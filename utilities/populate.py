@@ -14,6 +14,8 @@ def main():
 
     result_list = ming_fileio_library.parse_table_with_headers_object_list(sys.argv[1], ",")
 
+    ###Make sure we line these datasets up
+
 
     for result in result_list:
         filename = result["Filename"].rstrip()
