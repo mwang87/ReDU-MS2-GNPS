@@ -8,4 +8,4 @@ if __name__ == '__main__':
     Attribute.create_table(True)
     AttributeTerm.create_table(True)
     FilenameAttributeConnection.create_table(True)
-    app.run()
+    app.run(host='0.0.0.0')
