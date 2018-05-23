@@ -16,7 +16,18 @@ def main():
 
     for result in result_list:
         filename = result["Filename"].rstrip()
-        filename_db = Filename.create(filepath=filename)
+        filename_db = Filename.get_or_create(filepath=filename)
+
+        for key in result:
+            if key.find("ATTRIBUTE_") != -1:
+                attribute_name = key
+                attribute_value = result[key]
+
+                attribute_db = Attribute.get_or_create(categoryname=attribute_name)
+                attribute_value_db = AttributeTerm.get_or_create(term=attribute_value)
+
+
+
 
 
 if __name__ == '__main__':
