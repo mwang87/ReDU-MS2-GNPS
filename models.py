@@ -22,3 +22,13 @@ class AttributeTerm(Model):
 
     class Meta:
         database = db
+
+class FilenameAttributeConnection(Model):
+    filename = ForeignKeyField(Filename)
+    attribute = ForeignKeyField(Attribute)
+    attributeterm = ForeignKeyField(AttributeTerm)
+
+    class Meta:
+        database = db
+        #@primary_key = False
+        primary_key = CompositeKey('filename', 'attribute', 'attributeterm')
