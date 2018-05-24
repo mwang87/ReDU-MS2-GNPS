@@ -1,0 +1,802 @@
+filename	ATTRIBUTE_BodySite	ATTRIBUTE_BodyHabitat
+Cl.Blank.1A1.empty	Not applicable	UBERON:blank
+Cl.V1.1A2.Blank	Not applicable	UBERON:blank
+Cl.V1.1A3.RA	UBERON:axilla	UBERON:skin
+Cl.V1.1A4.LA	UBERON:axilla	UBERON:skin
+Cl.V1.1A5.C	UBERON:skin of chest	UBERON:skin
+Cl.V1.1A6.UB	UBERON:skin of back	UBERON:skin
+Cl.V1.1A7.LB	UBERON:skin of back	UBERON:skin
+Cl.V6.1A8.Blank	Not applicable	UBERON:blank
+Cl.V6.1A9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.1A10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.1A11.C	UBERON:skin of chest	UBERON:skin
+Cl.V6.1A12.UB	UBERON:skin of back	UBERON:skin
+Cl.V6.1B1.LB	UBERON:skin of back	UBERON:skin
+Cl.V2.1B2.Blank	Not applicable	UBERON:blank
+Cl.V2.1B3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.1B4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.1B5.C	UBERON:skin of chest	UBERON:skin
+Cl.V2.1B6.UB	UBERON:skin of back	UBERON:skin
+Cl.V2.1B7.LB	UBERON:skin of back	UBERON:skin
+Cl.V3.1B8.Blank	Not applicable	UBERON:blank
+Cl.V3.1B9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.1B10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.1B11.C	UBERON:skin of chest	UBERON:skin
+Cl.V3.1B12.UB	UBERON:skin of back	UBERON:skin
+Cl.V3.1C1.LB	UBERON:skin of back	UBERON:skin
+Cl.V4.1C2.Blank	Not applicable	UBERON:blank
+Cl.V4.1C3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.1C4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.1C5.C	UBERON:skin of chest	UBERON:skin
+Cl.V4.1C6.UB	UBERON:skin of back	UBERON:skin
+Cl.V4.1C7.LB	UBERON:skin of back	UBERON:skin
+Cl.V5.1C8.Blank	Not applicable	UBERON:blank
+Cl.V5.1C9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.1C10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.1C11.C	UBERON:skin of chest	UBERON:skin
+Cl.V5.1C12.UB	UBERON:skin of back	UBERON:skin
+Cl.V5.1D1.LB	UBERON:skin of back	UBERON:skin
+Cl.V9.1D2.Blank	Not applicable	UBERON:blank
+Cl.V9.1D3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.1D4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.1D5.C	UBERON:skin of chest	UBERON:skin
+Cl.V9.1D6.UB	UBERON:skin of back	UBERON:skin
+Cl.V9.1D7.LB	UBERON:skin of back	UBERON:skin
+Cl.V8.1D8.Blank	Not applicable	UBERON:blank
+Cl.V8.1D9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.1D10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.1D11.C	UBERON:skin of chest	UBERON:skin
+Cl.V8.1D12.UB	UBERON:skin of back	UBERON:skin
+Cl.V8.1E1.LB	UBERON:skin of back	UBERON:skin
+Cl.V11.1E2.Blank	Not applicable	UBERON:blank
+Cl.V11.1E3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.1E4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.1E5.C	UBERON:skin of chest	UBERON:skin
+Cl.V11.1E6.UB	UBERON:skin of back	UBERON:skin
+Cl.V11.1E7.LB	UBERON:skin of back	UBERON:skin
+Cl.V7.1E8.Blank	Not applicable	UBERON:blank
+Cl.V7.1E9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.1E10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.1E11.C	UBERON:skin of chest	UBERON:skin
+Cl.V7.1E12.UB	UBERON:skin of back	UBERON:skin
+Cl.V7.1F1.LB	UBERON:skin of back	UBERON:skin
+Cl.V12.1F2.Blank	Not applicable	UBERON:blank
+Cl.V12.1F3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.1F4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.1F5.C	UBERON:skin of chest	UBERON:skin
+Cl.V12.1F6.UB	UBERON:skin of back	UBERON:skin
+Cl.V12.1F7.LB	UBERON:skin of back	UBERON:skin
+Cl.V10.1F8.Blank	Not applicable	UBERON:blank
+Cl.V10.1F9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.1F10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.1F11.C	UBERON:skin of chest	UBERON:skin
+Cl.V10.1F12.UB	UBERON:skin of back	UBERON:skin
+Cl.V10.1G1.LB	UBERON:skin of back	UBERON:skin
+Cl.Blank.2A1.empty	Not applicable	UBERON:blank
+Cl.V1.2A2.Blank	Not applicable	UBERON:blank
+Cl.V1.2A3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.2A4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.2A5.C	UBERON:skin of chest	UBERON:skin
+Cl.V1.2A6.UB	UBERON:skin of back	UBERON:skin
+Cl.V1.2A7.LB	UBERON:skin of back	UBERON:skin
+Cl.V2.2A8.Blank	Not applicable	UBERON:blank
+Cl.V2.2A9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.2A10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.2A11.C	UBERON:skin of chest	UBERON:skin
+Cl.V2.2A12.UB	UBERON:skin of back	UBERON:skin
+Cl.V2.2B1.LB	UBERON:skin of back	UBERON:skin
+Cl.V3.2B2.Blank	Not applicable	UBERON:blank
+Cl.V3.2B3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.2B4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.2B5.C	UBERON:skin of chest	UBERON:skin
+Cl.V3.2B6.UB	UBERON:skin of back	UBERON:skin
+Cl.V3.2B7.LB	UBERON:skin of back	UBERON:skin
+Cl.V4.2B8.Blank	Not applicable	UBERON:blank
+Cl.V4.2B9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.2B10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.2B11.C	UBERON:skin of chest	UBERON:skin
+Cl.V4.2B12.UB	UBERON:skin of back	UBERON:skin
+Cl.V4.2C1.LB	UBERON:skin of back	UBERON:skin
+Cl.V5.2C2.Blank	Not applicable	UBERON:blank
+Cl.V5.2C3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.2C4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.2C5.C	UBERON:skin of chest	UBERON:skin
+Cl.V5.2C6.UB	UBERON:skin of back	UBERON:skin
+Cl.V5.2C7.LB	UBERON:skin of back	UBERON:skin
+Cl.V6.2C8.Blank	Not applicable	UBERON:blank
+Cl.V6.2C9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.2C10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.2C11.C	UBERON:skin of chest	UBERON:skin
+Cl.V6.2C12.UB	UBERON:skin of back	UBERON:skin
+Cl.V6.2D1.LB	UBERON:skin of back	UBERON:skin
+Cl.V8.2D2.Blank	Not applicable	UBERON:blank
+Cl.V8.2D3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.2D4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.2D5.C	UBERON:skin of chest	UBERON:skin
+Cl.V8.2D6.UB	UBERON:skin of back	UBERON:skin
+Cl.V8.2D7.LB	UBERON:skin of back	UBERON:skin
+Cl.V7.2D8.Blank	Not applicable	UBERON:blank
+Cl.V7.2D9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.2D10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.2D11.C	UBERON:skin of chest	UBERON:skin
+Cl.V7.2D12.UB	UBERON:skin of back	UBERON:skin
+Cl.V7.2E1.LB	UBERON:skin of back	UBERON:skin
+Cl.V9.2E2.Blank	Not applicable	UBERON:blank
+Cl.V9.2E3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.2E4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.2E5.C	UBERON:skin of chest	UBERON:skin
+Cl.V9.2E6.UB	UBERON:skin of back	UBERON:skin
+Cl.V9.2E7.LB	UBERON:skin of back	UBERON:skin
+Cl.V10.2E8.Blank	Not applicable	UBERON:blank
+Cl.V10.2E9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.2E10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.2E11.C	UBERON:skin of chest	UBERON:skin
+Cl.V10.2E12.UB	UBERON:skin of back	UBERON:skin
+Cl.V10.2F1.LB	UBERON:skin of back	UBERON:skin
+Cl.V11.2F2.Blank	Not applicable	UBERON:blank
+Cl.V11.2F3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.2F4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.2F5.C	UBERON:skin of chest	UBERON:skin
+Cl.V11.2F6.UB	UBERON:skin of back	UBERON:skin
+Cl.V11.2F7.LB	UBERON:skin of back	UBERON:skin
+Cl.V12.2F8.Blank	Not applicable	UBERON:blank
+Cl.V12.2F9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.2F10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.2F11.C	UBERON:skin of chest	UBERON:skin
+Cl.V12.2F12.UB	UBERON:skin of back	UBERON:skin
+Cl.V12.2G1.LB	UBERON:skin of back	UBERON:skin
+Cl.Blank.3A1.empty	Not applicable	UBERON:blank
+Cl.V9.3A2.Blank	Not applicable	UBERON:blank
+Cl.V9.3A3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.3A4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.3A5.C	UBERON:skin of chest	UBERON:skin
+Cl.V9.3A6.UB	UBERON:skin of back	UBERON:skin
+Cl.V9.3A7.LB	UBERON:skin of back	UBERON:skin
+Cl.V1.3A8.Blank	Not applicable	UBERON:blank
+Cl.V1.3A9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.3A10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.3A11.C	UBERON:skin of chest	UBERON:skin
+Cl.V1.3A12.UB	UBERON:skin of back	UBERON:skin
+Cl.V1.3B1.LB	UBERON:skin of back	UBERON:skin
+Cl.V2.3B2.Blank	Not applicable	UBERON:blank
+Cl.V2.3B3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.3B4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.3B5.C	UBERON:skin of chest	UBERON:skin
+Cl.V2.3B6.UB	UBERON:skin of back	UBERON:skin
+Cl.V2.3B7.LB	UBERON:skin of back	UBERON:skin
+Cl.V3.3B8.Blank	Not applicable	UBERON:blank
+Cl.V3.3B9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.3B10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.3B11.C	UBERON:skin of chest	UBERON:skin
+Cl.V3.3B12.UB	UBERON:skin of back	UBERON:skin
+Cl.V3.3C1.LB	UBERON:skin of back	UBERON:skin
+Cl.V4.3C2.Blank	Not applicable	UBERON:blank
+Cl.V4.3C3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.3C4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.3C5.C	UBERON:skin of chest	UBERON:skin
+Cl.V4.3C6.UB	UBERON:skin of back	UBERON:skin
+Cl.V4.3C7.LB	UBERON:skin of back	UBERON:skin
+Cl.V5.3C8.Blank	Not applicable	UBERON:blank
+Cl.V5.3C9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.3C10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.3C11.C	UBERON:skin of chest	UBERON:skin
+Cl.V5.3C12.UB	UBERON:skin of back	UBERON:skin
+Cl.V5.3D1.LB	UBERON:skin of back	UBERON:skin
+Cl.V6.3D2.Blank	Not applicable	UBERON:blank
+Cl.V6.3D3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.3D4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.3D5.C	UBERON:skin of chest	UBERON:skin
+Cl.V6.3D6.UB	UBERON:skin of back	UBERON:skin
+Cl.V6.3D7.LB	UBERON:skin of back	UBERON:skin
+Cl.V10.3D8.Blank	Not applicable	UBERON:blank
+Cl.V10.3D9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.3D10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.3D11.C	UBERON:skin of chest	UBERON:skin
+Cl.V10.3D12.UB	UBERON:skin of back	UBERON:skin
+Cl.V10.3E1.LB	UBERON:skin of back	UBERON:skin
+Cl.V8.3E2.Blank	Not applicable	UBERON:blank
+Cl.V8.3E3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.3E4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.3E5.C	UBERON:skin of chest	UBERON:skin
+Cl.V8.3E6.UB	UBERON:skin of back	UBERON:skin
+Cl.V8.3E7.LB	UBERON:skin of back	UBERON:skin
+Cl.V7.3E8.Blank	Not applicable	UBERON:blank
+Cl.V7.3E9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.3E10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.3E11.C	UBERON:skin of chest	UBERON:skin
+Cl.V7.3E12.UB	UBERON:skin of back	UBERON:skin
+Cl.V7.3F1.LB	UBERON:skin of back	UBERON:skin
+Cl.V11.3F2.Blank	Not applicable	UBERON:blank
+Cl.V11.3F3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.3F4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.3F5.C	UBERON:skin of chest	UBERON:skin
+Cl.V11.3F6.UB	UBERON:skin of back	UBERON:skin
+Cl.V11.3F7.LB	UBERON:skin of back	UBERON:skin
+Cl.V12.3F8.Blank	Not applicable	UBERON:blank
+Cl.V12.3F9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.3F10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.3F11.C	UBERON:skin of chest	UBERON:skin
+Cl.V12.3F12.UB	UBERON:skin of back	UBERON:skin
+Cl.V12.3G1.LB	UBERON:skin of back	UBERON:skin
+Cl.Blank.4A1.empty	Not applicable	UBERON:blank
+Cl.V1.4A2.Blank	Not applicable	UBERON:blank
+Cl.V1.4A3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.4A4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.4A5.C	UBERON:skin of chest	UBERON:skin
+Cl.V1.4A6.UB	UBERON:skin of back	UBERON:skin
+Cl.V1.4A7.LB	UBERON:skin of back	UBERON:skin
+Cl.V2.4A8.Blank	Not applicable	UBERON:blank
+Cl.V2.4A9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.4A10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.4A11.C	UBERON:skin of chest	UBERON:skin
+Cl.V2.4A12.UB	UBERON:skin of back	UBERON:skin
+Cl.V2.4B1.LB	UBERON:skin of back	UBERON:skin
+Cl.V3.4B2.Blank	Not applicable	UBERON:blank
+Cl.V3.4B3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.4B4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.4B5.C	UBERON:skin of chest	UBERON:skin
+Cl.V3.4B6.UB	UBERON:skin of back	UBERON:skin
+Cl.V3.4B7.LB	UBERON:skin of back	UBERON:skin
+Cl.V4.4B8.Blank	Not applicable	UBERON:blank
+Cl.V4.4B9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.4B10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.4B11.C	UBERON:skin of chest	UBERON:skin
+Cl.V4.4B12.UB	UBERON:skin of back	UBERON:skin
+Cl.V4.4C1.LB	UBERON:skin of back	UBERON:skin
+Cl.V5.4C2.Blank	Not applicable	UBERON:blank
+Cl.V5.4C3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.4C4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.4C5.C	UBERON:skin of chest	UBERON:skin
+Cl.V5.4C6.UB	UBERON:skin of back	UBERON:skin
+Cl.V5.4C7.LB	UBERON:skin of back	UBERON:skin
+Cl.V6.4C8.Blank	Not applicable	UBERON:blank
+Cl.V6.4C9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.4C10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.4C11.C	UBERON:skin of chest	UBERON:skin
+Cl.V6.4C12.UB	UBERON:skin of back	UBERON:skin
+Cl.V6.4D1.LB	UBERON:skin of back	UBERON:skin
+Cl.V8.4D2.Blank	Not applicable	UBERON:blank
+Cl.V8.4D3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.4D4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.4D5.C	UBERON:skin of chest	UBERON:skin
+Cl.V8.4D6.UB	UBERON:skin of back	UBERON:skin
+Cl.V8.4D7.LB	UBERON:skin of back	UBERON:skin
+Cl.V7.4D8.Blank	Not applicable	UBERON:blank
+Cl.V7.4D9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.4D10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.4D11.C	UBERON:skin of chest	UBERON:skin
+Cl.V7.4D12.UB	UBERON:skin of back	UBERON:skin
+Cl.V7.4E1.LB	UBERON:skin of back	UBERON:skin
+Cl.V9.4E2.Blank	Not applicable	UBERON:blank
+Cl.V9.4E3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.4E4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.4E5.C	UBERON:skin of chest	UBERON:skin
+Cl.V9.4E6.UB	UBERON:skin of back	UBERON:skin
+Cl.V9.4E7.LB	UBERON:skin of back	UBERON:skin
+Cl.V10.4E8.Blank	Not applicable	UBERON:blank
+Cl.V10.4E9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.4E10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.4E11.C	UBERON:skin of chest	UBERON:skin
+Cl.V10.4E12.UB	UBERON:skin of back	UBERON:skin
+Cl.V10.4F1.LB	UBERON:skin of back	UBERON:skin
+Cl.V12.4F2.Blank	Not applicable	UBERON:blank
+Cl.V12.4F3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.4F4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.4F5.C	UBERON:skin of chest	UBERON:skin
+Cl.V12.4F6.UB	UBERON:skin of back	UBERON:skin
+Cl.V12.4F7.LB	UBERON:skin of back	UBERON:skin
+Cl.V11.4F8.Blank	Not applicable	UBERON:blank
+Cl.V11.4F9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.4F10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.4F11.C	UBERON:skin of chest	UBERON:skin
+Cl.V11.4F12.UB	UBERON:skin of back	UBERON:skin
+Cl.V11.4G1.LB	UBERON:skin of back	UBERON:skin
+Cl.Blank.5A1.empty	Not applicable	UBERON:blank
+Cl.V5.5A2.Blank	Not applicable	UBERON:blank
+Cl.V5.5A3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.5A4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.5A5.C	UBERON:skin of chest	UBERON:skin
+Cl.V5.5A6.UB	UBERON:skin of back	UBERON:skin
+Cl.V5.5A7.LB	UBERON:skin of back	UBERON:skin
+Cl.V1.5A8.Blank	Not applicable	UBERON:blank
+Cl.V1.5A9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.5A10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.5A11.C	UBERON:skin of chest	UBERON:skin
+Cl.V1.5A12.UB	UBERON:skin of back	UBERON:skin
+Cl.V1.5B1.LB	UBERON:skin of back	UBERON:skin
+Cl.V2.5B2.Blank	Not applicable	UBERON:blank
+Cl.V2.5B3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.5B4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.5B5.C	UBERON:skin of chest	UBERON:skin
+Cl.V2.5B6.UB	UBERON:skin of back	UBERON:skin
+Cl.V2.5B7.LB	UBERON:skin of back	UBERON:skin
+Cl.V3.5B8.Blank	Not applicable	UBERON:blank
+Cl.V3.5B9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.5B10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.5B11.C	UBERON:skin of chest	UBERON:skin
+Cl.V3.5B12.UB	UBERON:skin of back	UBERON:skin
+Cl.V3.5C1.LB	UBERON:skin of back	UBERON:skin
+Cl.V4.5C2.Blank	Not applicable	UBERON:blank
+Cl.V4.5C3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.5C4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.5C5.C	UBERON:skin of chest	UBERON:skin
+Cl.V4.5C6.UB	UBERON:skin of back	UBERON:skin
+Cl.V4.5C7.LB	UBERON:skin of back	UBERON:skin
+Cl.V6.5C8.Blank	Not applicable	UBERON:blank
+Cl.V6.5C9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.5C10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.5C11.C	UBERON:skin of chest	UBERON:skin
+Cl.V6.5C12.UB	UBERON:skin of back	UBERON:skin
+Cl.V6.5D1.LB	UBERON:skin of back	UBERON:skin
+Cl.V8.5D2.Blank	Not applicable	UBERON:blank
+Cl.V8.5D3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.5D4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.5D5.C	UBERON:skin of chest	UBERON:skin
+Cl.V8.5D6.UB	UBERON:skin of back	UBERON:skin
+Cl.V8.5D7.LB	UBERON:skin of back	UBERON:skin
+Cl.V7.5D8.Blank	Not applicable	UBERON:blank
+Cl.V7.5D9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.5D10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.5D11.C	UBERON:skin of chest	UBERON:skin
+Cl.V7.5D12.UB	UBERON:skin of back	UBERON:skin
+Cl.V7.5E1.LB	UBERON:skin of back	UBERON:skin
+Cl.V9.5E2.Blank	Not applicable	UBERON:blank
+Cl.V9.5E3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.5E4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.5E5.C	UBERON:skin of chest	UBERON:skin
+Cl.V9.5E6.UB	UBERON:skin of back	UBERON:skin
+Cl.V9.5E7.LB	UBERON:skin of back	UBERON:skin
+Cl.V10.5E8.Blank	Not applicable	UBERON:blank
+Cl.V10.5E9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.5E10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.5E11.C	UBERON:skin of chest	UBERON:skin
+Cl.V10.5E12.UB	UBERON:skin of back	UBERON:skin
+Cl.V10.5F1.LB	UBERON:skin of back	UBERON:skin
+Cl.V11.5F2.Blank	Not applicable	UBERON:blank
+Cl.V11.5F3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.5F4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.5F5.C	UBERON:skin of chest	UBERON:skin
+Cl.V11.5F6.UB	UBERON:skin of back	UBERON:skin
+Cl.V11.5F7.LB	UBERON:skin of back	UBERON:skin
+Cl.V12.5F8.Blank	Not applicable	UBERON:blank
+Cl.V12.5F9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.5F10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.5F11.C	UBERON:skin of chest	UBERON:skin
+Cl.V12.5F12.UB	UBERON:skin of back	UBERON:skin
+Cl.V12.5G1.LB	UBERON:skin of back	UBERON:skin
+		
+Cl.Blank.6A1.empty	Not applicable	UBERON:blank
+Cl.V7.6A2.Blank	Not applicable	UBERON:blank
+Cl.V7.6A3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.6A4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.6A5.C	UBERON:skin of chest	UBERON:skin
+Cl.V7.6A6.UB	UBERON:skin of back	UBERON:skin
+Cl.V7.6A7.LB	UBERON:skin of back	UBERON:skin
+Cl.V8.6A8.Blank	Not applicable	UBERON:blank
+Cl.V8.6A9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.6A10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.6A11.C	UBERON:skin of chest	UBERON:skin
+Cl.V8.6A12.UB	UBERON:skin of back	UBERON:skin
+Cl.V8.6B1.LB	UBERON:skin of back	UBERON:skin
+Cl.V1.6B2.Blank	Not applicable	UBERON:blank
+Cl.V1.6B3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.6B4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.6B5.C	UBERON:skin of chest	UBERON:skin
+Cl.V1.6B6.UB	UBERON:skin of back	UBERON:skin
+Cl.V1.6B7.LB	UBERON:skin of back	UBERON:skin
+Cl.V3.6B8.Blank	Not applicable	UBERON:blank
+Cl.V3.6B9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.6B10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.6B11.C	UBERON:skin of chest	UBERON:skin
+Cl.V3.6B12.UB	UBERON:skin of back	UBERON:skin
+Cl.V3.6C1.LB	UBERON:skin of back	UBERON:skin
+Cl.V4.6C2.Blank	Not applicable	UBERON:blank
+Cl.V4.6C3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.6C4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.6C5.C	UBERON:skin of chest	UBERON:skin
+Cl.V4.6C6.UB	UBERON:skin of back	UBERON:skin
+Cl.V4.6C7.LB	UBERON:skin of back	UBERON:skin
+Cl.V5.6C8.Blank	Not applicable	UBERON:blank
+Cl.V5.6C9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.6C10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.6C11.C	UBERON:skin of chest	UBERON:skin
+Cl.V5.6C12.UB	UBERON:skin of back	UBERON:skin
+Cl.V5.6D1.LB	UBERON:skin of back	UBERON:skin
+Cl.V6.6D2.Blank	Not applicable	UBERON:blank
+Cl.V6.6D3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.6D4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.6D5.C	UBERON:skin of chest	UBERON:skin
+Cl.V6.6D6.UB	UBERON:skin of back	UBERON:skin
+Cl.V6.6D7.LB	UBERON:skin of back	UBERON:skin
+Cl.V9.6D8.Blank	Not applicable	UBERON:blank
+Cl.V9.6D9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.6D10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.6D11.C	UBERON:skin of chest	UBERON:skin
+Cl.V9.6D12.UB	UBERON:skin of back	UBERON:skin
+Cl.V9.6E1.LB	UBERON:skin of back	UBERON:skin
+Cl.V10.6E2.Blank	Not applicable	UBERON:blank
+Cl.V10.6E3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.6E4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.6E5.C	UBERON:skin of chest	UBERON:skin
+Cl.V10.6E6.UB	UBERON:skin of back	UBERON:skin
+Cl.V10.6E7.LB	UBERON:skin of back	UBERON:skin
+Cl.V11.6E8.Blank	Not applicable	UBERON:blank
+Cl.V11.6E9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.6E10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.6E11.C	UBERON:skin of chest	UBERON:skin
+Cl.V11.6E12.UB	UBERON:skin of back	UBERON:skin
+Cl.V11.6F1.LB	UBERON:skin of back	UBERON:skin
+Cl.V12.6F2.Blank	Not applicable	UBERON:blank
+Cl.V12.6F3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.6F4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.6F5.C	UBERON:skin of chest	UBERON:skin
+Cl.V12.6F6.UB	UBERON:skin of back	UBERON:skin
+Cl.V12.6F7.LB	UBERON:skin of back	UBERON:skin
+Cl.V2.6F8.Blank	Not applicable	UBERON:blank
+Cl.V2.6F9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.6F10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.6F11.C	UBERON:skin of chest	UBERON:skin
+Cl.V2.6F12.UB	UBERON:skin of back	UBERON:skin
+Cl.V2.6G1.LB	UBERON:skin of back	UBERON:skin
+Cl.Blank.6G2.empty	Not applicable	UBERON:blank
+Cl.V7.6G3.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V7.6G4.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V8.6G5.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V8.6G6.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V1.6G7.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V1.6G8.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V4.6G9.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V4.6G10.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V5.6G11.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V5.6G12.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V6.6H1.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V6.6H2.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V9.6H3.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V9.6H4.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V10.6H5.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V10.6H6.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V11.6H7.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V11.6H8.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V12.6H9.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V12.6H10.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V2.6H11.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V2.6H12.CRA	UBERON:clothes of armpit	UBERON:clothes
+		
+Cl.Blank.7A1.empty	Not applicable	UBERON:blank
+Cl.V1.7A2.Blank	Not applicable	UBERON:blank
+Cl.V1.7A3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.7A4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.7A5.C	UBERON:skin of chest	UBERON:skin
+Cl.V1.7A6.UB	UBERON:skin of back	UBERON:skin
+Cl.V1.7A7.LB	UBERON:skin of back	UBERON:skin
+Cl.V2.7A8.Blank	Not applicable	UBERON:blank
+Cl.V2.7A9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.7A10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.7A11.C	UBERON:skin of chest	UBERON:skin
+Cl.V2.7A12.UB	UBERON:skin of back	UBERON:skin
+Cl.V2.7B1.LB	UBERON:skin of back	UBERON:skin
+Cl.V3.7B2.Blank	Not applicable	UBERON:blank
+Cl.V3.7B3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.7B4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.7B5.C	UBERON:skin of chest	UBERON:skin
+Cl.V3.7B6.UB	UBERON:skin of back	UBERON:skin
+Cl.V3.7B7.LB	UBERON:skin of back	UBERON:skin
+Cl.V4.7B8.Blank	Not applicable	UBERON:blank
+Cl.V4.7B9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.7B10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.7B11.C	UBERON:skin of chest	UBERON:skin
+Cl.V4.7B12.UB	UBERON:skin of back	UBERON:skin
+Cl.V4.7C1.LB	UBERON:skin of back	UBERON:skin
+Cl.V5.7C2.Blank	Not applicable	UBERON:blank
+Cl.V5.7C3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.7C4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.7C5.C	UBERON:skin of chest	UBERON:skin
+Cl.V5.7C6.UB	UBERON:skin of back	UBERON:skin
+Cl.V5.7C7.LB	UBERON:skin of back	UBERON:skin
+Cl.V6.7C8.Blank	Not applicable	UBERON:blank
+Cl.V6.7C9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.7C10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.7C11.C	UBERON:skin of chest	UBERON:skin
+Cl.V6.7C12.UB	UBERON:skin of back	UBERON:skin
+Cl.V6.7D1.LB	UBERON:skin of back	UBERON:skin
+Cl.V8.7D2.Blank	Not applicable	UBERON:blank
+Cl.V8.7D3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.7D4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.7D5.C	UBERON:skin of chest	UBERON:skin
+Cl.V8.7D6.UB	UBERON:skin of back	UBERON:skin
+Cl.V8.7D7.LB	UBERON:skin of back	UBERON:skin
+Cl.V10.7D8.Blank	Not applicable	UBERON:blank
+Cl.V10.7D9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.7D10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.7D11.C	UBERON:skin of chest	UBERON:skin
+Cl.V10.7D12.UB	UBERON:skin of back	UBERON:skin
+Cl.V10.7E1.LB	UBERON:skin of back	UBERON:skin
+Cl.V7.7E2.Blank	Not applicable	UBERON:blank
+Cl.V7.7E3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.7E4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.7E5.C	UBERON:skin of chest	UBERON:skin
+Cl.V7.7E6.UB	UBERON:skin of back	UBERON:skin
+Cl.V7.7E7.LB	UBERON:skin of back	UBERON:skin
+Cl.V9.7E8.Blank	Not applicable	UBERON:blank
+Cl.V9.7E9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.7E10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.7E11.C	UBERON:skin of chest	UBERON:skin
+Cl.V9.7E12.UB	UBERON:skin of back	UBERON:skin
+Cl.V9.7F1.LB	UBERON:skin of back	UBERON:skin
+Cl.V11.7F2.Blank	Not applicable	UBERON:blank
+Cl.V11.7F3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.7F4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.7F5.C	UBERON:skin of chest	UBERON:skin
+Cl.V11.7F6.UB	UBERON:skin of back	UBERON:skin
+Cl.V11.7F7.LB	UBERON:skin of back	UBERON:skin
+Cl.V12.7F8.Blank	Not applicable	UBERON:blank
+Cl.V12.7F9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.7F10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.7F11.C	UBERON:skin of chest	UBERON:skin
+Cl.V12.7F12.UB	UBERON:skin of back	UBERON:skin
+Cl.V12.7G1.LB	UBERON:skin of back	UBERON:skin
+Cl.Blank.7G2.empty	Not applicable	UBERON:blank
+Cl.V3.7G3.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V3.7G4.CLA	UBERON:clothes of armpit	UBERON:clothes
+		
+Cl.Blank.8A1.empty	Not applicable	UBERON:blank
+Cl.V1.8A2.Blank	Not applicable	UBERON:blank
+Cl.V1.8A3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.8A4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.8A5.C	UBERON:skin of chest	UBERON:skin
+Cl.V1.8A6.UB	UBERON:skin of back	UBERON:skin
+Cl.V1.8A7.LB	UBERON:skin of back	UBERON:skin
+Cl.V2.8A8.Blank	Not applicable	UBERON:blank
+Cl.V2.8A9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.8A10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.8A11.C	UBERON:skin of chest	UBERON:skin
+Cl.V2.8A12.UB	UBERON:skin of back	UBERON:skin
+Cl.V2.8B1.LB	UBERON:skin of back	UBERON:skin
+Cl.V4.8B2.Blank	Not applicable	UBERON:blank
+Cl.V4.8B3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.8B4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.8B5.C	UBERON:skin of chest	UBERON:skin
+Cl.V4.8B6.UB	UBERON:skin of back	UBERON:skin
+Cl.V4.8B7.LB	UBERON:skin of back	UBERON:skin
+Cl.V5.8B8.Blank	Not applicable	UBERON:blank
+Cl.V5.8B9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.8B10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.8B11.C	UBERON:skin of chest	UBERON:skin
+Cl.V5.8B12.UB	UBERON:skin of back	UBERON:skin
+Cl.V5.8C1.LB	UBERON:skin of back	UBERON:skin
+Cl.V6.8C2.Blank	Not applicable	UBERON:blank
+Cl.V6.8C3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.8C4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.8C5.C	UBERON:skin of chest	UBERON:skin
+Cl.V6.8C6.UB	UBERON:skin of back	UBERON:skin
+Cl.V6.8C7.LB	UBERON:skin of back	UBERON:skin
+Cl.V3.8C8.Blank	Not applicable	UBERON:blank
+Cl.V3.8C9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.8C10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.8C11.C	UBERON:skin of chest	UBERON:skin
+Cl.V3.8C12.UB	UBERON:skin of back	UBERON:skin
+Cl.V3.8D1.LB	UBERON:skin of back	UBERON:skin
+Cl.V8.8D2.Blank	Not applicable	UBERON:blank
+Cl.V8.8D3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.8D4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.8D5.C	UBERON:skin of chest	UBERON:skin
+Cl.V8.8D6.UB	UBERON:skin of back	UBERON:skin
+Cl.V8.8D7.LB	UBERON:skin of back	UBERON:skin
+Cl.V7.8D8.Blank	Not applicable	UBERON:blank
+Cl.V7.8D9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.8D10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.8D11.C	UBERON:skin of chest	UBERON:skin
+Cl.V7.8D12.UB	UBERON:skin of back	UBERON:skin
+Cl.V7.8E1.LB	UBERON:skin of back	UBERON:skin
+Cl.V9.8E2.Blank	Not applicable	UBERON:blank
+Cl.V9.8E3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.8E4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.8E5.C	UBERON:skin of chest	UBERON:skin
+Cl.V9.8E6.UB	UBERON:skin of back	UBERON:skin
+Cl.V9.8E7.LB	UBERON:skin of back	UBERON:skin
+Cl.V10.8E8.Blank	Not applicable	UBERON:blank
+Cl.V10.8E9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.8E10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.8E11.C	UBERON:skin of chest	UBERON:skin
+Cl.V10.8E12.UB	UBERON:skin of back	UBERON:skin
+Cl.V10.8F1.LB	UBERON:skin of back	UBERON:skin
+Cl.V11.8F2.Blank	Not applicable	UBERON:blank
+Cl.V11.8F3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.8F4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.8F5.C	UBERON:skin of chest	UBERON:skin
+Cl.V11.8F6.UB	UBERON:skin of back	UBERON:skin
+Cl.V11.8F7.LB	UBERON:skin of back	UBERON:skin
+Cl.V12.8F8.Blank	Not applicable	UBERON:blank
+Cl.V12.8F9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.8F10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.8F11.C	UBERON:skin of chest	UBERON:skin
+Cl.V12.8F12.UB	UBERON:skin of back	UBERON:skin
+Cl.V12.8G1.LB	UBERON:skin of back	UBERON:skin
+		
+Cl.Blank.9A1.empty	Not applicable	UBERON:blank
+Cl.V2.9A2.Blank	Not applicable	UBERON:blank
+Cl.V2.9A3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.9A4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.9A5.C	UBERON:skin of chest	UBERON:skin
+Cl.V2.9A6.UB	UBERON:skin of back	UBERON:skin
+Cl.V2.9A7.LB	UBERON:skin of back	UBERON:skin
+Cl.V7.9A8.Blank	Not applicable	UBERON:blank
+Cl.V7.9A9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.9A10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V7.9A11.C	UBERON:skin of chest	UBERON:skin
+Cl.V7.9A12.UB	UBERON:skin of back	UBERON:skin
+Cl.V7.9B1.LB	UBERON:skin of back	UBERON:skin
+Cl.V9.9B2.Blank	Not applicable	UBERON:blank
+Cl.V9.9B3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.9B4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.9B5.C	UBERON:skin of chest	UBERON:skin
+Cl.V9.9B6.UB	UBERON:skin of back	UBERON:skin
+Cl.V9.9B7.LB	UBERON:skin of back	UBERON:skin
+Cl.V1.9B8.Blank	Not applicable	UBERON:blank
+Cl.V1.9B9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.9B10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.9B11.C	UBERON:skin of chest	UBERON:skin
+Cl.V1.9B12.UB	UBERON:skin of back	UBERON:skin
+Cl.V1.9C1.LB	UBERON:skin of back	UBERON:skin
+Cl.V4.9C2.Blank	Not applicable	UBERON:blank
+Cl.V4.9C3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.9C4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.9C5.C	UBERON:skin of chest	UBERON:skin
+Cl.V4.9C6.UB	UBERON:skin of back	UBERON:skin
+Cl.V4.9C7.LB	UBERON:skin of back	UBERON:skin
+Cl.V5.9C8.Blank	Not applicable	UBERON:blank
+Cl.V5.9C9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.9C10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.9C11.C	UBERON:skin of chest	UBERON:skin
+Cl.V5.9C12.UB	UBERON:skin of back	UBERON:skin
+Cl.V5.9D1.LB	UBERON:skin of back	UBERON:skin
+Cl.V6.9D2.Blank	Not applicable	UBERON:blank
+Cl.V6.9D3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.9D4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.9D5.C	UBERON:skin of chest	UBERON:skin
+Cl.V6.9D6.UB	UBERON:skin of back	UBERON:skin
+Cl.V6.9D7.LB	UBERON:skin of back	UBERON:skin
+Cl.V3.9D8.Blank	Not applicable	UBERON:blank
+Cl.V3.9D9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.9D10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.9D11.C	UBERON:skin of chest	UBERON:skin
+Cl.V3.9D12.UB	UBERON:skin of back	UBERON:skin
+Cl.V3.9E1.LB	UBERON:skin of back	UBERON:skin
+Cl.V8.9E2.Blank	Not applicable	UBERON:blank
+Cl.V8.9E3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.9E4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.9E5.C	UBERON:skin of chest	UBERON:skin
+Cl.V8.9E6.UB	UBERON:skin of back	UBERON:skin
+Cl.V8.9E7.LB	UBERON:skin of back	UBERON:skin
+Cl.V10.9E8.Blank	Not applicable	UBERON:blank
+Cl.V10.9E9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.9E10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.9E11.C	UBERON:skin of chest	UBERON:skin
+Cl.V10.9E12.UB	UBERON:skin of back	UBERON:skin
+Cl.V10.9F1.LB	UBERON:skin of back	UBERON:skin
+Cl.V11.9F2.Blank	Not applicable	UBERON:blank
+Cl.V11.9F3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.9F4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.9F5.C	UBERON:skin of chest	UBERON:skin
+Cl.V11.9F6.UB	UBERON:skin of back	UBERON:skin
+Cl.V11.9F7.LB	UBERON:skin of back	UBERON:skin
+Cl.V12.9F8.Blank	Not applicable	UBERON:blank
+Cl.V12.9F9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.9F10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.9F11.C	UBERON:skin of chest	UBERON:skin
+Cl.V12.9F12.UB	UBERON:skin of back	UBERON:skin
+Cl.V12.9G1.LB	UBERON:skin of back	UBERON:skin
+Cl.Blank.9G2.Blank	Not applicable	UBERON:blank
+Cl.V2.9G3.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V2.9G4.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V7.9G5.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V7.9G6.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V9.9G7.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V9.9G8.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V4.9G9.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V4.9G10.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V5.9G11.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V5.9G12.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V6.9H1.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V6.9H2.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V3.9H3.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V3.9H4.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V8.9H5.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V8.9H6.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V10.9H7.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V10.9H8.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V11.9H9.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V11.9H10.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V12.9H11.CRA	UBERON:clothes of armpit	UBERON:clothes
+Cl.V12.9H12.CLA	UBERON:clothes of armpit	UBERON:clothes
+Cl.Blank.10A1.empty	Not applicable	UBERON:blank
+Cl.V1.10A2.Blank	Not applicable	UBERON:blank
+Cl.V1.10A3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.10A4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V1.10A5.C	UBERON:skin of chest	UBERON:skin
+Cl.V1.10A6.UB	UBERON:skin of back	UBERON:skin
+Cl.V1.10A7.LB	UBERON:skin of back	UBERON:skin
+Cl.V2.10A8.Blank	Not applicable	UBERON:blank
+Cl.V2.10A9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.10A10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V2.10A11.C	UBERON:skin of chest	UBERON:skin
+Cl.V2.10A12.UB	UBERON:skin of back	UBERON:skin
+Cl.V2.10B1.LB	UBERON:skin of back	UBERON:skin
+Cl.V3.10B2.Blank	Not applicable	UBERON:blank
+Cl.V3.10B3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.10B4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V3.10B5.C	UBERON:skin of chest	UBERON:skin
+Cl.V3.10B6.UB	UBERON:skin of back	UBERON:skin
+Cl.V3.10B7.LB	UBERON:skin of back	UBERON:skin
+Cl.V4.10B8.Blank	Not applicable	UBERON:blank
+Cl.V4.10B9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.10B10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V4.10B11.C	UBERON:skin of chest	UBERON:skin
+Cl.V4.10B12.UB	UBERON:skin of back	UBERON:skin
+Cl.V4.10C1.LB	UBERON:skin of back	UBERON:skin
+Cl.V5.10C2.Blank	Not applicable	UBERON:blank
+Cl.V5.10C3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.10C4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V5.10C5.C	UBERON:skin of chest	UBERON:skin
+Cl.V5.10C6.UB	UBERON:skin of back	UBERON:skin
+Cl.V5.10C7.LB	UBERON:skin of back	UBERON:skin
+Cl.V6.10C8.Blank	Not applicable	UBERON:blank
+Cl.V6.10C9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.10C10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V6.10C11.C	UBERON:skin of chest	UBERON:skin
+Cl.V6.10C12.UB	UBERON:skin of back	UBERON:skin
+Cl.V6.10D1.LB	UBERON:skin of back	UBERON:skin
+Cl.V8.10D2.Blank	Not applicable	UBERON:blank
+Cl.V8.10D3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.10D4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V8.10D5.C	UBERON:skin of chest	UBERON:skin
+Cl.V8.10D6.UB	UBERON:skin of back	UBERON:skin
+Cl.V8.10D7.LB	UBERON:skin of back	UBERON:skin
+Cl.V9.10D8.Blank	Not applicable	UBERON:blank
+Cl.V9.10D9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.10D10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V9.10D11.C	UBERON:skin of chest	UBERON:skin
+Cl.V9.10D12.UB	UBERON:skin of back	UBERON:skin
+Cl.V9.10E1.LB	UBERON:skin of back	UBERON:skin
+Cl.V10.10E2.Blank	Not applicable	UBERON:blank
+Cl.V10.10E3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.10E4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V10.10E5.C	UBERON:skin of chest	UBERON:skin
+Cl.V10.10E6.UB	UBERON:skin of back	UBERON:skin
+Cl.V10.10E7.LB	UBERON:skin of back	UBERON:skin
+Cl.V11.10E8.Blank	Not applicable	UBERON:blank
+Cl.V11.10E9.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.10E10.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V11.10E11.C	UBERON:skin of chest	UBERON:skin
+Cl.V11.10E12.UB	UBERON:skin of back	UBERON:skin
+Cl.V11.10F1.LB	UBERON:skin of back	UBERON:skin
+Cl.V12.10F2.Blank	Not applicable	UBERON:blank
+Cl.V12.10F3.RA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.10F4.LA	UBERON:skin of armpit	UBERON:skin
+Cl.V12.10F5.C	UBERON:skin of chest	UBERON:skin
+Cl.V12.10F6.UB	UBERON:skin of back	UBERON:skin
+Cl.V12.10F7.LB	UBERON:skin of back	UBERON:skin
+Cl.Blank.10F8.Blank	Not applicable	UBERON:blank
+Cl.Blank.10F9.Blank	UBERON:skin of armpit	UBERON:skin
+Cl.Blank.10F10.Blank	UBERON:skin of armpit	UBERON:skin
+Cl.Blank.10F11.Blank	UBERON:skin of chest	UBERON:skin
+Cl.Blank.10F12.Blank	UBERON:skin of back	UBERON:skin
+Cl.Blank.10G1.Blank	UBERON:skin of back	UBERON:skin
+Cl.Blank.10G2.Blank	Not applicable	UBERON:blank
+Cl.V1.10G3.Shirt Right	UBERON:clothes of armpit	UBERON:clothes
+Cl.V1.10G4.Shirt Left	UBERON:clothes of armpit	UBERON:clothes
+Cl.Blank.10G5.Blank	Not applicable	UBERON:blank
+Cl.TE.10G6.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10G7.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10G8.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10G9.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10G10.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10G11.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10G12.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10H1.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10H2.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10H3.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10H4.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10H5.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10H6.TE Buffer	Not applicable	UBERON:blank
+Cl.TE.10H7.TE Buffer	Not applicable	UBERON:blank
