@@ -37,7 +37,10 @@ def main():
         dataset_filename = resolve_metadata_filename_to_all_files(filename, all_files)
 
         if dataset_filename == None:
+            print(filename, "Not Found in Dataset")
             continue
+        else:
+            print(filename, "Found in Dataset")
 
         filename_db, status = Filename.get_or_create(filepath=dataset_filename)
 

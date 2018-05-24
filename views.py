@@ -20,9 +20,13 @@ def getfilename():
     filepath_db = Filename.select().where(Filename.filepath == query_filename)
 
     if len(filepath_db) == 0:
-        return "{}"
+        return "[]"
 
     all_terms = AttributeTerm.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.filename == filepath_db)
 
 
     return json.dumps([myterm.term for myterm in all_terms])
+
+@app.route('/heartbeat', methods=['GET'])
+def heartbeat():
+    return "{'status' : 'up'}"

@@ -495,7 +495,16 @@ def get_all_files_in_dataset_folder(dataset_accession, folder_prefix, username, 
     all_files = []
     while len(directories_to_list) > 0:
         directory_to_list = directories_to_list.pop(0)
-        url = 'https://massive.ucsd.edu/ProteoSAFe/ManageFiles?query={"parentDir":"%s"}' % (directory_to_list)
+        url = 'https://massive.ucsd.edu/ProteoSAFe/ManageFiles?query='
+        try:
+            #Python 2
+            import urllib
+            url += urllib.quote('{"parentDir":"%s"}' % (directory_to_list))
+        except:
+            #Python 3
+            import urllib
+            url += urllib.parse.quote('{"parentDir":"%s"}' % (directory_to_list))
+
         json_obj = json.loads(s.get(url).text)["items"]
         for item in json_obj:
             if item["directory"] == True:
