@@ -35,11 +35,11 @@ def viewattributes():
     for attribute in all_attributes:
         all_terms = AttributeTerm.select().join(FilenameAttributeConnection).join(Attribute).where(Attribute.categoryname == attribute.categoryname).group_by(AttributeTerm.term)
         output_dict = {}
-        output_dict["attribute"] = attribute.categoryname
+        output_dict["attributename"] = attribute.categoryname
         output_dict["countterms"] = len(all_terms)
         output_list.append(output_dict)
 
-    return json.dumps(output_dict)
+    return json.dumps(output_list)
 
 #Returns all the terms given an attribute along with file counts for each term
 @app.route('/attribute/<attribute>/attributeterms', methods=['GET'])
@@ -53,7 +53,7 @@ def viewattributeterms(attribute):
         all_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term_db.term).where(FilenameAttributeConnection.attribute == attribute_db)
         #print(attribute_term_db.term, len(all_files_db))
         output_dict = {}
-        output_dict["attribute"] = attribute
+        output_dict["attributename"] = attribute
         output_dict["attributeterm"] = attribute_term_db.term
         output_dict["countfiles"] = len(all_files_db)
         output_list.append(output_dict)
@@ -79,3 +79,8 @@ def viewfilesattributeattributeterm(attribute, term):
 @app.route('/heartbeat', methods=['GET'])
 def heartbeat():
     return "{'status' : 'up'}"
+
+
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
+    return render_template('dashboard.html')
