@@ -1,5 +1,5 @@
 # views.py
-from flask import abort, jsonify, render_template, request
+from flask import abort, jsonify, render_template, request, redirect, url_for
 
 from app import app
 from models import *
@@ -8,10 +8,7 @@ import json
 
 @app.route('/', methods=['GET'])
 def homepage():
-    files = Filename.select()
-
-    print([myfile.filepath for myfile in files])
-    return json.dumps([myfile.filepath for myfile in files])
+    return redirect(url_for('dashboard'))
 
 @app.route('/filename', methods=['GET'])
 def getfilename():
@@ -83,3 +80,7 @@ def heartbeat():
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
     return render_template('dashboard.html')
+
+@app.route('/metadatabrowser', methods=['GET'])
+def metadatabrowser():
+    return render_template('metadatabrowser.html')

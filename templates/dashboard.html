@@ -2,39 +2,88 @@
 <html>
 
 <head>
-    <title>My first Vue app</title>
+    <title>GNPS Metadata Analysis Interface</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <!-- A grey horizontal navbar that becomes vertical on small screens -->
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <a class="navbar-brand" href="gnps.ucsd.edu">
+            <img src="/static/img/GNPS_logo.png" alt="Logo" style="width:120px;">
+        </a>
 
-    <div id="app-4">
-        <h1>Attributes</h1>
-        <div>
-            <attribute-viewer v-for="item in attributes" v-bind:attributename="item.attributename" v-on:update-attribute="updateAttributeSelection"></attribute-viewer>
-        </div>
-        <h1>Attribute Terms</h1>
-        <div>
-            <attributeterm-viewer v-for="item in attributeterms" v-bind:attributeterm="item.attributeterm" v-bind:countfiles="item.countfiles" v-bind:attributename="item.attributename" v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+      <!-- Links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Analysis Selection</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Metadata Explorer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Documentation</a>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="app-4" class="col-md-8 justify-content-center align-items-center">
+        <h1>GNPS Metadata Analysis Interface</h1>
+
+        <div id="toppanel" class="row">
+            <div class="col">
+                <h2>Analysis Summary</h2>
+                <analysis-gobutton></analysis-gobutton>
+            </div>
+
+            <div class="col">
+                <h2>Attributes</h2>
+                <attribute-viewer v-for="item in attributes" v-bind:attributename="item.attributename" v-on:update-attribute="updateAttributeSelection"></attribute-viewer>
+            </div>
         </div>
 
-        <br>
         <div>
-            <analysis-gobutton>
-                </attributeterm-viewer>
+            <h2>Attribute Terms</h2>
+            <table class="table table-sm table-striped">
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Term</th>
+                    <th># Files</th>
+                    <th>Analyze Selection</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="attributeterm in attributeterms">
+                        <td>{{attributeterm.attributename}}</td>
+                        <td>{{attributeterm.attributeterm}}</td>
+                        <td>{{attributeterm.countfiles}}</td>
+                        <td><attributeterm-viewer :attributeterm=attributeterm.attributeterm :countfiles=attributeterm.countfiles :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
     <script>
         function generateGNPSfilestring(fileslist) {
+            filelist1_array = extractFilenamesToList(fileslist)
+            filelist_string = filelist1_array.join(";")
+
+            return filelist_string
+        }
+
+        function extractFilenamesToList(fileslist){
             filelist1_array = []
             fileslist.forEach(function(element) {
                 filelist1_array.push(element["filename"])
             })
-            filelist_string = filelist1_array.join(";")
-
-            return filelist_string
+            return filelist1_array
         }
 
         Vue.component('attribute-viewer', {
@@ -82,13 +131,12 @@
                 }
             },
             template: '<div> \
-                  {{attributename}} - {{attributeterm}}, {{countfiles}} files \
-                  <button v-on:click="clickMe(\'filelist1\')">Analyze Group 1 </button> \
-                  <button v-on:click="clickMe(\'filelist2\')">Analyze Group 2 </button> \
-                  <button v-on:click="clickMe(\'filelist3\')">Analyze Group 3 </button> \
-                  <button v-on:click="clickMe(\'filelist4\')">Analyze Group 4 </button> \
-                  <button v-on:click="clickMe(\'filelist5\')">Analyze Group 5 </button> \
-                  <button v-on:click="clickMe(\'filelist6\')">Analyze Group 6 </button> \
+                  <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist1\')">+G1 </button> \
+                  <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist2\')">+G2 </button> \
+                  <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist3\')">+G3 </button> \
+                  <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist4\')">+G4 </button> \
+                  <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist5\')">+G5 </button> \
+                  <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist6\')">+G6 </button> \
                   </div>'
         })
 
@@ -98,7 +146,17 @@
             },
             methods: {
                 clickMe: function(event) {
+                    //Checking there are no file intersections
+                    total_number_of_files = this.$parent.filelist1.length + this.$parent.filelist2.length + this.$parent.filelist3.length + this.$parent.filelist4.length + this.$parent.filelist5.length + this.$parent.filelist6.length
+                    unique_list_files = extractFilenamesToList(this.$parent.filelist1.concat(this.$parent.filelist2, this.$parent.filelist3, this.$parent.filelist4, this.$parent.filelist5, this.$parent.filelist6));
+                    unique_list_files = Array.from(new Set(unique_list_files));
+                    if(total_number_of_files != unique_list_files.length){
+                        alert("Warning: some files belong to multiple groups! Might cause some issues on GNPS")
+                    }
+
+                    //Forming parameters
                     params_dict = {};
+                    params_dict["desc"] = "Meta-Analysis on GNPS"
                     params_dict["workflow"] = "METABOLOMICS-SNETS-V2"
                     params_dict["library_on_server"] = "d.speclibs;"
                     params_dict["spec_on_server"] = generateGNPSfilestring(this.$parent.filelist1)
@@ -121,7 +179,7 @@
       Group 4 {{ this.$parent.filelist4.length }} Files <br> \
       Group 5 {{ this.$parent.filelist5.length }} Files <br> \
       Group 6 {{ this.$parent.filelist6.length }} Files <br> \
-      <button v-on:click="clickMe">Analyze Data on GNPS Networking</button> \
+      <button class="btn btn-primary" v-on:click="clickMe">Analyze Data on GNPS Networking</button> \
       </div>'
         })
 
