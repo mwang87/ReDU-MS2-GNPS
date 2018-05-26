@@ -2,119 +2,119 @@
 <html>
 
 <head>
-  <title>My first Vue app</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <title>My first Vue app</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-  <div id="app-4">
-    <h1>Attributes</h1>
-    <div>
-      <attribute-viewer v-for="item in attributes" v-bind:attributename="item.attributename" v-on:update-attribute="updateAttributeSelection"></attribute-viewer>
-    </div>
-    <h1>Attribute Terms</h1>
-    <div>
-      <attributeterm-viewer v-for="item in attributeterms" v-bind:attributeterm="item.attributeterm" v-bind:countfiles="item.countfiles" v-bind:attributename="item.attributename" v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+    <div id="app-4">
+        <h1>Attributes</h1>
+        <div>
+            <attribute-viewer v-for="item in attributes" v-bind:attributename="item.attributename" v-on:update-attribute="updateAttributeSelection"></attribute-viewer>
+        </div>
+        <h1>Attribute Terms</h1>
+        <div>
+            <attributeterm-viewer v-for="item in attributeterms" v-bind:attributeterm="item.attributeterm" v-bind:countfiles="item.countfiles" v-bind:attributename="item.attributename" v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+        </div>
+
+        <br>
+        <div>
+            <analysis-gobutton>
+                </attributeterm-viewer>
+        </div>
     </div>
 
-    <br>
-    <div>
-      <analysis-gobutton>
-        </attributeterm-viewer>
-    </div>
-  </div>
+    <script>
+        function generateGNPSfilestring(fileslist) {
+            filelist1_array = []
+            fileslist.forEach(function(element) {
+                filelist1_array.push(element["filename"])
+            })
+            filelist_string = filelist1_array.join(";")
 
-  <script>
-    function generateGNPSfilestring(fileslist){
-        filelist1_array = []
-        fileslist.forEach(function(element) {
-          filelist1_array.push(element["filename"])
+            return filelist_string
+        }
+
+        Vue.component('attribute-viewer', {
+            props: ['attributename'],
+            data: function() {
+                return {
+                    count: 0
+                }
+            },
+            methods: {
+                clickMe: function(event) {
+                    $.ajax({
+                        url: "/attribute/" + this.$props["attributename"] + "/attributeterms",
+                        success: function(componentObject) {
+                            return function(response) {
+                                componentObject.$emit("update-attribute", response)
+                            }
+                        }(this),
+                        dataType: "json"
+                    });
+                }
+            },
+            template: '<div><button v-on:click="clickMe">View Terms: {{attributename}}</button></div>'
         })
-        filelist_string = filelist1_array.join(";")
 
-        return filelist_string
-    }
+        Vue.component('attributeterm-viewer', {
+            props: ['attributename', 'attributeterm', 'countfiles'],
+            data: function() {
+                return {
+                    count: 0
+                }
+            },
+            methods: {
+                clickMe: function(filelistname) {
+                    console.log(filelistname)
+                    $.ajax({
+                        url: "/attribute/" + this.$props["attributename"] + "/attributeterm/" + this.$props["attributeterm"] + "/files",
+                        success: function(componentObject, message) {
+                            return function(response) {
+                                componentObject.$emit("update-attributeterm", response, filelistname)
+                            }
+                        }(this, filelistname),
+                        dataType: "json"
+                    });
+                }
+            },
+            template: '<div> \
+                  {{attributename}} - {{attributeterm}}, {{countfiles}} files \
+                  <button v-on:click="clickMe(\'filelist1\')">Analyze Group 1 </button> \
+                  <button v-on:click="clickMe(\'filelist2\')">Analyze Group 2 </button> \
+                  <button v-on:click="clickMe(\'filelist3\')">Analyze Group 3 </button> \
+                  <button v-on:click="clickMe(\'filelist4\')">Analyze Group 4 </button> \
+                  <button v-on:click="clickMe(\'filelist5\')">Analyze Group 5 </button> \
+                  <button v-on:click="clickMe(\'filelist6\')">Analyze Group 6 </button> \
+                  </div>'
+        })
 
-    Vue.component('attribute-viewer', {
-      props: ['attributename'],
-      data: function() {
-        return {
-          count: 0
-        }
-      },
-      methods: {
-        clickMe: function(event) {
-          $.ajax({
-            url: "/attribute/" + this.$props["attributename"] + "/attributeterms",
-            success: function(componentObject) {
-              return function(response) {
-                componentObject.$emit("update-attribute", response)
-              }
-            }(this),
-            dataType: "json"
-          });
-        }
-      },
-      template: '<div><button v-on:click="clickMe">View Terms: {{attributename}}</button></div>'
-    })
+        Vue.component('analysis-gobutton', {
+            data: function() {
+                return {}
+            },
+            methods: {
+                clickMe: function(event) {
+                    params_dict = {};
+                    params_dict["workflow"] = "METABOLOMICS-SNETS-V2"
+                    params_dict["library_on_server"] = "d.speclibs;"
+                    params_dict["spec_on_server"] = generateGNPSfilestring(this.$parent.filelist1)
+                    params_dict["spec_on_server_group2"] = generateGNPSfilestring(this.$parent.filelist2)
+                    params_dict["spec_on_server_group3"] = generateGNPSfilestring(this.$parent.filelist3)
+                    params_dict["spec_on_server_group4"] = generateGNPSfilestring(this.$parent.filelist4)
+                    params_dict["spec_on_server_group5"] = generateGNPSfilestring(this.$parent.filelist5)
+                    params_dict["spec_on_server_group6"] = generateGNPSfilestring(this.$parent.filelist6)
 
-    Vue.component('attributeterm-viewer', {
-      props: ['attributename', 'attributeterm', 'countfiles'],
-      data: function() {
-        return {
-          count: 0
-        }
-      },
-      methods: {
-        clickMe: function(filelistname) {
-            console.log(filelistname)
-          $.ajax({
-            url: "/attribute/" + this.$props["attributename"] + "/attributeterm/" + this.$props["attributeterm"] + "/files",
-            success: function(componentObject, message) {
-              return function(response) {
-                componentObject.$emit("update-attributeterm", response, filelistname)
-              }
-          }(this, filelistname),
-            dataType: "json"
-          });
-        }
-      },
-      template: '<div> \
-      {{attributename}} - {{attributeterm}}, {{countfiles}} files \
-      <button v-on:click="clickMe(\'filelist1\')">Analyze Group 1 </button> \
-      <button v-on:click="clickMe(\'filelist2\')">Analyze Group 2 </button> \
-      <button v-on:click="clickMe(\'filelist3\')">Analyze Group 3 </button> \
-      <button v-on:click="clickMe(\'filelist4\')">Analyze Group 4 </button> \
-      <button v-on:click="clickMe(\'filelist5\')">Analyze Group 5 </button> \
-      <button v-on:click="clickMe(\'filelist6\')">Analyze Group 6 </button> \
-      </div>'
-    })
-
-    Vue.component('analysis-gobutton', {
-      data: function() {
-        return {}
-      },
-      methods: {
-        clickMe: function(event) {
-          params_dict = {};
-          params_dict["workflow"] = "METABOLOMICS-SNETS-V2"
-          params_dict["library_on_server"] = "d.speclibs;"
-          params_dict["spec_on_server"] = generateGNPSfilestring(this.$parent.filelist1)
-          params_dict["spec_on_server_group2"] = generateGNPSfilestring(this.$parent.filelist2)
-          params_dict["spec_on_server_group3"] = generateGNPSfilestring(this.$parent.filelist3)
-          params_dict["spec_on_server_group4"] = generateGNPSfilestring(this.$parent.filelist4)
-          params_dict["spec_on_server_group5"] = generateGNPSfilestring(this.$parent.filelist5)
-          params_dict["spec_on_server_group6"] = generateGNPSfilestring(this.$parent.filelist6)
-
-          //analysis_url = "https://ccms-internal.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
-          analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
-          var win = window.open(analysis_url, '_blank');
-          win.focus();
-        }
-      },
-      template: '<div> \
+                    //analysis_url = "https://ccms-internal.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
+                    analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
+                    var win = window.open(analysis_url, '_blank');
+                    win.focus();
+                }
+            },
+            template: '<div> \
       Group 1 {{ this.$parent.filelist1.length }} Files <br> \
       Group 2 {{ this.$parent.filelist2.length }} Files <br> \
       Group 3 {{ this.$parent.filelist3.length }} Files <br> \
@@ -123,48 +123,48 @@
       Group 6 {{ this.$parent.filelist6.length }} Files <br> \
       <button v-on:click="clickMe">Analyze Data on GNPS Networking</button> \
       </div>'
-    })
+        })
 
-    var app4 = new Vue({
-      el: '#app-4',
-      methods: {
-        updateAttributeSelection: function(attributeterm_list) {
-          this.attributeterms = attributeterm_list
-        },
-        updateAttributeTermSelection: function(filelist, filelistname) {
-          this[filelistname] = filelist
-          console.log("TOP", filelistname)
-        }
-      },
-      data: {
-        attributes: [{
-          attributename: "ATTRIBUTE_1"
-        }, {
-          attributename: "ATTRIBUTE_2"
-        }],
-        attributeterms: [{
-          attributename: "ATTRIBUTE_1",
-          attributeterm: "term1",
-          countfiles: "0"
-        }],
-        filelist1: [],
-        filelist2: [],
-        filelist3: [],
-        filelist4: [],
-        filelist5: [],
-        filelist6: []
-      }
-    })
+        var app4 = new Vue({
+            el: '#app-4',
+            methods: {
+                updateAttributeSelection: function(attributeterm_list) {
+                    this.attributeterms = attributeterm_list
+                },
+                updateAttributeTermSelection: function(filelist, filelistname) {
+                    this[filelistname] = filelist
+                    console.log("TOP", filelistname)
+                }
+            },
+            data: {
+                attributes: [{
+                    attributename: "ATTRIBUTE_1"
+                }, {
+                    attributename: "ATTRIBUTE_2"
+                }],
+                attributeterms: [{
+                    attributename: "ATTRIBUTE_1",
+                    attributeterm: "term1",
+                    countfiles: "0"
+                }],
+                filelist1: [],
+                filelist2: [],
+                filelist3: [],
+                filelist4: [],
+                filelist5: [],
+                filelist6: []
+            }
+        })
 
-    //Loading the initial attributes
-    $.ajax({
-      url: "/attributes",
-      success: function(response) {
-        app4.attributes = response
-      },
-      dataType: "json"
-    });
-  </script>
+        //Loading the initial attributes
+        $.ajax({
+            url: "/attributes",
+            success: function(response) {
+                app4.attributes = response
+            },
+            dataType: "json"
+        });
+    </script>
 </body>
 
 </html>
