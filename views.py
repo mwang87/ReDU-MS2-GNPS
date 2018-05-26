@@ -24,7 +24,6 @@ def getfilename():
 
     all_terms = AttributeTerm.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.filename == filepath_db)
 
-
     return json.dumps([myterm.term for myterm in all_terms])
 
 @app.route('/attributes', methods=['GET'])
