@@ -20,13 +20,13 @@
       <!-- Links -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#">Analysis Selection</a>
+          <a class="nav-link" href="/dashboard">Analysis Selection</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Metadata Explorer</a>
+          <a class="nav-link" href="/metadata">Metadata Explorer</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Documentation</a>
+          <a class="nav-link" href="https://bix-lab.ucsd.edu/display/Public/GNPS+Documentation+Page">Documentation</a>
         </li>
       </ul>
 
@@ -106,7 +106,7 @@
                     });
                 }
             },
-            template: '<div><button v-on:click="clickMe">View Terms: {{attributename}}</button></div>'
+            template: '<div><button class="btn btn-warning" v-on:click="clickMe">{{attributename}}</button></div>'
         })
 
         Vue.component('attributeterm-viewer', {
