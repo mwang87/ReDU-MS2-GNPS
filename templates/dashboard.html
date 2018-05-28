@@ -55,15 +55,38 @@
                     <th>Attribute</th>
                     <th>Term</th>
                     <th># Files</th>
-                    <th>Analyze Selection</th>
+                    <th>G1</th>
+                    <th>G2</th>
+                    <th>G3</th>
+                    <th>G4</th>
+                    <th>G5</th>
+                    <th>G6</th>
                   </tr>
                 </thead>
                 <tbody>
+                    <!-- <attributeterm-viewer :attributeterm=attributeterm.attributeterm :countfiles=attributeterm.countfiles :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer> -->
                     <tr v-for="attributeterm in attributeterms">
                         <td>{{attributeterm.attributename}}</td>
                         <td>{{attributeterm.attributeterm}}</td>
                         <td>{{attributeterm.countfiles}}</td>
-                        <td><attributeterm-viewer :attributeterm=attributeterm.attributeterm :countfiles=attributeterm.countfiles :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer></td>
+                        <td>
+                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G1" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+                        </td>
+                        <td>
+                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G2" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+                        </td>
+                        <td>
+                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G3" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+                        </td>
+                        <td>
+                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G4" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+                        </td>
+                        <td>
+                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G5" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+                        </td>
+                        <td>
+                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G6" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -118,7 +141,6 @@
             },
             methods: {
                 clickMe: function(filelistname) {
-                    console.log(filelistname)
                     $.ajax({
                         url: "/attribute/" + this.$props["attributename"] + "/attributeterm/" + this.$props["attributeterm"] + "/files",
                         success: function(componentObject, message) {
@@ -140,6 +162,38 @@
                   </div>'
         })
 
+        Vue.component('attributeterm-analyzebutton', {
+            props: ['attributename', 'attributeterm', 'groupname'],
+            data: function() {
+                return {
+                    classSelection: "btn-sm btn-outline-secondary"
+                }
+            },
+            methods: {
+                clickMe: function() {
+                    //Checking if we've already added this term to a group
+                    term_key = this.$props["attributename"] + ":" + this.$props["attributeterm"]
+                    if(this.$parent.selectedTerms.includes(term_key)){
+                        alert("Already Chose This Term")
+                        return
+                    }
+
+                    this.classSelection = "btn-sm btn-danger"
+                    $.ajax({
+                        url: "/attribute/" + this.$props["attributename"] + "/attributeterm/" + this.$props["attributeterm"] + "/files",
+                        success: function(componentObject) {
+                            return function(response) {
+                                componentObject.$emit("update-attributeterm", componentObject.$props["attributename"], componentObject.$props["attributeterm"], componentObject.$props["groupname"], response)
+                            }
+                        }(this),
+                        dataType: "json"
+                    });
+                }
+
+            },
+            template: '<button  v-bind:class=classSelection v-on:click="clickMe(\'{{ groupname }}\')">+{{ groupname }}</button>'
+        })
+
         Vue.component('analysis-gobutton', {
             data: function() {
                 return {}
@@ -147,8 +201,8 @@
             methods: {
                 clickMe: function(event) {
                     //Checking there are no file intersections
-                    total_number_of_files = this.$parent.filelist1.length + this.$parent.filelist2.length + this.$parent.filelist3.length + this.$parent.filelist4.length + this.$parent.filelist5.length + this.$parent.filelist6.length
-                    unique_list_files = extractFilenamesToList(this.$parent.filelist1.concat(this.$parent.filelist2, this.$parent.filelist3, this.$parent.filelist4, this.$parent.filelist5, this.$parent.filelist6));
+                    total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
+                    unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
                     unique_list_files = Array.from(new Set(unique_list_files));
                     if(total_number_of_files != unique_list_files.length){
                         alert("Warning: some files belong to multiple groups! Might cause some issues on GNPS")
@@ -159,12 +213,12 @@
                     params_dict["desc"] = "Meta-Analysis on GNPS"
                     params_dict["workflow"] = "METABOLOMICS-SNETS-V2"
                     params_dict["library_on_server"] = "d.speclibs;"
-                    params_dict["spec_on_server"] = generateGNPSfilestring(this.$parent.filelist1)
-                    params_dict["spec_on_server_group2"] = generateGNPSfilestring(this.$parent.filelist2)
-                    params_dict["spec_on_server_group3"] = generateGNPSfilestring(this.$parent.filelist3)
-                    params_dict["spec_on_server_group4"] = generateGNPSfilestring(this.$parent.filelist4)
-                    params_dict["spec_on_server_group5"] = generateGNPSfilestring(this.$parent.filelist5)
-                    params_dict["spec_on_server_group6"] = generateGNPSfilestring(this.$parent.filelist6)
+                    params_dict["spec_on_server"] = generateGNPSfilestring(this.$parent.groupG1)
+                    params_dict["spec_on_server_group2"] = generateGNPSfilestring(this.$parent.groupG2)
+                    params_dict["spec_on_server_group3"] = generateGNPSfilestring(this.$parent.groupG3)
+                    params_dict["spec_on_server_group4"] = generateGNPSfilestring(this.$parent.groupG4)
+                    params_dict["spec_on_server_group5"] = generateGNPSfilestring(this.$parent.groupG5)
+                    params_dict["spec_on_server_group6"] = generateGNPSfilestring(this.$parent.groupG6)
 
                     //analysis_url = "https://ccms-internal.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
                     analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
@@ -173,12 +227,12 @@
                 }
             },
             template: '<div> \
-      Group 1 {{ this.$parent.filelist1.length }} Files <br> \
-      Group 2 {{ this.$parent.filelist2.length }} Files <br> \
-      Group 3 {{ this.$parent.filelist3.length }} Files <br> \
-      Group 4 {{ this.$parent.filelist4.length }} Files <br> \
-      Group 5 {{ this.$parent.filelist5.length }} Files <br> \
-      Group 6 {{ this.$parent.filelist6.length }} Files <br> \
+      Group 1 {{ this.$parent.groupG1.length }} Files <br> \
+      Group 2 {{ this.$parent.groupG2.length }} Files <br> \
+      Group 3 {{ this.$parent.groupG3.length }} Files <br> \
+      Group 4 {{ this.$parent.groupG4.length }} Files <br> \
+      Group 5 {{ this.$parent.groupG5.length }} Files <br> \
+      Group 6 {{ this.$parent.groupG6.length }} Files <br> \
       <button class="btn btn-primary" v-on:click="clickMe">Analyze Data on GNPS Networking</button> \
       </div>'
         })
@@ -189,9 +243,10 @@
                 updateAttributeSelection: function(attributeterm_list) {
                     this.attributeterms = attributeterm_list
                 },
-                updateAttributeTermSelection: function(filelist, filelistname) {
-                    this[filelistname] = filelist
-                    console.log("TOP", filelistname)
+                updateAttributeTermSelection: function(attributename, attributeterm, groupname, filelist) {
+                    term_key = attributename + ":" + attributeterm
+                    this["group" + groupname] = this["group" + groupname].concat(filelist)
+                    this.selectedTerms.push(term_key)
                 }
             },
             data: {
@@ -205,12 +260,13 @@
                     attributeterm: "term1",
                     countfiles: "0"
                 }],
-                filelist1: [],
-                filelist2: [],
-                filelist3: [],
-                filelist4: [],
-                filelist5: [],
-                filelist6: []
+                groupG1: [],
+                groupG2: [],
+                groupG3: [],
+                groupG4: [],
+                groupG5: [],
+                groupG6: [],
+                selectedTerms: []
             }
         })
 
