@@ -43,15 +43,28 @@ def viewattributeterms(attribute):
     attribute_db = Attribute.select().where(Attribute.categoryname == attribute)
     all_terms_db = AttributeTerm.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attribute == attribute_db).group_by(AttributeTerm.term)
 
+    filters_list = json.loads(request.args['filters'])
+
     output_list = []
 
     for attribute_term_db in all_terms_db:
-        all_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term_db.term).where(FilenameAttributeConnection.attribute == attribute_db)
+        all_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term_db).where(FilenameAttributeConnection.attribute == attribute)
+        all_files = set([file_db.filepath for file_db in all_files_db])
+        #Adding the filter
+        all_filtered_files_list = [all_files]
+        for filterobject in filters_list:
+            new_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == filterobject["attributeterm"]).where(FilenameAttributeConnection.attribute == filterobject["attributename"])
+            print(attribute_term_db.term, len(new_db))
+
+            all_filtered_files_list.append(set([file_db.filepath for file_db in new_db]))
+
+        intersection_set = set.intersection(*all_filtered_files_list)
+
         #print(attribute_term_db.term, len(all_files_db))
         output_dict = {}
         output_dict["attributename"] = attribute
         output_dict["attributeterm"] = attribute_term_db.term
-        output_dict["countfiles"] = len(all_files_db)
+        output_dict["countfiles"] = len(intersection_set)
         output_list.append(output_dict)
 
     return json.dumps(output_list)
@@ -60,14 +73,23 @@ def viewattributeterms(attribute):
 @app.route('/attribute/<attribute>/attributeterm/<term>/files', methods=['GET'])
 def viewfilesattributeattributeterm(attribute, term):
     all_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == term).where(FilenameAttributeConnection.attribute == attribute)
+    all_files = set([file_db.filepath for file_db in all_files_db])
+
+    filters_list = json.loads(request.args['filters'])
+    all_filtered_files_list = [all_files]
+    for filterobject in filters_list:
+        new_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == filterobject["attributeterm"]).where(FilenameAttributeConnection.attribute == filterobject["attributename"])
+
+        all_filtered_files_list.append(set([file_db.filepath for file_db in new_db]))
+    intersection_set = set.intersection(*all_filtered_files_list)
 
     output_list = []
 
-    for file_db in all_files_db:
+    for filepath in intersection_set:
         output_dict = {}
         output_dict["attribute"] = attribute
         output_dict["attributeterm"] = term
-        output_dict["filename"] = file_db.filepath
+        output_dict["filename"] = filepath
         output_list.append(output_dict)
 
     return json.dumps(output_list)

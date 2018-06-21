@@ -3,6 +3,7 @@ import sys
 sys.path.insert(0, "..")
 
 from models import *
+from collections import defaultdict
 
 import ming_fileio_library
 import ming_proteosafe_library
@@ -18,21 +19,11 @@ def resolve_metadata_filename_to_all_files(metadata_filename, all_files):
 
     return acceptable_filenames[0]
 
-def main():
-    Filename.create_table(True)
-    Attribute.create_table(True)
-    AttributeTerm.create_table(True)
-    FilenameAttributeConnection.create_table(True)
-
-    dataset_accession = sys.argv[1]
-    input_metadata_filename = sys.argv[2]
-
-    result_list = ming_fileio_library.parse_table_with_headers_object_list(input_metadata_filename, "\t")
-
+def add_metadata_per_accession(dataset_accession, metadata_list):
     ###Make sure we line these datasets up
     all_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, "ccms_peak", credentials.USERNAME, credentials.PASSWORD)
 
-    for result in result_list:
+    for result in metadata_list:
         filename = result["filename"].rstrip()
         dataset_filename = resolve_metadata_filename_to_all_files(filename, all_files)
 
@@ -53,6 +44,32 @@ def main():
                 attribute_value_db, status = AttributeTerm.get_or_create(term=attribute_value)
 
                 join_db = FilenameAttributeConnection.get_or_create(filename=filename_db, attribute=attribute_db, attributeterm=attribute_value_db)
+
+
+def main():
+    Filename.create_table(True)
+    Attribute.create_table(True)
+    AttributeTerm.create_table(True)
+    FilenameAttributeConnection.create_table(True)
+
+    input_metadata_filename = sys.argv[1]
+
+    result_list = ming_fileio_library.parse_table_with_headers_object_list(input_metadata_filename, "\t")
+
+    metadata_by_accession = defaultdict(list)
+
+    for result in result_list:
+        massive_accession = result["MassiveID"]
+        metadata_by_accession[massive_accession].append(result)
+
+
+
+    for dataset_accession in metadata_by_accession:
+        print(dataset_accession, len(metadata_by_accession[dataset_accession]))
+        add_metadata_per_accession(dataset_accession, metadata_by_accession[dataset_accession])
+
+
+
 
 
 

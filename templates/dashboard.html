@@ -45,15 +45,21 @@
                 <h2>Attributes</h2>
                 <attribute-viewer v-for="item in attributes" v-bind:attributename="item.attributename" v-on:update-attribute="updateAttributeSelection"></attribute-viewer>
             </div>
+
+            <div class="col">
+                <h2>Attribute Filters</h2>
+                <attribute-filterviewer v-for="item in filterTerms" v-bind:attributename="item.attributename" v-bind:attributeterm="item.attributeterm"></attribute-filterviewer>
+            </div>
         </div>
 
-        <div>
+        <div style="overflow-y:auto; height:400px">
             <h2>Attribute Terms</h2>
             <table class="table table-sm table-striped">
                 <thead>
                   <tr>
                     <th>Attribute</th>
                     <th>Term</th>
+                    <th>TermFilter</th>
                     <th># Files</th>
                     <th>G1</th>
                     <th>G2</th>
@@ -68,24 +74,27 @@
                     <tr v-for="attributeterm in attributeterms">
                         <td>{{attributeterm.attributename}}</td>
                         <td>{{attributeterm.attributeterm}}</td>
+                        <td>
+                            <attributeterm-filterbutton :attributeterm=attributeterm.attributeterm :attributename=attributeterm.attributename ></attributeterm-filterbutton>
+                        </td>
                         <td>{{attributeterm.countfiles}}</td>
                         <td>
-                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G1" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G1" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-analyzebutton>
                         </td>
                         <td>
-                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G2" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G2" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-analyzebutton>
                         </td>
                         <td>
-                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G3" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G3" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-analyzebutton>
                         </td>
                         <td>
-                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G4" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G4" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-analyzebutton>
                         </td>
                         <td>
-                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G5" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G5" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-analyzebutton>
                         </td>
                         <td>
-                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G6" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer>
+                            <attributeterm-analyzebutton :attributeterm=attributeterm.attributeterm groupname="G6" :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-analyzebutton>
                         </td>
                     </tr>
                 </tbody>
@@ -120,6 +129,9 @@
                 clickMe: function(event) {
                     $.ajax({
                         url: "/attribute/" + this.$props["attributename"] + "/attributeterms",
+                        data: {
+                            filters: JSON.stringify(this.$parent.filterTerms)
+                        },
                         success: function(componentObject) {
                             return function(response) {
                                 componentObject.$emit("update-attribute", response)
@@ -132,34 +144,86 @@
             template: '<div><button class="btn btn-warning" v-on:click="clickMe">{{attributename}}</button></div>'
         })
 
-        Vue.component('attributeterm-viewer', {
-            props: ['attributename', 'attributeterm', 'countfiles'],
+        Vue.component('attribute-filterviewer', {
+            props: ['attributename', 'attributeterm'],
             data: function() {
                 return {
                     count: 0
                 }
             },
             methods: {
-                clickMe: function(filelistname) {
-                    $.ajax({
-                        url: "/attribute/" + this.$props["attributename"] + "/attributeterm/" + this.$props["attributeterm"] + "/files",
-                        success: function(componentObject, message) {
-                            return function(response) {
-                                componentObject.$emit("update-attributeterm", response, filelistname)
-                            }
-                        }(this, filelistname),
-                        dataType: "json"
+                clickMe: function(event) {
+                    found_index = this.$parent.filterTerms.indexOf({
+                        attributename:   this.$props["attributename"],
+                        attributeterm: this.$props["attributeterm"]
                     });
+
+                    if (found_index > -1) {
+                        this.$parent.filterTerms = array.splice(found_index, 1);
+                    }
+
                 }
             },
-            template: '<div> \
-                  <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist1\')">+G1 </button> \
-                  <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist2\')">+G2 </button> \
-                  <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist3\')">+G3 </button> \
-                  <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist4\')">+G4 </button> \
-                  <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist5\')">+G5 </button> \
-                  <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist6\')">+G6 </button> \
-                  </div>'
+            template: '<div><button class="btn btn-warning" v-on:click="clickMe">{{attributename}} : {{attributeterm}}</button></div>'
+        })
+
+        // Vue.component('attributeterm-viewer', {
+        //     props: ['attributename', 'attributeterm', 'countfiles'],
+        //     data: function() {
+        //         return {
+        //             count: 0
+        //         }
+        //     },
+        //     methods: {
+        //         clickMe: function(filelistname) {
+        //             $.ajax({
+        //                 url: "/attribute/" + this.$props["attributename"] + "/attributeterm/" + this.$props["attributeterm"] + "/files",
+        //                 success: function(componentObject, message) {
+        //                     return function(response) {
+        //                         componentObject.$emit("update-attributeterm", response, filelistname)
+        //                     }
+        //                 }(this, filelistname),
+        //                 dataType: "json"
+        //             });
+        //         }
+        //     },
+        //     template: '<div> \
+        //           <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist1\')">+G1 </button> \
+        //           <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist2\')">+G2 </button> \
+        //           <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist3\')">+G3 </button> \
+        //           <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist4\')">+G4 </button> \
+        //           <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist5\')">+G5 </button> \
+        //           <button class="btn-sm btn-outline-secondary" v-on:click="clickMe(\'filelist6\')">+G6 </button> \
+        //           </div>'
+        // })
+
+        Vue.component('attributeterm-filterbutton', {
+            props: ['attributename', 'attributeterm'],
+            data: function() {
+                return {
+                    classSelection: "btn-sm btn-outline-secondary"
+                }
+            },
+            methods: {
+                clickMe: function() {
+                    //Checking if we've already added this term to a group
+                    // term_key = this.$props["attributename"] + ":" + this.$props["attributeterm"]
+                    // if(this.$parent.filterTerms.includes(term_key)){
+                    //     alert("Already Chose This Term")
+                    //     return
+                    // }
+
+                    this.$parent.filterTerms.push({
+                        attributename:   this.$props["attributename"],
+                        attributeterm: this.$props["attributeterm"]
+                    })
+
+                    //console.log(term_key)
+
+                    //this.classSelection = "btn-sm btn-danger"
+                }
+            },
+            template: '<button  v-bind:class=classSelection v-on:click="clickMe()">+Filter</button>'
         })
 
         Vue.component('attributeterm-analyzebutton', {
@@ -181,6 +245,9 @@
                     this.classSelection = "btn-sm btn-danger"
                     $.ajax({
                         url: "/attribute/" + this.$props["attributename"] + "/attributeterm/" + this.$props["attributeterm"] + "/files",
+                        data: {
+                            filters: JSON.stringify(this.$parent.filterTerms)
+                        },
                         success: function(componentObject) {
                             return function(response) {
                                 componentObject.$emit("update-attributeterm", componentObject.$props["attributename"], componentObject.$props["attributeterm"], componentObject.$props["groupname"], response)
@@ -266,7 +333,8 @@
                 groupG4: [],
                 groupG5: [],
                 groupG6: [],
-                selectedTerms: []
+                selectedTerms: [],
+                filterTerms: []
             }
         })
 
