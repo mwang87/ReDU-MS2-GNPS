@@ -6,6 +6,9 @@ from models import *
 
 import json
 import requests
+import requests_cache
+
+requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
 """Resolving ontologies only if they need to be"""
 def resolve_ontology(attribute, term):

@@ -52,8 +52,10 @@
             </div>
         </div>
 
-        <div style="overflow-y:auto; height:400px">
+        <div>
             <h2>Attribute Terms</h2>
+        </div>
+        <div style="overflow-y:auto; height:400px">
             <table class="table table-sm table-striped">
                 <thead>
                   <tr>
@@ -155,13 +157,19 @@
             },
             methods: {
                 clickMe: function(event) {
-                    found_index = this.$parent.filterTerms.indexOf({
-                        attributename:   this.$props["attributename"],
-                        attributeterm: this.$props["attributeterm"]
-                    });
+                    found_index = -1
+                    for( i = 0; i < this.$parent.filterTerms.length; i++){
+                        if(this.$parent.filterTerms[i].attributename == this.$props["attributename"] && this.$parent.filterTerms[i].attributeterm == this.$props["attributeterm"]){
+                            found_index = i;
+                        }
+                    }
+                    // found_index = this.$parent.filterTerms.indexOf({
+                    //     attributename:   this.$props["attributename"],
+                    //     attributeterm: this.$props["attributeterm"]
+                    // });
 
-                    if (found_index > -1) {
-                        this.$parent.filterTerms = array.splice(found_index, 1);
+                    if (found_index !== -1) {
+                        this.$parent.filterTerms.splice(found_index, 1);
                     }
 
                 }
