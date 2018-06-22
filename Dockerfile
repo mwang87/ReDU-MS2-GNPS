@@ -6,6 +6,7 @@ RUN apt-get install -y python-pip python-dev build-essential
 
 RUN pip install peewee
 RUN pip install flask
+RUN pip install requests
 
 COPY . /app
 WORKDIR /app
