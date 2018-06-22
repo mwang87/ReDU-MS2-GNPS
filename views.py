@@ -5,6 +5,29 @@ from app import app
 from models import *
 
 import json
+import requests
+
+"""Resolving ontologies only if they need to be"""
+def resolve_ontology(attribute, term):
+    if attribute == "ATTRIBUTE_BodyPart":
+        url = "https://www.ebi.ac.uk/ols/api/ontologies/uberon/terms?iri=http://purl.obolibrary.org/obo/%s" % (term.replace(":", "_"))
+        try:
+            ontology_json = requests.get(url).json()
+            print(json.dumps(ontology_json))
+            return ontology_json["_embedded"]["terms"][0]["label"]
+        except:
+            return term
+
+    if attribute == "ATTRIBUTE_Disease":
+        url = "https://www.ebi.ac.uk/ols/api/ontologies/doid/terms?iri=http://purl.obolibrary.org/obo/%s" % (term.replace(":", "_"))
+        try:
+            ontology_json = requests.get(url).json()
+            print(json.dumps(ontology_json))
+            return ontology_json["_embedded"]["terms"][0]["label"]
+        except:
+            return term
+
+    return term
 
 @app.route('/', methods=['GET'])
 def homepage():
@@ -60,10 +83,13 @@ def viewattributeterms(attribute):
 
         intersection_set = set.intersection(*all_filtered_files_list)
 
+
+
         #print(attribute_term_db.term, len(all_files_db))
         output_dict = {}
         output_dict["attributename"] = attribute
         output_dict["attributeterm"] = attribute_term_db.term
+        output_dict["ontologyterm"] = resolve_ontology(attribute, attribute_term_db.term)
         output_dict["countfiles"] = len(intersection_set)
         output_list.append(output_dict)
 

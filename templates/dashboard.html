@@ -58,6 +58,7 @@
                 <thead>
                   <tr>
                     <th>Attribute</th>
+                    <th>Ontology Term</th>
                     <th>Term</th>
                     <th>TermFilter</th>
                     <th># Files</th>
@@ -73,6 +74,7 @@
                     <!-- <attributeterm-viewer :attributeterm=attributeterm.attributeterm :countfiles=attributeterm.countfiles :attributename=attributeterm.attributename v-on:update-attributeterm="updateAttributeTermSelection"></attributeterm-viewer> -->
                     <tr v-for="attributeterm in attributeterms">
                         <td>{{attributeterm.attributename}}</td>
+                        <td>{{attributeterm.ontologyterm}}</td>
                         <td>{{attributeterm.attributeterm}}</td>
                         <td>
                             <attributeterm-filterbutton :attributeterm=attributeterm.attributeterm :attributename=attributeterm.attributename ></attributeterm-filterbutton>
@@ -322,11 +324,7 @@
                 }, {
                     attributename: "ATTRIBUTE_2"
                 }],
-                attributeterms: [{
-                    attributename: "ATTRIBUTE_1",
-                    attributeterm: "term1",
-                    countfiles: "0"
-                }],
+                attributeterms: [],
                 groupG1: [],
                 groupG2: [],
                 groupG3: [],
