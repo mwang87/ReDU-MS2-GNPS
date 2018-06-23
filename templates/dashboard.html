@@ -26,34 +26,50 @@
           <a class="nav-link" href="/metadata">Metadata Explorer</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://bix-lab.ucsd.edu/display/Public/GNPS+Documentation+Page">Documentation</a>
+          <a class="nav-link" href="https://ccms-ucsd.github.io/GNPSDocumentation/">Documentation</a>
         </li>
       </ul>
 
     </nav>
 
-    <div id="app-4" class="col-md-8 justify-content-center align-items-center">
-        <h1>GNPS Metadata Analysis Interface</h1>
+    <div id="app-4" class="container-fluid justify-content-center align-items-center">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm text-center">
+                <h2>GNPS Metadata Analysis Interface</h2>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+
+        <hr>
 
         <div id="toppanel" class="row">
             <div class="col">
-                <h2>Analysis Summary</h2>
+                <div class="text-center">
+                    <h3>Analysis Summary</h3>
+                </div>
+
                 <analysis-gobutton></analysis-gobutton>
             </div>
 
             <div class="col">
-                <h2>Attributes</h2>
+                <div class="text-center">
+                    <h3>Attributes</h3>
+                </div>
                 <attribute-viewer v-for="item in attributes" v-bind:attributename="item.attributename" v-on:update-attribute="updateAttributeSelection"></attribute-viewer>
-                <br>
             </div>
 
             <div class="col">
-                <h2>Attribute Filters</h2>
+                <div class="text-center">
+                    <h3>Attribute Term Filters</h3>
+                </div>
                 <attribute-filterviewer v-for="item in filterTerms" v-bind:attributename="item.attributename" v-bind:attributeterm="item.attributeterm"></attribute-filterviewer>
             </div>
         </div>
 
-        <div>
+        <hr>
+
+        <div class="col-sm text-center">
             <h2>Attribute Terms</h2>
         </div>
         <div style="overflow-y:auto; height:400px">
@@ -275,15 +291,20 @@
                     win.focus();
                 }
             },
-            template: '<div> \
-      Group 1 {{ this.$parent.groupG1.length }} Files <br> \
-      Group 2 {{ this.$parent.groupG2.length }} Files <br> \
-      Group 3 {{ this.$parent.groupG3.length }} Files <br> \
-      Group 4 {{ this.$parent.groupG4.length }} Files <br> \
-      Group 5 {{ this.$parent.groupG5.length }} Files <br> \
-      Group 6 {{ this.$parent.groupG6.length }} Files <br> \
-      <button class="btn btn-primary" v-on:click="clickMe">Analyze Data on GNPS Networking</button> \
-      </div>'
+            template: '<div> <table class="table table-striped"> \
+            <tr> \
+            <th>Group Number</th> \
+            <th>Number of Selected Files</th> \
+            </tr> \
+            <tr><td>Group 1 </td><td>{{ this.$parent.groupG1.length }}</td></tr>\
+            <tr><td>Group 2 </td><td>{{ this.$parent.groupG2.length }}</td></tr>\
+            <tr><td>Group 3 </td><td>{{ this.$parent.groupG3.length }}</td></tr>\
+            <tr><td>Group 4 </td><td>{{ this.$parent.groupG4.length }}</td></tr>\
+            <tr><td>Group 5 </td><td>{{ this.$parent.groupG5.length }}</td></tr>\
+            <tr><td>Group 6 </td><td>{{ this.$parent.groupG6.length }}</td></tr>\
+            </table> \
+            <button class="btn btn-primary btn-block" v-on:click="clickMe">Analyze Data on GNPS Networking</button> \
+            </div>'
         })
 
         var app4 = new Vue({
