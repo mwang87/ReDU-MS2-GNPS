@@ -50,6 +50,8 @@ def main():
     Filename.create_table(True)
     Attribute.create_table(True)
     AttributeTerm.create_table(True)
+    Compound.create_table(True)
+    CompoundFilenameConnection.create_table(True)
     FilenameAttributeConnection.create_table(True)
 
     input_metadata_filename = sys.argv[1]

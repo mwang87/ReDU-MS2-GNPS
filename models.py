@@ -23,6 +23,20 @@ class AttributeTerm(Model):
     class Meta:
         database = db
 
+class Compound(Model):
+    compoundname = TextField(primary_key=True)
+
+    class Meta:
+        database = db
+
+class CompoundFilenameConnection(Model):
+    compound = ForeignKeyField(Compound)
+    filename = ForeignKeyField(Filename)
+
+    class Meta:
+        database = db
+        primary_key = CompositeKey('compound', 'filename')
+
 class FilenameAttributeConnection(Model):
     filename = ForeignKeyField(Filename)
     attribute = ForeignKeyField(Attribute)
