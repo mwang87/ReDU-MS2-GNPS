@@ -16,21 +16,28 @@ def main():
 
     input_identifications = sys.argv[1]
 
-    #for filename in Filename.select():
-    #    print(filename.filepath)
+    all_files_in_db = Filename.select()
+    all_files_in_db_set = set([filename.filepath for filename in all_files_in_db])
 
     with open(input_identifications) as csvfile:
         reader = csv.DictReader(csvfile, delimiter='\t')
         line_count = 0
         for row in reader:
             line_count += 1
-            
+
+            if line_count % 1000 == 0:
+                print(line_count)
+
             try:
                 original_path = row["Original_Path"].replace("MSV000078556/spectrum", "MSV000078556/ccms_peak")
-                if original_path.find("MSV000078556") == -1:
+
+
+                if not original_path in all_files_in_db_set:
+                    #print(original_path, "Missing")
                     continue
+
                 filename_db = Filename.get(filepath=original_path)
-                print(row['Original_Path'])
+
                 compound_db, status = Compound.get_or_create(compoundname=row['compound_name'])
                 join_db = CompoundFilenameConnection.get_or_create(filename=filename_db, compound=compound_db)
             except KeyboardInterrupt:

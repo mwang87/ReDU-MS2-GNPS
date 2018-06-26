@@ -14,19 +14,25 @@ requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 def resolve_ontology(attribute, term):
     if attribute == "ATTRIBUTE_BodyPart":
         url = "https://www.ebi.ac.uk/ols/api/ontologies/uberon/terms?iri=http://purl.obolibrary.org/obo/%s" % (term.replace(":", "_"))
+        print(url)
         try:
             ontology_json = requests.get(url).json()
-            print(json.dumps(ontology_json))
+            #print(json.dumps(ontology_json))
             return ontology_json["_embedded"]["terms"][0]["label"]
+        except KeyboardInterrupt:
+            raise
         except:
             return term
 
     if attribute == "ATTRIBUTE_Disease":
         url = "https://www.ebi.ac.uk/ols/api/ontologies/doid/terms?iri=http://purl.obolibrary.org/obo/%s" % (term.replace(":", "_"))
+        print(url)
         try:
             ontology_json = requests.get(url).json()
-            print(json.dumps(ontology_json))
+            #print(json.dumps(ontology_json))
             return ontology_json["_embedded"]["terms"][0]["label"]
+        except KeyboardInterrupt:
+            raise
         except:
             return term
 
