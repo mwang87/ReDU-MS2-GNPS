@@ -20,7 +20,7 @@ def resolve_metadata_filename_to_all_files(metadata_filename, all_files):
     return acceptable_filenames[0]
 
 def add_metadata_per_accession(dataset_accession, metadata_list):
-    found_files = False
+    added_files = 0
 
     ###Make sure we line these datasets up
     all_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, "ccms_peak", credentials.USERNAME, credentials.PASSWORD)
@@ -30,9 +30,12 @@ def add_metadata_per_accession(dataset_accession, metadata_list):
         dataset_filename = resolve_metadata_filename_to_all_files(filename, all_files)
 
         if dataset_filename == None:
+            #print(filename, "Missing")
             continue
 
-        found_files = True
+        added_files += 1
+
+        #continue
 
         filename_db, status = Filename.get_or_create(filepath=dataset_filename)
 
@@ -46,8 +49,10 @@ def add_metadata_per_accession(dataset_accession, metadata_list):
 
                 join_db = FilenameAttributeConnection.get_or_create(filename=filename_db, attribute=attribute_db, attributeterm=attribute_value_db)
 
-        if found_files == False:
-            print(dataset_accession, "No Files Found")
+    if added_files == 0:
+        print(dataset_accession, "No Files Found")
+
+    return added_files
 
 def main():
     Filename.create_table(True)
@@ -68,8 +73,8 @@ def main():
         metadata_by_accession[massive_accession].append(result)
 
     for dataset_accession in metadata_by_accession:
-        print(dataset_accession, len(metadata_by_accession[dataset_accession]))
-        add_metadata_per_accession(dataset_accession, metadata_by_accession[dataset_accession])
+        added_files = add_metadata_per_accession(dataset_accession, metadata_by_accession[dataset_accession])
+        print(dataset_accession, len(metadata_by_accession[dataset_accession]), added_files)
 
 
 
