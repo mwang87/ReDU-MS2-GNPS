@@ -19,6 +19,8 @@ def main():
     all_files_in_db = Filename.select()
     all_files_in_db_set = set([filename.filepath for filename in all_files_in_db])
 
+    processed_key = set()
+
     with open(input_identifications) as csvfile:
         reader = csv.DictReader(csvfile, delimiter='\t')
         line_count = 0
@@ -34,10 +36,16 @@ def main():
                 if not original_path in all_files_in_db_set:
                     continue
 
-                filename_db = Filename.get(filepath=original_path)
+                key = original_path + ":" + row["Compound_Name"]
 
+                if key in processed_key:
+                    continue
+
+                filename_db = Filename.get(filepath=original_path)
                 compound_db, status = Compound.get_or_create(compoundname=row['Compound_Name'])
                 join_db = CompoundFilenameConnection.get_or_create(filename=filename_db, compound=compound_db)
+
+                processed_key.add(key)
             except KeyboardInterrupt:
                 raise
             except:

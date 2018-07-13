@@ -39,6 +39,8 @@ def resolve_ontology(attribute, term):
     return term
 
 def count_compounds_in_files(filelist1, filelist2, filelist3, filelist4, filelist5, filelist6):
+    print("HEREEEE")
+
     output_list = []
     input_fileset1 = set(filelist1)
     input_fileset2 = set(filelist2)
@@ -60,6 +62,8 @@ def count_compounds_in_files(filelist1, filelist2, filelist3, filelist4, filelis
 
         output_dict = {}
         output_dict["compound"] = my_compound.compoundname
+
+        include_row = False
 
         output_dict["count1"] = len(intersection_set1)
         if len(filelist1) > 0:
@@ -97,7 +101,9 @@ def count_compounds_in_files(filelist1, filelist2, filelist3, filelist4, filelis
         else:
             output_dict["count6_norm"] = 0
 
-        output_list.append(output_dict)
+        counts_total = output_dict["count1"] + output_dict["count2"] + output_dict["count3"] + output_dict["count4"] + output_dict["count5"] + output_dict["count6"]
+        if counts_total > 0:
+            output_list.append(output_dict)
 
     return output_list
 
