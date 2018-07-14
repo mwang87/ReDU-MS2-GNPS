@@ -50,6 +50,7 @@ def count_compounds_in_files(filelist1, filelist2, filelist3, filelist4, filelis
     all_compounds = Compound.select()
     for my_compound in all_compounds:
         my_files = Filename.select().join(CompoundFilenameConnection).where(CompoundFilenameConnection.compound==my_compound)
+
         my_files_set = set([one_file.filepath for one_file in my_files])
         intersection_set1 = input_fileset1.intersection(my_files_set)
         intersection_set2 = input_fileset2.intersection(my_files_set)
@@ -60,6 +61,74 @@ def count_compounds_in_files(filelist1, filelist2, filelist3, filelist4, filelis
 
         output_dict = {}
         output_dict["compound"] = my_compound.compoundname
+
+        include_row = False
+
+        output_dict["count1"] = len(intersection_set1)
+        if len(filelist1) > 0:
+            output_dict["count1_norm"] = int(float(len(intersection_set1)) / float(len(filelist1)) * 100.0)
+        else:
+            output_dict["count1_norm"] = 0
+
+        output_dict["count2"] = len(intersection_set2)
+        if len(filelist2) > 0:
+            output_dict["count2_norm"] = int(float(len(intersection_set2)) / float(len(filelist2)) * 100.0)
+        else:
+            output_dict["count2_norm"] = 0
+
+        output_dict["count3"] = len(intersection_set3)
+        if len(filelist3) > 0:
+            output_dict["count3_norm"] = int(float(len(intersection_set3)) / float(len(filelist3)) * 100.0)
+        else:
+            output_dict["count3_norm"] = 0
+
+        output_dict["count4"] = len(intersection_set4)
+        if len(filelist4) > 0:
+            output_dict["count4_norm"] = int(float(len(intersection_set4)) / float(len(filelist4)) * 100.0)
+        else:
+            output_dict["count4_norm"] = 0
+
+        output_dict["count5"] = len(intersection_set5)
+        if len(filelist5) > 0:
+            output_dict["count5_norm"] = int(float(len(intersection_set5)) / float(len(filelist5)) * 100.0)
+        else:
+            output_dict["count5_norm"] = 0
+
+        output_dict["count6"] = len(intersection_set6)
+        if len(filelist6) > 0:
+            output_dict["count6_norm"] = int(float(len(intersection_set6)) / float(len(filelist6)) * 100.0)
+        else:
+            output_dict["count6_norm"] = 0
+
+        counts_total = output_dict["count1"] + output_dict["count2"] + output_dict["count3"] + output_dict["count4"] + output_dict["count5"] + output_dict["count6"]
+        if counts_total > 0:
+            output_list.append(output_dict)
+
+    return output_list
+
+def count_tags_in_files(filelist1, filelist2, filelist3, filelist4, filelist5, filelist6):
+    output_list = []
+    input_fileset1 = set(filelist1)
+    input_fileset2 = set(filelist2)
+    input_fileset3 = set(filelist3)
+    input_fileset4 = set(filelist4)
+    input_fileset5 = set(filelist5)
+    input_fileset6 = set(filelist6)
+
+    all_tags = CompoundTag.select()
+    for my_tag in all_tags:
+        my_files = Filename.select().join(CompoundTagFilenameConnection).where(CompoundTagFilenameConnection.compoundtag==my_tag)
+
+        my_files_set = set([one_file.filepath for one_file in my_files])
+        intersection_set1 = input_fileset1.intersection(my_files_set)
+        intersection_set2 = input_fileset2.intersection(my_files_set)
+        intersection_set3 = input_fileset3.intersection(my_files_set)
+        intersection_set4 = input_fileset4.intersection(my_files_set)
+        intersection_set5 = input_fileset5.intersection(my_files_set)
+        intersection_set6 = input_fileset6.intersection(my_files_set)
+
+        output_dict = {}
+        output_dict["compound"] = my_tag.tagname
 
         include_row = False
 
@@ -207,6 +276,19 @@ def summarizefiles():
     all_files_G6 = json.loads(request.form["G6"])
 
     output = count_compounds_in_files(all_files_G1, all_files_G2, all_files_G3, all_files_G4, all_files_G5, all_files_G6)
+
+    return json.dumps(output)
+
+@app.route('/tagexplorer', methods=['POST'])
+def summarizetagfiles():
+    all_files_G1 = json.loads(request.form["G1"])
+    all_files_G2 = json.loads(request.form["G2"])
+    all_files_G3 = json.loads(request.form["G3"])
+    all_files_G4 = json.loads(request.form["G4"])
+    all_files_G5 = json.loads(request.form["G5"])
+    all_files_G6 = json.loads(request.form["G6"])
+
+    output = count_tags_in_files(all_files_G1, all_files_G2, all_files_G3, all_files_G4, all_files_G5, all_files_G6)
 
     return json.dumps(output)
 

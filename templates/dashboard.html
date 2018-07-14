@@ -299,6 +299,7 @@
                     }
 
                     params_dict = {};
+                    params_dict["mode"] = "annotations"
                     params_dict["G1"] = extractFilenamesToList(this.$parent.groupG1)
                     params_dict["G2"] = extractFilenamesToList(this.$parent.groupG2)
                     params_dict["G3"] = extractFilenamesToList(this.$parent.groupG3)
@@ -329,6 +330,28 @@
                     analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
                     var win = window.open(analysis_url, '_blank');
                     win.focus();
+                },
+                analyzetags: function(event){
+                    total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
+                    unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
+                    unique_list_files = Array.from(new Set(unique_list_files));
+                    if(total_number_of_files != unique_list_files.length){
+                        alert("Warning: some files belong to multiple groups! Might cause some issues on GNPS")
+                    }
+
+                    params_dict = {};
+                    params_dict["mode"] = "tags"
+                    params_dict["G1"] = extractFilenamesToList(this.$parent.groupG1)
+                    params_dict["G2"] = extractFilenamesToList(this.$parent.groupG2)
+                    params_dict["G3"] = extractFilenamesToList(this.$parent.groupG3)
+                    params_dict["G4"] = extractFilenamesToList(this.$parent.groupG4)
+                    params_dict["G5"] = extractFilenamesToList(this.$parent.groupG5)
+                    params_dict["G6"] = extractFilenamesToList(this.$parent.groupG6)
+
+                    //analysis_url = "https://ccms-internal.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
+                    analysis_url = "/explorerdashboard#" + encodeURIComponent(JSON.stringify(params_dict))
+                    var win = window.open(analysis_url, '_blank');
+                    win.focus();
                 }
             },
             template: '<div> <table class="table table-striped"> \
@@ -348,6 +371,8 @@
             <button class="btn btn-primary btn-block" v-on:click="analyzelibrarysearch">Analyze Data on GNPS Library Search</button> \
             <br> \
             <button class="btn btn-primary btn-block" v-on:click="analyzeexplorer">Analyze Data with Identification</button> \
+            <br> \
+            <button class="btn btn-primary btn-block" v-on:click="analyzetags">Analyze Data with Tags</button> \
             </div>'
         })
 

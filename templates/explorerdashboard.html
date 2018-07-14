@@ -138,8 +138,15 @@
     // Get the hash and make the query
     all_files = JSON.parse(decodeURIComponent(window.location.hash).slice(1))
 
+    mode = all_files["mode"]
+
+    url = "/explorer"
+    if(mode == "tags"){
+        url = "tagexplorer"
+    }
+
     $.ajax({
-        url: "/explorer",
+        url: url,
         type: "POST",
         data: {
             G1: JSON.stringify(all_files["G1"]),
