@@ -23,8 +23,8 @@ def main():
     Compound.create_table(True)
     CompoundFilenameConnection.create_table(True)
     FilenameAttributeConnection.create_table(True)
-    Tag.create_table(True)
-    TagFilenameConnection.create_table(True)
+    CompoundTag.create_table(True)
+    CompoundTagFilenameConnection.create_table(True)
 
     input_identifications = sys.argv[1]
     input_tags_mapping = sys.argv[2]
@@ -44,7 +44,6 @@ def main():
 
             if line_count % 1000 == 0:
                 print(line_count)
-
             try:
                 original_path = "f." + row["full_CCMS_path"]
 
@@ -63,8 +62,8 @@ def main():
                         if len(tag) > 2:
                             print(tag)
                             filename_db = Filename.get(filepath=original_path)
-                            tag_db = Tag.get(tagname=tag)
-                            join_db = TagFilenameConnection.get_or_create(filename=filename_db, tag=tag_db)
+                            tag_db, status = CompoundTag.get_or_create(tagname=tag)
+                            join_db = CompoundTagFilenameConnection.get_or_create(filename=filename_db, compoundtag=tag_db)
 
                 processed_key.add(key)
             except KeyboardInterrupt:

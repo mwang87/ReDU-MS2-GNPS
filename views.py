@@ -39,8 +39,6 @@ def resolve_ontology(attribute, term):
     return term
 
 def count_compounds_in_files(filelist1, filelist2, filelist3, filelist4, filelist5, filelist6):
-    print("HEREEEE")
-
     output_list = []
     input_fileset1 = set(filelist1)
     input_fileset2 = set(filelist2)

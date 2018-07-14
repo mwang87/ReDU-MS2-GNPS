@@ -37,19 +37,19 @@ class CompoundFilenameConnection(Model):
         database = db
         primary_key = CompositeKey('compound', 'filename')
 
-class Tag(Model):
+class CompoundTag(Model):
     tagname = TextField(primary_key=True)
 
     class Meta:
         database = db
 
-class TagFilenameConnection(Model):
-    tag = ForeignKeyField(Tag)
+class CompoundTagFilenameConnection(Model):
+    compoundtag = ForeignKeyField(CompoundTag)
     filename = ForeignKeyField(Filename)
 
     class Meta:
         database = db
-        primary_key = CompositeKey('tag', 'filename')
+        primary_key = CompositeKey('compoundtag', 'filename')
 
 
 class FilenameAttributeConnection(Model):
