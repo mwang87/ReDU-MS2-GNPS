@@ -8,6 +8,7 @@ RUN pip install peewee
 RUN pip install flask
 RUN pip install requests
 RUN pip install requests-cache
+RUN pip install gunicorn
 
 COPY . /app
 WORKDIR /app
