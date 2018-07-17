@@ -1,10 +1,12 @@
 # views.py
-from flask import abort, jsonify, render_template, request, redirect, url_for
+from flask import abort, jsonify, render_template, request, redirect, url_for, send_file
 
 from app import app
 from models import *
 
+import csv
 import json
+import uuid
 import requests
 import requests_cache
 
@@ -291,6 +293,48 @@ def summarizetagfiles():
     output = count_tags_in_files(all_files_G1, all_files_G2, all_files_G3, all_files_G4, all_files_G5, all_files_G6)
 
     return json.dumps(output)
+
+@app.route('/plottags', methods=['POST'])
+def plottags():
+    import os
+    uuid_to_use = str(uuid.uuid4())
+    input_filename = os.path.join("static", "temp", uuid_to_use + ".tsv")
+    all_counts = json.loads(request.form["tagcounts"])
+    print(all_counts)
+
+    with open(input_filename, 'w') as csvfile:
+        field_name = ["source information", "G1 number", "G1 percent", "G2 number", "G2 percent", "G3 number", "G3 percent", "G4 number", "G4 percent", "G5 number", "G5 percent", "G6 number", "G6 percent"]
+        writer = csv.DictWriter(csvfile, fieldnames=field_name, delimiter="\t")
+
+        writer.writeheader()
+
+        for row in all_counts:
+            new_dict = {}
+            new_dict["source information"] = row["compound"]
+            new_dict["G1 number"] = row["count1"]
+            new_dict["G1 percent"] = row["count1_norm"]
+            new_dict["G2 number"] = row["count2"]
+            new_dict["G2 percent"] = row["count2_norm"]
+            new_dict["G3 number"] = row["count3"]
+            new_dict["G3 percent"] = row["count3_norm"]
+            new_dict["G4 number"] = row["count4"]
+            new_dict["G4 percent"] = row["count4_norm"]
+            new_dict["G5 number"] = row["count5"]
+            new_dict["G6 percent"] = row["count5_norm"]
+            new_dict["G6 number"] = row["count6"]
+            new_dict["G6 percent"] = row["count6_norm"]
+            writer.writerow(new_dict)
+
+    output_counts_png = os.path.join("static", "temp", uuid_to_use + "_count.png")
+    output_percent_png = os.path.join("static", "temp", uuid_to_use + "_percent.png")
+
+    cmd = "Rscript %s %s %s %s" % ("Meta_Analysis_Plot_Example.r", input_filename, output_counts_png, output_percent_png)
+    print(cmd)
+    os.system(cmd)
+
+    return json.dumps({"uuid" : uuid_to_use})
+
+
 
 #Summarize Files Per Comparison Group
 @app.route('/explorerdashboard', methods=['GET'])
