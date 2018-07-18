@@ -299,7 +299,6 @@
                     }
 
                     params_dict = {};
-                    params_dict["mode"] = "annotations"
                     params_dict["G1"] = extractFilenamesToList(this.$parent.groupG1)
                     params_dict["G2"] = extractFilenamesToList(this.$parent.groupG2)
                     params_dict["G3"] = extractFilenamesToList(this.$parent.groupG3)
@@ -340,7 +339,6 @@
                     }
 
                     params_dict = {};
-                    params_dict["mode"] = "tags"
                     params_dict["G1"] = extractFilenamesToList(this.$parent.groupG1)
                     params_dict["G2"] = extractFilenamesToList(this.$parent.groupG2)
                     params_dict["G3"] = extractFilenamesToList(this.$parent.groupG3)
@@ -349,7 +347,7 @@
                     params_dict["G6"] = extractFilenamesToList(this.$parent.groupG6)
 
                     //analysis_url = "https://ccms-internal.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
-                    analysis_url = "/explorerdashboard#" + encodeURIComponent(JSON.stringify(params_dict))
+                    analysis_url = "/tagdashboard#" + encodeURIComponent(JSON.stringify(params_dict))
                     var win = window.open(analysis_url, '_blank');
                     win.focus();
                 }

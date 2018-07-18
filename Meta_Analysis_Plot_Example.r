@@ -1,10 +1,11 @@
 
-user_input <- "Source0"
+
 
 library(ggplot2)
 library(tidyr)
 
 args <- commandArgs(trailingOnly=TRUE)
+user_input <- args[4]
 
 df <- read.delim(args[1], sep="\t", header =TRUE)
 df <- separate(data = df,col = source.information, into = c("source_level", "category"), sep = "_")

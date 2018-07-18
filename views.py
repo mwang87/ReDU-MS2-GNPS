@@ -300,7 +300,7 @@ def plottags():
     uuid_to_use = str(uuid.uuid4())
     input_filename = os.path.join("static", "temp", uuid_to_use + ".tsv")
     all_counts = json.loads(request.form["tagcounts"])
-    print(all_counts)
+    sourcelevel = request.form["sourcelevel"]
 
     with open(input_filename, 'w') as csvfile:
         field_name = ["source information", "G1 number", "G1 percent", "G2 number", "G2 percent", "G3 number", "G3 percent", "G4 number", "G4 percent", "G5 number", "G5 percent", "G6 number", "G6 percent"]
@@ -328,18 +328,22 @@ def plottags():
     output_counts_png = os.path.join("static", "temp", uuid_to_use + "_count.png")
     output_percent_png = os.path.join("static", "temp", uuid_to_use + "_percent.png")
 
-    cmd = "Rscript %s %s %s %s" % ("Meta_Analysis_Plot_Example.r", input_filename, output_counts_png, output_percent_png)
+    cmd = "Rscript %s %s %s %s %s" % ("Meta_Analysis_Plot_Example.r", input_filename, output_counts_png, output_percent_png, sourcelevel)
     print(cmd)
     os.system(cmd)
 
     return json.dumps({"uuid" : uuid_to_use})
 
 
-
 #Summarize Files Per Comparison Group
 @app.route('/explorerdashboard', methods=['GET'])
 def explorerdashboard():
     return render_template('explorerdashboard.html')
+
+#Summarize Files Per Comparison Group
+@app.route('/tagdashboard', methods=['GET'])
+def tagdashboard():
+    return render_template('tagdashboard.html')
 
 @app.route('/heartbeat', methods=['GET'])
 def heartbeat():
