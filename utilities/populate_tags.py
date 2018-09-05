@@ -12,8 +12,19 @@ def load_compound_tag_mapping(tag_mapping_filename):
         reader = csv.DictReader(csvfile, delimiter='\t')
         for row in reader:
             compound_name = row["GNPS_annotation"]
-            tag = row["Source"]
-            compound_map[compound_name].append(tag)
+            tag1 = "Source0_" + row["Source"]
+            tag2 = "Source1_" + row["Source_Sub1"]
+            tag3 = "Source2_" + row["Source_Sub2"]
+
+            if len(row["Source"]) > 2:
+                compound_map[compound_name].append(tag1)
+
+            if len(row["Source_Sub1"]) > 2:
+                compound_map[compound_name].append(tag2)
+
+            if len(row["Source_Sub2"]) > 2:
+                compound_map[compound_name].append(tag3)
+
     return compound_map
 
 def main():
@@ -60,7 +71,6 @@ def main():
                 if len(tags_for_compound) > 0:
                     for tag in tags_for_compound:
                         if len(tag) > 2:
-                            print(tag)
                             filename_db = Filename.get(filepath=original_path)
                             tag_db, status = CompoundTag.get_or_create(tagname=tag)
                             join_db = CompoundTagFilenameConnection.get_or_create(filename=filename_db, compoundtag=tag_db)

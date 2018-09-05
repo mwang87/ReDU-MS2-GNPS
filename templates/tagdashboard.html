@@ -46,7 +46,15 @@
         <hr>
 
         <div class="col-sm text-center">
-            <h2>Compounds</h2>
+            <h2>Compound Tags</h2>
+        </div>
+
+        <div class="text-center">
+            <button class="btn btn-warning" style="margin-bottom:4px" onclick="plotimage('Source0')">Plot Abundances Source0</button>
+            <button class="btn btn-warning" style="margin-bottom:4px" onclick="plotimage('Source1')">Plot Abundances Source1</button>
+            <button class="btn btn-warning" style="margin-bottom:4px" onclick="plotimage('Source2')">Plot Abundances Source2</button>
+        </div>
+        <div class="text-center" id="plotimage">
         </div>
 
         <div style="">
@@ -54,7 +62,7 @@
                 <thead>
                   <tr>
                     <th>
-                        Compound Name
+                        Compound Tag Name
                         <i class="fa fa-sort-alpha-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('compound')"></i>
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('compound')"></i>
                     </th>
@@ -134,13 +142,34 @@
         });
     }
 
+    function plotimage(sourcelevel){
+        $.ajax({
+            url: "/plottags",
+            type: "POST",
+            data: {
+                tagcounts: JSON.stringify(app4.compoundlist),
+                sourcelevel : JSON.stringify(sourcelevel)
+            },
+            success: function(response) {
+                console.log(response);
+                url_count = "/static/temp/" + response["uuid"] + "_count.png"
+                url_percent = "/static/temp/" + response["uuid"] + "_percent.png"
+                $('#plotimage').html('<img src="' + url_count + '" />' + '<img src="' + url_percent + '" />');
+            },
+            failure: function(){
+                console.log("Ming")
+            },
+            dataType: "json"
+        });
+    }
+
 
     // Get the hash and make the query
     all_files = JSON.parse(decodeURIComponent(window.location.hash).slice(1))
 
     mode = all_files["mode"]
 
-    url = "/explorer"
+    url = "/tagexplorer"
 
     $.ajax({
         url: url,
