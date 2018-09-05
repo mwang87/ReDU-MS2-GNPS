@@ -16,7 +16,8 @@ def resolve_ontology(attribute, term):
         url = "https://www.ebi.ac.uk/ols/api/ontologies/uberon/terms?iri=http://purl.obolibrary.org/obo/%s" % (term.replace(":", "_"))
         print(url)
         try:
-            ontology_json = requests.get(url).json()
+            requests.get(url)
+            ontology_json = json.loads(requests.get(url).text)
             #print(json.dumps(ontology_json))
             return ontology_json["_embedded"]["terms"][0]["label"]
         except KeyboardInterrupt:
@@ -187,9 +188,16 @@ def getfilename():
     if len(filepath_db) == 0:
         return "[]"
 
-    all_terms = AttributeTerm.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.filename == filepath_db)
+    all_connections = FilenameAttributeConnection.select().where(FilenameAttributeConnection.filename == filepath_db)
+    resolved_terms = []
+    for connection in all_connections:
+        attribute_name = connection.attribute.categoryname
+        attribute_term = connection.attributeterm.term
+        resolved_term = resolve_ontology(attribute_name, attribute_term)
 
-    return json.dumps([myterm.term for myterm in all_terms])
+        resolved_terms.append(resolved_term)
+
+    return json.dumps(resolved_terms)
 
 @app.route('/attributes', methods=['GET'])
 def viewattributes():
