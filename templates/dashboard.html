@@ -56,7 +56,7 @@
                 <div class="text-center">
                     <h3>Attributes</h3>
                 </div>
-                <attribute-viewer v-for="item in attributes" v-bind:attributename="item.attributename" v-on:update-attribute="updateAttributeSelection"></attribute-viewer>
+                <attribute-viewer v-for="item in attributes" v-bind:attributename="item.attributename" v-bind:attributedisplay="item.attributedisplay" v-on:update-attribute="updateAttributeSelection"></attribute-viewer>
             </div>
 
             <div class="col">
@@ -140,7 +140,7 @@
         }
 
         Vue.component('attribute-viewer', {
-            props: ['attributename'],
+            props: ['attributename', 'attributedisplay'],
             data: function() {
                 return {
                     count: 0
@@ -162,7 +162,7 @@
                     });
                 }
             },
-            template: '<div><button class="btn btn-warning btn-block" style="margin-bottom:4px" v-on:click="clickMe">{{attributename}}</button></div>'
+            template: '<div><button class="btn btn-warning btn-block" style="margin-bottom:4px" v-on:click="clickMe">{{attributedisplay}}</button></div>'
         })
 
         Vue.component('attribute-filterviewer', {

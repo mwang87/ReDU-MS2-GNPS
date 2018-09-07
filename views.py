@@ -203,6 +203,7 @@ def getfilename():
 
 @app.route('/attributes', methods=['GET'])
 def viewattributes():
+    white_list_attributes = ["ATTRIBUTE_SampleType", "ATTRIBUTE_BodyPart", "ATTRIBUTE_Disease", "ATTRIBUTE_LifeStage", "ATTRIBUTE_Sex", "ATTRIBUTE_Mass_Spectrometer", "ATTRIBUTE_HumanPopulationDensity" ]
     all_attributes = Attribute.select()
 
     output_list = []
@@ -210,8 +211,11 @@ def viewattributes():
         all_terms = AttributeTerm.select().join(FilenameAttributeConnection).join(Attribute).where(Attribute.categoryname == attribute.categoryname).group_by(AttributeTerm.term)
         output_dict = {}
         output_dict["attributename"] = attribute.categoryname
+        output_dict["attributedisplay"] = attribute.categoryname.replace("ATTRIBUTE_", "")
         output_dict["countterms"] = len(all_terms)
-        output_list.append(output_dict)
+
+        if attribute.categoryname in white_list_attributes:
+            output_list.append(output_dict)
 
     return json.dumps(output_list)
 
