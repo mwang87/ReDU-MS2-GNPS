@@ -12,6 +12,8 @@ import requests_cache
 
 requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
+white_list_attributes = ["ATTRIBUTE_SampleType", "ATTRIBUTE_BodyPart", "ATTRIBUTE_Disease", "ATTRIBUTE_LifeStage", "ATTRIBUTE_Sex", "ATTRIBUTE_Mass_Spectrometer", "ATTRIBUTE_HumanPopulationDensity" ]
+
 """Resolving ontologies only if they need to be"""
 def resolve_ontology(attribute, term):
     if attribute == "ATTRIBUTE_BodyPart":
@@ -184,6 +186,7 @@ def homepage():
 @app.route('/filename', methods=['GET'])
 def getfilename():
     query_filename = request.args["query"]
+    expanded_attributes = request.args.get("expanded", "false")
 
     filepath_db = Filename.select().where(Filename.filepath == query_filename)
 
@@ -197,13 +200,16 @@ def getfilename():
         attribute_term = connection.attributeterm.term
         resolved_term = resolve_ontology(attribute_name, attribute_term)
 
-        resolved_terms.append(resolved_term)
+        if expanded_attributes == "false" and attribute_name in white_list_attributes:
+            resolved_terms.append(resolved_term)
+
+        if expanded_attributes == "true" and not(attribute_name in white_list_attributes):
+            resolved_terms.append(resolved_term)
 
     return json.dumps(resolved_terms)
 
 @app.route('/attributes', methods=['GET'])
 def viewattributes():
-    white_list_attributes = ["ATTRIBUTE_SampleType", "ATTRIBUTE_BodyPart", "ATTRIBUTE_Disease", "ATTRIBUTE_LifeStage", "ATTRIBUTE_Sex", "ATTRIBUTE_Mass_Spectrometer", "ATTRIBUTE_HumanPopulationDensity" ]
     all_attributes = Attribute.select()
 
     output_list = []
