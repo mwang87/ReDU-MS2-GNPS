@@ -437,6 +437,11 @@ def get_dataset_information(dataset_task, username=None, password=None):
         json_obj = json.loads(requests.get(datasets_url).text)
         return json_obj
 
+def get_px_dataset_information(dataset_accession):
+    url = "https://massive.ucsd.edu/ProteoSAFe/proxi/datasets?resultType=full&accession=%s" % (dataset_accession)
+
+    return requests.get(url).json()
+
 def get_dataset_mzTab_list(dataset_task):
     url = "http://massive.ucsd.edu/ProteoSAFe/result_json.jsp?task=%s&view=view_result_list" % (dataset_task)
     json_obj = json.loads(requests.get(url).text)["blockData"]
@@ -553,6 +558,6 @@ def get_all_results_from_serverside_results_view_groupbycolumn(server, task_id, 
     return r.json()["row_data"]
 
 # def dataset_accession_to_task(dataset_accession):
-#     url = "http://massive.ucsd.edu/ProteoSAFe/QueryMSV?id=%s" % (dataset_accession)
+#     url = "https://massive.ucsd.edu/ProteoSAFe/proxi/datasets?resultType=full&accession=%s" % (dataset_accession)
 #     r = requests.get(url)
 #     print(r.text)

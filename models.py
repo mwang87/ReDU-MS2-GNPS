@@ -7,6 +7,7 @@ from app import db
 
 class Filename(Model):
     filepath = TextField(primary_key=True)
+    datasetaccession = TextField()
 
     class Meta:
         database = db

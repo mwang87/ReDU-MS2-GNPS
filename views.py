@@ -12,7 +12,7 @@ import requests_cache
 
 requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
-white_list_attributes = ["ATTRIBUTE_SampleType", "ATTRIBUTE_BodyPart", "ATTRIBUTE_Disease", "ATTRIBUTE_LifeStage", "ATTRIBUTE_Sex", "ATTRIBUTE_Mass_Spectrometer", "ATTRIBUTE_HumanPopulationDensity" ]
+white_list_attributes = ["ATTRIBUTE_DatasetAccession", "ATTRIBUTE_SampleType", "ATTRIBUTE_Curated_BodyPartOntologyName", "ATTRIBUTE_Disease", "ATTRIBUTE_LifeStage", "ATTRIBUTE_Sex", "ATTRIBUTE_Mass_Spectrometer", "ATTRIBUTE_HumanPopulationDensity" ]
 
 """Resolving ontologies only if they need to be"""
 def resolve_ontology(attribute, term):
@@ -40,6 +40,17 @@ def resolve_ontology(attribute, term):
             raise
         except:
             return term
+
+    print((attribute, term))
+    if attribute == "ATTRIBUTE_DatasetAccession":
+        try:
+            url = "https://massive.ucsd.edu/ProteoSAFe/proxi/datasets?resultType=full&accession=%s" % (term)
+            dataset_information = requests.get(url).json()
+            return dataset_information[0]["title"]
+        except:
+            raise
+            return term
+
 
     return term
 
@@ -208,6 +219,35 @@ def getfilename():
 
     return json.dumps(resolved_terms)
 
+@app.route('/filenamedict', methods=['GET'])
+def queryfilename():
+    query_filename = request.args["query"]
+    expanded_attributes = request.args.get("expanded", "false")
+    all_attributes = request.args.get("allattributes", "false")
+
+    filepath_db = Filename.select().where(Filename.filepath == query_filename)
+
+    if len(filepath_db) == 0:
+        return "[]"
+
+    all_connections = FilenameAttributeConnection.select().where(FilenameAttributeConnection.filename == filepath_db)
+    resolved_terms = []
+    for connection in all_connections:
+        attribute_name = connection.attribute.categoryname
+        attribute_term = connection.attributeterm.term
+        resolved_term = resolve_ontology(attribute_name, attribute_term)
+
+        if all_attributes == "true":
+            resolved_terms.append({"attribute_name": attribute_name, "attribute_term" : resolved_term})
+        else:
+            if expanded_attributes == "false" and attribute_name in white_list_attributes:
+                resolved_terms.append({"attribute_name": attribute_name, "attribute_term" : resolved_term})
+
+            if expanded_attributes == "true" and not(attribute_name in white_list_attributes):
+                resolved_terms.append({"attribute_name": attribute_name, "attribute_term" : resolved_term})
+
+    return json.dumps(resolved_terms)
+
 @app.route('/attributes', methods=['GET'])
 def viewattributes():
     all_attributes = Attribute.select()
@@ -242,21 +282,19 @@ def viewattributeterms(attribute):
         all_filtered_files_list = [all_files]
         for filterobject in filters_list:
             new_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == filterobject["attributeterm"]).where(FilenameAttributeConnection.attribute == filterobject["attributename"])
-            print(attribute_term_db.term, len(new_db))
-
             all_filtered_files_list.append(set([file_db.filepath for file_db in new_db]))
 
         intersection_set = set.intersection(*all_filtered_files_list)
 
 
 
-        #print(attribute_term_db.term, len(all_files_db))
-        output_dict = {}
-        output_dict["attributename"] = attribute
-        output_dict["attributeterm"] = attribute_term_db.term
-        output_dict["ontologyterm"] = resolve_ontology(attribute, attribute_term_db.term)
-        output_dict["countfiles"] = len(intersection_set)
-        output_list.append(output_dict)
+        if len(intersection_set) > 0:
+            output_dict = {}
+            output_dict["attributename"] = attribute
+            output_dict["attributeterm"] = attribute_term_db.term
+            output_dict["ontologyterm"] = resolve_ontology(attribute, attribute_term_db.term)
+            output_dict["countfiles"] = len(intersection_set)
+            output_list.append(output_dict)
 
     return json.dumps(output_list)
 
@@ -374,3 +412,8 @@ def dashboard():
 @app.route('/metadatabrowser', methods=['GET'])
 def metadatabrowser():
     return render_template('metadatabrowser.html')
+
+
+@app.route('/datalookup', methods=['GET'])
+def datalookup():
+    return render_template('datalookup.html')

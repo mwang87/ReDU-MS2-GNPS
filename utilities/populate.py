@@ -1,16 +1,40 @@
 
 import sys
 sys.path.insert(0, "..")
+from collections import defaultdict
+import json
 
 from models import *
-from collections import defaultdict
-
 import ming_fileio_library
 import ming_proteosafe_library
 import credentials
 
-def resolve_metadata_filename_to_all_files(metadata_filename, all_files):
-    stripped_extension = ming_fileio_library.get_filename_without_extension(metadata_filename)
+try:
+    import redis
+    redis_client = redis.Redis()
+except:
+    print("no redis")
+
+
+
+def get_dataset_files(dataset_accession, collection_name):
+    dataset_files = None
+
+    try:
+        dataset_files = json.loads(redis_client.get(dataset_accession))
+    except:
+        dataset_files = None
+
+    if dataset_files is None:
+        dataset_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, collection_name, credentials.USERNAME, credentials.PASSWORD)
+        redis_client.set(dataset_accession, json.dumps(dataset_files))
+
+    return dataset_files
+
+
+
+def resolve_metadata_filename_to_all_files(filename, all_files):
+    stripped_extension = ming_fileio_library.get_filename_without_extension(filename)
 
     acceptable_filenames = ["f." + dataset_filename for dataset_filename in all_files if dataset_filename.find(stripped_extension) != -1]
 
@@ -23,21 +47,24 @@ def add_metadata_per_accession(dataset_accession, metadata_list):
     added_files = 0
 
     ###Make sure we line these datasets up
-    all_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, "ccms_peak", credentials.USERNAME, credentials.PASSWORD)
+    all_files = get_dataset_files(dataset_accession, "ccms_peak")
 
     for result in metadata_list:
-        filename = result["filename"].rstrip()
+        filename = result["Filename"].rstrip()
+
         dataset_filename = resolve_metadata_filename_to_all_files(filename, all_files)
 
         if dataset_filename == None:
-            #print(filename, "Missing")
             continue
 
         added_files += 1
 
-        #continue
+        filename_db, status = Filename.get_or_create(filepath=dataset_filename, datasetaccession=dataset_accession)
 
-        filename_db, status = Filename.get_or_create(filepath=dataset_filename)
+        #Adding Default Attribute of Dataset Accession
+        attribute_db, status = Attribute.get_or_create(categoryname="ATTRIBUTE_DatasetAccession")
+        attribute_value_db, status = AttributeTerm.get_or_create(term=dataset_accession)
+        join_db = FilenameAttributeConnection.get_or_create(filename=filename_db, attribute=attribute_db, attributeterm=attribute_value_db)
 
         for key in result:
             if key.find("ATTRIBUTE_") != -1:
@@ -61,10 +88,12 @@ def main():
     Compound.create_table(True)
     CompoundFilenameConnection.create_table(True)
     FilenameAttributeConnection.create_table(True)
-    Tag.create_table(True)
-    TagFilenameConnection.create_table(True)
+    CompoundTag.create_table(True)
+    CompoundTagFilenameConnection.create_table(True)
 
     input_metadata_filename = sys.argv[1]
+
+    print(input_metadata_filename)
 
     result_list = ming_fileio_library.parse_table_with_headers_object_list(input_metadata_filename, "\t")
 

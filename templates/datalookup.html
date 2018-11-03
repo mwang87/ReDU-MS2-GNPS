@@ -25,7 +25,7 @@
           <a class="nav-link" href="/dashboard">Analysis Selection</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/metadata">Metadata Explorer</a>
+          <a class="nav-link" href="/datalookup">Dataset Lookup</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://ccms-ucsd.github.io/GNPSDocumentation/">Documentation</a>
@@ -51,12 +51,14 @@
         <table class="table table-sm table-striped">
             <thead>
                   <tr>
-                    <th>A</th>
+                    <th>Attribute</th>
+                    <th>Term</th>
                   </tr>
             </thead>
             <tbody>
                 <tr v-for="result in results">
-                    <td>{{result.accession}}</td>
+                    <td>{{result.attribute_name}}</td>
+                    <td>{{result.attribute_term}}</td>
                 </tr>
             </tbody>
         </table>
@@ -73,23 +75,22 @@
             methods: {
                 clickMe: function() {
                     $.ajax({
-                        url: "/filename",
+                        url: "/filenamedict",
                         success: function(componentObject) {
                             return function(response) {
+                                console.log(componentObject.$parent.results);
                                 componentObject.$parent.results = response
                             }
                         }(this),
                         data: {
-                            exactmass: $("#exactmass").val(),
-                            toleranceppm: $("#toleranceppm").val(),
-                            common_name: $("#common_name").val(),
-                            molecular_formula: $("#molecular_formula").val()
+                            query: $("#filename").val(),
+                            allattributes: "true"
                         },
                         dataType: "json"
                     });
                 }
             },
-            template: '<div><button  v-bind:class=classSelection v-on:click="clickMe()">Query Structures</button></div>'
+            template: '<div><button  v-bind:class=classSelection v-on:click="clickMe()">Query Filename</button></div>'
         })
         var app4 = new Vue({
             el: '#app-4',
