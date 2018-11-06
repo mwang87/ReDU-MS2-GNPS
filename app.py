@@ -5,7 +5,7 @@ from flask import Flask
 from peewee import SqliteDatabase
 
 APP_ROOT = os.path.dirname(os.path.realpath(__file__))
-DATABASE = os.path.join(APP_ROOT, 'metadata.db')
+DATABASE = os.path.join(APP_ROOT, './database/metadata.db')
 DEBUG = False
 
 class CustomFlask(Flask):

@@ -12,7 +12,7 @@ import requests_cache
 
 requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
-white_list_attributes = ["ATTRIBUTE_DatasetAccession", "ATTRIBUTE_SampleType", "ATTRIBUTE_Curated_BodyPartOntologyName", "ATTRIBUTE_Disease", "ATTRIBUTE_LifeStage", "ATTRIBUTE_Sex", "ATTRIBUTE_Mass_Spectrometer", "ATTRIBUTE_HumanPopulationDensity" ]
+white_list_attributes = ["ATTRIBUTE_DatasetAccession", "ATTRIBUTE_Subject_Sex", "ATTRIBUTE_Curated_BodyPartOntologyName", "ATTRIBUTE_Subject_LifeStage", "ATTRIBUTE_Analysis_MassSpectrometer", "ATTRIBUTE_Analysis_IonizationSourceAndPolarity", "ATTRIBUTE_Analysis_ChromatographyAndPhase", "ATTRIBUTE_Subject_Health", "ATTRIBUTE_Curated_SampleType", "ATTRIBUTE_Curated_SampleType_Sub1", "ATTRIBUTE_Curated_BodyPartOntologyName", "ATTRIBUTE_DiseaseCommonName"]
 
 """Resolving ontologies only if they need to be"""
 def resolve_ontology(attribute, term):
