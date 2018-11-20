@@ -196,7 +196,7 @@ def homepage():
 
 @app.route('/filename', methods=['GET'])
 def getfilename():
-    query_filename = request.args["query"]
+    query_filename = request.args["query"].replace("/spectrum/", "/ccms_peak/")
     expanded_attributes = request.args.get("expanded", "false")
 
     filepath_db = Filename.select().where(Filename.filepath == query_filename)
@@ -221,7 +221,7 @@ def getfilename():
 
 @app.route('/filenamedict', methods=['GET'])
 def queryfilename():
-    query_filename = request.args["query"]
+    query_filename = request.args["query"].replace("/spectrum/", "/ccms_peak/")
     expanded_attributes = request.args.get("expanded", "false")
     all_attributes = request.args.get("allattributes", "false")
 

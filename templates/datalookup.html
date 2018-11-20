@@ -65,21 +65,12 @@
     </div>
 
     <script>
-        Vue.component('query-results', {
-            props: [],
-            data: function() {
-                return {
-                    classSelection: "btn btn-primary"
-                }
-            },
-            methods: {
-                clickMe: function() {
+        function queryfilename() {
                     $.ajax({
                         url: "/filenamedict",
                         success: function(componentObject) {
                             return function(response) {
-                                console.log(componentObject.$parent.results);
-                                componentObject.$parent.results = response
+                                app4._data.results = response
                             }
                         }(this),
                         data: {
@@ -89,6 +80,17 @@
                         dataType: "json"
                     });
                 }
+
+       
+        Vue.component('query-results', {
+            props: [],
+            data: function() {
+                return {
+                    classSelection: "btn btn-primary"
+                }
+            },
+            methods: {
+                clickMe: queryfilename
             },
             template: '<div><button  v-bind:class=classSelection v-on:click="clickMe()">Query Filename</button></div>'
         })
@@ -100,6 +102,12 @@
                 results: []
             }
         })
+
+        var params = new window.URLSearchParams(window.location.search);
+        if(params.has("filename") == true){
+            $("#filename").val(params.get("filename"))
+            queryfilename();
+        }
     </script>
 
 </body>
