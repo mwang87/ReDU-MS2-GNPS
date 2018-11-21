@@ -7,6 +7,7 @@ from models import *
 import csv
 import json
 import uuid
+import util
 import requests
 import requests_cache
 
@@ -391,6 +392,15 @@ def plottags():
     return json.dumps({"uuid" : uuid_to_use})
 
 
+#Launch Job
+import credentials
+
+@app.route('/analyzelibrarysearch', methods=['POST'])
+def analyzelibrarysearch():
+    all_files = json.loads(request.form["files"])
+    taskid = util.launch_GNPS_librarysearchworkflow(all_files, "Meta-Analysis on GNPS", credentials.USERNAME, credentials.PASSWORD, "miw023@ucsd.edu")
+    return json.dumps({"taskid": taskid})
+
 #Summarize Files Per Comparison Group
 @app.route('/explorerdashboard', methods=['GET'])
 def explorerdashboard():
@@ -412,7 +422,6 @@ def dashboard():
 @app.route('/metadatabrowser', methods=['GET'])
 def metadatabrowser():
     return render_template('metadatabrowser.html')
-
 
 @app.route('/datalookup', methods=['GET'])
 def datalookup():
