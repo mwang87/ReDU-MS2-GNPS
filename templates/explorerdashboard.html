@@ -34,71 +34,133 @@
 
     </nav>
 
-    <div id="app-4" class="container-fluid">
-        <br>
-        <h2 class="text-center">Filename Metadata Query Interface</h2>
-        <br>
-        <div class="col-md-6 offset-md-4">
-            <div class="form-group row">
-                <label for="filename" class="col-4 col-form-label">Filename</label>
-                <div class="col-4">
-                    <input class="form-control" type="text" placeholder="Enter MassIVE Filename" id="filename">
-                </div>
+    <div id="app-4" class="container-fluid justify-content-center align-items-center">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm text-center">
+                <h2>GNPS Metadata Analysis Interface</h2>
             </div>
-            <query-results></query-results>
+            <div class="col-sm"></div>
         </div>
-        <div>{{results.length}} Metadata</div>
-        <table class="table table-sm table-striped">
-            <thead>
+
+        <hr>
+
+        <div class="col-sm text-center">
+            <h2>Compounds</h2>
+        </div>
+
+        <div style="">
+            <table class="table table-sm table-striped">
+                <thead>
                   <tr>
-                    <th>A</th>
+                    <th>
+                        Compound Name
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('compound')"></i>
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('compound')"></i>
+                    </th>
+                    <th>
+                        G1 (Percent of Files)
+                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count1')"></i>
+                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count1')"></i>
+                    </th>
+                    <th>
+                        G2 (Percent of Files)
+                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count2')"></i>
+                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count2')"></i>
+                    </th>
+                    <th>
+                        G3 (Percent of Files)
+                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count3')"></i>
+                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count3')"></i>
+                    </th>
+                    <th>
+                        G4 (Percent of Files)
+                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count4')"></i>
+                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count4')"></i>
+                    </th>
+                    <th>
+                        G5 (Percent of Files)
+                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count5')"></i>
+                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count5')"></i>
+                    </th>
+                    <th>
+                        G6 (Percent of Files)
+                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count6')"></i>
+                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count6')"></i>
+                    </th>
                   </tr>
-            </thead>
-            <tbody>
-                <tr v-for="result in results">
-                    <td>{{result.accession}}</td>
-                </tr>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <tr v-for="compoundobject in compoundlist">
+                        <td>{{compoundobject.compound}}</td>
+                        <td>{{compoundobject.count1}} ({{compoundobject.count1_norm}}%)</td>
+                        <td>{{compoundobject.count2}} ({{compoundobject.count2_norm}}%)</td>
+                        <td>{{compoundobject.count3}} ({{compoundobject.count3_norm}}%)</td>
+                        <td>{{compoundobject.count4}} ({{compoundobject.count4_norm}}%)</td>
+                        <td>{{compoundobject.count5}} ({{compoundobject.count5_norm}}%)</td>
+                        <td>{{compoundobject.count6}} ({{compoundobject.count6_norm}}%)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
-        Vue.component('query-results', {
-            props: [],
-            data: function() {
-                return {
-                    classSelection: "btn btn-primary"
-                }
-            },
-            methods: {
-                clickMe: function() {
-                    $.ajax({
-                        url: "/filename",
-                        success: function(componentObject) {
-                            return function(response) {
-                                componentObject.$parent.results = response
-                            }
-                        }(this),
-                        data: {
-                            exactmass: $("#exactmass").val(),
-                            toleranceppm: $("#toleranceppm").val(),
-                            common_name: $("#common_name").val(),
-                            molecular_formula: $("#molecular_formula").val()
-                        },
-                        dataType: "json"
-                    });
-                }
-            },
-            template: '<div><button  v-bind:class=classSelection v-on:click="clickMe()">Query Structures</button></div>'
-        })
-        var app4 = new Vue({
-            el: '#app-4',
-            methods: {
-            },
-            data: {
-                results: []
+    var app4 = new Vue({
+        el: '#app-4',
+        methods: {
+            updateAttributeSelection: function(attributeterm_list) {
+                this.attributeterms = attributeterm_list
             }
-        })
+        },
+        data: {
+            compoundlist: []
+        }
+    })
+
+    function sortdesccolumn(column_name) {
+        app4.compoundlist.sort(function(a, b) {
+            if(a[column_name] < b[column_name]) return 1;
+            if(a[column_name] > b[column_name]) return -1;
+            return 0
+        });
+    }
+
+    function sortasccolumn(column_name) {
+        app4.compoundlist.sort(function(a, b) {
+            if(a[column_name] < b[column_name]) return -1;
+            if(a[column_name] > b[column_name]) return 1;
+            return 0
+        });
+    }
+
+
+    // Get the hash and make the query
+    all_files = JSON.parse(decodeURIComponent(window.location.hash).slice(1))
+
+    mode = all_files["mode"]
+
+    url = "/explorer"
+
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            G1: JSON.stringify(all_files["G1"]),
+            G2: JSON.stringify(all_files["G2"]),
+            G3: JSON.stringify(all_files["G3"]),
+            G4: JSON.stringify(all_files["G4"]),
+            G5: JSON.stringify(all_files["G5"]),
+            G6: JSON.stringify(all_files["G6"])
+        },
+        success: function(componentObject) {
+            return function(response) {
+                console.log(response);
+                app4.compoundlist = response
+            }
+        }(this),
+        dataType: "json"
+    });
     </script>
 
 </body>
