@@ -44,6 +44,34 @@ def resolve_metadata_filename_to_all_files(filename, all_files):
     return acceptable_filenames[0]
 
 def add_metadata_per_accession(dataset_accession, metadata_list):
+    whitelist_columns = ["Study_SubjectIdentifierAsRecorded",
+    "Study_UniqueSubjectID",
+    "ATTRIBUTE_Subject_Sex",
+    "Subject_AgeInYears",
+    "ATTRIBUTE_Subject_LifeStage",
+    "Subject_Country",
+    "ATTRIBUTE_Subject_HumanPopulationDensity",
+    "Analysis_SampleCollectionMethod",
+    "Analysis_SampleExtractionMethod",
+    "Analysis_InternalStandardsUsed",
+    "ATTRIBUTE_Analysis_MassSpectrometer",
+    "Analysis_IonizationSourceAndPolarity",
+    "Analysis_ChromatographyAndPhase",
+    "Analysis_YearOfAnalysis",
+    "Study_DayAsReported",
+    "Study_DayRelative",
+    "Study_TimepointMin",
+    "Study_Health",
+    "Study_SampleTypeasRecorded",
+    "Study_SampleTermsofPosition",
+    "ATTRIBUTE_Curated_SampleType",
+    "ATTRIBUTE_Curated_SampleType_Sub1",
+    "ATTRIBUTE_Curated_BodyPartOntologyName",
+    "ATTRIBUTE_Curated_BodyPartOntologyIndex",
+    "Curated_DiseaseCommonName",
+    "ATTRIBUTE_Curated_DiseaseOntologyIndex",
+    "Curated_Comorbidity_ListDOIDs"]
+
     added_files = 0
 
     ###Make sure we line these datasets up
@@ -67,14 +95,16 @@ def add_metadata_per_accession(dataset_accession, metadata_list):
         join_db = FilenameAttributeConnection.get_or_create(filename=filename_db, attribute=attribute_db, attributeterm=attribute_value_db)
 
         for key in result:
-            if key.find("ATTRIBUTE_") != -1:
-                attribute_name = key
-                attribute_value = result[key]
+            if not key in whitelist_columns:
+                continue
 
-                attribute_db, status = Attribute.get_or_create(categoryname=attribute_name)
-                attribute_value_db, status = AttributeTerm.get_or_create(term=attribute_value)
+            attribute_name = key
+            attribute_value = result[key]
 
-                join_db = FilenameAttributeConnection.get_or_create(filename=filename_db, attribute=attribute_db, attributeterm=attribute_value_db)
+            attribute_db, status = Attribute.get_or_create(categoryname=attribute_name)
+            attribute_value_db, status = AttributeTerm.get_or_create(term=attribute_value)
+
+            join_db = FilenameAttributeConnection.get_or_create(filename=filename_db, attribute=attribute_db, attributeterm=attribute_value_db)
 
     if added_files == 0:
         print(dataset_accession, "No Files Found")

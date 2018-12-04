@@ -18,6 +18,7 @@ class Attribute(Model):
     class Meta:
         database = db
 
+### Reference Parent Attribute
 class AttributeTerm(Model):
     term = TextField(primary_key=True)
 
@@ -51,7 +52,6 @@ class CompoundTagFilenameConnection(Model):
     class Meta:
         database = db
         primary_key = CompositeKey('compoundtag', 'filename')
-
 
 class FilenameAttributeConnection(Model):
     filename = ForeignKeyField(Filename)

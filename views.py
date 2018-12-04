@@ -255,14 +255,15 @@ def viewattributes():
 
     output_list = []
     for attribute in all_attributes:
-        all_terms = AttributeTerm.select().join(FilenameAttributeConnection).join(Attribute).where(Attribute.categoryname == attribute.categoryname).group_by(AttributeTerm.term)
-        output_dict = {}
-        output_dict["attributename"] = attribute.categoryname
-        output_dict["attributedisplay"] = attribute.categoryname.replace("ATTRIBUTE_", "")
-        output_dict["countterms"] = len(all_terms)
+        if attribute.categoryname.find("ATTRIBUTE_") != -1:
+            all_terms = AttributeTerm.select().join(FilenameAttributeConnection).join(Attribute).where(Attribute.categoryname == attribute.categoryname).group_by(AttributeTerm.term)
+            output_dict = {}
+            output_dict["attributename"] = attribute.categoryname
+            output_dict["attributedisplay"] = attribute.categoryname.replace("ATTRIBUTE_", "")
+            output_dict["countterms"] = len(all_terms)
 
-        if attribute.categoryname in white_list_attributes:
-            output_list.append(output_dict)
+            if attribute.categoryname in white_list_attributes:
+                output_list.append(output_dict)
 
     return json.dumps(output_list)
 
@@ -337,6 +338,68 @@ def summarizefiles():
     output = count_compounds_in_files(all_files_G1, all_files_G2, all_files_G3, all_files_G4, all_files_G5, all_files_G6)
 
     return json.dumps(output)
+
+# Lists all Compounds
+@app.route('/compounds', methods=['GET'])
+def querycompounds():
+    all_compounds = []
+
+    for compound in Compound.select():
+        compound_dict = {}
+        compound_dict["compound"] = compound.compoundname
+        #compound_dict["count"] = 0
+        compound_dict["count"] = len(CompoundFilenameConnection.select().where(CompoundFilenameConnection.compound==compound))
+
+        all_compounds.append(compound_dict)
+
+    return json.dumps(all_compounds)
+
+@app.route('/compoundfilename', methods=['GET'])
+def queryfilesbycompound():
+    compoundname = request.args['compoundname']
+    compound_db = Compound.select().where(Compound.compoundname == compoundname)
+
+    filenames_db = Filename.select().join(CompoundFilenameConnection).where(CompoundFilenameConnection.compound==compound_db)
+
+    output_filenames = []
+    for filename in filenames_db:
+        output_filenames.append({"filepath" : filename.filepath})
+
+    return json.dumps(output_filenames)
+
+@app.route('/compoundenrichment', methods=['GET'])
+def compoundenrichment():
+    compoundname = request.args['compoundname']
+    compound_db = Compound.select().where(Compound.compoundname == compoundname)
+
+    compound_filenames = [filename.filepath for filename in Filename.select().join(CompoundFilenameConnection).where(CompoundFilenameConnection.compound==compound_db)]
+
+    enrichment_list = []
+    for attribute in Attribute.select():
+        if attribute.categoryname.find("ATTRIBUTE_") == -1:
+            continue
+
+        for attribute_term in AttributeTerm.select():
+            #new_files_db = filenames_db.join(FilenameAttributeConnection).where(FilenameAttributeConnection.attribute==attribute, FilenameAttributeConnection.attributeterm==attributeterm)
+            attribute_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term).where(FilenameAttributeConnection.attribute == attribute)
+            attribute_filenames = [filename.filepath for filename in attribute_files_db]
+
+            if len(attribute_files_db) > 0:
+                intersection_filenames = set(compound_filenames).intersection(set(attribute_filenames))
+
+                enrichment_dict = {}
+                enrichment_dict["attribute_name"] = attribute.categoryname
+                enrichment_dict["attribute_term"] = attribute_term.term
+                enrichment_dict["totalfiles"] = len(attribute_files_db)
+                enrichment_dict["compoundfiles"] = len(intersection_filenames)
+                enrichment_dict["percentage"] = len(intersection_filenames)/float(len(attribute_files_db))
+
+                enrichment_list.append(enrichment_dict)
+
+
+                print(len(attribute_files_db), len(intersection_filenames), attribute.categoryname, attribute_term.term)
+    return json.dumps(enrichment_list)
+
 
 @app.route('/tagexplorer', methods=['POST'])
 def summarizetagfiles():
@@ -426,3 +489,11 @@ def metadatabrowser():
 @app.route('/datalookup', methods=['GET'])
 def datalookup():
     return render_template('datalookup.html')
+
+@app.route('/compounddashboard', methods=['GET'])
+def compoundsview():
+    return render_template('compounds.html')
+
+@app.route('/compoundenrichmentdashboard', methods=['GET'])
+def compoundenrichmentview():
+    return render_template('compoundenrichment.html')

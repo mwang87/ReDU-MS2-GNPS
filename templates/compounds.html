@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GNPS Metadata Analysis Interface</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- A grey horizontal navbar that becomes vertical on small screens -->
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <a class="navbar-brand" href="gnps.ucsd.edu">
+            <img src="/static/img/GNPS_logo.png" alt="Logo" style="width:120px;">
+        </a>
+
+      <!-- Links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Analysis Selection</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/metadata">Metadata Explorer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://ccms-ucsd.github.io/GNPSDocumentation/">Documentation</a>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="app-4" class="container-fluid justify-content-center align-items-center">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm text-center">
+                <h2>GNPS Metadata Analysis Interface</h2>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+
+        <hr>
+
+        <div class="col-sm text-center">
+            <h2>Compounds</h2>
+        </div>
+
+        <div style="">
+            <table class="table table-sm table-striped">
+                <thead>
+                  <tr>
+                    <th>
+                        Compound Name
+                    </th>
+                    <th>
+                        Number of Files
+                    </th>
+                    <th>
+                        View Files
+                    </th>
+                    <th>
+                        View Metadata Enrichment
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="compoundobject in compoundlist">
+                        <td>{{compoundobject.compound}}</td>
+                        <td>{{compoundobject.count}}</td>
+                        <td>
+                            <compoundfiles-linkout :compoundname=compoundobject.compound></compoundfiles-linkout>
+                        </td>
+                        <td>
+                            <compoundenrichment-linkout :compoundname=compoundobject.compound></compoundenrichment-linkout>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+    Vue.component('compoundfiles-linkout', {
+        props: ['compoundname'],
+        data: function() {
+            return {}
+        },
+        methods: {
+            clickMe: function(event) {
+                analysis_url = "/compoundfilename?compoundname=" + encodeURIComponent(this.$props["compoundname"])
+                var win = window.open(analysis_url, '_blank');
+                win.focus();
+            }
+        },
+        template: '<div><button class="btn btn-warning btn-block" style="margin-bottom:4px" v-on:click="clickMe">View Files</button></div>'
+    })
+
+    Vue.component('compoundenrichment-linkout', {
+        props: ['compoundname'],
+        data: function() {
+            return {}
+        },
+        methods: {
+            clickMe: function(event) {
+                analysis_url = "/compoundenrichmentdashboard?compound=" + encodeURIComponent(this.$props["compoundname"])
+                var win = window.open(analysis_url, '_blank');
+                win.focus();
+            }
+        },
+        template: '<div><button class="btn btn-warning btn-block" style="margin-bottom:4px" v-on:click="clickMe">View Enrichment</button></div>'
+    })
+
+    var app4 = new Vue({
+        el: '#app-4',
+        methods: {},
+        data: {
+            compoundlist: []
+        }
+    })
+
+    url = "/compounds"
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: {
+        },
+        success: function(componentObject) {
+            return function(response) {
+                console.log(response);
+                app4.compoundlist = response
+            }
+        }(this),
+        dataType: "json"
+    });
+    </script>
+
+</body>
+
+</html>

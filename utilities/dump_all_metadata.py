@@ -26,10 +26,11 @@ def main():
             file_metadata[attribute_name] = attribute_term
 
 
+        if loop_count > 500:
+            break
 
 
-
-        if len(resolved_terms) != 10:
+        if len(resolved_terms) != 30:
             print("ERROR", filename.filepath, len(resolved_terms))
         else:
             all_file_metadata.append(file_metadata)

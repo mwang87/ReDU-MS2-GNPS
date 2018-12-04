@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GNPS Metadata Analysis Interface</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- A grey horizontal navbar that becomes vertical on small screens -->
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <a class="navbar-brand" href="gnps.ucsd.edu">
+            <img src="/static/img/GNPS_logo.png" alt="Logo" style="width:120px;">
+        </a>
+
+      <!-- Links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Analysis Selection</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/datalookup">Dataset Lookup</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://ccms-ucsd.github.io/GNPSDocumentation/">Documentation</a>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="app-4" class="container-fluid">
+        <br>
+        <h2 class="text-center">Compound Enrichment Query Interface</h2>
+        <br>
+        <div class="col-md-6 offset-md-4">
+            <div class="form-group row">
+                <label for="compound" class="col-4 col-form-label">Compound</label>
+                <div class="col-4">
+                    <input class="form-control" type="text" placeholder="Enter Compound Name" id="compound">
+                </div>
+            </div>
+            <query-results></query-results>
+        </div>
+        <div>{{results.length}} Metadata</div>
+        <table class="table table-sm table-striped">
+            <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Term</th>
+                    <th>Observations</th>
+                    <th>
+                        Total Files
+                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('totalfiles')"></i>
+                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('totalfiles')"></i>
+                    </th>
+                    <th>
+                        Percentage
+                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('percentage')"></i>
+                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('percentage')"></i>
+                    </th>
+                  </tr>
+            </thead>
+            <tbody>
+                <tr v-for="result in results">
+                    <td>{{result.attribute_name}}</td>
+                    <td>{{result.attribute_term}}</td>
+                    <td>{{result.compoundfiles}}</td>
+                    <td>{{result.totalfiles}}</td>
+                    <td>{{result.percentage}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function sortdesccolumn(column_name) {
+            app4.results.sort(function(a, b) {
+                if(a[column_name] < b[column_name]) return 1;
+                if(a[column_name] > b[column_name]) return -1;
+                return 0
+            });
+        }
+
+        function sortasccolumn(column_name) {
+            app4.results.sort(function(a, b) {
+                if(a[column_name] < b[column_name]) return -1;
+                if(a[column_name] > b[column_name]) return 1;
+                return 0
+            });
+        }
+
+        function querycompound() {
+            $.ajax({
+                url: "/compoundenrichment",
+                success: function(componentObject) {
+                    return function(response) {
+                        app4._data.results = response
+                    }
+                }(this),
+                data: {
+                    compoundname: $("#compound").val()
+                },
+                dataType: "json"
+            });
+        }
+
+
+        Vue.component('query-results', {
+            props: [],
+            data: function() {
+                return {
+                    classSelection: "btn btn-primary"
+                }
+            },
+            methods: {
+                clickMe: querycompound
+            },
+            template: '<div><button  v-bind:class=classSelection v-on:click="clickMe()">Query Compound</button></div>'
+        })
+        var app4 = new Vue({
+            el: '#app-4',
+            methods: {
+            },
+            data: {
+                results: []
+            }
+        })
+
+        var params = new window.URLSearchParams(window.location.search);
+        if(params.has("compound") == true){
+            $("#compound").val(params.get("compound"))
+            querycompound();
+        }
+    </script>
+
+</body>
+
+</html>
