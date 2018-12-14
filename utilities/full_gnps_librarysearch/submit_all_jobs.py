@@ -79,7 +79,7 @@ def main():
 
 
     #Loading all GNPS datasets
-    all_gnps_datasets = get_all_datasets(gnps_only=True)[:10]
+    all_gnps_datasets = get_all_datasets(gnps_only=True)
     submission_parameters = []
     for dataset in all_gnps_datasets:
         dataset_accession = dataset["dataset"]
@@ -91,7 +91,7 @@ def main():
 
         submission_parameters.append(search_parameters)
 
-    all_jobs = run_all_jobs_delayed(submission_parameters, 0, credentials)
+    all_jobs = run_all_jobs_delayed(submission_parameters, 30, credentials)
 
     with open(args.outputtaskscsv, 'w') as csvfile:
         fieldnames = ['description', 'task']
