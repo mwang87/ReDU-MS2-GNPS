@@ -1,0 +1,56 @@
+{
+    "ANALOG_SEARCH": [
+        "0"
+    ],
+    "FILTER_LIBRARY": [
+        "1"
+    ],
+    "FILTER_PRECURSOR_WINDOW": [
+        "1"
+    ],
+    "FILTER_STDDEV_PEAK_datasetsINT": [
+        "0.0"
+    ],
+    "MAX_SHIFT_MASS": [
+        "100.0"
+    ],
+    "MIN_MATCHED_PEAKS": [
+        "6"
+    ],
+    "MIN_PEAK_INT": [
+        "0.0"
+    ],
+    "SCORE_THRESHOLD": [
+        "0.7"
+    ],
+    "SEARCH_LIBQUALITY": [
+        "3"
+    ],
+    "TOP_K_RESULTS": [
+        "1"
+    ],
+    "WINDOW_FILTER": [
+        "1"
+    ],
+    "desc": [
+        "Meta-Analysis on GNPS"
+    ],
+    "email": [
+        "miw023@ucsd.edu"
+    ],
+    "library_on_server": [
+        "d.speclibs;"
+    ],
+    "spec_on_server": [
+        "f.MSV000082969/ccms_peak/data_mzxml/environmental/G85331_10x_cwp_BB6_01_36733.mzML;f.MSV000082582/ccms_peak/raw_files/controls/Std_MIx_10.mzML;f.MSV000083073/ccms_peak/raw_files/samples/94528.mzML;"
+    ],
+    "tolerance.Ion_tolerance": [
+        "0.5"
+    ],
+    "tolerance.PM_tolerance": [
+        "2.0"
+    ],
+    "workflow": [
+        "MOLECULAR-LIBRARYSEARCH-V2"
+    ]
+}
