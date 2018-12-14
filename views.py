@@ -191,10 +191,6 @@ def count_tags_in_files(filelist1, filelist2, filelist3, filelist4, filelist5, f
 
     return output_list
 
-@app.route('/', methods=['GET'])
-def homepage():
-    return redirect(url_for('dashboard'))
-
 @app.route('/filename', methods=['GET'])
 def getfilename():
     query_filename = request.args["query"].replace("/spectrum/", "/ccms_peak/")
@@ -490,9 +486,24 @@ def metadatabrowser():
 def datalookup():
     return render_template('datalookup.html')
 
-@app.route('/compounddashboard', methods=['GET'])
-def compoundsview():
-    return render_template('compounds.html')
+
+
+
+
+
+""" Production Views """
+
+@app.route('/', methods=['GET'])
+def homepage():
+    return render_template('homepage.html')
+
+@app.route('/globalmultivariate', methods=['GET'])
+def globalmultivariate():
+    return render_template('globalmultivariate.html')
+
+@app.route('/compoundslist', methods=['GET'])
+def compoundslist():
+    return render_template('compoundslist.html')
 
 @app.route('/compoundenrichmentdashboard', methods=['GET'])
 def compoundenrichmentview():
