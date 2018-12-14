@@ -23,14 +23,14 @@ def main():
             attribute_term = connection.attributeterm.term
 
             resolved_terms.append({"attribute_name": attribute_name, "attribute_term" : attribute_term})
-            file_metadata[attribute_name] = attribute_term
+            file_metadata[attribute_name] = attribute_term.rstrip()
 
 
-        if loop_count > 500:
-            break
+#        if loop_count > 500:
+#            break
 
 
-        if len(resolved_terms) != 30:
+        if len(resolved_terms) != 27:
             print("ERROR", filename.filepath, len(resolved_terms))
         else:
             all_file_metadata.append(file_metadata)
