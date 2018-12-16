@@ -508,3 +508,7 @@ def compoundslist():
 @app.route('/compoundenrichmentdashboard', methods=['GET'])
 def compoundenrichmentview():
     return render_template('compoundenrichment.html')
+
+@app.route('/metadataselection', methods=['GET'])
+def metadataselection():
+    return render_template('metadataselection.html')
