@@ -34,10 +34,14 @@ def main():
     credentials = json.loads(open(args.credentialsjson).read())
     all_jobs = json.loads(open(args.tasksjson).read())
 
+    all_files_analyzed = []
+
     for job in all_jobs:
         task = job["task"]
         if task != None and len(task) == 32:
             task_information = get_task_information(credentials["server_url"], task)
+            all_files_analyzed += task_information["files"]
+            print("Total Files", len(all_files_analyzed))
             print(task_information["status"])
             if task_information["status"] == "DONE":
                 retreival_url = "http://%s/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=%s" % (credentials["server_url"], task, args.gnpspathname)
@@ -45,6 +49,9 @@ def main():
                 r = requests.get(retreival_url, allow_redirects=True)
                 output_filename = os.path.join(args.outputdirectory, task)
                 open(output_filename, 'wb').write(r.content)
+
+    all_files_analyzed = list(set(all_files_analyzed))
+    print("Full Total Files", len(all_files_analyzed))
 
     exit(0)
 

@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:16.04
 MAINTAINER Mingxun Wang "mwang87@gmail.com"
 
 RUN apt-get update -y
@@ -12,6 +12,7 @@ RUN pip install gunicorn
 RUN pip install xmltodict
 
 RUN apt-get update -y
+RUN export DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y r-base r-base-dev
 
 COPY . /app
