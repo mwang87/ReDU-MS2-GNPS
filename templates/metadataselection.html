@@ -29,7 +29,8 @@
                 <h3>Selection Summary</h3>
             </div>
 
-            <analysis-gobutton></analysis-gobutton>
+            <!-- <analysis-gobutton></analysis-gobutton> -->
+            <analysis-display-selection></analysis-display-selection>
         </div>
 
         <div class="col">
@@ -109,18 +110,30 @@
             <div class="text-center">
                 <h3>Co-Analyze With Your Data in GNPS</h3>
             </div>
+
+            <hr>
+
+            <analysis-gnps-setup></analysis-gnps-setup>
         </div>
 
         <div class="col">
             <div class="text-center">
                 <h3>Re-Analyze Public Data in GNPS</h3>
             </div>
+
+            <hr>
+
+            <analysis-gnps-launch></analysis-gnps-launch>
         </div>
 
         <div class="col">
             <div class="text-center">
                 <h3>Cohort Enrichment Analysis</h3>
             </div>
+
+            <hr>
+
+            <analysis-enrichment-launch></analysis-enrichment-launch>
         </div>
     </div>
 
@@ -264,77 +277,30 @@
         template: '<button  v-bind:class=classSelection v-on:click="clickMe(\'{{ groupname }}\')">+{{ groupname }}</button>'
     })
 
-    Vue.component('analysis-gobutton', {
+    Vue.component('analysis-display-selection', {
+        data: function() {
+            return {}
+        },
+        methods: {},
+        template: '<div> <table class="table table-striped"> \
+        <tr> \
+        <th>Group Number</th> \
+        <th>Number of Selected Files</th> \
+        </tr> \
+        <tr><td>Group 1 </td><td>{{ this.$parent.groupG1.length }}</td></tr>\
+        <tr><td>Group 2 </td><td>{{ this.$parent.groupG2.length }}</td></tr>\
+        <tr><td>Group 3 </td><td>{{ this.$parent.groupG3.length }}</td></tr>\
+        <tr><td>Group 4 </td><td>{{ this.$parent.groupG4.length }}</td></tr>\
+        <tr><td>Group 5 </td><td>{{ this.$parent.groupG5.length }}</td></tr>\
+        <tr><td>Group 6 </td><td>{{ this.$parent.groupG6.length }}</td></tr>\
+        </table></div>'
+    })
+
+    Vue.component('analysis-gnps-launch', {
         data: function() {
             return {}
         },
         methods: {
-            analyzenetworking: function(event) {
-                //Checking there are no file intersections
-                total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
-                unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
-                unique_list_files = Array.from(new Set(unique_list_files));
-                if(total_number_of_files != unique_list_files.length){
-                    alert("Warning: some files belong to multiple groups! Might cause some issues on GNPS")
-                }
-
-                //Forming parameters
-                params_dict = {};
-                params_dict["desc"] = "Meta-Analysis on GNPS"
-                params_dict["workflow"] = "METABOLOMICS-SNETS-V2"
-                params_dict["library_on_server"] = "d.speclibs;"
-                params_dict["spec_on_server"] = generateGNPSfilestring(this.$parent.groupG1)
-                params_dict["spec_on_server_group2"] = generateGNPSfilestring(this.$parent.groupG2)
-                params_dict["spec_on_server_group3"] = generateGNPSfilestring(this.$parent.groupG3)
-                params_dict["spec_on_server_group4"] = generateGNPSfilestring(this.$parent.groupG4)
-                params_dict["spec_on_server_group5"] = generateGNPSfilestring(this.$parent.groupG5)
-                params_dict["spec_on_server_group6"] = generateGNPSfilestring(this.$parent.groupG6)
-
-                //analysis_url = "https://ccms-internal.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
-                analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
-                var win = window.open(analysis_url, '_blank');
-                win.focus();
-            },
-            analyzeexplorer: function(event){
-                total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
-                unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
-                unique_list_files = Array.from(new Set(unique_list_files));
-                if(total_number_of_files != unique_list_files.length){
-                    alert("Warning: some files belong to multiple groups! Might cause some issues on GNPS")
-                }
-
-                params_dict = {};
-                params_dict["G1"] = extractFilenamesToList(this.$parent.groupG1)
-                params_dict["G2"] = extractFilenamesToList(this.$parent.groupG2)
-                params_dict["G3"] = extractFilenamesToList(this.$parent.groupG3)
-                params_dict["G4"] = extractFilenamesToList(this.$parent.groupG4)
-                params_dict["G5"] = extractFilenamesToList(this.$parent.groupG5)
-                params_dict["G6"] = extractFilenamesToList(this.$parent.groupG6)
-
-                //analysis_url = "https://ccms-internal.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
-                analysis_url = "/explorerdashboard#" + encodeURIComponent(JSON.stringify(params_dict))
-                var win = window.open(analysis_url, '_blank');
-                win.focus();
-            },
-            analyzelibrarysearch: function(event){
-                total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
-                unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
-                unique_list_files = Array.from(new Set(unique_list_files));
-                if(total_number_of_files != unique_list_files.length){
-                    alert("Warning: some files belong to multiple groups! Might cause some issues on GNPS")
-                }
-
-                //Forming parameters
-                params_dict = {};
-                params_dict["desc"] = "Meta-Analysis on GNPS"
-                params_dict["workflow"] = "MOLECULAR-LIBRARYSEARCH-V2"
-                params_dict["library_on_server"] = "d.speclibs;"
-                params_dict["spec_on_server"] = generateGNPSfilestring(this.$parent.groupG1)
-
-                analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
-                var win = window.open(analysis_url, '_blank');
-                win.focus();
-            },
             launchlibrarysearch: function(event){
                 total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
                 unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
@@ -360,10 +326,21 @@
                     },
                     dataType: "json"
                 });
+            }
+        },
+        template: '<div> <button class="btn btn-primary btn-block" v-on:click="launchlibrarysearch">Launch GNPS Molecular Networking</button> \
+        <br> \
+            <button class="btn btn-primary btn-block" v-on:click="launchlibrarysearch">Launch GNPS Library Search</button> \
+        <br> \
+        </div>'
+    })
 
-
-            },
-            analyzetags: function(event){
+    Vue.component('analysis-enrichment-launch', {
+        data: function() {
+            return {}
+        },
+        methods: {
+            launchenrichment: function(event){
                 total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
                 unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
                 unique_list_files = Array.from(new Set(unique_list_files));
@@ -380,31 +357,72 @@
                 params_dict["G6"] = extractFilenamesToList(this.$parent.groupG6)
 
                 //analysis_url = "https://ccms-internal.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
-                analysis_url = "/tagdashboard#" + encodeURIComponent(JSON.stringify(params_dict))
+                analysis_url = "/explorerdashboard#" + encodeURIComponent(JSON.stringify(params_dict))
                 var win = window.open(analysis_url, '_blank');
                 win.focus();
             }
         },
-        template: '<div> <table class="table table-striped"> \
-        <tr> \
-        <th>Group Number</th> \
-        <th>Number of Selected Files</th> \
-        </tr> \
-        <tr><td>Group 1 </td><td>{{ this.$parent.groupG1.length }}</td></tr>\
-        <tr><td>Group 2 </td><td>{{ this.$parent.groupG2.length }}</td></tr>\
-        <tr><td>Group 3 </td><td>{{ this.$parent.groupG3.length }}</td></tr>\
-        <tr><td>Group 4 </td><td>{{ this.$parent.groupG4.length }}</td></tr>\
-        <tr><td>Group 5 </td><td>{{ this.$parent.groupG5.length }}</td></tr>\
-        <tr><td>Group 6 </td><td>{{ this.$parent.groupG6.length }}</td></tr>\
-        </table> \
-        <button class="btn btn-primary btn-block" v-on:click="analyzenetworking">Set Up GNPS Networking</button> \
+        template: '<div><button class="btn btn-primary btn-block" v-on:click="launchenrichment">Launch Enrichment Analysis</button> \
+        </div>'
+    })
+
+
+
+
+    Vue.component('analysis-gnps-setup', {
+        data: function() {
+            return {}
+        },
+        methods: {
+            setupnetworking: function(event) {
+                //Checking there are no file intersections
+                total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
+                unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
+                unique_list_files = Array.from(new Set(unique_list_files));
+                if(total_number_of_files != unique_list_files.length){
+                    alert("Warning: some files belong to multiple groups! Might cause some issues on GNPS")
+                }
+
+                //Forming parameters
+                params_dict = {};
+                params_dict["desc"] = "Meta-Analysis on GNPS"
+                params_dict["workflow"] = "METABOLOMICS-SNETS-V2"
+                params_dict["library_on_server"] = "d.speclibs;"
+                params_dict["spec_on_server"] = generateGNPSfilestring(this.$parent.groupG1)
+                params_dict["spec_on_server_group2"] = generateGNPSfilestring(this.$parent.groupG2)
+                params_dict["spec_on_server_group3"] = generateGNPSfilestring(this.$parent.groupG3)
+                params_dict["spec_on_server_group4"] = generateGNPSfilestring(this.$parent.groupG4)
+                params_dict["spec_on_server_group5"] = generateGNPSfilestring(this.$parent.groupG5)
+                params_dict["spec_on_server_group6"] = generateGNPSfilestring(this.$parent.groupG6)
+
+                //analysis_url = "https://ccms-internal.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
+                analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
+                var win = window.open(analysis_url, '_blank');
+                win.focus();
+            },
+            setuplibrarysearch: function(event){
+                total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
+                unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
+                unique_list_files = Array.from(new Set(unique_list_files));
+                if(total_number_of_files != unique_list_files.length){
+                    alert("Warning: some files belong to multiple groups! Might cause some issues on GNPS")
+                }
+
+                //Forming parameters
+                params_dict = {};
+                params_dict["desc"] = "Meta-Analysis on GNPS"
+                params_dict["workflow"] = "MOLECULAR-LIBRARYSEARCH-V2"
+                params_dict["library_on_server"] = "d.speclibs;"
+                params_dict["spec_on_server"] = generateGNPSfilestring(this.$parent.groupG1)
+
+                analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
+                var win = window.open(analysis_url, '_blank');
+                win.focus();
+            }
+        },
+        template: '<div><button class="btn btn-primary btn-block" v-on:click="setupnetworking">Set Up GNPS Networking</button> \
         <br> \
-        <button class="btn btn-primary btn-block" v-on:click="analyzelibrarysearch">Set Up GNPS Library Search</button> \
-        <button class="btn btn-primary btn-block" v-on:click="launchlibrarysearch">Analyze Data with GNPS Library Search</button> \
-        <br> \
-        <button class="btn btn-primary btn-block" v-on:click="analyzeexplorer">Enrichment Analysis with Identification</button> \
-        <br> \
-        <button class="btn btn-primary btn-block" v-on:click="analyzetags">Enrichment Analysis with Tags</button> \
+        <button class="btn btn-primary btn-block" v-on:click="setuplibrarysearch">Set Up GNPS Library Search</button> \
         </div>'
     })
 
