@@ -343,8 +343,8 @@ def querycompounds():
     for compound in Compound.select():
         compound_dict = {}
         compound_dict["compound"] = compound.compoundname
-        #compound_dict["count"] = 0
-        compound_dict["count"] = len(CompoundFilenameConnection.select().where(CompoundFilenameConnection.compound==compound))
+        compound_dict["count"] = 0
+        #compound_dict["count"] = len(CompoundFilenameConnection.select().where(CompoundFilenameConnection.compound==compound))
 
         all_compounds.append(compound_dict)
 
@@ -365,6 +365,8 @@ def queryfilesbycompound():
 
 @app.route('/compoundenrichment', methods=['GET'])
 def compoundenrichment():
+    blacklist_attributes = ["ATTRIBUTE_DatasetAccession"]
+
     compoundname = request.args['compoundname']
     compound_db = Compound.select().where(Compound.compoundname == compoundname)
 
@@ -375,7 +377,11 @@ def compoundenrichment():
         if attribute.categoryname.find("ATTRIBUTE_") == -1:
             continue
 
-        for attribute_term in AttributeTerm.select():
+        if attribute.categoryname in blacklist_attributes:
+            continue
+
+        for attribute_term in AttributeTerm.select().limit(5):
+        #for attribute_term in AttributeTerm.select():
             #new_files_db = filenames_db.join(FilenameAttributeConnection).where(FilenameAttributeConnection.attribute==attribute, FilenameAttributeConnection.attributeterm==attributeterm)
             attribute_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term).where(FilenameAttributeConnection.attribute == attribute)
             attribute_filenames = [filename.filepath for filename in attribute_files_db]
@@ -454,11 +460,7 @@ def plottags():
 #Launch Job
 import credentials
 
-@app.route('/analyzelibrarysearch', methods=['POST'])
-def analyzelibrarysearch():
-    all_files = json.loads(request.form["files"])
-    taskid = util.launch_GNPS_librarysearchworkflow(all_files, "Meta-Analysis on GNPS", credentials.USERNAME, credentials.PASSWORD, "miw023@ucsd.edu")
-    return json.dumps({"taskid": taskid})
+
 
 #Summarize Files Per Comparison Group
 @app.route('/explorerdashboard', methods=['GET'])
@@ -470,21 +472,13 @@ def explorerdashboard():
 def tagdashboard():
     return render_template('tagdashboard.html')
 
-@app.route('/heartbeat', methods=['GET'])
-def heartbeat():
-    return "{'status' : 'up'}"
 
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
     return render_template('dashboard.html')
 
-@app.route('/metadatabrowser', methods=['GET'])
-def metadatabrowser():
-    return render_template('metadatabrowser.html')
 
-@app.route('/datalookup', methods=['GET'])
-def datalookup():
-    return render_template('datalookup.html')
+
 
 
 
@@ -501,6 +495,10 @@ def homepage():
 def globalmultivariate():
     return render_template('globalmultivariate.html')
 
+@app.route('/comparemultivariate', methods=['GET'])
+def comparemultivariate():
+    return render_template('comparemultivariate.html')
+
 @app.route('/compoundslist', methods=['GET'])
 def compoundslist():
     return render_template('compoundslist.html')
@@ -512,3 +510,20 @@ def compoundenrichmentview():
 @app.route('/metadataselection', methods=['GET'])
 def metadataselection():
     return render_template('metadataselection.html')
+
+@app.route('/heartbeat', methods=['GET'])
+def heartbeat():
+    return "{'status' : 'up'}"
+
+@app.route('/datalookup', methods=['GET'])
+def datalookup():
+    return render_template('datalookup.html')
+
+
+# API End Points
+
+@app.route('/analyzelibrarysearch', methods=['POST'])
+def analyzelibrarysearch():
+    all_files = json.loads(request.form["files"])
+    taskid = util.launch_GNPS_librarysearchworkflow(all_files, "Meta-Analysis on GNPS", credentials.USERNAME, credentials.PASSWORD, "miw023@ucsd.edu")
+    return json.dumps({"taskid": taskid})
