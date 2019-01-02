@@ -540,6 +540,12 @@ def validate():
     validation_dict["status"] = pass_validation
     validation_dict["errors"] = errors_list
 
+    if pass_validation:
+        filestats_dict, filestats_list = metadata_validator.perform_summary(local_filename)
+        validation_dict["stats"] = filestats_list
+    else:
+        validation_dict["stats"] = []
+
     return json.dumps(validation_dict)
 
 @app.route('/analyzelibrarysearch', methods=['POST'])

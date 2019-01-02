@@ -60,7 +60,26 @@
 
         <div id="app-4" class="container-fluid">
             <br>
-            <h2 class="text-center">Metadata Validation Errors</h2>
+            <h3 class="text-center">Metadata Summary</h3>
+            <br>
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="stat in stats">
+                        <td>{{stat.type}}</td>
+                        <td>{{stat.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h3 class="text-center">Metadata Validation Errors</h3>
             <br>
             <table class="table table-sm table-striped">
                 <thead>
@@ -71,10 +90,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="result in results">
-                        <td>{{result.header}}</td>
-                        <td>{{result.line_number}}</td>
-                        <td>{{result.error_string}}</td>
+                    <tr v-for="error in errors">
+                        <td>{{error.header}}</td>
+                        <td>{{error.line_number}}</td>
+                        <td>{{error.error_string}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -86,7 +105,9 @@
     validatedropzone = new Dropzone("#validate", { url: "validate", maxFilesize: 200, parallelUploads:1});
     validatedropzone.on("success", function(file, response) {
         validation_json = JSON.parse(response)
-        app4._data.results = validation_json.errors;
+        app4._data.errors = validation_json.errors;
+        app4._data.stats = validation_json.stats;
+        app4._data.pass_validation = validation_json.status;
 
         if(validation_json.status){
             alert("Metadata File Passed Validation!")
@@ -101,7 +122,9 @@
         methods: {
         },
         data: {
-            results: []
+            pass_validation: null,
+            errors: [],
+            stats: []
         }
     })
 </script>
