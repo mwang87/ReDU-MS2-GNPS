@@ -15,6 +15,8 @@ def perform_validation(filename):
         'Filename': [
             UniqueValidator()
         ],
+        "MassiveID" : [],
+        "ATTRIBUTE_Subject_LifeStage" : [],
         'ATTRIBUTE_Subject_Sex': [
             SetValidator(valid_set=["female", "male", "not collected", "not applicable"])
         ],
@@ -92,34 +94,13 @@ def perform_validation(filename):
             "midgut",
             "lung"])
         ],
-        'ATTRIBUTE_Curated_BodyPartOntologyName' : [
-            SetValidator(valid_set=["anal region",
-            "arm skin",
-            "axilla skin",
-            "blood",
-            "blood plasma",
-            "blood serum",
-            "calcareous tooth",
-            "feces",
-            "gall bladder",
-            "head or neck skin",
-            "nasal cavity",
-            "not applicable",
-            "oral cavity",
-            "skin of leg",
-            "skin of manus",
-            "skin of pes",
-            "skin of trunk",
-            "sputum",
-            "urine",
-            "vagina",
-            "saliva",
-            "digestive tract",
-            "lower digestive tract",
-            "upper digestive tract",
-            "midgut",
-            "lung"])
+        'ATTRIBUTE_Curated_BodyPartOntologyIndex' : [
+            SetValidator(valid_set=[])
         ],
+        'ATTRIBUTE_Curated_DiseaseOntologyIndex' : [
+            SetValidator(valid_set=[])
+        ],
+        "Analysis_SampleExtractionMethod" : [],
         'Analysis_InternalStandardsUsed' : [
             SetValidator(valid_set=["sulfamethizole;sulfachloropyridazine",
             "sulfamethazine",
@@ -131,6 +112,22 @@ def perform_validation(filename):
             "fluconazole",
             "amitryptiline;fluconazole",
             "sulfadimethoxine;sulfachloropyridazine"
+            ])
+        ],
+        'Analysis_IonizationSourceAndPolarity' : [
+            SetValidator(valid_set=["electrospray ionization (positive)",
+            "electrospray ionization (negative)",
+            "atmospheric pressure chemical ionization (positive)",
+            "atmospheric pressure chemical ionization (negative)",
+            "atmospheric pressure photoionization (positive)",
+            "atmospheric pressure photoionization (negative)"
+            ])
+        ],
+        'Analysis_ChromatographyAndPhase' : [
+            SetValidator(valid_set=["reverse phase (C18)",
+            "reverse phase (C8)",
+            "reverse phase (Phenyl-Hexyl)",
+            "normal phase (HILIC)"
             ])
         ]
     }
