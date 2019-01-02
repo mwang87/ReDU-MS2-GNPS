@@ -1,15 +1,18 @@
 # views.py
-from flask import abort, jsonify, render_template, request, redirect, url_for, send_file
+from flask import abort, jsonify, render_template, request, redirect, url_for, send_file, make_response
 
 from app import app
 from models import *
 
+import os
 import csv
 import json
 import uuid
 import util
 import requests
 import requests_cache
+
+import metadata_validator
 
 requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
@@ -519,8 +522,25 @@ def heartbeat():
 def datalookup():
     return render_template('datalookup.html')
 
+@app.route('/addmetadata', methods=['GET'])
+def addmetadata():
+    return render_template('addmetadata.html')
 
 # API End Points
+
+@app.route('/validate', methods=['POST'])
+def validate():
+    request_file = request.files['file']
+    local_filename = os.path.join(app.config['UPLOAD_FOLDER'], str(uuid.uuid4()))
+    request_file.save(local_filename)
+
+    pass_validation, failures, errors_list = metadata_validator.perform_validation(local_filename)
+
+    validation_dict = {}
+    validation_dict["status"] = pass_validation
+    validation_dict["errors"] = errors_list
+
+    return json.dumps(validation_dict)
 
 @app.route('/analyzelibrarysearch', methods=['POST'])
 def analyzelibrarysearch():
