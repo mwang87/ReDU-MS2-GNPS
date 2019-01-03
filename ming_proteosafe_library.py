@@ -513,7 +513,11 @@ def get_all_files_in_dataset_folder(dataset_accession, folder_prefix, username, 
         json_obj = json.loads(s.get(url).text)["items"]
         for item in json_obj:
             if item["directory"] == True:
-                directories_to_list.append(item["path"])
+                #dir_name = ming_fileio_library.get_root_folder(item["path"])
+                if item["path"].find(directory_to_list) == -1:
+                    print("Error Listing", directory_to_list, " Listed This, not subdir: ", item["path"], url)
+                else:
+                    directories_to_list.append(item["path"])
             else:
                 if item["size"] > 0:
                     if includefilemetadata:
@@ -521,7 +525,8 @@ def get_all_files_in_dataset_folder(dataset_accession, folder_prefix, username, 
                     else:
                         all_files.append(item["path"])
                 else:
-                    print("File not included, 0 size", item["path"])
+                    x = 1
+                    #print("File not included, 0 size", item["path"])
 
     return all_files
 

@@ -36,13 +36,13 @@
             <div class="col-sm-8">
                 <p>
                     To add new metadata to your public data at GNPS, you'll need to create a metadata spreadsheet describing each individual mass spectrometry file. This will need to fit
-                    into our own metadata template that is entered according to a controlled vocabulary. Check out this <a href="#">template</a>.
+                    into our own metadata template that is entered according to a controlled vocabulary. Check out this <a href="https://docs.google.com/spreadsheets/d/1xEYFvAR6GlB-Gv3OFr2xgnpNhhe6dznn7h0489HIReY/edit?usp=sharing">template</a>.
                     <br>
                     <br>
                     Once your have create your own metadata file saved as a tab separated text file based on the template, you can check if the format is valid below with a drag and drop.
                     <br>
                     <br>
-                    Once your metadata has been updated save your file as gnps_metadata.tsv exactly and update your dataset with this gnps_metadata.tsv in the other file category. This metadata will be imported automatically each evening.
+                    Once your metadata has been updated save your file as gnps_metadata.tsv exactly and update your dataset with this gnps_metadata.tsv in the supplementary file category. This metadata will be imported automatically.
                 </p>
             </div>
             <div class="col-sm-2"></div>
@@ -118,7 +118,7 @@
     });
 
     validatedropzone.on("error", function(file) {
-        
+
     });
 
     var app4 = new Vue({
