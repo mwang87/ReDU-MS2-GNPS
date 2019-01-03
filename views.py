@@ -534,17 +534,22 @@ def validate():
     local_filename = os.path.join(app.config['UPLOAD_FOLDER'], str(uuid.uuid4()))
     request_file.save(local_filename)
 
-    pass_validation, failures, errors_list = metadata_validator.perform_validation(local_filename)
+    pass_validation, failures, errors_list, valid_rows, total_rows = metadata_validator.perform_validation(local_filename)
 
     validation_dict = {}
     validation_dict["status"] = pass_validation
     validation_dict["errors"] = errors_list
+    validation_dict["stats"] = []
 
-    if pass_validation:
-        filestats_dict, filestats_list = metadata_validator.perform_summary(local_filename)
-        validation_dict["stats"] = filestats_list
-    else:
-        validation_dict["stats"] = []
+    validation_dict["stats"].append({"type":"total_rows", "value":total_rows})
+    validation_dict["stats"].append({"type":"valid_rows", "value":len(valid_rows)})
+    #
+    #
+    # if pass_validation:
+    #     filestats_dict, filestats_list = metadata_validator.perform_summary(local_filename)
+    #     validation_dict["stats"] = filestats_list
+    # else:
+    #     validation_dict["stats"] = []
 
     return json.dumps(validation_dict)
 

@@ -40,7 +40,7 @@ def main():
     import urllib
     urllib.urlretrieve(ftp_path, local_metadata_path)
     #Validate
-    pass_validation, failures, errors_list = metadata_validator.perform_validation(local_metadata_path)
+    pass_validation, failures, errors_list, valid_rows, total_rows_count = metadata_validator.perform_validation(local_metadata_path)
     #print(pass_validation, errors_list)
 
     #Filtering out lines
@@ -49,21 +49,13 @@ def main():
         print("Missing Columns, Rejected")
         exit(0)
 
-    no_validation_lines = [int(error["line_number"]) for error in errors_list]
-    no_validation_lines.sort()
+    ming_fileio_library.write_list_dict_table_data(valid_rows, local_filtered_metadata_path)
 
-    with open(local_filtered_metadata_path, "w") as filtered_file:
-        line_count = 0
-        for line in open(local_metadata_path):
-            line_count += 1
-            if line_count in no_validation_lines:
-                continue
-            filtered_file.write(line)
-
-    pass_validation, failures, errors_list = metadata_validator.perform_validation(local_filtered_metadata_path)
-    populate.populate_dataset_metadata(local_filtered_metadata_path)
-
-    #print(pass_validation, errors_list)
+    pass_validation, failures, errors_list, valid_rows, total_rows_count = metadata_validator.perform_validation(local_filtered_metadata_path)
+    if pass_validation:
+        populate.populate_dataset_metadata(local_filtered_metadata_path)
+    else:
+        print("Filtered File is not Valid")
 
 
 
