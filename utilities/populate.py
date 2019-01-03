@@ -7,6 +7,7 @@ import json
 from models import *
 import ming_fileio_library
 import ming_proteosafe_library
+import metadata_validator
 import credentials
 
 try:
@@ -27,10 +28,12 @@ def get_dataset_files(dataset_accession, collection_name):
 
     if dataset_files is None:
         dataset_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, collection_name, credentials.USERNAME, credentials.PASSWORD)
-        redis_client.set(dataset_accession, json.dumps(dataset_files))
+        try:
+            redis_client.set(dataset_accession, json.dumps(dataset_files))
+        except:
+            x = 1
 
     return dataset_files
-
 
 
 def resolve_metadata_filename_to_all_files(filename, all_files):
@@ -111,7 +114,7 @@ def add_metadata_per_accession(dataset_accession, metadata_list):
 
     return added_files
 
-def main():
+def populate_dataset_metadata(input_metadata_filename):
     Filename.create_table(True)
     Attribute.create_table(True)
     AttributeTerm.create_table(True)
@@ -120,8 +123,6 @@ def main():
     FilenameAttributeConnection.create_table(True)
     CompoundTag.create_table(True)
     CompoundTagFilenameConnection.create_table(True)
-
-    input_metadata_filename = sys.argv[1]
 
     print(input_metadata_filename)
 
@@ -136,6 +137,12 @@ def main():
     for dataset_accession in metadata_by_accession:
         added_files = add_metadata_per_accession(dataset_accession, metadata_by_accession[dataset_accession])
         print(dataset_accession, len(metadata_by_accession[dataset_accession]), added_files)
+
+def main():
+    input_metadata_filename = sys.argv[1]
+    populate_dataset_metadata(input_metadata_filename)
+
+
 
 
 

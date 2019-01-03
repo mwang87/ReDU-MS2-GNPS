@@ -7,7 +7,7 @@ import argparse
 import csv
 import json
 from vladiate import Vlad
-from vladiate.validators import UniqueValidator, SetValidator
+from vladiate.validators import UniqueValidator, SetValidator, Ignore
 from vladiate.inputs import LocalFile
 
 def perform_validation(filename):
@@ -15,8 +15,12 @@ def perform_validation(filename):
         'Filename': [
             UniqueValidator()
         ],
-        "MassiveID" : [],
-        "ATTRIBUTE_Subject_LifeStage" : [],
+        "MassiveID" : [
+            Ignore()
+        ],
+        "ATTRIBUTE_Subject_LifeStage" : [
+            Ignore()
+        ],
         'ATTRIBUTE_Subject_Sex': [
             SetValidator(valid_set=["female", "male", "not collected", "not applicable"])
         ],
@@ -95,12 +99,68 @@ def perform_validation(filename):
             "lung"])
         ],
         'ATTRIBUTE_Curated_BodyPartOntologyIndex' : [
-            SetValidator(valid_set=[])
+            SetValidator(valid_set=['UBERON:0001353',
+            'UBERON:0002427',
+            'UBERON:0015474',
+            'UBERON:0000178',
+            'UBERON:0001969',
+            'UBERON:0001977',
+            'UBERON:0001091',
+            'UBERON:0001988',
+            'UBERON:0002110',
+            'UBERON:0012180',
+            'UBERON:0001707',
+            'not applicable',
+            'UBERON:0000167',
+            'UBERON:0001511',
+            'UBERON:0001519',
+            'UBERON:0001513',
+            'UBERON:0001085',
+            'UBERON:0007311',
+            'UBERON:0001088',
+            'UBERON:0000996',
+            'UBERON:0001836',
+            'UBERON:0001153',
+            'UBERON:0001555',
+            'UBERON:0004907',
+            'UBERON:0004908',
+            'UBERON:0001045',
+            'UBERON:0002048'])
         ],
         'ATTRIBUTE_Curated_DiseaseOntologyIndex' : [
-            SetValidator(valid_set=[])
+            SetValidator(valid_set=["DOID:1485",
+            "DOID:9351",
+            "disease NOS",
+            "DOID:10763",
+            "DOID:0050589",
+            "no disease reported",
+            "not applicable",
+            "DOID:8893",
+            "no DOID avaliable",
+            "DOID:12140",
+            "DOID:9970",
+            "DOID:12155",
+            "DOID:8778"
+            ])
         ],
-        "Analysis_SampleExtractionMethod" : [],
+        "Analysis_SampleExtractionMethod" : [
+            SetValidator(valid_set=['ethanol-water (9:1)',
+            'methanol-water (1:1)',
+            'dichloromethane-methanol (2:1)',
+            'ethanol-water (19:1)',
+            'water (94_deg_C)',
+            'water (95_deg_C)',
+            'water (100%) (deg_C_NOS)',
+            'chloroform-methanol-water (1:3:1) ',
+            'methanol (100%)',
+            'ethanol (100%)',
+            'ethanol-water (1:1)',
+            'ethanol-water (9:1)',
+            'water-acetonitrile (250:1)',
+            'methanol-acetonitrile (3:7)',
+            'methanol-water (4:1)'
+            ])
+        ],
         'Analysis_InternalStandardsUsed' : [
             SetValidator(valid_set=["sulfamethizole;sulfachloropyridazine",
             "sulfamethazine",
@@ -138,11 +198,9 @@ def perform_validation(filename):
     errors_list = []
     for column in my_validator.failures:
         for line_number in my_validator.failures[column]:
-            print(column, line_number)
-
             error_dict = {}
             error_dict["header"] = column
-            error_dict["line_number"] = line_number
+            error_dict["line_number"] = line_number + 2
             error_dict["error_string"] = str(my_validator.failures[column][line_number])
 
             errors_list.append(error_dict)
@@ -168,8 +226,6 @@ def perform_summary(filename):
         summary_list.append({"type" : "row_count", "value" : summary_dict["row_count"]})
 
         return summary_dict, summary_list
-
-
 
 def main():
     parser = argparse.ArgumentParser(description='Validate Stuff.')

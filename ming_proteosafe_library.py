@@ -478,7 +478,7 @@ def get_dataset_file_category_folders(dataset_accession, username, password):
 
     return json_obj
 
-def get_all_files_in_dataset_folder(dataset_accession, folder_prefix, username, password):
+def get_all_files_in_dataset_folder(dataset_accession, folder_prefix, username, password, includefilemetadata=False):
     s = requests.Session()
 
     payload = {
@@ -516,7 +516,10 @@ def get_all_files_in_dataset_folder(dataset_accession, folder_prefix, username, 
                 directories_to_list.append(item["path"])
             else:
                 if item["size"] > 0:
-                    all_files.append(item["path"])
+                    if includefilemetadata:
+                        all_files.append({"path": item["path"], "timestamp" : int(item["modified"])})
+                    else:
+                        all_files.append(item["path"])
                 else:
                     print("File not included, 0 size", item["path"])
 
