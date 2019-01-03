@@ -528,9 +528,30 @@ def addmetadata():
 
 # API End Points
 
+def allowed_file_metadata(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ["tsv"]
+
 @app.route('/validate', methods=['POST'])
 def validate():
     request_file = request.files['file']
+
+    #Invalid File Types
+    if not allowed_file_metadata(request_file.filename):
+        error_dict = {}
+        error_dict["header"] = "Incorrect File Type"
+        error_dict["line_number"] = "N/A"
+        error_dict["error_string"] = "Please provide a tab separated file"
+
+        validation_dict = {}
+        validation_dict["status"] = False
+        validation_dict["errors"] = [error_dict]
+        validation_dict["stats"] = []
+        validation_dict["stats"].append({"type":"total_rows", "value": 0})
+        validation_dict["stats"].append({"type":"valid_rows", "value": 0})
+
+        return json.dumps(validation_dict)
+
     local_filename = os.path.join(app.config['UPLOAD_FOLDER'], str(uuid.uuid4()))
     request_file.save(local_filename)
 
@@ -543,13 +564,6 @@ def validate():
 
     validation_dict["stats"].append({"type":"total_rows", "value":total_rows})
     validation_dict["stats"].append({"type":"valid_rows", "value":len(valid_rows)})
-    #
-    #
-    # if pass_validation:
-    #     filestats_dict, filestats_list = metadata_validator.perform_summary(local_filename)
-    #     validation_dict["stats"] = filestats_list
-    # else:
-    #     validation_dict["stats"] = []
 
     return json.dumps(validation_dict)
 
