@@ -565,6 +565,11 @@ def validate():
     validation_dict["stats"].append({"type":"total_rows", "value":total_rows})
     validation_dict["stats"].append({"type":"valid_rows", "value":len(valid_rows)})
 
+    try:
+        os.remove(local_filename)
+    except:
+        print("Cannot Remove File")
+
     return json.dumps(validation_dict)
 
 @app.route('/analyzelibrarysearch', methods=['POST'])
