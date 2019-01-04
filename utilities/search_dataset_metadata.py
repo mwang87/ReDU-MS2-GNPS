@@ -16,6 +16,7 @@ import ftputil
 massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
 
 def find_dataset_metadata(dataset_accession, useftp=False):
+    print("Finding Files %s " % dataset_accession)
     if useftp:
         all_other_files = []
         #all_other_files = ming_proteosafe_library.get_all_files_in_dataset_folder_ftp(dataset_accession, "other", includefilemetadata=True, massive_host=massive_host)
@@ -38,8 +39,6 @@ def find_dataset_metadata(dataset_accession, useftp=False):
     return None
 
 def process_metadata_import(dataset_accession):
-    print(dataset_accession)
-
     dataset_metadatum = find_dataset_metadata(dataset_accession, useftp=True)
 
     if dataset_metadatum == None:
@@ -50,9 +49,16 @@ def process_metadata_import(dataset_accession):
 
     #Save files Locally
     local_metadata_path = os.path.join("tempuploads", dataset_accession + ".tsv")
-    ftp_path = "ftp://massive.ucsd.edu/" + dataset_metadatum["path"]
-    import urllib
-    urllib.urlretrieve(ftp_path, local_metadata_path)
+
+    try:
+        massive_host.download(dataset_metadatum["path"], local_metadata_path)
+    except:
+        print("SHIT CANT DOWNLOAD")
+        raise
+
+    #ftp_path = "ftp://massive.ucsd.edu/" + dataset_metadatum["path"]
+    #import urllib
+    #urllib.urlretrieve(ftp_path, local_metadata_path)
     #Validate
     pass_validation, failures, errors_list, valid_rows, total_rows_count = metadata_validator.perform_validation(local_metadata_path)
     #print(pass_validation, errors_list)
@@ -67,6 +73,7 @@ def process_metadata_import(dataset_accession):
 
     pass_validation, failures, errors_list, valid_rows, total_rows_count = metadata_validator.perform_validation(local_filtered_metadata_path)
     if pass_validation:
+        print("Importing Data")
         populate.populate_dataset_metadata(local_filtered_metadata_path)
     else:
         print("Filtered File is not Valid")

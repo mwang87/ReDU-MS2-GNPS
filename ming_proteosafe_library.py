@@ -544,7 +544,6 @@ def get_all_files_in_dataset_folder_ftp(dataset_accession, folder_prefix, includ
         for filename in files:
             file_full_path = os.path.join(root, filename)
             if includefilemetadata:
-                print(file_full_path)
                 file_stats = massive_host.lstat(file_full_path)
                 all_files.append({"path": file_full_path, "timestamp" : int(file_stats.st_mtime)})
             else:
