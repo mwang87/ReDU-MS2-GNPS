@@ -81,7 +81,7 @@ def add_metadata_per_accession(dataset_accession, metadata_list):
     all_files = get_dataset_files(dataset_accession, "ccms_peak")
 
     for result in metadata_list:
-        filename = result["Filename"].rstrip()
+        filename = result["filename"].rstrip()
 
         dataset_filename = resolve_metadata_filename_to_all_files(filename, all_files)
 

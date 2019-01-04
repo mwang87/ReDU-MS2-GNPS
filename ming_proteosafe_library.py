@@ -530,6 +530,31 @@ def get_all_files_in_dataset_folder(dataset_accession, folder_prefix, username, 
 
     return all_files
 
+def get_all_files_in_dataset_folder_ftp(dataset_accession, folder_prefix, includefilemetadata=False, massive_host=None):
+    import ftputil
+
+    if massive_host == None:
+        massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
+
+    directory = os.path.join(dataset_accession, folder_prefix)
+
+    all_files = []
+
+    for root, dirs, files in massive_host.walk(directory, topdown=True, onerror=None):
+        for filename in files:
+            file_full_path = os.path.join(root, filename)
+            if includefilemetadata:
+                print(file_full_path)
+                file_stats = massive_host.lstat(file_full_path)
+                all_files.append({"path": file_full_path, "timestamp" : int(file_stats.st_mtime)})
+            else:
+                all_files.append(file_full_path)
+
+
+    return all_files
+
+
+
 def get_all_results_from_serverside_results_view(server, task_id, view_name):
     url = "http://%s/ProteoSAFe/result_json.jsp?task=%s&view=%s" % (server, task_id, view_name)
     r = requests.get(url)

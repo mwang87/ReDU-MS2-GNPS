@@ -11,11 +11,18 @@ import ming_fileio_library
 import ming_proteosafe_library
 import populate
 import credentials
+import ftputil
 
+massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
 
-def find_dataset_metadata(dataset_accession):
-    all_other_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, "other", credentials.USERNAME, credentials.PASSWORD, includefilemetadata=True)
-    all_update_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, "updates", credentials.USERNAME, credentials.PASSWORD, includefilemetadata=True)
+def find_dataset_metadata(dataset_accession, useftp=False):
+    if useftp:
+        all_other_files = []
+        #all_other_files = ming_proteosafe_library.get_all_files_in_dataset_folder_ftp(dataset_accession, "other", includefilemetadata=True, massive_host=massive_host)
+        all_update_files = ming_proteosafe_library.get_all_files_in_dataset_folder_ftp(dataset_accession, "updates", includefilemetadata=True, massive_host=massive_host)
+    else:
+        all_other_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, "other", credentials.USERNAME, credentials.PASSWORD, includefilemetadata=True)
+        all_update_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, "updates", credentials.USERNAME, credentials.PASSWORD, includefilemetadata=True)
 
     print(dataset_accession, len(all_other_files), len(all_update_files))
 
@@ -33,7 +40,7 @@ def find_dataset_metadata(dataset_accession):
 def process_metadata_import(dataset_accession):
     print(dataset_accession)
 
-    dataset_metadatum = find_dataset_metadata(dataset_accession)
+    dataset_metadatum = find_dataset_metadata(dataset_accession, useftp=True)
 
     if dataset_metadatum == None:
         print("Not Importing %s, no metadata" % dataset_accession)
