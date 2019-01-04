@@ -12,7 +12,7 @@ from vladiate.inputs import LocalFile
 
 def perform_validation(filename):
     validators = {
-        'Filename': [
+        'filename': [
             UniqueValidator()
         ],
         "MassiveID" : [
@@ -214,6 +214,7 @@ def perform_validation(filename):
         errors_list.append(error_dict)
 
     valid_rows = []
+    row_count = 0
     #Read in the good rows
     try:
         no_validation_lines = [int(error["line_number"]) for error in errors_list]
@@ -226,7 +227,7 @@ def perform_validation(filename):
                     continue
                 valid_rows.append(row)
     except:
-        raise
+        #raise
         print("error reading file")
 
 
