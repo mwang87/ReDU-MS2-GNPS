@@ -8,6 +8,7 @@ from models import *
 import ming_fileio_library
 import ming_proteosafe_library
 import metadata_validator
+import ftputil
 import credentials
 
 try:
@@ -16,7 +17,7 @@ try:
 except:
     print("no redis")
 
-
+massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
 
 def get_dataset_files(dataset_accession, collection_name):
     dataset_files = None
@@ -27,7 +28,8 @@ def get_dataset_files(dataset_accession, collection_name):
         dataset_files = None
 
     if dataset_files is None:
-        dataset_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, collection_name, credentials.USERNAME, credentials.PASSWORD)
+        dataset_files = ming_proteosafe_library.get_all_files_in_dataset_folder_ftp(dataset_accession, collection_name, massive_host=massive_host)
+        #dataset_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, collection_name, credentials.USERNAME, credentials.PASSWORD)
         try:
             redis_client.set(dataset_accession, json.dumps(dataset_files))
         except:
@@ -78,6 +80,7 @@ def add_metadata_per_accession(dataset_accession, metadata_list):
     added_files = 0
 
     ###Make sure we line these datasets up
+    print("Get All Files Per Dataset")
     all_files = get_dataset_files(dataset_accession, "ccms_peak")
 
     for result in metadata_list:
@@ -124,7 +127,12 @@ def populate_dataset_metadata(input_metadata_filename):
     CompoundTag.create_table(True)
     CompoundTagFilenameConnection.create_table(True)
 
-    print(input_metadata_filename)
+    #Check if dataset metadata is in the database already
+    included_accessions = []
+    accession_attribute = Attribute.select().where(Attribute.categoryname == "ATTRIBUTE_DatasetAccession")[0]
+    for joined in FilenameAttributeConnection.select().where(FilenameAttributeConnection.attribute == accession_attribute).group_by(FilenameAttributeConnection.attributeterm):
+        included_accessions.append(joined.attributeterm.term)
+
 
     result_list = ming_fileio_library.parse_table_with_headers_object_list(input_metadata_filename, "\t")
 
@@ -135,6 +143,10 @@ def populate_dataset_metadata(input_metadata_filename):
         metadata_by_accession[massive_accession].append(result)
 
     for dataset_accession in metadata_by_accession:
+        print("Attempting Import", dataset_accession)
+        if dataset_accession in included_accessions:
+            print("Skipping %s, already imported" % (dataset_accession))
+            continue
         added_files = add_metadata_per_accession(dataset_accession, metadata_by_accession[dataset_accession])
         print(dataset_accession, len(metadata_by_accession[dataset_accession]), added_files)
 
