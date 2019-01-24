@@ -376,33 +376,70 @@ def compoundenrichment():
     compound_filenames = [filename.filepath for filename in Filename.select().join(CompoundFilenameConnection).where(CompoundFilenameConnection.compound==compound_db)]
 
     enrichment_list = []
-    for attribute in Attribute.select():
-        if attribute.categoryname.find("ATTRIBUTE_") == -1:
+
+    #Alternative
+
+    i = 0
+    #all_metadata = FilenameAttributeConnection.select(Filename.filepath, Attribute.categoryname, AttributeTerm.term).join(Filename).switch(FilenameAttributeConnection).join(Attribute).switch(FilenameAttributeConnection).join(AttributeTerm).dicts()
+    all_metadata = FilenameAttributeConnection.select(Attribute.categoryname, AttributeTerm.term, fn.COUNT(FilenameAttributeConnection.filename).alias('ct')).join(Attribute).switch(FilenameAttributeConnection).join(AttributeTerm).group_by(Attribute.categoryname, AttributeTerm.term).dicts()
+
+    print(len(all_metadata))
+    print(all_metadata[0])
+
+    for attribute_term_pair in all_metadata:
+        print(attribute_term_pair)
+
+        if attribute_term_pair["categoryname"].find("ATTRIBUTE_") == -1:
             continue
 
-        if attribute.categoryname in blacklist_attributes:
+        if attribute_term_pair["categoryname"] in blacklist_attributes:
             continue
 
-        #for attribute_term in AttributeTerm.select().limit(5):
-        for attribute_term in AttributeTerm.select():
-            #new_files_db = filenames_db.join(FilenameAttributeConnection).where(FilenameAttributeConnection.attribute==attribute, FilenameAttributeConnection.attributeterm==attributeterm)
-            attribute_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term).where(FilenameAttributeConnection.attribute == attribute)
-            attribute_filenames = [filename.filepath for filename in attribute_files_db]
+        attribute_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term_pair["term"]).where(FilenameAttributeConnection.attribute == attribute_term_pair["categoryname"])
+        attribute_filenames = [filename.filepath for filename in attribute_files_db]
+        if len(attribute_files_db) > 0:
+            intersection_filenames = set(compound_filenames).intersection(set(attribute_filenames))
 
-            if len(attribute_files_db) > 0:
-                intersection_filenames = set(compound_filenames).intersection(set(attribute_filenames))
+            enrichment_dict = {}
+            enrichment_dict["attribute_name"] = attribute_term_pair["categoryname"]
+            enrichment_dict["attribute_term"] = attribute_term_pair["term"]
+            enrichment_dict["totalfiles"] = attribute_term_pair["ct"]
+            enrichment_dict["compoundfiles"] = len(intersection_filenames)
+            enrichment_dict["percentage"] = len(intersection_filenames)/float(attribute_term_pair["ct"])
 
-                enrichment_dict = {}
-                enrichment_dict["attribute_name"] = attribute.categoryname
-                enrichment_dict["attribute_term"] = attribute_term.term
-                enrichment_dict["totalfiles"] = len(attribute_files_db)
-                enrichment_dict["compoundfiles"] = len(intersection_filenames)
-                enrichment_dict["percentage"] = len(intersection_filenames)/float(len(attribute_files_db))
+            enrichment_list.append(enrichment_dict)
 
-                enrichment_list.append(enrichment_dict)
+    enrichment_list = sorted(enrichment_list, key=lambda list_object: list_object["percentage"], reverse=True)
 
-
-                print(len(attribute_files_db), len(intersection_filenames), attribute.categoryname, attribute_term.term)
+    #
+    #
+    # for attribute in Attribute.select():
+    #     if attribute.categoryname.find("ATTRIBUTE_") == -1:
+    #         continue
+    #
+    #     if attribute.categoryname in blacklist_attributes:
+    #         continue
+    #
+    #     #for attribute_term in AttributeTerm.select().limit(5):
+    #     for attribute_term in AttributeTerm.select():
+    #         #new_files_db = filenames_db.join(FilenameAttributeConnection).where(FilenameAttributeConnection.attribute==attribute, FilenameAttributeConnection.attributeterm==attributeterm)
+    #         attribute_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term).where(FilenameAttributeConnection.attribute == attribute)
+    #         attribute_filenames = [filename.filepath for filename in attribute_files_db]
+    #
+    #         if len(attribute_files_db) > 0:
+    #             intersection_filenames = set(compound_filenames).intersection(set(attribute_filenames))
+    #
+    #             enrichment_dict = {}
+    #             enrichment_dict["attribute_name"] = attribute.categoryname
+    #             enrichment_dict["attribute_term"] = attribute_term.term
+    #             enrichment_dict["totalfiles"] = len(attribute_files_db)
+    #             enrichment_dict["compoundfiles"] = len(intersection_filenames)
+    #             enrichment_dict["percentage"] = len(intersection_filenames)/float(len(attribute_files_db))
+    #
+    #             enrichment_list.append(enrichment_dict)
+    #
+    #
+    #             print(len(attribute_files_db), len(intersection_filenames), attribute.categoryname, attribute_term.term)
     return json.dumps(enrichment_list)
 
 
