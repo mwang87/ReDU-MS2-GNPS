@@ -383,8 +383,8 @@ def compoundenrichment():
         if attribute.categoryname in blacklist_attributes:
             continue
 
-        for attribute_term in AttributeTerm.select().limit(5):
-        #for attribute_term in AttributeTerm.select():
+        #for attribute_term in AttributeTerm.select().limit(5):
+        for attribute_term in AttributeTerm.select():
             #new_files_db = filenames_db.join(FilenameAttributeConnection).where(FilenameAttributeConnection.attribute==attribute, FilenameAttributeConnection.attributeterm==attributeterm)
             attribute_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term).where(FilenameAttributeConnection.attribute == attribute)
             attribute_filenames = [filename.filepath for filename in attribute_files_db]
