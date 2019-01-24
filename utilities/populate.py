@@ -9,7 +9,6 @@ import ming_fileio_library
 import ming_proteosafe_library
 import metadata_validator
 import ftputil
-import credentials
 
 try:
     import redis
@@ -75,7 +74,14 @@ def add_metadata_per_accession(dataset_accession, metadata_list):
     "ATTRIBUTE_Curated_BodyPartOntologyIndex",
     "Curated_DiseaseCommonName",
     "ATTRIBUTE_Curated_DiseaseOntologyIndex",
-    "Curated_Comorbidity_ListDOIDs"]
+    "Curated_Comorbidity_ListDOIDs",
+    "ATTRIBUTE_kingdom",
+    "ATTRIBUTE_phylum",
+    "ATTRIBUTE_class",
+    "ATTRIBUTE_order",
+    "ATTRIBUTE_family",
+    "ATTRIBUTE_genus",
+    "ATTRIBUTE_species", "ATTRIBUTE_simplified_class"]
 
     added_files = 0
 
@@ -129,9 +135,9 @@ def populate_dataset_metadata(input_metadata_filename):
 
     #Check if dataset metadata is in the database already
     included_accessions = []
-    accession_attribute = Attribute.select().where(Attribute.categoryname == "ATTRIBUTE_DatasetAccession")[0]
-    for joined in FilenameAttributeConnection.select().where(FilenameAttributeConnection.attribute == accession_attribute).group_by(FilenameAttributeConnection.attributeterm):
-        included_accessions.append(joined.attributeterm.term)
+    #accession_attribute = Attribute.select().where(Attribute.categoryname == "ATTRIBUTE_DatasetAccession")[0]
+    #for joined in FilenameAttributeConnection.select().where(FilenameAttributeConnection.attribute == accession_attribute).group_by(FilenameAttributeConnection.attributeterm):
+    #    included_accessions.append(joined.attributeterm.term)
 
 
     result_list = ming_fileio_library.parse_table_with_headers_object_list(input_metadata_filename, "\t")

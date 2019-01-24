@@ -39,6 +39,7 @@ def perform_validation(filename):
             "animal_NOS",
             "animal_osteichthyes_NOS",
             "animal_reptilia_NOS",
+            "animal_amphibia_NOS",
             "beverage",
             "blank_analysis",
             "blank_extraction",
