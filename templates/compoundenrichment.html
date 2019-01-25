@@ -47,6 +47,11 @@
     </div>
 
     <script>
+        all_files = []
+        if(window.location.hash.length > 5){
+            all_files = JSON.parse(decodeURIComponent(window.location.hash).slice(1))["filenames"]
+        }
+
         function sortdesccolumn(column_name) {
             app4.results.sort(function(a, b) {
                 if(a[column_name] < b[column_name]) return 1;
@@ -66,13 +71,15 @@
         function querycompound() {
             $.ajax({
                 url: "/compoundenrichment",
+                type: "POST",
                 success: function(componentObject) {
                     return function(response) {
                         app4._data.results = response
                     }
                 }(this),
                 data: {
-                    compoundname: $("#compound").val()
+                    compoundname: $("#compound").val(),
+                    filenames: JSON.stringify(all_files)
                 },
                 dataType: "json"
             });
@@ -105,6 +112,10 @@
             $("#compound").val(params.get("compound"))
             querycompound();
         }
+
+
+
+
     </script>
 
 (% endblock %)

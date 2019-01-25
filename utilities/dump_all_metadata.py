@@ -37,7 +37,7 @@ def main():
 
         loop_count += 1
         if loop_count % 100 == 0:
-            print(loop_count, filename.filepath)
+            print(loop_count, filename.filepath, len(resolved_terms))
 
     ming_fileio_library.write_list_dict_table_data(all_file_metadata, "all_metadata_dumps.tsv")
 
