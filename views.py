@@ -369,18 +369,23 @@ def queryfilesbycompound():
 
     return json.dumps(output_filenames)
 
-@app.route('/compoundenrichment', methods=['GET'])
+@app.route('/compoundenrichment', methods=['POST'])
 def compoundenrichment():
-    blacklist_attributes = ["ATTRIBUTE_DatasetAccession"]
+    blacklist_attributes = ["ATTRIBUTE_DatasetAccession", "ATTRIBUTE_Curated_BodyPartOntologyIndex"]
 
-    compoundname = request.args['compoundname']
+    compoundname = request.form['compoundname']
     compound_db = Compound.select().where(Compound.compoundname == compoundname)
 
     compound_filenames = [filename.filepath for filename in Filename.select().join(CompoundFilenameConnection).where(CompoundFilenameConnection.compound==compound_db)]
 
     enrichment_list = []
 
-    #Alternative
+    if "filenames" in request.form:
+        filter_filenames = set(json.loads(request.form["filenames"]))
+        if len(filter_filenames) == 0:
+            filter_filenames = set([filename.filepath for filename in Filename.select()])
+    else:
+        filter_filenames = set([filename.filepath for filename in Filename.select()])
 
     all_metadata = FilenameAttributeConnection.select(Attribute.categoryname, AttributeTerm.term, fn.COUNT(FilenameAttributeConnection.filename).alias('ct')).join(Attribute).switch(FilenameAttributeConnection).join(AttributeTerm).group_by(Attribute.categoryname, AttributeTerm.term).dicts()
 
@@ -388,25 +393,26 @@ def compoundenrichment():
     print(all_metadata[0])
 
     for attribute_term_pair in all_metadata:
-        print(attribute_term_pair)
-
         if attribute_term_pair["categoryname"].find("ATTRIBUTE_") == -1:
             continue
 
         if attribute_term_pair["categoryname"] in blacklist_attributes:
             continue
 
+        print(attribute_term_pair)
+
         attribute_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term_pair["term"]).where(FilenameAttributeConnection.attribute == attribute_term_pair["categoryname"])
-        attribute_filenames = [filename.filepath for filename in attribute_files_db]
-        if len(attribute_files_db) > 0:
-            intersection_filenames = set(compound_filenames).intersection(set(attribute_filenames))
+        attribute_filenames = set([filename.filepath for filename in attribute_files_db]).intersection(filter_filenames)
+
+        if len(attribute_filenames) > 0:
+            intersection_filenames = set(compound_filenames).intersection(set(attribute_filenames)).intersection(filter_filenames)
 
             enrichment_dict = {}
             enrichment_dict["attribute_name"] = attribute_term_pair["categoryname"]
             enrichment_dict["attribute_term"] = attribute_term_pair["term"]
-            enrichment_dict["totalfiles"] = attribute_term_pair["ct"]
+            enrichment_dict["totalfiles"] = len(attribute_filenames)
             enrichment_dict["compoundfiles"] = len(intersection_filenames)
-            enrichment_dict["percentage"] = len(intersection_filenames)/float(attribute_term_pair["ct"])
+            enrichment_dict["percentage"] = len(intersection_filenames)/float(len(attribute_filenames))
 
             enrichment_list.append(enrichment_dict)
 

@@ -356,13 +356,25 @@
                 params_dict["G5"] = extractFilenamesToList(this.$parent.groupG5)
                 params_dict["G6"] = extractFilenamesToList(this.$parent.groupG6)
 
-                //analysis_url = "https://ccms-internal.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
                 analysis_url = "/explorerdashboard#" + encodeURIComponent(JSON.stringify(params_dict))
+                var win = window.open(analysis_url, '_blank');
+                win.focus();
+            },
+            launchcompoundenrichment: function(event){
+                total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
+                unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
+
+                params_dict = {};
+                params_dict["filenames"] = unique_list_files
+
+                analysis_url = "/compoundslist#" + encodeURIComponent(JSON.stringify(params_dict))
                 var win = window.open(analysis_url, '_blank');
                 win.focus();
             }
         },
         template: '<div><button class="btn btn-primary btn-block" v-on:click="launchenrichment">Launch Enrichment Analysis</button> \
+        <br> \
+        <button class="btn btn-primary btn-block" v-on:click="launchcompoundenrichment">Launch Compound Enrichment Analysis</button>\
         </div>'
     })
 
