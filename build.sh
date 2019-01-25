@@ -1,1 +1,1 @@
-docker build -t gnpsmetadata .
+docker build -t gnpsmetadatafoodomics .

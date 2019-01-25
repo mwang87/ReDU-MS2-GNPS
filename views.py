@@ -16,7 +16,7 @@ import metadata_validator
 
 requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
-white_list_attributes = ["ATTRIBUTE_DatasetAccession", "ATTRIBUTE_Subject_Sex", "ATTRIBUTE_Curated_BodyPartOntologyName", "ATTRIBUTE_Subject_LifeStage", "ATTRIBUTE_Analysis_MassSpectrometer", "ATTRIBUTE_Analysis_IonizationSourceAndPolarity", "ATTRIBUTE_Analysis_ChromatographyAndPhase", "ATTRIBUTE_Subject_Health", "ATTRIBUTE_Curated_SampleType", "ATTRIBUTE_Curated_SampleType_Sub1", "ATTRIBUTE_Curated_BodyPartOntologyName", "ATTRIBUTE_DiseaseCommonName"]
+white_list_attributes = ["fermented", "empo_3", "empo_2", "sample_type_group3", "sample_type_group4", "caffeinated_no"]
 
 """Resolving ontologies only if they need to be"""
 def resolve_ontology(attribute, term):
@@ -254,7 +254,8 @@ def viewattributes():
 
     output_list = []
     for attribute in all_attributes:
-        if attribute.categoryname.find("ATTRIBUTE_") != -1:
+        #if attribute.categoryname.find("ATTRIBUTE_") != -1:
+        if True:
             all_terms = AttributeTerm.select().join(FilenameAttributeConnection).join(Attribute).where(Attribute.categoryname == attribute.categoryname).group_by(AttributeTerm.term)
             output_dict = {}
             output_dict["attributename"] = attribute.categoryname
