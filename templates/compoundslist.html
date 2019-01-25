@@ -77,7 +77,7 @@
         },
         methods: {
             clickMe: function(event) {
-                analysis_url = "/compoundenrichmentdashboard?compound=" + encodeURIComponent(this.$props["compoundname"])
+                analysis_url = "/compoundenrichmentdashboard?compound=" + encodeURIComponent(this.$props["compoundname"]) + "#" + encodeURIComponent(all_files_string)
                 var win = window.open(analysis_url, '_blank');
                 win.focus();
             }
@@ -94,6 +94,8 @@
     })
 
     url = "/compounds"
+
+    all_files_string = decodeURIComponent(window.location.hash).slice(1)
 
     $.ajax({
         url: url,
