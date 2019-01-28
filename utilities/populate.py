@@ -48,7 +48,7 @@ def resolve_metadata_filename_to_all_files(filename, all_files):
     return acceptable_filenames[0]
 
 def add_metadata_per_accession(dataset_accession, metadata_list):
-    whitelist_columns = ["fermented", "empo_3", "empo_2", "sample_type_group3", "sample_type_group4", "caffeinated_no"]
+    whitelist_columns = ["fermented", "empo_3", "empo_2", "sample_type_group3", "sample_type_group4", "caffeinated_no", "simple_complex"]
 
     added_files = 0
 

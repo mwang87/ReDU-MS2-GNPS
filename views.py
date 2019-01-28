@@ -16,7 +16,7 @@ import metadata_validator
 
 requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
-white_list_attributes = ["fermented", "empo_3", "empo_2", "sample_type_group3", "sample_type_group4", "caffeinated_no"]
+white_list_attributes = ["fermented", "empo_3", "empo_2", "sample_type_group3", "sample_type_group4", "caffeinated_no", "simple_complex"]
 
 """Resolving ontologies only if they need to be"""
 def resolve_ontology(attribute, term):
@@ -394,8 +394,8 @@ def compoundenrichment():
     print(all_metadata[0])
 
     for attribute_term_pair in all_metadata:
-        if attribute_term_pair["categoryname"].find("ATTRIBUTE_") == -1:
-            continue
+        #if attribute_term_pair["categoryname"].find("ATTRIBUTE_") == -1:
+        #    continue
 
         if attribute_term_pair["categoryname"] in blacklist_attributes:
             continue
