@@ -140,7 +140,9 @@ def perform_validation(filename):
             "DOID:12140",
             "DOID:9970",
             "DOID:12155",
-            "DOID:8778"
+            "DOID:8778",
+            "DOID:0050338",
+            "DOID:13378"
             ])
         ],
         "Analysis_SampleExtractionMethod" : [
@@ -171,7 +173,8 @@ def perform_validation(filename):
             "none",
             "fluconazole",
             "amitryptiline;fluconazole",
-            "sulfadimethoxine;sulfachloropyridazine"
+            "sulfadimethoxine;sulfachloropyridazine",
+            "cholic_acid-d4;lithocholic_acid-d4"
             ])
         ],
         'Analysis_IonizationSourceAndPolarity' : [
