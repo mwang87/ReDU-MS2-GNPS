@@ -96,6 +96,10 @@ def perform_validation(filename):
             "caecum",
             "breast milk",
             "midgut",
+            "pulmonary artery",
+            "coronary artery",
+            "pulmonary vein",
+            "cardiac vein",
             "lung"])
         ],
         'ATTRIBUTE_Curated_BodyPartOntologyIndex' : [
@@ -125,7 +129,11 @@ def perform_validation(filename):
             'UBERON:0004907',
             'UBERON:0004908',
             'UBERON:0001045',
-            'UBERON:0002048'])
+            'UBERON:0002048',
+            "UBERON:0002012",
+            "UBERON:0001621",
+            "UBERON:0002016",
+            "UBERON:0004148"])
         ],
         'ATTRIBUTE_Curated_DiseaseOntologyIndex' : [
             SetValidator(valid_set=["DOID:1485",
