@@ -25,7 +25,7 @@
         <div class="row">
           <div class="col-sm"></div>
           <div class="col-sm text-center">
-              <h2>Add Metadata To Public Data</h2>
+              <h2>Add Sample Information To Public Data</h2>
           </div>
           <div class="col-sm"></div>
         </div>
@@ -35,14 +35,14 @@
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
                 <p>
-                    To add new metadata to your public data at GNPS, you'll need to create a metadata spreadsheet describing each individual mass spectrometry file. This will need to fit
-                    into our own metadata template that is entered according to a controlled vocabulary. Check out this <a href="https://docs.google.com/spreadsheets/d/1xEYFvAR6GlB-Gv3OFr2xgnpNhhe6dznn7h0489HIReY/edit?usp=sharing">template</a>.
+                    To add new sample information to your public data at GNPS, you'll need to create a sample information spreadsheet describing each individual mass spectrometry file. This will need to fit
+                    into a template that is entered according to a controlled vocabulary. Users need to create one sample information file per MassIVE dataset. Check out this <a href="https://docs.google.com/spreadsheets/d/1xEYFvAR6GlB-Gv3OFr2xgnpNhhe6dznn7h0489HIReY/edit?usp=sharing">template</a>.
                     <br>
                     <br>
-                    Once your have create your own metadata file saved as a tab separated text file based on the template, you can check if the format is valid below with a drag and drop.
+                    Once your have created the sample information file it should be downloaded from Google Sheets as a tab separated text file (delete unused rows prior to download). The formatting of the sample information file should then be checked using the validator below with a drag and drop.
                     <br>
                     <br>
-                    Once your metadata has been updated save your file as gnps_metadata.tsv exactly and update your dataset with this gnps_metadata.tsv in the supplementary file category. This metadata will be imported automatically.
+                    Once your sample information has passed validation, upload your sample information file renamed as "gnps_metadata.tsv" (exactly) to MassIVE (massive.ucsd.edu) by updating the corresponding dataset. Add the sample information file in the supplementary file category. Following the prior instructions allows the metadata to be imported automatically.
                 </p>
             </div>
             <div class="col-sm-2"></div>
@@ -60,7 +60,7 @@
 
         <div id="app-4" class="container-fluid">
             <br>
-            <h3 class="text-center">Metadata Summary</h3>
+            <h3 class="text-center">Sample Information Summary</h3>
             <br>
             <table class="table table-sm table-striped">
                 <thead>
@@ -79,7 +79,7 @@
 
             <hr>
 
-            <h3 class="text-center">Metadata Validation Errors (First 500)</h3>
+            <h3 class="text-center">Sample Information Validation Errors (First 500)</h3>
             <br>
             <table class="table table-sm table-striped">
                 <thead>
@@ -110,10 +110,10 @@
         app4._data.pass_validation = validation_json.status;
 
         if(validation_json.status){
-            alert("Metadata File Passed Validation!")
+            alert("Sample Information File Passed Validation!")
         }
         else{
-            alert("Metadata File Failed Validation! Please Check Errors Below.")
+            alert("Sample Information File Failed Validation! Please Check Errors Below.")
         }
     });
 
