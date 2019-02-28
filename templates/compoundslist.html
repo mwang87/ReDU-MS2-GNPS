@@ -2,7 +2,22 @@
 
 (% block content %)
 
+    <style>
+    tbody {
+        display:block;
+        height:800px;
+        overflow:auto;
+    }
+    thead, tbody tr {
+        display:table;
+        width:100%;
+        table-layout:fixed;
+    }
+    thead {
+        width: calc( 100% - 1em )
+    }
 
+    </style>
 
 
     <div id="app-4" class="container-fluid justify-content-center align-items-center">
@@ -20,7 +35,7 @@
             <h2>Compounds</h2>
         </div>
 
-        <div style="">
+        <div>
             <table class="table table-sm table-striped">
                 <thead>
                   <tr>

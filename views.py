@@ -276,7 +276,7 @@ def viewattributes():
             all_terms = AttributeTerm.select().join(FilenameAttributeConnection).join(Attribute).where(Attribute.categoryname == attribute.categoryname).group_by(AttributeTerm.term)
             output_dict = {}
             output_dict["attributename"] = attribute.categoryname
-            output_dict["attributedisplay"] = attribute.categoryname.replace("ATTRIBUTE_", "")
+            output_dict["attributedisplay"] = attribute.categoryname.replace("ATTRIBUTE_", "").replace("Analysis_", "").replace("Subject_", "").replace("Curated_", "")
             output_dict["countterms"] = len(all_terms)
 
             if attribute.categoryname in white_list_attributes:

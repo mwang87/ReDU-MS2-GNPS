@@ -2,6 +2,23 @@
 
 (% block content %)
 
+<style>
+tbody {
+    display:block;
+    height:800px;
+    overflow:auto;
+}
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+thead {
+    width: calc( 100% - 1em )
+}
+
+</style>
+
     <div id="app-4" class="container-fluid">
         <br>
         <h2 class="text-center">Compound Enrichment Query Interface</h2>

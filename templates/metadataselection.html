@@ -108,7 +108,7 @@
     <div id="toppanel" class="row">
         <div class="col">
             <div class="text-center">
-                <h3>Co-Analyze With Your Data in GNPS</h3>
+                <h3>Analyze With Your Data in GNPS</h3>
             </div>
 
             <hr>
@@ -118,23 +118,16 @@
 
         <div class="col">
             <div class="text-center">
-                <h3>Re-Analyze Public Data in GNPS</h3>
+                <h3>Analyze Public Data</h3>
             </div>
 
             <hr>
 
             <analysis-gnps-launch></analysis-gnps-launch>
-        </div>
-
-        <div class="col">
-            <div class="text-center">
-                <h3>Cohort Enrichment Analysis</h3>
-            </div>
-
-            <hr>
 
             <analysis-enrichment-launch></analysis-enrichment-launch>
         </div>
+
     </div>
 
     <hr>
@@ -372,9 +365,9 @@
                 win.focus();
             }
         },
-        template: '<div><button class="btn btn-primary btn-block" v-on:click="launchenrichment">Launch Enrichment Analysis</button> \
+        template: '<div><button class="btn btn-primary btn-block" v-on:click="launchenrichment">Launch Chemical Enrichment Analysis</button> \
         <br> \
-        <button class="btn btn-primary btn-block" v-on:click="launchcompoundenrichment">Launch Compound Enrichment Analysis</button>\
+        <button class="btn btn-primary btn-block" v-on:click="launchcompoundenrichment">Launch Sample Information Enrichment Analysis</button>\
         </div>'
     })
 
@@ -432,9 +425,9 @@
                 win.focus();
             }
         },
-        template: '<div><button class="btn btn-primary btn-block" v-on:click="setupnetworking">Set Up GNPS Networking</button> \
+        template: '<div><button class="btn btn-primary btn-block" v-on:click="setupnetworking">Coanalyze with GNPS Molecular Networking</button> \
         <br> \
-        <button class="btn btn-primary btn-block" v-on:click="setuplibrarysearch">Set Up GNPS Library Search</button> \
+        <button class="btn btn-primary btn-block" v-on:click="setuplibrarysearch">Coanalyze with GNPS Library Search</button> \
         </div>'
     })
 
