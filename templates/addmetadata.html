@@ -35,6 +35,10 @@
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
                 <p>
+              <b>Summary:</b> A sample information file should be created <b>per MassIVE ID</b> (it can contain multiple sample types, experiments, etc); however, the file is required to adhere to a template based on a controlled vocabulary. Sample information that does not adhere to the controlled vocabulary will be removed on a file-by-file basis. <b>If you require options that are not avaliable in the template, please contact the admins (<b>contact page hyperlink</b>) in order to update the options.</b>
+              <br>
+              <b>The sample information template can be found <a href="https://docs.google.com/spreadsheets/d/1xEYFvAR6GlB-Gv3OFr2xgnpNhhe6dznn7h0489HIReY/edit?usp=sharing">here</a>.</b>
+                    <br>
                     To add new sample information to your public data at GNPS, you'll need to do the following:
                   <ul>
                           <li>
@@ -45,12 +49,8 @@
                           </li>
                       </ul>
                   <br>
-              <b>Summary:</b> A sample information file should be created <b>per MassIVE ID</b> (it can contain multiple sample types, experiments, etc); however, the file is required to adhere to a template based on a controlled vocabulary. Sample information that does not adhere to the controlled vocabulary will be removed on a file-by-file basis. <b>If you require options that are not avaliable in the template, please contact the admins (EMAIL) in order to update the options.</b>
-              <br>
-              <br>
-              <b>The sample information template can be found <a href="https://docs.google.com/spreadsheets/d/1xEYFvAR6GlB-Gv3OFr2xgnpNhhe6dznn7h0489HIReY/edit?usp=sharing">here</a>.</b>
-                    <br>
-                    <br>
+              <b>The sample information file can be created by completing the following steps.</b>
+                  <br>
               <ul>
                           <li>
                               Users should save a copy of the sample information template and enter information in Google Sheets.
@@ -62,10 +62,11 @@
                             The formatting of the sample information file should then be checked using the validator below with a drag and drop. The validator will indicate via a message if there are any errors. Non-adherant information is displayed in the "Sample Information Validation Errors" panel.
                           </li>
                           <li>
-                            Once your sample information has passed validation, upload your sample information file renamed as "gnps_metadata.tsv" (exactly) to MassIVE (massive.ucsd.edu) by updating the corresponding dataset. <b>In order to update a MassIVE ID</b>, click the "add files" button in MassIVE and upload the sample information file in the <b>supplementary file"</b> option. *This apporach allows the metadata to be automatically imported into ReDU-MS2 multiple times per day.
+                            Once your sample information has passed validation, upload your sample information file renamed as "gnps_metadata.tsv" (exactly) to MassIVE (massive.ucsd.edu) by updating the corresponding dataset. <b>In order to update a MassIVE ID</b>, click the "add files" button in MassIVE and upload the sample information file in the <b>supplementary file"</b> option. 
                           </li>
                       </ul>
-                </p>
+              <b>Notes:</b> *Sample information files are automatically imported into ReDU-MS2 multiple times per day from MassIVE. Any conflict between identically named files will result in their exclusion. Sample information file must be renamed prior to uploading to MassIVE. If corrections or updates are necessary, please make them them in the Google Sheet and following the instructions - our system will automatically import the most recent version of the "gnps_metadata.tsv" file (files cannot be deleted by users from MassIVE).    
+              </p>
             </div>
             <div class="col-sm-2"></div>
         </div>
