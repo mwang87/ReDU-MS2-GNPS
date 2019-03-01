@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm text-center">
-            <h2>File Selection by Metadata</h2>
+            <h2>File Selection by Sample Information Interface</h2>
         </div>
         <div class="col-sm-1"></div>
     </div>
@@ -35,7 +35,7 @@
 
         <div class="col">
             <div class="text-center">
-                <h3>Metadata Attributes</h3>
+                <h3>Sample Information Attributes</h3>
             </div>
             <attribute-viewer v-for="item in attributes" v-bind:attributename="item.attributename" v-bind:attributedisplay="item.attributedisplay" v-on:update-attribute="updateAttributeSelection"></attribute-viewer>
         </div>
@@ -60,7 +60,7 @@
                 <th>Attribute</th>
                 <th>Ontology Term</th>
                 <th>Term</th>
-                <th>TermFilter</th>
+                <th>Filter</th>
                 <th># Files</th>
                 <th>G1</th>
                 <th>G2</th>
