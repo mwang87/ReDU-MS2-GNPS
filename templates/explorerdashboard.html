@@ -2,150 +2,150 @@
 
 (% block content %)
 
-    <style>
-    tbody {
-        display:block;
-        height:800px;
-        overflow:auto;
-    }
-    thead, tbody tr {
-        display:table;
-        width:100%;
-        table-layout:fixed;
-    }
-    thead {
-        width: calc( 100% - 1em )
-    }
+<style>
+tbody {
+    display:block;
+    height:800px;
+    overflow:auto;
+}
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+thead {
+    width: calc( 100% - 1em )
+}
 
-    </style>
+</style>
 
-    <div id="app-4" class="container-fluid justify-content-center align-items-center">
-        <div class="row">
-            <div class="col-sm"></div>
-            <div class="col-sm text-center">
-                <h2>Chemical Enrichment Analysis Results</h2>
-            </div>
-            <div class="col-sm"></div>
-        </div>
-
-        <hr>
-
+<div id="app-4" class="container-fluid justify-content-center align-items-center">
+    <div class="row">
+        <div class="col-sm"></div>
         <div class="col-sm text-center">
-            <h2>Chemicals Annotated via GNPS</h2>
+            <h2>Chemical Enrichment Analysis Results</h2>
         </div>
-
-        <div>
-            <table class="table table-sm table-striped">
-                <thead>
-                  <tr>
-                    <th>
-                        Chemical
-                        <i class="fa fa-sort-alpha-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('compound')"></i>
-                        <i class="fa fa-sort-alpha-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('compound')"></i>
-                    </th>
-                    <th>
-                        # Files in G1 (% Files)
-                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count1')"></i>
-                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count1')"></i>
-                    </th>
-                    <th>
-                        # Files in G2 (% Files)
-                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count2')"></i>
-                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count2')"></i>
-                    </th>
-                    <th>
-                        # Files in G3 (% Filess)
-                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count3')"></i>
-                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count3')"></i>
-                    </th>
-                    <th>
-                        # Files in G4 (% Files)
-                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count4')"></i>
-                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count4')"></i>
-                    </th>
-                    <th>
-                        # Files in G5 (% Files)
-                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count5')"></i>
-                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count5')"></i>
-                    </th>
-                    <th>
-                        # Files in G6 (% Files)
-                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count6')"></i>
-                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count6')"></i>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="compoundobject in compoundlist">
-                        <td>{{compoundobject.compound}}</td>
-                        <td>{{compoundobject.count1}} ({{compoundobject.count1_norm}}%)</td>
-                        <td>{{compoundobject.count2}} ({{compoundobject.count2_norm}}%)</td>
-                        <td>{{compoundobject.count3}} ({{compoundobject.count3_norm}}%)</td>
-                        <td>{{compoundobject.count4}} ({{compoundobject.count4_norm}}%)</td>
-                        <td>{{compoundobject.count5}} ({{compoundobject.count5_norm}}%)</td>
-                        <td>{{compoundobject.count6}} ({{compoundobject.count6_norm}}%)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="col-sm"></div>
     </div>
 
-    <script>
-    var app4 = new Vue({
-        el: '#app-4',
-        methods: {
-            updateAttributeSelection: function(attributeterm_list) {
-                this.attributeterms = attributeterm_list
-            }
-        },
-        data: {
-            compoundlist: []
+    <hr>
+
+    <div class="col-sm text-center">
+        <h2>Chemicals Annotated via GNPS</h2>
+    </div>
+
+    <div>
+        <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th>
+                    Chemical
+                    <i class="fa fa-sort-alpha-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('compound')"></i>
+                    <i class="fa fa-sort-alpha-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('compound')"></i>
+                </th>
+                <th>
+                    # Files in G1 ( % Files)
+                    <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count1')"></i>
+                    <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count1')"></i>
+                </th>
+                <th>
+                    # Files in G2 ( % Files)
+                    <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count2')"></i>
+                    <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count2')"></i>
+                </th>
+                <th>
+                    # Files in G3 ( % Files)
+                    <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count3')"></i>
+                    <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count3')"></i>
+                </th>
+                <th>
+                    # Files in G4 ( % Files)
+                    <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count4')"></i>
+                    <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count4')"></i>
+                </th>
+                <th>
+                    # Files in G5 ( % Files)
+                    <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count5')"></i>
+                    <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count5')"></i>
+                </th>
+                <th>
+                    # Files in G6 ( % Files)
+                    <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count6')"></i>
+                    <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count6')"></i>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr v-for="compoundobject in compoundlist">
+                    <td>{{compoundobject.compound}}</td>
+                    <td>{{compoundobject.count1}} ({{compoundobject.count1_norm}}%)</td>
+                    <td>{{compoundobject.count2}} ({{compoundobject.count2_norm}}%)</td>
+                    <td>{{compoundobject.count3}} ({{compoundobject.count3_norm}}%)</td>
+                    <td>{{compoundobject.count4}} ({{compoundobject.count4_norm}}%)</td>
+                    <td>{{compoundobject.count5}} ({{compoundobject.count5_norm}}%)</td>
+                    <td>{{compoundobject.count6}} ({{compoundobject.count6_norm}}%)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+var app4 = new Vue({
+    el: '#app-4',
+    methods: {
+        updateAttributeSelection: function(attributeterm_list) {
+            this.attributeterms = attributeterm_list
         }
-    })
-
-    function sortdesccolumn(column_name) {
-        app4.compoundlist.sort(function(a, b) {
-            if(a[column_name] < b[column_name]) return 1;
-            if(a[column_name] > b[column_name]) return -1;
-            return 0
-        });
+    },
+    data: {
+        compoundlist: []
     }
+})
 
-    function sortasccolumn(column_name) {
-        app4.compoundlist.sort(function(a, b) {
-            if(a[column_name] < b[column_name]) return -1;
-            if(a[column_name] > b[column_name]) return 1;
-            return 0
-        });
-    }
-
-
-    // Get the hash and make the query
-    all_files = JSON.parse(decodeURIComponent(window.location.hash).slice(1))
-
-    mode = all_files["mode"]
-
-    url = "/explorer"
-
-    $.ajax({
-        url: url,
-        type: "POST",
-        data: {
-            G1: JSON.stringify(all_files["G1"]),
-            G2: JSON.stringify(all_files["G2"]),
-            G3: JSON.stringify(all_files["G3"]),
-            G4: JSON.stringify(all_files["G4"]),
-            G5: JSON.stringify(all_files["G5"]),
-            G6: JSON.stringify(all_files["G6"])
-        },
-        success: function(componentObject) {
-            return function(response) {
-                console.log(response);
-                app4.compoundlist = response
-            }
-        }(this),
-        dataType: "json"
+function sortdesccolumn(column_name) {
+    app4.compoundlist.sort(function(a, b) {
+        if(a[column_name] < b[column_name]) return 1;
+        if(a[column_name] > b[column_name]) return -1;
+        return 0
     });
-    </script>
+}
+
+function sortasccolumn(column_name) {
+    app4.compoundlist.sort(function(a, b) {
+        if(a[column_name] < b[column_name]) return -1;
+        if(a[column_name] > b[column_name]) return 1;
+        return 0
+    });
+}
+
+
+// Get the hash and make the query
+all_files = JSON.parse(decodeURIComponent(window.location.hash).slice(1))
+
+mode = all_files["mode"]
+
+url = "/explorer"
+
+$.ajax({
+    url: url,
+    type: "POST",
+    data: {
+        G1: JSON.stringify(all_files["G1"]),
+        G2: JSON.stringify(all_files["G2"]),
+        G3: JSON.stringify(all_files["G3"]),
+        G4: JSON.stringify(all_files["G4"]),
+        G5: JSON.stringify(all_files["G5"]),
+        G6: JSON.stringify(all_files["G6"])
+    },
+    success: function(componentObject) {
+        return function(response) {
+            console.log(response);
+            app4.compoundlist = response
+        }
+    }(this),
+    dataType: "json"
+});
+</script>
 
 (% endblock %)
