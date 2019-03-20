@@ -600,6 +600,14 @@ def validate():
     validation_dict["stats"].append({"type":"total_rows", "value":total_rows})
     validation_dict["stats"].append({"type":"valid_rows", "value":len(valid_rows)})
 
+    """Try to find datasets in public data"""
+    try:
+        dataset_success, result_string, valid_items = metadata_validator.perform_validation_against_massive(local_filename)
+        validation_dict["stats"].append({"type":"massive_files_founds", "value": valid_items})
+
+    except:
+        print("Massive validation error")
+
     try:
         os.remove(local_filename)
     except:

@@ -5,6 +5,6 @@ interactive:
 server:
 	docker run -d  -p 5005:5001 --rm --name gnpsmetadata gnpsmetadata /app/run_production_server.sh
 testserver:
-	docker run -it  -p 5005:5001 --rm --name gnpsmetadata gnpsmetadata /app/run_server.sh
+	docker run -it  -p 5006:5001 --rm --name gnpsmetadata gnpsmetadata /app/run_server.sh
 bash:
 	docker run -it  -p 5005:5001 --rm --name gnpsmetadata gnpsmetadata bash

@@ -6,9 +6,56 @@ import os
 import argparse
 import csv
 import json
+import pandas as pd
 from vladiate import Vlad
 from vladiate.validators import UniqueValidator, SetValidator, Ignore
 from vladiate.inputs import LocalFile
+
+import ftputil
+import ming_proteosafe_library
+import ming_fileio_library
+
+"""Validation with actual data"""
+massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
+
+def get_dataset_files(dataset_accession, collection_name):
+    dataset_files = ming_proteosafe_library.get_all_files_in_dataset_folder_ftp(dataset_accession, collection_name, massive_host=massive_host)
+    return dataset_files
+
+def perform_validation_against_massive(filename):
+    metadata = pd.read_csv(filename, sep="\t")
+
+    print(metadata.keys())
+
+    if len(set(list(metadata["MassiveID"]))) > 1:
+        print("Too many accessions")
+        return False, "Too many accessions", 0
+
+    accession = metadata["MassiveID"][0]
+    print(accession)
+    dataset_files = get_dataset_files(accession, "ccms_peak")
+
+    all_resolved_filenames = []
+    for query_filename in metadata["filename"]:
+        print(query_filename)
+        dataset_filename = resolve_metadata_filename_to_all_files(query_filename, dataset_files)
+
+        if dataset_filename == None:
+            continue
+
+        all_resolved_filenames.append(dataset_filename)
+
+    return True, "Success", len(all_resolved_filenames)
+
+def resolve_metadata_filename_to_all_files(filename, dataset_files):
+    stripped_extension = ming_fileio_library.get_filename_without_extension(filename)
+
+    acceptable_filenames = ["f." + dataset_filename for dataset_filename in dataset_files if dataset_filename.find(stripped_extension) != -1]
+
+    if len(acceptable_filenames) != 1:
+        return None
+
+    return acceptable_filenames[0]
 
 def perform_validation(filename):
     validators = {
@@ -98,7 +145,6 @@ def perform_validation(filename):
     except:
         #raise
         print("error reading file")
-
 
     return passes_validation, my_validator.failures, errors_list, valid_rows, row_count
 

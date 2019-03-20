@@ -13,6 +13,7 @@ RUN pip install gunicorn
 RUN pip install xmltodict
 RUN pip install ftputil
 RUN pip install vladiate
+RUN pip install pandas
 
 #RUN apt-get update -y
 #RUN export DEBIAN_FRONTEND=noninteractive
