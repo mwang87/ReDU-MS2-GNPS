@@ -9,6 +9,7 @@ import csv
 import json
 import uuid
 import util
+import pandas as pd
 import requests
 import requests_cache
 
@@ -589,6 +590,10 @@ def validate():
 
     local_filename = os.path.join(app.config['UPLOAD_FOLDER'], str(uuid.uuid4()))
     request_file.save(local_filename)
+
+    """Trying stuff out with pandas"""
+    metadata_df = pd.read_csv(local_filename, sep="\t")
+    metadata_df.to_csv(local_filename, index=False, sep="\t")
 
     pass_validation, failures, errors_list, valid_rows, total_rows = metadata_validator.perform_validation(local_filename)
 
