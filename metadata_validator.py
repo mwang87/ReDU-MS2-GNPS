@@ -91,7 +91,7 @@ def perform_validation(filename):
             ])
         ],
         "Analysis_SampleExtractionMethod" : [
-            SetValidator(valid_set=['ethanol-water (9:1)','methanol-water (1:1)','dichloromethane-methanol (2:1)','ethanol-water (19:1)','water (94_deg_C)','water (95_deg_C)','water (100%) (deg_C_NOS)','chloroform-methanol-water (1:3:1) ','methanol (100%)','ethanol (100%)','ethanol-water (1:1)','ethanol-water (9:1)','water-acetonitrile (250:1)','methanol-acetonitrile (3:7)','methanol-water (4:1)','methanol-water (9:1)','not collected'
+            SetValidator(valid_set=['ethanol-water (9:1)','methanol-water (1:1)','dichloromethane-methanol (2:1)','ethanol-water (19:1)','water (94_deg_C)','water (95_deg_C)','water (100%) (deg_C_NOS)','chloroform-methanol-water (1:3:1) ','methanol (100%)','ethanol (100%)','ethanol-water (1:1)','ethanol-water (9:1)','water-acetonitrile (250:1)','methanol-acetonitrile (3:7)','methanol-water (4:1)','methanol-water (9:1)','not collected','ethyl acetate (100%)'
             ])
         ],
         'Analysis_InternalStandardsUsed' : [
