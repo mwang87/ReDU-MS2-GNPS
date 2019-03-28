@@ -1,6 +1,6 @@
 
 import sys
-sys.path.insert(0, "..")
+#sys.path.insert(0, "..")
 from collections import defaultdict
 import json
 import pandas as pd
