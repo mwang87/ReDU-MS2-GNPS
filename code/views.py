@@ -518,12 +518,6 @@ def dashboard():
 
 
 
-
-
-
-
-
-
 """ Production Views """
 
 @app.route('/', methods=['GET'])
@@ -561,6 +555,15 @@ def datalookup():
 @app.route('/addmetadata', methods=['GET'])
 def addmetadata():
     return render_template('addmetadata.html')
+
+@app.route('/dump', methods=['GET'])
+def dump():
+    return send_file('./all_metadata_dumps.tsv')
+
+
+
+
+
 
 # API End Points
 
