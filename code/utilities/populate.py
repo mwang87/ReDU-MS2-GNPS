@@ -129,9 +129,12 @@ def populate_dataset_metadata(input_metadata_filename):
 
     #Check if dataset metadata is in the database already
     included_accessions = []
-    accession_attribute = Attribute.select().where(Attribute.categoryname == "ATTRIBUTE_DatasetAccession")[0]
-    for joined in FilenameAttributeConnection.select().where(FilenameAttributeConnection.attribute == accession_attribute).group_by(FilenameAttributeConnection.attributeterm):
-        included_accessions.append(joined.attributeterm.term)
+    try:
+        accession_attribute = Attribute.select().where(Attribute.categoryname == "ATTRIBUTE_DatasetAccession")[0]
+        for joined in FilenameAttributeConnection.select().where(FilenameAttributeConnection.attribute == accession_attribute).group_by(FilenameAttributeConnection.attributeterm):
+            included_accessions.append(joined.attributeterm.term)
+    except:
+        print("No Accessions")
 
 
     result_list = ming_fileio_library.parse_table_with_headers_object_list(input_metadata_filename, "\t")
