@@ -95,7 +95,7 @@ def perform_validation(filename):
             ])
         ],
         'Analysis_InternalStandardsUsed' : [
-            SetValidator(valid_set=['sulfamethizole;sulfachloropyridazine','sulfamethazine','sulfamethazine;sulfadimethoxine','sulfadimethoxine','sulfamethizole;sulfachloropyridazine;sulfadimethoxine;sulfamethazine;coumarin-314;amitryptiline','amitryptiline','none','fluconazole','amitryptiline;fluconazole','sulfadimethoxine;sulfachloropyridazine','cholic_acid-d4;lithocholic_acid-d4 ','cocaine;cocaine-d3','cocaine-d3'
+            SetValidator(valid_set=['sulfamethizole;sulfachloropyridazine','sulfamethazine','sulfamethazine;sulfadimethoxine','sulfadimethoxine','sulfamethizole;sulfachloropyridazine;sulfadimethoxine;sulfamethazine;coumarin-314;amitryptiline','amitryptiline','none','fluconazole','amitryptiline;fluconazole','sulfadimethoxine;sulfachloropyridazine','cholic_acid-d4;lithocholic_acid-d4','cocaine;cocaine-d3','cocaine-d3'
             ])
         ],
         'Analysis_IonizationSourceAndPolarity' : [
