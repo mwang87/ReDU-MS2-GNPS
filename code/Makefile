@@ -2,7 +2,7 @@ build:
 	docker build -t gnpsmetadata .
 
 populate:
-	docker run -it -v $(PWD)/../database/:/app/database -p 5006:5001 --rm --name gnpsmetadata gnpsmetadata /app/run_production_populate.sh
+	docker run -it -v $(PWD)/../database/:/app/database --rm  gnpsmetadata /app/run_production_populate.sh
 
 interactive:
 	docker run -it -v $(PWD)/../database/:/app/database -p 5006:5001 --rm --name gnpsmetadata gnpsmetadata /app/run_production_server.sh
