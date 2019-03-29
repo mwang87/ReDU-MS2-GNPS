@@ -15,6 +15,8 @@ RUN pip install ftputil
 RUN pip install vladiate
 RUN pip install pandas
 
+RUN apt-get install -y wget
+
 #RUN apt-get update -y
 #RUN export DEBIAN_FRONTEND=noninteractive
 #RUN apt-get install -y r-base r-base-dev

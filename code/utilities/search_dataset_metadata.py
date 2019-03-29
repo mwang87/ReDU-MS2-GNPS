@@ -71,7 +71,11 @@ def process_metadata_import(dataset_accession):
 
     ming_fileio_library.write_list_dict_table_data(valid_rows, local_filtered_metadata_path)
 
-    pass_validation, failures, errors_list, valid_rows, total_rows_count = metadata_validator.perform_validation(local_filtered_metadata_path)
+    try:
+        pass_validation, failures, errors_list, valid_rows, total_rows_count = metadata_validator.perform_validation(local_filtered_metadata_path)
+    except:
+        pass_validation = False
+
     if pass_validation:
         print("Importing Data")
         populate.populate_dataset_metadata(local_filtered_metadata_path)
