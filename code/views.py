@@ -558,7 +558,7 @@ def addmetadata():
 
 @app.route('/dump', methods=['GET'])
 def dump():
-    return send_file('./all_metadata_dumps.tsv', as_attachment=True, attachment_filename="all_sampleinformation.tsv")
+    return send_file('./all_metadata_dumps.tsv', cache_timeout=1, as_attachment=True, attachment_filename="all_sampleinformation.tsv")
 
 
 
