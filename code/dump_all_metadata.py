@@ -32,7 +32,7 @@ def main():
             print(loop_count, filename.filepath, len(resolved_terms))
 
     df = pd.DataFrame(all_file_metadata)
-    df.to_csv("all_metadata_dumps.tsv", sep="\t")
+    df.to_csv("all_metadata_dumps.tsv", index=False, sep="\t")
 
 if __name__ == '__main__':
     main()
