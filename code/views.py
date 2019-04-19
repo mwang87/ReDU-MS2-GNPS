@@ -399,6 +399,7 @@ def compoundenrichment():
 
     compound_filenames = [filename.filepath for filename in Filename.select().join(CompoundFilenameConnection).where(CompoundFilenameConnection.compound==compound_db)]
 
+
     enrichment_list = []
 
     if "filenames" in request.form:
@@ -440,6 +441,49 @@ def compoundenrichment():
     enrichment_list = sorted(enrichment_list, key=lambda list_object: list_object["percentage"], reverse=True)
 
     return json.dumps(enrichment_list)
+
+@app.route('/filesenrichment', methods=['POST'])
+def filesenrichment():
+    blacklist_attributes = ["ATTRIBUTE_DatasetAccession", "ATTRIBUTE_Curated_BodyPartOntologyIndex"]
+
+    compound_filenames = set(json.loads(request.form["filenames"]))
+    enrichment_list = []
+        
+    filter_filenames = set([filename.filepath for filename in Filename.select()])
+
+    all_metadata = FilenameAttributeConnection.select(Attribute.categoryname, AttributeTerm.term, fn.COUNT(FilenameAttributeConnection.filename).alias('ct')).join(Attribute).switch(FilenameAttributeConnection).join(AttributeTerm).group_by(Attribute.categoryname, AttributeTerm.term).dicts()
+
+    print(len(all_metadata))
+    print(all_metadata[0])
+
+    for attribute_term_pair in all_metadata:
+        if attribute_term_pair["categoryname"].find("ATTRIBUTE_") == -1:
+            continue
+
+        if attribute_term_pair["categoryname"] in blacklist_attributes:
+            continue
+
+        print(attribute_term_pair)
+
+        attribute_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term_pair["term"]).where(FilenameAttributeConnection.attribute == attribute_term_pair["categoryname"])
+        attribute_filenames = set([filename.filepath for filename in attribute_files_db]).intersection(filter_filenames)
+
+        if len(attribute_filenames) > 0:
+            intersection_filenames = set(compound_filenames).intersection(set(attribute_filenames)).intersection(filter_filenames)
+
+            enrichment_dict = {}
+            enrichment_dict["attribute_name"] = attribute_term_pair["categoryname"]
+            enrichment_dict["attribute_term"] = attribute_term_pair["term"]
+            enrichment_dict["totalfiles"] = len(attribute_filenames)
+            enrichment_dict["compoundfiles"] = len(intersection_filenames)
+            enrichment_dict["percentage"] = len(intersection_filenames)/float(len(attribute_filenames))
+
+            enrichment_list.append(enrichment_dict)
+
+    enrichment_list = sorted(enrichment_list, key=lambda list_object: list_object["percentage"], reverse=True)
+
+    return json.dumps(enrichment_list)
+
 
 
 @app.route('/tagexplorer', methods=['POST'])

@@ -102,6 +102,22 @@ thead {
             });
         }
 
+        function queryfiles() {
+            $.ajax({
+                url: "/filesenrichment",
+                type: "POST",
+                success: function(componentObject) {
+                    return function(response) {
+                        app4._data.results = response
+                    }
+                }(this),
+                data: {
+                    filenames: JSON.stringify(all_files)
+                },
+                dataType: "json"
+            });
+        }
+
 
         Vue.component('query-results', {
             props: [],
@@ -128,7 +144,11 @@ thead {
         if(params.has("compound") == true){
             $("#compound").val(params.get("compound"))
             querycompound();
+        }else if(all_files.length > 0){
+            queryfiles();
         }
+
+
 
 
 
