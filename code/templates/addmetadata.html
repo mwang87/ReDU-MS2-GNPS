@@ -25,7 +25,7 @@
         <div class="row">
           <div class="col-sm"></div>
           <div class="col-sm text-center">
-              <h2>How to Add New Sample Information to Public Data</h2>
+              <h2>How to Add New Sample Information for Use in ReDU-MS2</h2>
           </div>
           <div class="col-sm"></div>
         </div>
@@ -35,37 +35,36 @@
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
                 <p>
-              <b>Summary:</b> A sample information file should be created <b>per MassIVE ID</b> (it can contain multiple sample types, experiments, etc); however, the file is required to adhere to a template based on a controlled vocabulary. Sample information that does not adhere to the controlled vocabulary will be removed on a file-by-file basis. <b>If you require options that are not avaliable in the template, please contact the admins (<b>contact page hyperlink</b>) in order to update the options.</b>
-              <br>
-              <b>The sample information template can be found <a href="https://docs.google.com/spreadsheets/d/1xEYFvAR6GlB-Gv3OFr2xgnpNhhe6dznn7h0489HIReY/edit?usp=sharing">here</a>.</b>
-                    <br>
-                    To add new sample information to your public data at GNPS, you'll need to do the following:
+              <b>Required Steps to Add Data to ReDU-MS2:</b>
                   <ul>
-                          <li>
-                              <b>Upload Data to GNPS (or MassIVE) and make the data public</b> - instructions can be found <a href="https://ccms-ucsd.github.io/GNPSDocumentation/">here</a>.
+                    <li>
+                            <b>Upload Data to GNPS (or MassIVE)</b> - instructions can be found <a href="https://ccms-ucsd.github.io/GNPSDocumentation/">here</a>. Launch the workflow to create a MassIVE ID. Upon completetion (an email will be received) please click the "make public" and "convert spectra" buttons.
                           </li>
                           <li>
-                            <b>Create a sample information file</b> that describes each file and upload to the corresponding MassIVE ID - instructions follow.
+                            <b>One Sample Information File (.tsv)</b> - instructions follow.
                           </li>
-                      </ul>
-                  <br>
-              <b>The sample information file can be created by completing the following steps.</b>
-                  <br>
+                    </ul>
+Sample information is synonymous with file-level metadata, and it is necessary for data to be included in ReDU-MS2. One sample information file is required <b>per MassIVE ID</b> (it can contain multiple sample types, experiments, etc), and should be uploaded to the same MassIVE ID as the data. The file is required to adhere to the template which uses a controlled vocabulary. <b>If you require options that are not avaliable in the template, please contact the admins (<b>contact page hyperlink</b>) in order to update the options.</b> Note, sample information that does not adhere to the controlled vocabulary will be removed on a file-by-file basis.
+                  <ul>
+<b>The sample information template can be found <a href="https://docs.google.com/spreadsheets/d/1xEYFvAR6GlB-Gv3OFr2xgnpNhhe6dznn7h0489HIReY/edit?usp=sharing">here</a>.</b>
+                   </ul>
               <ul>
-                          <li>
-                              Users should save a copy of the sample information template and enter information in Google Sheets.
+              <b>The sample information file can be created by completing the following steps.</b>
+              <ul>
+                          <li>Users should save a copy of the sample information template by going to "File - Make a copy" into their personal google drive
                           </li>
-                          <li>
-                            When completed, The sample information file should be downloaded from Google Sheets as a tab separated text file (please delete unused rows prior to download).
+                          <li>Users can then fill in sample information using drop-downs when applicable (grey columns are automatically entered using formulae). If copying and pasting, please copy+special and paste without changing the cell formulae. The accepted entries when vocublary is controlled is displayed, per column, in "TheMagic" tab. <b>If you require options that are not avaliable in the template, please contact the admins (<b>contact page hyperlink</b>)
+                            </li>
+                          <li>When completed, delete all extra rows. Download from Google Sheets as a tab separated text file by "File-Download as" and selecting "Tab-seperated values..."
                           </li>
-                          <li>
-                            The formatting of the sample information file should then be checked using the validator below with a drag and drop. The validator will indicate via a message if there are any errors. Non-adherant information is displayed in the "Sample Information Validation Errors" panel.
+                <li> Rename the file as <b> gnps_metadata.tsv" </b> (it must be this exact name).
+                            </li>
+                <li> Check the sample informatoin using the drag-and-drop <b> validator </b> below. The validator will indicate via a message if there are any errors. Non-adherant information is displayed in the "Sample Information Validation Errors" panel - the row, column, and the accepted terms are listed.
                           </li>
-                          <li>
-                            Once your sample information has passed validation, upload your sample information file renamed as "gnps_metadata.tsv" (exactly) to MassIVE (massive.ucsd.edu) by updating the corresponding dataset. <b>In order to update a MassIVE ID</b>, click the "add files" button in MassIVE and upload the sample information file in the <b>supplementary file"</b> option. 
+                          <li> Once your sample information has passed validation, upload your sample information file ("gnps_metadata.tsv") to MassIVE (massive.ucsd.edu) by updating the appropriate MassIVE ID. <b>In order to update a MassIVE ID</b>, click the "add files" button in MassIVE and upload the sample information file in the <b>"supplementary file"</b> option. 
                           </li>
                       </ul>
-              <b>Notes:</b> *Sample information files are automatically imported into ReDU-MS2 multiple times per day from MassIVE. Any conflict between identically named files will result in their exclusion. Sample information file must be renamed prior to uploading to MassIVE. If corrections or updates are necessary, please make them them in the Google Sheet and following the instructions - our system will automatically import the most recent version of the "gnps_metadata.tsv" file (files cannot be deleted by users from MassIVE).    
+              <b>Notes:</b> *Sample information files are automatically imported into ReDU-MS2 multiple times per day from MassIVE. Any conflict between identically named files will result in their exclusion. The filename present in the same folder must match the uploaded data (.mzML or .mzXML). If corrections or updates are necessary, please make them accordingly and upload the new sample information file - our system will automatically import the most recent version of the "gnps_metadata.tsv" file (files cannot be deleted by users from MassIVE).   
               </p>
             </div>
             <div class="col-sm-2"></div>
@@ -76,7 +75,7 @@
         <div class="row">
             <div class="col-md-2" id=""></div>
             <div class="dropzone col-md-8" id="validate">
-                <div class="dz-message">Drop files here or click to validate!</div>
+                <div class="dz-message">The Validator! Drop Sample Information Files Here or Click to Select</div>
             </div>
             <div class="col-md-2" id=""></div>
         </div>
