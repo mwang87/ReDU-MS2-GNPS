@@ -66,7 +66,7 @@ def perform_validation(filename):
             Ignore()
         ],
         "ATTRIBUTE_Subject_LifeStage" : [
-            Ignore()
+            SetValidator(valid_set=['not applicable','not collected','Infancy (<2 yrs)','Early Childhood (2 yrs < x <=8 yrs)','Adolescence (8 yrs < x <= 18 yrs)','Early Adulthood (18 yrs < x <= 45 yrs)','Middle Adulthood (45 yrs < x <= 65 yrs)','Later Adulthood (>65 yrs)'])
         ],
         'ATTRIBUTE_Subject_Sex': [
             SetValidator(valid_set=['female','male','asexual','not collected','not applicable'])
@@ -81,30 +81,25 @@ def perform_validation(filename):
             SetValidator(valid_set=['animal_arachnida_NOS','animal_aves_NOS','animal_insecta_NOS','animal_malacostraca_NOS','animal_mammalia_NOS','animal_NOS','animal_osteichthyes_NOS','animal_reptilia_NOS','beverage','blank_analysis','blank_extraction','blank_QC','culture_bacterial','culture_fungal','environmental','food','human','mouse','plant_angiospermae','plant_gymnospermae','plant_NOS','rat','reference material','animal_actinopterygii_NOS','animal_amphibia_NOS','animal_chondricthyes_NOS','animal_myxini_NOS','animal_sarcopterygii_NOS'])
         ],
         'ATTRIBUTE_Curated_SampleType_Sub1' : [
-            SetValidator(valid_set=['anal region','bacterial culture','beverage_alcoholic','beverage_nonalcoholic','blank_analysis','blank_extraction','blank_QC','blood','blood plasma','blood serum','environmental_brackish_dissolvedorganicmatter','environmental_clothing','environmental_freshwater_dissolvedorganicmatter','environmental_house','environmental_saline_dissolvedorganicmatter','environmental_soil_dissolvedorganicmatter','feces','food_source_animal','food_source_complex','food_source_fungi','food_source_NOS','food_source_plant','fungal culture','gall bladder','nasal cavity','oral cavity','plant','reference material_chemicalstandard','reference material_drugsorsupplement','reference material_personalcareproduct','reference material_animalfeedorsupplement','skin','sputum','tooth','urine','vagina','saliva','caecum','breast milk','midgut','lung','bile','pulmonary artery','coronary artery','pulmonary vein','cardiac vein','reference material_collectionmaterial_swabs','reference material_collectionmaterial_spotcards','reference material_collectionmaterial_microtubes','reference material_collectionmaterial_wellplates','environmental_coral','environmental_bacteria_insitu','environmental_fungi_insitu'])
+            SetValidator(valid_set=['anal region','bacterial','beverage_alcoholic','beverage_nonalcoholic','blank_analysis','blank_extraction','blank_QC','blood','blood plasma','blood serum','environmental_brackish_dissolvedorganicmatter','environmental_clothing','environmental_freshwater_dissolvedorganicmatter','environmental_house','environmental_saline_dissolvedorganicmatter','environmental_soil_dissolvedorganicmatter','feces','food_source_animal','food_source_complex','food_source_fungi','food_source_NOS','food_source_plant','fungal','gall bladder','nasal cavity','oral cavity','plant','reference material_chemicalstandard','reference material_drugsorsupplement','reference material_personalcareproduct','reference material_animalfeedorsupplement','skin','sputum','tooth','urine','vagina','saliva','caecum','breast milk','midgut','lung','bile','pulmonary artery','coronary artery','pulmonary vein','cardiac vein','reference material_collectionmaterial_swabs','reference material_collectionmaterial_spotcards','reference material_collectionmaterial_microtubes','reference material_collectionmaterial_wellplates','environmental_coral','environmental_bacteria_insitu','environmental_fungi_insitu','environmental_cyanobacteria_insitu'])
         ],
         'ATTRIBUTE_Curated_BodyPartOntologyIndex' : [
-            SetValidator(valid_set=['UBERON:0001353','UBERON:0002427','UBERON:0015474','UBERON:0000178','UBERON:0001969','UBERON:0001977','UBERON:0001091','UBERON:0001988','UBERON:0002110','UBERON:0012180','UBERON:0001707','not applicable','UBERON:0000167','UBERON:0001511','UBERON:0001519','UBERON:0001513','UBERON:0001085','UBERON:0007311','UBERON:0001088','UBERON:0000996','UBERON:0001836','UBERON:0001153','UBERON:0001555','UBERON:0004907','UBERON:0004908','UBERON:0001045','UBERON:0002048','UBERON:0001970','UBERON:0002012','UBERON:0001621','UBERON:0002016','UBERON:0004148','UBERON:0001913'])
+            SetValidator(valid_set=['UBERON:0001353','UBERON:0002427','UBERON:0015474','UBERON:0001970','UBERON:0000178','UBERON:0001969','UBERON:0001977','UBERON:0001153','UBERON:0001091','UBERON:0004148','UBERON:0001621','UBERON:0001555','UBERON:0001988','UBERON:0002110','UBERON:0012180','UBERON:0004907','UBERON:0002048','UBERON:0001045','UBERON:0001913','UBERON:0001707','not applicable','UBERON:0000167','UBERON:0002012','UBERON:0002016','UBERON:0001836','UBERON:0001511','UBERON:0001519','UBERON:0001513','UBERON:0001085','UBERON:0007311','UBERON:0004908','UBERON:0001088','UBERON:0000996','UBERON:0000955','UBERON:0002097','UBERON:0002387','UBERON:0001690','UBERON:0002106','UBERON:0002107','UBERON:0001264','UBERON:0000945','UBERON:0002114','UBERON:0002115','UBERON:0002116','UBERON:0001155','UBERON:0018707','UBERON:0002113','UBERON:0002369','UBERON:0000992','UBERON:0000995','UBERON:0000002','UBERON:0000948','UBERON:0003126','UBERON:0001043','UBERON:0002370'])
         ],
         'ATTRIBUTE_Curated_DiseaseOntologyIndex' : [
-            SetValidator(valid_set=['DOID:1485','DOID:9351','disease NOS','DOID:10763','DOID:0050589','no disease reported','not applicable','DOID:8893','no DOID avaliable','no DOID avaliable','DOID:12140','DOID:9970','DOID:12155','DOID:8778','DOID:13378','DOID:0050338','no DOID avaliable','no DOID avaliable','no DOID avaliable'
-            ])
+            SetValidator(valid_set=['DOID:1485','DOID:9351','disease NOS','DOID:10763','DOID:0050589','no disease reported','not applicable','DOID:8893','no DOID avaliable','no DOID avaliable','DOID:12140','DOID:9970','DOID:12155','DOID:8778','DOID:13378','DOID:0050338','no DOID avaliable','no DOID avaliable','no DOID avaliable'])
         ],
         "Analysis_SampleExtractionMethod" : [
-            SetValidator(valid_set=['ethanol-water (9:1)','methanol-water (1:1)','dichloromethane-methanol (2:1)','ethanol-water (19:1)','water (94_deg_C)','water (95_deg_C)','water (100%) (deg_C_NOS)','chloroform-methanol-water (1:3:1) ','methanol (100%)','ethanol (100%)','ethanol-water (1:1)','ethanol-water (9:1)','water-acetonitrile (250:1)','methanol-acetonitrile (3:7)','methanol-water (4:1)','methanol-water (9:1)','not collected','ethyl acetate (100%)','methanol-water (7:3)'
-            ])
+            SetValidator(valid_set=['ethanol-water (9:1)','methanol-water (1:1)','dichloromethane-methanol (2:1)','ethanol-water (19:1)','water (94_deg_C)','water (95_deg_C)','water (100%) (deg_C_NOS)','chloroform-methanol-water (1:3:1) ','methanol (100%)','ethanol (100%)','ethanol-water (1:1)','ethanol-water (9:1)','water-acetonitrile (250:1)','methanol-acetonitrile (3:7)','methanol-water (4:1)','methanol-water (9:1)','not collected','ethyl acetate (100%)','methanol-water (7:3)'])
         ],
         'Analysis_InternalStandardsUsed' : [
-            SetValidator(valid_set=['sulfamethizole;sulfachloropyridazine','sulfamethazine','sulfamethazine;sulfadimethoxine','sulfadimethoxine','sulfamethizole;sulfachloropyridazine;sulfadimethoxine;sulfamethazine;coumarin-314;amitryptiline','amitryptiline','none','fluconazole','amitryptiline;fluconazole','sulfadimethoxine;sulfachloropyridazine','cholic_acid-d4;lithocholic_acid-d4','cocaine;cocaine-d3','cocaine-d3'
-            ])
+            SetValidator(valid_set=['sulfamethizole;sulfachloropyridazine','sulfamethazine','sulfamethazine;sulfadimethoxine','sulfadimethoxine','sulfamethizole;sulfachloropyridazine;sulfadimethoxine;sulfamethazine;coumarin-314;amitryptiline','amitryptiline','none','fluconazole','amitryptiline;fluconazole','sulfadimethoxine;sulfachloropyridazine','cholic_acid-d4;lithocholic_acid-d4','cocaine;cocaine-d3','cocaine-d3'])
         ],
         'Analysis_IonizationSourceAndPolarity' : [
-            SetValidator(valid_set=['electrospray ionization (positive)','electrospray ionization (negative)','atmospheric pressure chemical ionization (positive)','atmospheric pressure chemical ionization (negative)','atmospheric pressure photoionization (positive)','atmospheric pressure photoionization (negative)'
-            ])
+            SetValidator(valid_set=['electrospray ionization (positive)','electrospray ionization (negative)','atmospheric pressure chemical ionization (positive)','atmospheric pressure chemical ionization (negative)','atmospheric pressure photoionization (positive)','atmospheric pressure photoionization (negative)'])
         ],
         'Analysis_ChromatographyAndPhase' : [
-            SetValidator(valid_set=['reverse phase (C18)','reverse phase (C8)','reverse phase (Phenyl-Hexyl)','normal phase (HILIC)','mixed mode (Scherzo SM-C18)'
-            ])
+            SetValidator(valid_set=['reverse phase (C18)','reverse phase (C8)','reverse phase (Phenyl-Hexyl)','normal phase (HILIC)','mixed mode (Scherzo SM-C18)'])
         ]
     }
 
