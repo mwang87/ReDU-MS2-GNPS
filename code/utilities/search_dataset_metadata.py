@@ -12,6 +12,7 @@ import ming_proteosafe_library
 import populate
 import credentials
 import ftputil
+import pandas as pd
 
 massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
 
@@ -53,23 +54,74 @@ def process_metadata_import(dataset_accession):
     try:
         massive_host.download(dataset_metadatum["path"], local_metadata_path)
     except:
-        print("SHIT CANT DOWNLOAD")
+        print("CANT DOWNLOAD", dataset_metadatum["path"])
         raise
 
-    #ftp_path = "ftp://massive.ucsd.edu/" + dataset_metadatum["path"]
-    #import urllib
-    #urllib.urlretrieve(ftp_path, local_metadata_path)
+    """
+    Metadata Fields Rewrite
+
+    Fields changed and will need to be rewritten
+
+    """
+
+    metadata_df = pd.read_csv(local_metadata_path, sep="\t")
+
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='anal region',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='adrenal gland',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='brain',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='caecum',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='cardiac vein',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='colon',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='coronary artery',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='duodenum',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='esophagus',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='gall bladder',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='heart',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='ileum',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='jejunum',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='kidney',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='liver',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='lung',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='midgut',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='nasal cavity',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='oral cavity',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='ovary',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='pancreas',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='pulmonary artery',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='pulmonary vein',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='skin',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='spleen',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='sputum',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='stomach',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='thymus',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='tooth',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='trachea',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='uterine cervix',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='uterus',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='vagina',value='tissue',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='bile',value='biofluid',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='blood',value='biofluid',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='blood plasma',value='biofluid',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='blood serum',value='biofluid',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='breast milk',value='biofluid',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='feces',value='biofluid',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='saliva',value='biofluid',inplace=True)
+    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='urine',value='biofluid',inplace=True)
+
+
+    metadata_df.to_csv(local_metadata_path, sep="\t", index=False)
+
+    
     #Validate
     pass_validation, failures, errors_list, valid_rows, total_rows_count = metadata_validator.perform_validation(local_metadata_path)
-    #print(pass_validation, errors_list)
 
-    #Filtering out lines
+    #Filtering out lines that are not valid
     local_filtered_metadata_path = os.path.join("tempuploads", "filtered_" + dataset_accession + ".tsv")
     if len([error for error in errors_list if error["error_string"].find("Missing column") != -1]) > 0:
         print("Missing Columns, Rejected")
         return
 
-    ming_fileio_library.write_list_dict_table_data(valid_rows, local_filtered_metadata_path)
+    pd.DataFrame(valid_rows).to_csv(local_filtered_metadata_path, sep="\t", index=False)
 
     try:
         pass_validation, failures, errors_list, valid_rows, total_rows_count = metadata_validator.perform_validation(local_filtered_metadata_path)
@@ -80,7 +132,7 @@ def process_metadata_import(dataset_accession):
         print("Importing Data")
         populate.populate_dataset_metadata(local_filtered_metadata_path)
     else:
-        print("Filtered File is not Valid")
+        print("Filtered File is not valid")
 
 
 def main():
@@ -94,34 +146,6 @@ def main():
     elif mode == "dataset":
         dataset_accession = sys.argv[2]
         process_metadata_import(dataset_accession)
-
-    #
-    # dataset_accession = "MSV000080673"
-    # dataset_metadatum = find_dataset_metadata(dataset_accession)
-    # print(dataset_metadatum)
-    # #Save files Locally
-    # local_metadata_path = os.path.join("tempuploads", dataset_accession + ".tsv")
-    # ftp_path = "ftp://massive.ucsd.edu/" + dataset_metadatum["path"]
-    # import urllib
-    # urllib.urlretrieve(ftp_path, local_metadata_path)
-    # #Validate
-    # pass_validation, failures, errors_list, valid_rows, total_rows_count = metadata_validator.perform_validation(local_metadata_path)
-    # #print(pass_validation, errors_list)
-    #
-    # #Filtering out lines
-    # local_filtered_metadata_path = os.path.join("tempuploads", "filtered_" + dataset_accession + ".tsv")
-    # if len([error for error in errors_list if error["error_string"].find("Missing column") != -1]) > 0:
-    #     print("Missing Columns, Rejected")
-    #     exit(0)
-    #
-    # ming_fileio_library.write_list_dict_table_data(valid_rows, local_filtered_metadata_path)
-    #
-    # pass_validation, failures, errors_list, valid_rows, total_rows_count = metadata_validator.perform_validation(local_filtered_metadata_path)
-    # if pass_validation:
-    #     populate.populate_dataset_metadata(local_filtered_metadata_path)
-    # else:
-    #     print("Filtered File is not Valid")
-
 
 
 if __name__ == "__main__":
