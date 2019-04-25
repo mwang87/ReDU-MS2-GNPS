@@ -8,7 +8,7 @@ import csv
 import json
 import pandas as pd
 from vladiate import Vlad
-from vladiate.validators import UniqueValidator, SetValidator, Ignore
+from vladiate.validators import UniqueValidator, SetValidator, Ignore, IntValidator, RangeValidator
 from vladiate.inputs import LocalFile
 
 import ftputil
@@ -109,7 +109,6 @@ def perform_validation(filename):
         'Analysis_YearOfAnalysis' : [
             IntValidator(),
             RangeValidator(low=2000, high=2030)
-            ])
         ]
     }
 
