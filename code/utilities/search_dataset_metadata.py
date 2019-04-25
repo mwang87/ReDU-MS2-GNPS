@@ -108,7 +108,15 @@ def process_metadata_import(dataset_accession):
     metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='saliva',value='biofluid',inplace=True)
     metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='urine',value='biofluid',inplace=True)
 
+    #Rewriting Year of Analysis
+    metadata_list = metadata_df.to_dict(orient="records")
+    for metadata_obj in metadata_list:
+        try:
+            metadata_obj["Analysis_YearOfAnalysis"] = str(int(float(metadata_obj["Analysis_YearOfAnalysis"])))
+        except:
+            continue
 
+    metadata_df = pd.DataFrame(metadata_list)
     metadata_df.to_csv(local_metadata_path, sep="\t", index=False)
 
     

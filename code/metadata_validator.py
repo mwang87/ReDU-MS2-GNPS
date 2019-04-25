@@ -105,6 +105,11 @@ def perform_validation(filename):
         'Analysis_ChromatographyAndPhase' : [
             SetValidator(valid_set=['reverse phase (C18)','reverse phase (C8)','reverse phase (Phenyl-Hexyl)','normal phase (HILIC)','mixed mode (Scherzo SM-C18)','not specified'
             ])
+        ],
+        'Analysis_YearOfAnalysis' : [
+            IntValidator(),
+            RangeValidator(low=2000, high=2030)
+            ])
         ]
     }
 
