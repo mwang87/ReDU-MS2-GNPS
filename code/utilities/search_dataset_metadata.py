@@ -57,67 +57,7 @@ def process_metadata_import(dataset_accession):
         print("CANT DOWNLOAD", dataset_metadatum["path"])
         raise
 
-    """
-    Metadata Fields Rewrite
-
-    Fields changed and will need to be rewritten
-
-    """
-
-    metadata_df = pd.read_csv(local_metadata_path, sep="\t")
-
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='anal region',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='adrenal gland',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='brain',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='caecum',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='cardiac vein',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='colon',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='coronary artery',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='duodenum',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='esophagus',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='gall bladder',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='heart',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='ileum',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='jejunum',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='kidney',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='liver',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='lung',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='midgut',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='nasal cavity',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='oral cavity',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='ovary',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='pancreas',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='pulmonary artery',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='pulmonary vein',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='skin',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='spleen',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='sputum',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='stomach',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='thymus',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='tooth',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='trachea',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='uterine cervix',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='uterus',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='vagina',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='bile',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='blood',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='blood plasma',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='blood serum',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='breast milk',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='feces',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='saliva',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='urine',value='biofluid',inplace=True)
-
-    #Rewriting Year of Analysis
-    metadata_list = metadata_df.to_dict(orient="records")
-    for metadata_obj in metadata_list:
-        try:
-            metadata_obj["Analysis_YearOfAnalysis"] = str(int(float(metadata_obj["Analysis_YearOfAnalysis"])))
-        except:
-            continue
-
-    metadata_df = pd.DataFrame(metadata_list)
-    metadata_df.to_csv(local_metadata_path, sep="\t", index=False)
+    metadata_validator.rewrite_metadata(local_metadata_path)
 
     
     #Validate

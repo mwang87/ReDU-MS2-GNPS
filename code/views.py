@@ -642,6 +642,8 @@ def validate():
     metadata_df = pd.read_csv(local_filename, sep="\t")
     metadata_df.to_csv(local_filename, index=False, sep="\t")
 
+    metadata_validator.rewrite_metadata(local_filename)
+
     pass_validation, failures, errors_list, valid_rows, total_rows = metadata_validator.perform_validation(local_filename)
 
     validation_dict = {}
