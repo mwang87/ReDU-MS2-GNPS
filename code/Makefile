@@ -1,6 +1,9 @@
 build:
 	docker build -t gnpsmetadata .
 
+build-no-cache:
+	docker build --no-cache -t gnpsmetadata .
+
 populate:
 	docker run -d -v $(PWD)/../database/:/app/database --rm  gnpsmetadata /app/run_production_populate.sh
 
