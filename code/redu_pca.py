@@ -5,7 +5,6 @@ import sys
 import os
 import csv
 from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
 import seaborn
 
 PATH_TO_COMPONENT_MATRIX = "./component_matrix.csv" #Eigenvectors
@@ -97,7 +96,8 @@ def project_new_data(input_file_occurrences_table, output_png):
     dataframe4 = pd.read_csv(PATH_TO_ORIGINAL_PCA, sep = ",")
     dataframe3 = pd.DataFrame(data = visualize_stuff)
     
-    scatterplot_new = seaborn.scatterplot(0, 1, data = dataframe3, marker = 'x') 
+    seaborn.set(rc={'figure.figsize':(11.7,8.27)})
+    scatterplot_new = seaborn.scatterplot(0, 1, data = dataframe3, marker = 'x')
     scatterplot_original = seaborn.scatterplot('0','1', data = dataframe4)
     figure = scatterplot_new.get_figure()
     figure.savefig(output_png)
@@ -105,10 +105,11 @@ def project_new_data(input_file_occurrences_table, output_png):
 
 def main():
     input_global_file_occurrences_table = sys.argv[1]
+    input_new_file_occurrences_table = sys.argv[2]
     output_png = "output_merged_png.png"
 
     calculate_master_projection(input_global_file_occurrences_table)
-    project_new_data(input_global_file_occurrences_table, output_png)
+    project_new_data(input_new_file_occurrences_table, output_png)
 
 if __name__ == "__main__":
     main()
