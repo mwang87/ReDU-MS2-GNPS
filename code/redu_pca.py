@@ -6,6 +6,8 @@ import os
 import csv
 from sklearn.decomposition import PCA
 import seaborn
+import matplotlib.pyplot as plt
+
 
 PATH_TO_COMPONENT_MATRIX = "./component_matrix.csv" #Eigenvectors
 PATH_TO_ORIGINAL_PCA = "./original_pca.csv" #original PCA matrix of the original files
@@ -115,6 +117,9 @@ def project_new_data(input_file_occurrences_table, output_png):
     
     figure = scatterplot.get_figure()
     figure.savefig(output_png)
+
+    plt.clf()
+
     
 
 def main():
