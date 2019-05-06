@@ -19,6 +19,12 @@ import ming_fileio_library
 massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
 
 def get_dataset_files(dataset_accession, collection_name):
+    try:
+        massive_host.keep_alive()
+    except:
+        print("MassIVE connection broken, reconnecting")
+        massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
+
     dataset_files = ming_proteosafe_library.get_all_files_in_dataset_folder_ftp(dataset_accession, collection_name, massive_host=massive_host)
     return dataset_files
 
