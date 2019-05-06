@@ -16,14 +16,49 @@
 
     <br>
 
-    <div class="row">
-        <div class="col-sm"></div>
-        <div class="col-sm text-center">
-            Lorum Ipsum
+    <div id="displayer">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <div class="text-center">
+                    <input type="text" class="form-control" name="task" id="task"
+                        placeholder="Enter GNPS Networking Task ID">
+                </div>
+            </div>
+            <div class="col-sm"></div>
         </div>
-        <div class="col-sm"></div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <div class="text-center">
+                    <button id="analyzebutton" class="btn btn-primary" onclick="myFunction()">Create PCA</button>
+                </div>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <div id="display">
+                </div>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+        
     </div>
 </div>
 
+<script>
+    function myFunction() {
+        remote_url = "/processcomparemultivariate?task=" + $("#task").val()
+        $('#display').prepend($('<img>',{id:'pca',src:remote_url}))
+
+    }
+</script>
 
 (% endblock %)

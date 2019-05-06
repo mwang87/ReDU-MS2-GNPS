@@ -5,8 +5,9 @@ import sys
 import os
 import csv
 from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
 import seaborn
+import matplotlib.pyplot as plt
+
 
 PATH_TO_COMPONENT_MATRIX = "./component_matrix.csv" #Eigenvectors
 PATH_TO_ORIGINAL_PCA = "./original_pca.csv" #original PCA matrix of the original files
@@ -94,21 +95,41 @@ def project_new_data(input_file_occurrences_table, output_png):
       
     visualize_stuff = C.dot(we_dont_care) #manually calculating the output for projection
     
-    dataframe4 = pd.read_csv(PATH_TO_ORIGINAL_PCA, sep = ",")
-    dataframe3 = pd.DataFrame(data = visualize_stuff)
+    original_pca_df = pd.read_csv(PATH_TO_ORIGINAL_PCA, sep = ",")
+    new_pca_df = pd.DataFrame(data=visualize_stuff)
+
+    column_mapping = {}
+    for key in new_pca_df.keys():
+        column_mapping[key] = "PC" + str(key)
+    new_pca_df = new_pca_df.rename(index=str, columns=column_mapping)
+    new_pca_df["type"] = "Your Data"
+
+    column_mapping = {}
+    for key in original_pca_df.keys():
+        column_mapping[key] = "PC" + str(key)
+    original_pca_df = original_pca_df.rename(index=str, columns=column_mapping)
+    original_pca_df["type"] = "Global Data"
+
+    all_pca_df = pd.concat([original_pca_df, new_pca_df])
     
-    scatterplot_new = seaborn.scatterplot(0, 1, data = dataframe3, marker = 'x') 
-    scatterplot_original = seaborn.scatterplot('0','1', data = dataframe4)
-    figure = scatterplot_new.get_figure()
+    seaborn.set(rc={'figure.figsize':(11.7,8.27)})
+    scatterplot = seaborn.scatterplot(x="PC0", y="PC1", data = all_pca_df, hue='type')
+    
+    figure = scatterplot.get_figure()
     figure.savefig(output_png)
+
+    plt.clf()
+
     
 
 def main():
     input_global_file_occurrences_table = sys.argv[1]
+    input_new_file_occurrences_table = sys.argv[2]
     output_png = "output_merged_png.png"
 
-    calculate_master_projection(input_global_file_occurrences_table)
-    project_new_data(input_global_file_occurrences_table, output_png)
+    #calculate_master_projection(input_global_file_occurrences_table)
+    project_new_data(input_new_file_occurrences_table, output_png)
 
 if __name__ == "__main__":
     main()
+

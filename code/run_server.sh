@@ -1,3 +1,3 @@
 #!/bin/bash
 export FLASK_ENV=development
-python ./main.py
+python3 ./main.py
