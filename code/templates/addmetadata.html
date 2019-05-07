@@ -49,14 +49,15 @@
               <h3>The sample information template can be found <a href="https://docs.google.com/spreadsheets/d/1v71bnUd8fiXX51zuZIUAvYETWmpwFQj-M3mu4CNsHBU/edit?usp=sharing">here</a>.</h3>
               </p>
               <p>
-Sample information is synonymous with file-level metadata, and it is necessary for data to be included in ReDU-MS2. One sample information file is required <b>per MassIVE ID</b> (it can contain multiple sample types, experiments, etc), and should be uploaded to the same MassIVE ID as the data. The file is required to adhere to the template which uses a controlled vocabulary. <b>If you require options that are not avaliable in the template, please contact the admins (<b>contact page hyperlink</b>) in order to update the options.</b> Note, sample information that does not adhere to the controlled vocabulary will be removed on a file-by-file basis.
+              <h3>What is Sample Information in ReDU-MS2?</h3>
+Sample information is synonymous with file-level metadata, and it is necessary for data to be included in ReDU-MS2. One sample information file is required <b>per MassIVE ID</b> (it can contain multiple sample types, experiments, etc), and should be uploaded to the same MassIVE ID as the data. The file is required to adhere to the template which uses a controlled vocabulary. <b>If you require options that are not avaliable in the template, please raise an issue on <a href="https://github.com/mwang87/ReDU-MS2-GNPS">GitHub</a> in order to update the options.</b> Note, sample information that does not adhere to the controlled vocabulary will be removed on a file-by-file basis.
               </p>
               <p>
               <h3>The sample information file can be created by completing the following steps.</h3>
               <ul>
                           <li>Save a copy of the sample information template by going to "File - Make a copy" into a personal google drive.
                           </li>
-                          <li>Fill in sample information using drop-downs when applicable (grey columns at the end of the template are automatically entered using formulae). <b>If copying and pasting, please copy+special and paste without changing the cell formulae.</b> The accepted options in the controlled vocublary is indicated, per column, in "ReDUMS2_controlled_vocabulary" tab. <b>If you require options that are not avaliable, please contact the admins - Mingxun Wang (miw023@ucsd.edu) or Alan Jarmusch (ajarmusch@ucsd.edu).</b>
+                          <li>Fill in sample information using drop-downs when applicable (grey columns at the end of the template are automatically entered using formulae). <b>If copying and pasting, please copy+special and paste without changing the cell formulae.</b> The accepted options in the controlled vocublary is indicated, per column, in "ReDUMS2_controlled_vocabulary" tab. <b>If you require options that are not avaliable, please raise an issue on <a href="https://github.com/mwang87/ReDU-MS2-GNPS">GitHub</a>.</b>
                             </li>
                           <li>When completed, delete all extra rows of the template. Download from Google Sheets as a tab separated text file using "File-Download as" and selecting "Tab-seperated values..."
                           </li>
@@ -69,7 +70,11 @@ Sample information is synonymous with file-level metadata, and it is necessary f
                       </ul>
                 </p>
                 <p>
-              <b>Notes:</b> *Sample information files are automatically imported into ReDU-MS2 multiple times per day from MassIVE. Any conflict between identically named files will result in their exclusion. The filename present in the same folder must match the uploaded data (.mzML or .mzXML). If corrections or updates are necessary, please make them accordingly and upload the new sample information file - our system will automatically import the most recent version of the "gnps_metadata.tsv" file (files cannot be deleted by users from MassIVE).
+              <h3>Additional details and images of each step can be found in the <a href="https://mwang87.github.io/ReDU-MS2-Documentation/HowtoContribute/">documentation</a></h3> 
+</p>
+<p>
+<h3>Notes</h3>
+Sample information files are automatically imported into ReDU-MS2 multiple times per day from MassIVE. Any conflict between identically named files will result in their exclusion. The filename present in the same folder must match the uploaded data (.mzML or .mzXML). If corrections or updates are necessary, please make them accordingly and upload the new sample information file - our system will automatically import the most recent version of the "gnps_metadata.tsv" file (files cannot be deleted by users from MassIVE).
               </p>
             </div>
             <div class="col-sm-2"></div>
