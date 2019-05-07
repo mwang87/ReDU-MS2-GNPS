@@ -36,6 +36,8 @@ def calculate_master_projection(input_file_occurrences_table):
     pca = PCA(n_components = 5) #creating the instance
     pca.fit(new_matrix) #fitting the data 
 
+    eigenvalues = pca.explained_variance_ #eigenvalue vector
+    
     component_matrix = pca.components_ #principle components / vectors
     dataframe1 = pd.DataFrame(data = component_matrix.transpose())
     dataframe1['filename'] = compound_list
@@ -44,6 +46,7 @@ def calculate_master_projection(input_file_occurrences_table):
     sklearn_output = pca.transform(new_matrix) #using sklearn to calculate the output
     
     dataframe2 = pd.DataFrame(data = sklearn_output)
+    dataframe2.loc[col_range[-1]] = list(eigenvalues) #adding eigenvalues to the end of the matrix
     dataframe2.to_csv(r"original_pca.csv")
 
 ### Given a new file occurrence table, creates a projection of the new data along with the old data and saves as a png output
@@ -96,6 +99,7 @@ def project_new_data(input_file_occurrences_table, output_png):
     visualize_stuff = C.dot(we_dont_care) #manually calculating the output for projection
     
     original_pca_df = pd.read_csv(PATH_TO_ORIGINAL_PCA, sep = ",")
+    original_pca_df = original_pca_df.iloc[:-1] #removing eigenvalues before projection
     new_pca_df = pd.DataFrame(data=visualize_stuff)
 
     column_mapping = {}
