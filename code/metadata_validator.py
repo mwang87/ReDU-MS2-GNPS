@@ -145,7 +145,7 @@ def perform_validation(filename):
             SetValidator(valid_set=['Urban','Rural','not collected','not applicable','not specified'])
         ],
         'ATTRIBUTE_Analysis_MassSpectrometer' : [
-            SetValidator(valid_set=['Maxis_Impact','Maxis_ImpactHD','QExactive','micrOTOF-Q II'])
+            SetValidator(valid_set=['Maxis_Impact','Maxis_ImpactHD','QExactive','micrOTOF-Q II','not specified','QTOF_6540','LTQ_Orbitrap_XL'])
         ],
         'ATTRIBUTE_Curated_SampleType' : [
             SetValidator(valid_set=['animal_arachnida_NOS','animal_aves_NOS','animal_insecta_NOS','animal_malacostraca_NOS','animal_mammalia_NOS','animal_NOS','animal_osteichthyes_NOS','animal_reptilia_NOS','beverage','blank_analysis','blank_extraction','blank_QC','culture_bacterial','culture_fungal','environmental','food','human','mouse','plant_angiospermae','plant_gymnospermae','plant_NOS','rat','reference material','animal_actinopterygii_NOS','animal_amphibia_NOS','animal_chondricthyes_NOS','animal_myxini_NOS','animal_sarcopterygii_NOS','algae_NOS','not specified'])
