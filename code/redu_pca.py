@@ -36,7 +36,7 @@ def calculate_master_projection(input_file_occurrences_table):
     pca = PCA(n_components = 5) #creating the instance
     pca.fit(new_matrix) #fitting the data 
 
-    eigenvalues = pca.explained_variance_ #eigenvalue vector
+     eigenvalues = list(pca.explained_variance_) #eigenvalue vector
     
     component_matrix = pca.components_ #principle components / vectors
     dataframe1 = pd.DataFrame(data = component_matrix.transpose())
@@ -45,8 +45,12 @@ def calculate_master_projection(input_file_occurrences_table):
     
     sklearn_output = pca.transform(new_matrix) #using sklearn to calculate the output
     
+    new_files = file_list[:-2]
+    new_files.append("eigens")
+    
     dataframe2 = pd.DataFrame(data = sklearn_output)
-    dataframe2.loc[col_range[-1]] = list(eigenvalues) #adding eigenvalues to the end of the matrix
+    dataframe2.loc[len(col_range)] = eigenvalues
+    dataframe2['filename'] = new_files
     dataframe2.to_csv(r"original_pca.csv")
 
 ### Given a new file occurrence table, creates a projection of the new data along with the old data and saves as a png output
