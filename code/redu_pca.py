@@ -36,7 +36,7 @@ def calculate_master_projection(input_file_occurrences_table):
     pca = PCA(n_components = 5) #creating the instance
     pca.fit(new_matrix) #fitting the data 
 
-     eigenvalues = list(pca.explained_variance_) #eigenvalue vector
+    eigenvalues = list(pca.explained_variance_) #eigenvalue vector
     
     component_matrix = pca.components_ #principle components / vectors
     dataframe1 = pd.DataFrame(data = component_matrix.transpose())
