@@ -145,7 +145,7 @@ def perform_validation(filename):
             SetValidator(valid_set=['Urban','Rural','not collected','not applicable','not specified'])
         ],
         'ATTRIBUTE_Analysis_MassSpectrometer' : [
-            SetValidator(valid_set=['Maxis_Impact','Maxis_ImpactHD','QExactive','micrOTOF-Q II'])
+            SetValidator(valid_set=['Maxis_Impact','Maxis_ImpactHD','QExactive','micrOTOF-Q II','not specified','QTOF_6540','LTQ_Orbitrap_XL'])
         ],
         'ATTRIBUTE_Curated_SampleType' : [
             SetValidator(valid_set=['animal_arachnida_NOS','animal_aves_NOS','animal_insecta_NOS','animal_malacostraca_NOS','animal_mammalia_NOS','animal_NOS','animal_osteichthyes_NOS','animal_reptilia_NOS','beverage','blank_analysis','blank_extraction','blank_QC','culture_bacterial','culture_fungal','environmental','food','human','mouse','plant_angiospermae','plant_gymnospermae','plant_NOS','rat','reference material','animal_actinopterygii_NOS','animal_amphibia_NOS','animal_chondricthyes_NOS','animal_myxini_NOS','animal_sarcopterygii_NOS','algae_NOS','not specified'])
@@ -160,7 +160,7 @@ def perform_validation(filename):
             SetValidator(valid_set=['DOID:1485','DOID:9351','disease NOS','DOID:10763','DOID:0050589','no disease reported','not applicable','DOID:8893','no DOID avaliable','no DOID avaliable','DOID:12140','DOID:9970','DOID:12155','DOID:8778','DOID:13378','DOID:0050338','no DOID avaliable','no DOID avaliable','no DOID avaliable','not applicable','DOID:8577','DOID:216'])
         ],
         "Analysis_SampleExtractionMethod" : [
-            SetValidator(valid_set=['ethanol-water (9:1)','methanol-water (1:1)','dichloromethane-methanol (2:1)','ethanol-water (19:1)','water (94_deg_C)','water (95_deg_C)','water (100%) (deg_C_NOS)','chloroform-methanol-water (1:3:1) ','methanol (100%)','ethanol (100%)','ethanol-water (1:1)','ethanol-water (9:1)','water-acetonitrile (250:1)','methanol-acetonitrile (3:7)','methanol-water (4:1)','methanol-water (9:1)','not collected','ethyl acetate (100%)','methanol-water (7:3)','water-acetonitrile (149:1)','not specified'])
+            SetValidator(valid_set=['ethanol-water (9:1)','methanol-water (1:1)','dichloromethane-methanol (2:1)','ethanol-water (19:1)','water (94_deg_C)','water (95_deg_C)','water (100%) (deg_C_NOS)','chloroform-methanol-water (1:3:1) ','methanol (100%)','ethanol (100%)','ethanol-water (1:1)','water-acetonitrile (250:1)','methanol-acetonitrile (3:7)','methanol-water (4:1)','methanol-water (9:1)','not collected','ethyl acetate (100%)','methanol-water (7:3)','water-acetonitrile (149:1)','not specified','methanol-water (3:2)','acetonitrile (100%)','acetonitrile-water (7:3)','acetonitrile-methanol (1:1)','acetonitrile-isopropanol-water (3:3:2)'])
         ],
         'Analysis_InternalStandardsUsed' : [
             SetValidator(valid_set=['sulfamethizole;sulfachloropyridazine','sulfamethazine','sulfamethazine;sulfadimethoxine','sulfadimethoxine','sulfamethizole;sulfachloropyridazine;sulfadimethoxine;sulfamethazine;coumarin-314;amitryptiline','amitryptiline','none','fluconazole','amitryptiline;fluconazole','sulfadimethoxine;sulfachloropyridazine','cholic_acid-d4;lithocholic_acid-d4','cocaine;cocaine-d3','cocaine-d3','sulfamethizole','not specified'
