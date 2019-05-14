@@ -570,7 +570,8 @@ def dashboard():
 
 @app.route('/', methods=['GET'])
 def homepage():
-    return render_template('homepage.html')
+    total_files = Filename.select().count()
+    return render_template('homepage.html', total_files=total_files)
 
 @app.route('/globalmultivariate', methods=['GET'])
 def globalmultivariate():
