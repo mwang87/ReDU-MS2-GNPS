@@ -18,8 +18,12 @@ def main():
         
         filenames_list = [filename.filepath for filename in partition_filenames]
 
-        taskid = util.launch_GNPS_librarysearchworkflow(filenames_list, "ReDU-MS2 Global Analysis Populate %i of %i" % (i, PARALLISM), \
+        print("Searching %d Files", len(filenames_list))
+
+        taskid = util.launch_GNPS_librarysearchworkflow(filenames_list, "ReDU-MS2 Global Analysis Populate %d of %d" % (i, PARALLISM), \
             credentials.USERNAME, credentials.PASSWORD, "miw023@ucsd.edu")
+
+        print(taskid)
 
         task_id_list.append(taskid)
 
