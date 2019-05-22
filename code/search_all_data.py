@@ -25,7 +25,7 @@ def main():
 
     df = pd.DataFrame()
     df["taskid"] = task_id_list
-    df.to_csv("./data/global_tasks.tsv", sep="\t", index=False)
+    df.to_csv("./database/global_tasks.tsv", sep="\t", index=False)
 
 if __name__ == '__main__':
     main()
