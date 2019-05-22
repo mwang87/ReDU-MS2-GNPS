@@ -7,6 +7,9 @@ build-no-cache:
 populate:
 	docker run -d -v $(PWD)/../database/:/app/database --rm  gnpsmetadata /app/run_production_populate.sh
 
+global_search:
+	docker run -it -v $(PWD)/../database/:/app/database --rm  gnpsmetadata /app/populate_global_search.sh
+
 interactive:
 	docker run -it -v $(PWD)/../database/:/app/database -p 5006:5001 --rm --name gnpsmetadata gnpsmetadata /app/run_production_server.sh
 
