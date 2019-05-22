@@ -1,2 +1,3 @@
-#This script syncs down the compound occurrences for all files and then shoves it into the database
+#!/bin/bash
+
 python3 ./search_all_data.py
