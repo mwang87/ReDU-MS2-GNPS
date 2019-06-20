@@ -245,7 +245,7 @@
         methods: {
             clickMe: function() {
                 //Checking if we've already added this term to a group
-                term_key = this.$props["attributename"] + ":" + this.$props["attributeterm"]
+                term_key = this.$props["attributename"] + ":" + this.$props["attributeterm"] + ":" + this.$props["groupname"]
                 if(this.$parent.selectedTerms.includes(term_key)){
                     alert("Already Chose This Term")
                     return
@@ -438,7 +438,7 @@
                 this.attributeterms = attributeterm_list
             },
             updateAttributeTermSelection: function(attributename, attributeterm, groupname, filelist) {
-                term_key = attributename + ":" + attributeterm
+                term_key = attributename + ":" + attributeterm + ":" + groupname
                 this["group" + groupname] = this["group" + groupname].concat(filelist)
                 this.selectedTerms.push(term_key)
             }
