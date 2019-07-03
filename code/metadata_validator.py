@@ -74,53 +74,53 @@ def rewrite_metadata(metadata_filename):
 
     metadata_df = pd.read_csv(metadata_filename, sep="\t")
 
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='anal region',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='adrenal gland',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='brain',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='caecum',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='cardiac vein',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='colon',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='coronary artery',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='duodenum',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='esophagus',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='gall bladder',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='heart',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='ileum',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='jejunum',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='kidney',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='liver',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='lung',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='midgut',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='nasal cavity',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='oral cavity',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='ovary',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='pancreas',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='pulmonary artery',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='pulmonary vein',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='skin',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='spleen',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='sputum',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='stomach',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='thymus',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='tooth',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='trachea',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='uterine cervix',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='uterus',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='vagina',value='tissue',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='bile',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='blood',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='blood plasma',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='blood serum',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='breast milk',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='feces',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='saliva',value='biofluid',inplace=True)
-    metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='urine',value='biofluid',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='anal region',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='adrenal gland',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='brain',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='caecum',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='cardiac vein',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='colon',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='coronary artery',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='duodenum',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='esophagus',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='gall bladder',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='heart',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='ileum',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='jejunum',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='kidney',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='liver',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='lung',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='midgut',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='nasal cavity',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='oral cavity',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='ovary',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='pancreas',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='pulmonary artery',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='pulmonary vein',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='skin',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='spleen',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='sputum',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='stomach',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='thymus',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='tooth',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='trachea',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='uterine cervix',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='uterus',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='vagina',value='tissue',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='bile',value='biofluid',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='blood',value='biofluid',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='blood plasma',value='biofluid',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='blood serum',value='biofluid',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='breast milk',value='biofluid',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='feces',value='biofluid',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='saliva',value='biofluid',inplace=True)
+   # metadata_df['ATTRIBUTE_Curated_SampleType_Sub1'].replace(to_replace='urine',value='biofluid',inplace=True)
 
     #Rewriting Year of Analysis
     metadata_list = metadata_df.to_dict(orient="records")
     for metadata_obj in metadata_list:
         try:
-            metadata_obj["Analysis_YearOfAnalysis"] = str(int(float(metadata_obj["Analysis_YearOfAnalysis"])))
+            metadata_obj["YearOfAnalysis"] = str(int(float(metadata_obj["YearOfAnalysis"])))
         except:
             continue
 
@@ -135,48 +135,54 @@ def perform_validation(filename):
         "MassiveID" : [
             Ignore()
         ],
-        "ATTRIBUTE_Subject_LifeStage" : [
-            Ignore()
+        'SampleType' : [
+            SetValidator(valid_set=['animal','beverage','blank_analysis','blank_extraction','blank_QC','culture_bacterial','culture_fungal','inanimate_object','environmental','built_environment','food','plant','reference material'])
         ],
-        'ATTRIBUTE_Subject_Sex': [
-            SetValidator(valid_set=['female','male','asexual','not collected','not applicable','not specified'])
+        'SampleTypeSub1' : [
+            SetValidator(valid_set=['biofluid','food_source_animal','tissue','beverage_nonalcoholic','beverage_alcoholic','blank_analysis','blank_extraction','bacterial culture','blank_QC','culture_bacterial','culture_fungal','mobile phone','keys','computer','purse_or_wallet','clothing','dissolvedorganicmatter_soil','dissolvedorganicmatter_water_saline','house','marine_invertebrates_insitu','marine_cyanobacteria_insitu','food_source_plant','food_source_complex','food_source_fungi','food_source_NOS','plant_angiospermae','plant_NOS','reference material_personalcareproduct','reference material_animalfeedorsupplement','reference material_chemicalstandard','reference material_collectionmaterial_microtubes','reference material_collectionmaterial_wellplates','not specified','not applicable'])
         ],
-        'ATTRIBUTE_Subject_HumanPopulationDensity' : [
-            SetValidator(valid_set=['Urban','Rural','not collected','not applicable','not specified'])
+        'NCBITaxonomy' : [
+            SetValidator(valid_set=['1003843|Halcyon smyrnensis','100858|Threskiornis aethiopicus','10088|Mus','10114|Rattus','10157|Myocastor coypus','1087776|Euphorbia pithyusa','109689|Chaetodon ephippium','109695|Chaetodon melannotus','109712|Pomacanthus navarchus','110196|Bitis atropos','110555|Myxine','113544|Arapaima gigas','115645|Ducula bicolor','119419|Tauraco schalowi','121123|Alouatta sara','1243780|Pelecanus occidentalis californicus','1297064|Trichechus manatus manatus','13489|Dicentrarchus labrax','1390567|Ptilinopus cinctus','147464|Dinornis giganteus','1543402|Geocapromys brownii','170820|Hemiscyllium ocellatum','175825|Aceros corrugatus','184245|Tomistoma schlegelii','187114|Ducula aenea','194526|Gegeneophis ramaswamii','195635|Pleuronichthys verticalis','202946|Apteryx australis mantelli','227231|Himantopus mexicanus','241562|Amazona leucocephala','2711|Citrus sinensis','28713|Lanius ludovicianus','30406|Tragopan blythii','30461|Bubo bubo','311359|Cochoa','33589|Leptoptilos crumeniferus','3702|Arabidopsis thaliana','37083|Eudyptula minor','37578|Morus bassanus','377254|Megophrys nasuta','381107|Cinnyricinclus leucogaster','38626|Phascolarctos cinereus','38845|Euphorbia dendroides','403904|Onychostoma angustistomata','40833|Bucephala islandica','41691|Cygnus melancoryphus','43311|Fratercula cirrhata','43490|Gyps africanus','441894|Struthio camelus australis','444138|Ducula rufigaster','44489|Carettochelys insculpta','507972|Ptilopsis granti','51861|Corallus caninus','56072|Ardea herodias','56117|Tapirus bairdii','56549|Lycodon semicarinatus','571338|Macrochelys temminckii','57571|Salamandra salamandra','585466|Burhinus grallarius','61316|Hypentelium nigricans','62165|Chlorophanes spiza','651656|Incilius','681183|Astrapia mayeri','704175|Phoenicoparrus minor','71240|eudicotyledons','740693|Cephaloscyllium ventriosum','75024|Holacanthus ciliaris','75988|Pachymedusa dacnicolor','78394|Eptatretus cirrhatus','7897|Latimeria chalumnae','81903|Fulica americana','83391|Coryphaenoides cinereus','8450|Hypogeophis rostratus','8467|Caretta caretta','8503|Crocodylus novaeguineae','85101|Urocolius macrourus','8557|Varanus exanthematicus','86377|Taeniura lymma','8682|Hydrophis schistosus','8790|Dromaius novaehollandiae','8797|Rhea americana','8801|Struthio camelus','8863|Coscoroba coscoroba','8884|Oxyura jamaicensis','8924|Vultur gryphus','8961|Aquila audax','91789|Capito niger','9258|Ornithorhynchus anatinus','92683|Spheniscus demersus','9316|Macropus fuliginosus','9600|Pongo pygmaeus','9606|Homo sapiens','9636|Melursus ursinus','9755|Physeter catodon','not applicable','not collected','not specified'])
         ],
-        'ATTRIBUTE_Analysis_MassSpectrometer' : [
-            SetValidator(valid_set=['Maxis_Impact','Maxis_ImpactHD','QExactive','micrOTOF-Q II','not specified','QTOF_6540','LTQ_Orbitrap_XL'])
-        ],
-        'ATTRIBUTE_Curated_SampleType' : [
-            SetValidator(valid_set=['animal_arachnida_NOS','animal_aves_NOS','animal_insecta_NOS','animal_malacostraca_NOS','animal_mammalia_NOS','animal_NOS','animal_osteichthyes_NOS','animal_reptilia_NOS','beverage','blank_analysis','blank_extraction','blank_QC','culture_bacterial','culture_fungal','environmental','food','human','mouse','plant_angiospermae','plant_gymnospermae','plant_NOS','rat','reference material','animal_actinopterygii_NOS','animal_amphibia_NOS','animal_chondricthyes_NOS','animal_myxini_NOS','animal_sarcopterygii_NOS','algae_NOS','not specified'])
-        ],
-        'ATTRIBUTE_Curated_SampleType_Sub1' : [
-            SetValidator(valid_set=['bacterial culture','beverage_alcoholic','beverage_nonalcoholic','blank_analysis','blank_extraction','blank_QC','environmental_bacteria_insitu','environmental_brackish_dissolvedorganicmatter','environmental_clothing','environmental_coral','environmental_cyanobacteria_insitu','environmental_freshwater_dissolvedorganicmatter','environmental_fungi_insitu','environmental_house','environmental_saline_dissolvedorganicmatter','environmental_soil_dissolvedorganicmatter','food_source_animal','food_source_complex','food_source_fungi','food_source_NOS','food_source_plant','fungal culture','not specified','plant','reference material_animalfeedorsupplement','reference material_chemicalstandard','reference material_collectionmaterial_microtubes','reference material_collectionmaterial_spotcards','reference material_collectionmaterial_swabs','reference material_collectionmaterial_wellplates','reference material_drugsorsupplement','reference material_personalcareproduct','tissue','biofluid'])
-        ],
-        'ATTRIBUTE_Curated_BodyPartOntologyIndex' : [
-            SetValidator(valid_set=['UBERON:0001353','UBERON:0002427','UBERON:0015474','UBERON:0001970','UBERON:0000178','UBERON:0001969','UBERON:0001977','UBERON:0001153','UBERON:0001091','UBERON:0004148','UBERON:0001621','UBERON:0001555','UBERON:0001988','UBERON:0002110','UBERON:0012180','UBERON:0004907','UBERON:0002048','UBERON:0001045','UBERON:0001913','UBERON:0001707','not applicable','UBERON:0000167','UBERON:0002012','UBERON:0002016','UBERON:0001836','UBERON:0001511','UBERON:0001519','UBERON:0001513','UBERON:0001085','UBERON:0007311','UBERON:0004908','UBERON:0001088','UBERON:0000996','UBERON:0000955','UBERON:0002097','UBERON:0002387','UBERON:0001690','UBERON:0002106','UBERON:0002107','UBERON:0001264','UBERON:0000945','UBERON:0002114','UBERON:0002115','UBERON:0002116','UBERON:0001155','UBERON:0018707','UBERON:0002113','UBERON:0002369','UBERON:0000992','UBERON:0000995','UBERON:0000002','UBERON:0000948','UBERON:0003126','UBERON:0001043','UBERON:0002370','not applicable','UBERON:0002097'])
-        ],
-        'ATTRIBUTE_Curated_DiseaseOntologyIndex' : [
-            SetValidator(valid_set=['DOID:1485','DOID:9351','disease NOS','DOID:10763','DOID:0050589','no disease reported','not applicable','DOID:8893','no DOID avaliable','no DOID avaliable','DOID:12140','DOID:9970','DOID:12155','DOID:8778','DOID:13378','DOID:0050338','no DOID avaliable','no DOID avaliable','no DOID avaliable','not applicable','DOID:8577','DOID:216'])
-        ],
-        "Analysis_SampleExtractionMethod" : [
-            SetValidator(valid_set=['ethanol-water (9:1)','methanol-water (1:1)','dichloromethane-methanol (2:1)','ethanol-water (19:1)','water (94_deg_C)','water (95_deg_C)','water (100%) (deg_C_NOS)','chloroform-methanol-water (1:3:1) ','methanol (100%)','ethanol (100%)','ethanol-water (1:1)','water-acetonitrile (250:1)','methanol-acetonitrile (3:7)','methanol-water (4:1)','methanol-water (9:1)','not collected','ethyl acetate (100%)','methanol-water (7:3)','water-acetonitrile (149:1)','not specified','methanol-water (3:2)','acetonitrile (100%)','acetonitrile-water (7:3)','acetonitrile-methanol (1:1)','acetonitrile-isopropanol-water (3:3:2)'])
-        ],
-        'Analysis_InternalStandardsUsed' : [
-            SetValidator(valid_set=['sulfamethizole;sulfachloropyridazine','sulfamethazine','sulfamethazine;sulfadimethoxine','sulfadimethoxine','sulfamethizole;sulfachloropyridazine;sulfadimethoxine;sulfamethazine;coumarin-314;amitryptiline','amitryptiline','none','fluconazole','amitryptiline;fluconazole','sulfadimethoxine;sulfachloropyridazine','cholic_acid-d4;lithocholic_acid-d4','cocaine;cocaine-d3','cocaine-d3','sulfamethizole','not specified'
-            ])
-        ],
-        'Analysis_IonizationSourceAndPolarity' : [
-            SetValidator(valid_set=['electrospray ionization (positive)','electrospray ionization (negative)','atmospheric pressure chemical ionization (positive)','atmospheric pressure chemical ionization (negative)','atmospheric pressure photoionization (positive)','atmospheric pressure photoionization (negative)','electrospray ionization (alternating)','not specified'
-            ])
-        ],
-        'Analysis_ChromatographyAndPhase' : [
-            SetValidator(valid_set=['reverse phase (C18)','reverse phase (C8)','reverse phase (Phenyl-Hexyl)','normal phase (HILIC)','mixed mode (Scherzo SM-C18)','not specified'
-            ])
-        ],
-        'Analysis_YearOfAnalysis' : [
+        'YearOfAnalysis' : [
             IntValidator(),
             RangeValidator(low=2000, high=2030)
+        ],
+        'SampleCollectionMethod' : [
+            SetValidator(valid_set=['blood draw, capillary','blood draw, venous','blood NOS','liquid','not applicable','solid material, dried','solid material, fresh','solid material, frozen','swabs, dry','swabs, moist (50% EtOH)','urine, 24-hour','urine, NOS','urine, spot','extract, solid phase extraction (C18)','liquid, solid phase extraction (C18)','solid, solid phase extraction (C18)','solid material, NOS','not specified','liquid, solid phase extraction (PPL)'])
+        ],
+        "SampleExtractionMethod" : [
+            SetValidator(valid_set=['ethanol-water (9:1)','methanol-water (1:1)','dichloromethane-methanol (2:1)','ethanol-water (19:1)','water (94_deg_C)','water (95_deg_C)','water (100%) (deg_C_NOS)','chloroform-methanol-water (1:3:1)','methanol (100%)','ethanol (100%)','ethanol-water (1:1)','water-acetonitrile (250:1)','methanol-acetonitrile (3:7)','methanol-water (4:1)','methanol-water (9:1)','not collected','ethyl acetate (100%)','methanol-water (7:3)','water-acetonitrile (149:1)','not specified','methanol-water (3:2)','acetonitrile (100%)','acetonitrile-water (7:3)','acetonitrile-methanol (1:1)','acetonitrile-isopropanol-water (3:3:2)'])
+        ],
+        'InternalStandardsUsed' : [
+            SetValidator(valid_set=['sulfamethizole;sulfachloropyridazine','sulfamethazine','sulfamethazine;sulfadimethoxine','sulfadimethoxine','sulfamethizole;sulfachloropyridazine;sulfadimethoxine;sulfamethazine;coumarin-314;amitryptiline','amitryptiline','none','fluconazole','amitryptiline;fluconazole','sulfadimethoxine;sulfachloropyridazine','cholic_acid-d4;lithocholic_acid-d4','cocaine;cocaine-d3','cocaine-d3','sulfamethizole','not specified'])
+        ],        
+       'MassSpectrometer' : [
+            SetValidator(valid_set=['Maxis_Impact','Maxis_ImpactHD','QExactive','micrOTOF-Q II','not specified','QTOF_6540','LTQ_Orbitrap_XL'])
+        ],        
+        'IonizationSourceAndPolarity' : [
+            SetValidator(valid_set=['electrospray ionization (positive)','electrospray ionization (negative)','atmospheric pressure chemical ionization (positive)','atmospheric pressure chemical ionization (negative)','atmospheric pressure photoionization (positive)','atmospheric pressure photoionization (negative)','electrospray ionization (alternating)','not specified'])
+        ],
+        'ChromatographyAndPhase' : [
+            SetValidator(valid_set=['reverse phase (C18)','reverse phase (C8)','reverse phase (Phenyl-Hexyl)','normal phase (HILIC)','mixed mode (Scherzo SM-C18)','not specified'])
+        ],
+        'BiologicalSex': [
+            SetValidator(valid_set=['female','male','asexual','not collected','not applicable','not specified'])
+        ],
+        'Country': [
+            SetValidator(valid_set=['not applicable','not collected','not specified','Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Argentina','Armenia','Australia','Austria','Azerbaijan','Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bhutan','Bolivia','Bosnia and Herzegovina','Botswana','Brazil','Brunei','Bulgaria','Burkina Faso','Burundi','Cabo Verde','Cambodia','Cameroon','Canada','Central African Republic (CAR)','Chad','Chile','China','Colombia','Comoros','Congo, Democratic Republic of the','Congo, Republic of the','Costa Rica','Cote dIvoire','Croatia','Cuba','Cyprus','Czechia','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eritrea','Estonia','Eswatini (formerly Swaziland)','Ethiopia','Fiji','Finland','France','Gabon','Gambia','Georgia','Germany','Ghana','Greece','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kazakhstan','Kenya','Kiribati','Kosovo','Kuwait','Kyrgyzstan','Laos','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania','Luxembourg','Madagascar','Malawi','Malaysia','Maldives','Mali','Malta','Marshall Islands','Mauritania','Mauritius','Mexico','Micronesia','Moldova','Monaco','Mongolia','Montenegro','Morocco','Mozambique','Myanmar (formerly Burma)','Namibia','Nauru','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','North Macedonia (formerly Macedonia)','Norway','Oman','Pakistan','Palau','Palestine','Panama','Papua New Guinea','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Russia'])
+        ],
+        'HumanPopulationDensity' : [
+            SetValidator(valid_set=['Urban','Rural','not collected','not applicable','not specified'])
+        ],
+         'LifeStage' : [
+            SetValidator(valid_set=['not applicable','not collected','Infancy (<2 yrs)','Early Childhood (2 yrs < x <=8 yrs)','Adolescence (8 yrs < x <= 18 yrs)','Early Adulthood (18 yrs < x <= 45 yrs)','Middle Adulthood (45 yrs < x <= 65 yrs)','Later Adulthood (>65 yrs)','not specified'])
+        ],
+        'UBERONOntologyIndex' : [
+            SetValidator(valid_set=['UBERON:0001353','UBERON:0002427','UBERON:0015474','UBERON:0001970','UBERON:0000178','UBERON:0001969','UBERON:0001977','UBERON:0001153','UBERON:0001091','UBERON:0004148','UBERON:0001621','UBERON:0001555','UBERON:0001988','UBERON:0002110','UBERON:0012180','UBERON:0004907','UBERON:0002048','UBERON:0001045','UBERON:0001913','UBERON:0001707','not applicable','UBERON:0000167','UBERON:0002012','UBERON:0002016','UBERON:0001836','UBERON:0001511','UBERON:0001519','UBERON:0001513','UBERON:0001085','UBERON:0007311','UBERON:0004908','UBERON:0001088','UBERON:0000996','UBERON:0000955','UBERON:0002097','UBERON:0002387','UBERON:0001690','UBERON:0002106','UBERON:0002107','UBERON:0001264','UBERON:0000945','UBERON:0002114','UBERON:0002115','UBERON:0002116','UBERON:0001155','UBERON:0018707','UBERON:0002113','UBERON:0002369','UBERON:0000992','UBERON:0000995','UBERON:0000002','UBERON:0000948','UBERON:0003126','UBERON:0001043','UBERON:0002370','not applicable','UBERON:0002097'])
+        ],
+        'DOIDOntologyIndex' : [
+            SetValidator(valid_set=['DOID:1485','DOID:9351','disease NOS','DOID:10763','DOID:0050589','no disease reported','not applicable','DOID:8893','no DOID avaliable','no DOID avaliable','DOID:12140','DOID:9970','DOID:12155','DOID:8778','DOID:13378','DOID:0050338','no DOID avaliable','no DOID avaliable','no DOID avaliable','not applicable','DOID:8577','DOID:216'])
         ]
     }
 
