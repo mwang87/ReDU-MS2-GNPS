@@ -21,24 +21,7 @@ GLOBAL_REDU_LIBRARY_SEARCH_TASK = "058564829a434277a5899f92fe4825a9"
 
 requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
-white_list_attributes = ["ATTRIBUTE_DatasetAccession", \
-"ATTRIBUTE_Subject_Sex", \
-"ATTRIBUTE_Curated_BodyPartOntologyName", \
-"ATTRIBUTE_Subject_LifeStage", \
-"ATTRIBUTE_Analysis_MassSpectrometer", \
-"ATTRIBUTE_Analysis_IonizationSourceAndPolarity", \
-"ATTRIBUTE_Analysis_ChromatographyAndPhase", \
-"ATTRIBUTE_Subject_Health", \
-"ATTRIBUTE_Curated_SampleType", \
-"ATTRIBUTE_Curated_SampleType_Sub1", \
-"ATTRIBUTE_Curated_BodyPartOntologyName", \
-"ATTRIBUTE_Subject_HumanPopulationDensity", \
-"Analysis_SampleCollectionMethod", \
-"Analysis_SampleExtractionMethod", \
-"Analysis_IonizationSourceAndPolarity", \
-"Analysis_ChromatographyAndPhase", \
-"Analysis_YearOfAnalysis", \
-"ATTRIBUTE_DiseaseCommonName"]
+black_list_attribute = ["SubjectIdentifierAsRecorded", "UniqueSubjectID", "UBERONOntologyIndex", "DOIDOntologyIndex", "ComorbidityListDOIDIndex"]
 
 """Resolving ontologies only if they need to be"""
 def resolve_ontology(attribute, term):
@@ -233,10 +216,10 @@ def getfilename():
         attribute_term = connection.attributeterm.term
         resolved_term = resolve_ontology(attribute_name, attribute_term)
 
-        if expanded_attributes == "false" and attribute_name in white_list_attributes:
+        if expanded_attributes == "false" and attribute_name:
             resolved_terms.append(resolved_term)
 
-        if expanded_attributes == "true" and not(attribute_name in white_list_attributes):
+        if expanded_attributes == "true" and not(attribute_name):
             resolved_terms.append(resolved_term)
 
     return json.dumps(resolved_terms)
@@ -262,10 +245,10 @@ def queryfilename():
         if all_attributes == "true":
             resolved_terms.append({"attribute_name": attribute_name, "attribute_term" : resolved_term})
         else:
-            if expanded_attributes == "false" and attribute_name in white_list_attributes:
+            if expanded_attributes == "false" and attribute_name:
                 resolved_terms.append({"attribute_name": attribute_name, "attribute_term" : resolved_term})
 
-            if expanded_attributes == "true" and not(attribute_name in white_list_attributes):
+            if expanded_attributes == "true" and not(attribute_name):
                 resolved_terms.append({"attribute_name": attribute_name, "attribute_term" : resolved_term})
 
     return json.dumps(resolved_terms)
@@ -276,16 +259,16 @@ def viewattributes():
 
     output_list = []
     for attribute in all_attributes:
-        #if attribute.categoryname.find("ATTRIBUTE_") != -1:
-        if True:
-            all_terms = AttributeTerm.select().join(FilenameAttributeConnection).join(Attribute).where(Attribute.categoryname == attribute.categoryname).group_by(AttributeTerm.term)
-            output_dict = {}
-            output_dict["attributename"] = attribute.categoryname
-            output_dict["attributedisplay"] = attribute.categoryname.replace("ATTRIBUTE_", "").replace("Analysis_", "").replace("Subject_", "").replace("Curated_", "")
-            output_dict["countterms"] = len(all_terms)
+        all_terms = AttributeTerm.select().join(FilenameAttributeConnection).join(Attribute).where(Attribute.categoryname == attribute.categoryname).group_by(AttributeTerm.term)
+        output_dict = {}
+        output_dict["attributename"] = attribute.categoryname
+        output_dict["attributedisplay"] = attribute.categoryname.replace("ATTRIBUTE_", "").replace("Analysis_", "").replace("Subject_", "").replace("Curated_", "")
+        output_dict["countterms"] = len(all_terms)
 
-            if attribute.categoryname in white_list_attributes:
-                output_list.append(output_dict)
+        if attribute.categoryname in black_list_attribute:
+            continue
+        else:
+            output_list.append(output_dict)
 
     output_list = sorted(output_list, key=lambda x: x["attributedisplay"], reverse=False)
 
