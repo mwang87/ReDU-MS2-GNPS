@@ -8,7 +8,7 @@ import csv
 import json
 import pandas as pd
 from vladiate import Vlad
-from vladiate.validators import UniqueValidator, SetValidator, Ignore, IntValidator, RangeValidator
+from vladiate.validators import UniqueValidator, SetValidator, Ignore, IntValidator, RangeValidator, NotEmptyValidator
 from vladiate.inputs import LocalFile
 
 import ftputil
@@ -88,7 +88,7 @@ def rewrite_metadata(metadata_filename):
 def perform_validation(filename):
     validators = {
         'filename': [
-            UniqueValidator()
+            NotEmptyValidator()
         ],
         "MassiveID" : [
             Ignore()
