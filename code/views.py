@@ -1,5 +1,5 @@
-# views.py
-from flask import abort, jsonify, render_template, request, redirect, url_for, send_file, make_response
+#views.py
+from flask import abort, jsonify, send_from_directory, render_template, request, redirect, url_for, send_file, make_response
 
 from app import app
 from models import *
@@ -11,15 +11,13 @@ import uuid
 import util
 import pandas as pd
 import requests
-import requests_cache
+#import requests_cache
 
 import metadata_validator
-
-
 #GLOBALS
 GLOBAL_REDU_LIBRARY_SEARCH_TASK = "058564829a434277a5899f92fe4825a9"
 
-requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
+#requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
 black_list_attribute = ["SubjectIdentifierAsRecorded", "UniqueSubjectID", "UBERONOntologyIndex", "DOIDOntologyIndex", "ComorbidityListDOIDIndex"]
 
@@ -670,11 +668,12 @@ import redu_pca
 
 @app.route('/processcomparemultivariate', methods=['GET'])
 def processcomparemultivariate():
+
     #Making sure we have the local filenames
     if not os.path.isfile("component_matrix.csv"):
         print("Retrieving Global Identifications")
         
-        remote_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=compound_filename_occurences/" % (GLOBAL_REDU_LIBRARY_SEARCH_TASK)
+        remote_url = "http://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=DB_result/" % (GLOBAL_REDU_LIBRARY_SEARCH_TASK)
         global_filename = "global_occurrences.tsv"
         r = requests.get(remote_url)
         with open(global_filename, 'wb') as f:
@@ -683,14 +682,15 @@ def processcomparemultivariate():
 
     task_id = request.args['task']
     new_analysis_filename = os.path.join(app.config['UPLOAD_FOLDER'], str(uuid.uuid4()))
-
+    print(os.listdir(app.config['UPLOAD_FOLDER']))
     #Making sure we have the local compound name
     remote_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=compound_filename_occurences/" % (task_id)
+    
     r = requests.get(remote_url)
     with open(new_analysis_filename, 'wb') as f:
         f.write(r.content)
-
-    output_png = os.path.join(app.config['UPLOAD_FOLDER'], str(uuid.uuid4()) + ".png")
+                                                             
+   #output_png = os.path.join("./tempuploads", str(uuid.uuid4()))
+    output_png = ("./tempuploads")
     redu_pca.project_new_data(new_analysis_filename, output_png)
-    
-    return send_file(output_png, cache_timeout=1)
+    return send_file("./tempuploads/index.html")
