@@ -589,7 +589,7 @@ def addmetadata():
 
 @app.route('/dump', methods=['GET'])
 def dump():
-    return send_file('./all_metadata_dumps.tsv', cache_timeout=1, as_attachment=True, attachment_filename="all_sampleinformation.tsv")
+    return send_file('./all_sampleinformation.tsv', cache_timeout=1, as_attachment=True, attachment_filename="all_sampleinformation.tsv")
 
 
 
@@ -670,15 +670,16 @@ import redu_pca
 def processcomparemultivariate():
 
     #Making sure we have the local filenames
-    if not os.path.isfile("component_matrix.csv"):
+    if not os.path.isfile(redu_pca.PATH_TO_COMPONENT_MATRIX):
         print("Retrieving Global Identifications")
-        
-        remote_url = "http://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=DB_result/" % (GLOBAL_REDU_LIBRARY_SEARCH_TASK)
-        global_filename = "global_occurrences.tsv"
-        r = requests.get(remote_url)
-        with open(global_filename, 'wb') as f:
-            f.write(r.content)
-        redu_pca.calculate_master_projection(global_filename)
+
+        if not os.path.isfile(redu_pca.PATH_TO_GLOBAL_OCCURRENCES):
+            remote_url = "http://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=DB_result/" % (GLOBAL_REDU_LIBRARY_SEARCH_TASK)
+            r = requests.get(remote_url)
+            with open(redu_pca.PATH_TO_GLOBAL_OCCURRENCES, 'wb') as f:
+                f.write(r.content)
+
+        redu_pca.calculate_master_projection(redu_pca.PATH_TO_GLOBAL_OCCURRENCES)
 
     task_id = request.args['task']
     new_analysis_filename = os.path.join(app.config['UPLOAD_FOLDER'], str(uuid.uuid4()))
@@ -690,7 +691,6 @@ def processcomparemultivariate():
     with open(new_analysis_filename, 'wb') as f:
         f.write(r.content)
                                                              
-   #output_png = os.path.join("./tempuploads", str(uuid.uuid4()))
-    output_png = ("./tempuploads")
-    redu_pca.project_new_data(new_analysis_filename, output_png)
+    output_folder = ("./tempuploads")
+    redu_pca.project_new_data(new_analysis_filename, output_folder)
     return send_file("./tempuploads/index.html")

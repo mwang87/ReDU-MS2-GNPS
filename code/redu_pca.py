@@ -11,10 +11,10 @@ from skbio.stats.ordination import OrdinationResults
 from emperor import Emperor
 import scipy.sparse as sps
 
-
-PATH_TO_COMPONENT_MATRIX = "./component_matrix.csv" #eigenvectors output by calculate_master_projection
-PATH_TO_ORIGINAL_PCA = "./original_pca.csv" #original PCA matrix of the original files
-PATH_TO_ORIGINAL_MAPPING_FILE =  "./all_sampleinformation.tsv" #global ReDU metadata
+PATH_TO_GLOBAL_OCCURRENCES = "/app/temp/global_occurrences.tsvs"
+PATH_TO_COMPONENT_MATRIX = "/app/temp/component_matrix.csv" #eigenvectors output by calculate_master_projection
+PATH_TO_ORIGINAL_PCA = "/app/temp/original_pca.csv" #original PCA matrix of the original files
+PATH_TO_ORIGINAL_MAPPING_FILE =  "/app/temp/all_sampleinformation.tsv" #global ReDU metadata
 
 
 ### Given a file input occurrence table, creates the eigen vectors file defined above PATH_TO_COMPONENT_MATRIX, and PCA project of these files PATH_TO_ORIGINAL_PCA
@@ -71,13 +71,13 @@ def calculate_master_projection(input_file_occurrences_table, components = 5):
     #place eigenvalues and percent variance on the end of this file so it can be used for emperor projection
     df_temp.loc[len(compound_list)] = eigenvalues
     df_temp.loc[len(compound_list)+1] = percent_variance
-    df_temp.to_csv("./component_matrix.csv")
+    df_temp.to_csv(PATH_TO_COMPONENT_MATRIX)
     
     sklearn_output = pca.transform(new_matrix) #using sklearn to transform the output
     
     #saving the "master pca" calculated by this function as a csv
     df_temp = pd.DataFrame(data = sklearn_output, index = sample_list)
-    df_temp.to_csv("./original_pca.csv")
+    df_temp.to_csv(PATH_TO_ORIGINAL_PCA)
 
 ### Given a new file occurrence table, creates a projection of the new data along with the old data and saves as a png output
 def project_new_data(new_file_occurrence_table, output_file):
@@ -164,7 +164,6 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
     global_metadata["type"] = "Global Data"
     global_metadata.set_index("SampleID", inplace = True)
     
-        
     #this part is for the user uploaded metadata file
     metadata_uploaded = pd.DataFrame({"SampleID": new_files, "type":["Your Data"] * len(new_files)})
     metadata_uploaded.set_index("SampleID", inplace = True)
