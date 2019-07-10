@@ -4,8 +4,11 @@ build:
 build-no-cache:
 	docker build --no-cache -t gnpsmetadata .
 
-populate:
+populate_metadata:
 	docker run -d -v $(PWD)/../database/:/app/database -v $(PWD)/../temp/:/app/temp --rm  gnpsmetadata /app/run_production_populate.sh
+
+populate_identification:
+	docker run -it -v $(PWD)/../database/:/app/database -v $(PWD)/../temp/:/app/temp --rm  gnpsmetadata /app/utilities/populate_identifications.sh
 
 global_search:
 	docker run -it -v $(PWD)/../database/:/app/database -v $(PWD)/../temp/:/app/temp --rm  gnpsmetadata /app/populate_global_search.sh
