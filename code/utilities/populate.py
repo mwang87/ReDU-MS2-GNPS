@@ -31,9 +31,11 @@ def get_dataset_files(dataset_accession, collection_name):
         dataset_files = ming_proteosafe_library.get_all_files_in_dataset_folder_ftp(dataset_accession, collection_name, massive_host=massive_host)
         #dataset_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, collection_name, credentials.USERNAME, credentials.PASSWORD)
         try:
-            redis_client.set(dataset_accession, json.dumps(dataset_files))
+            redis_client.set(dataset_accession, json.dumps(dataset_files), ex=3600)
         except:
             x = 1
+
+    print(dataset_accession, len(dataset_files))
 
     return dataset_files
 
