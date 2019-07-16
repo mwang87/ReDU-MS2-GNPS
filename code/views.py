@@ -690,7 +690,6 @@ def processcomparemultivariate():
     with open(new_analysis_filename, 'wb') as f:
         f.write(r.content)
                                                              
-   #output_png = os.path.join("./tempuploads", str(uuid.uuid4()))
-    output_png = ("./tempuploads")
+    output_png = os.path.join("./tempuploads", task_id)
     redu_pca.project_new_data(new_analysis_filename, output_png)
-    return send_file("./tempuploads/index.html")
+    return send_file("./tempuploads/%s/index.html" %(task_id))
