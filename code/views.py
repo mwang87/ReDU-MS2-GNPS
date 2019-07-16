@@ -12,10 +12,7 @@ import util
 import pandas as pd
 import requests
 #import requests_cache
-
 import metadata_validator
-#GLOBALS
-GLOBAL_REDU_LIBRARY_SEARCH_TASK = "058564829a434277a5899f92fe4825a9"
 
 #requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
@@ -673,11 +670,12 @@ def processcomparemultivariate():
     if not os.path.isfile(redu_pca.PATH_TO_COMPONENT_MATRIX):
         print("Retrieving Global Identifications")
 
-        if not os.path.isfile(redu_pca.PATH_TO_GLOBAL_OCCURRENCES):
-            remote_url = "http://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=DB_result/" % (GLOBAL_REDU_LIBRARY_SEARCH_TASK)
-            r = requests.get(remote_url)
-            with open(redu_pca.PATH_TO_GLOBAL_OCCURRENCES, 'wb') as f:
-                f.write(r.content)
+        # We can assume this file will be present due to another task that is running to retreive it. 
+        # if not os.path.isfile(redu_pca.PATH_TO_GLOBAL_OCCURRENCES):
+        #     remote_url = "http://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=DB_result/" % (GLOBAL_REDU_LIBRARY_SEARCH_TASK)
+        #     r = requests.get(remote_url)
+        #     with open(redu_pca.PATH_TO_GLOBAL_OCCURRENCES, 'wb') as f:
+        #         f.write(r.content)
 
         redu_pca.calculate_master_projection(redu_pca.PATH_TO_GLOBAL_OCCURRENCES)
 

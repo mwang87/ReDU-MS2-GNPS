@@ -16,7 +16,7 @@ services:
     build: .
     volumes:
       - ../database/:/app/database
-    command: /app/continuous_metadata_update.sh
+    command: /app/utilities/continuous_metadata_update.sh
 
   redis:
     image: redis
