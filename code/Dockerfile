@@ -15,10 +15,15 @@ RUN pip3 install ftputil
 RUN pip3 install vladiate
 RUN pip3 install pandas
 
+RUN pip3 install matplotlib
+RUN pip3 install scikit-bio
+RUN pip3 install emperor --pre
+
 RUN apt-get install -y wget
 
 RUN pip3 install sklearn
 RUN pip3 install seaborn
+
 #RUN apt-get update -y
 #RUN export DEBIAN_FRONTEND=noninteractive
 #RUN apt-get install -y r-base r-base-dev

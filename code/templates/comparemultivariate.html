@@ -56,8 +56,8 @@
 <script>
     function myFunction() {
         remote_url = "/processcomparemultivariate?task=" + $("#task").val()
-        $('#display').prepend($('<img>',{id:'pca',src:remote_url}))
-
+        $('#display').prepend($('<img>',{id:'pca',src: remote_url}))
+        window.location.replace(remote_url)
     }
 </script>
 
