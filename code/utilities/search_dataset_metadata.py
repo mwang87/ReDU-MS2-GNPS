@@ -9,7 +9,7 @@ import os
 import metadata_validator
 import ming_fileio_library
 import ming_proteosafe_library
-import populate
+import populate_metadata
 import credentials
 import ftputil
 import pandas as pd
