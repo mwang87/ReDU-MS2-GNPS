@@ -7,5 +7,5 @@ while true; do
     cd ..
     python3 ./dump_all_metadata.py
     cp ./all_sampleinformation.tsv /app/temp/all_sampleinformation.tsv
-    sleep 10m
+    #sleep 10m
 done

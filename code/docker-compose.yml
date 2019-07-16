@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  redu-ms2:
+  redu-ms2-web:
     build: .
     ports:
       - "5005:5001"
@@ -11,6 +11,12 @@ services:
     environment:
       - VIRTUAL_HOST=redu.ucsd.edu
       - VIRTUAL_PORT=5005
+
+  redu-ms2-populate:
+    build: .
+    volumes:
+      - ../database/:/app/database
+    command: /app/continuous_metadata_update.sh
 
   redis:
     image: redis
