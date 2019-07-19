@@ -147,13 +147,18 @@ def populate_dataset_metadata(input_metadata_filename):
         massive_accession = result["MassiveID"]
         metadata_by_accession[massive_accession].append(result)
 
+    total_added_files = 0
+
     for dataset_accession in metadata_by_accession:
         print("Attempting Import", dataset_accession)
         if dataset_accession in included_accessions:
             print("Skipping %s, already imported" % (dataset_accession))
             continue
         added_files = add_metadata_per_accession(dataset_accession, metadata_by_accession[dataset_accession])
+        total_added_files += added_files
         print(dataset_accession, len(metadata_by_accession[dataset_accession]), added_files)
+
+    return total_added_files
 
 def main():
     input_metadata_filename = sys.argv[1]
