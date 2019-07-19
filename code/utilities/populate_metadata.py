@@ -13,7 +13,7 @@ import credentials
 
 try:
     import redis
-    redis_client = redis.Redis()
+    redis_client = redis.Redis("redis://dorresteinappshub.ucsd.edu:6378")
 except:
     print("no redis")
 
@@ -24,6 +24,7 @@ def get_dataset_files(dataset_accession, collection_name):
 
     try:
         dataset_files = json.loads(redis_client.get(dataset_accession))
+        print("Read from Redis", len(dataset_files))
     except:
         dataset_files = None
 

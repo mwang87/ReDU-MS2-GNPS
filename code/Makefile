@@ -23,7 +23,7 @@ testserver:
 	docker run -it -v $(PWD)/../database/:/app/database -v $(PWD)/../temp/:/app/temp -p 5006:5001 --rm --name gnpsmetadata gnpsmetadata /app/run_server.sh
 
 populate-test:
-	docker exec -i -t gnpsmetadata /app/run_test_populate.sh
+	docker run -it -v $(PWD)/../database/:/app/database -v $(PWD)/../temp/:/app/temp --rm --name gnpsmetadata gnpsmetadata /app/utilities/run_test_populate.sh
 
 bash:
 	docker run -it -v $(PWD)/../database/:/app/database -v $(PWD)/../temp/:/app/temp  -p 5006:5001 --rm --name gnpsmetadata gnpsmetadata bash

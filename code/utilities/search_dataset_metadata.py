@@ -100,9 +100,16 @@ def main():
 
         all_datasets = ming_proteosafe_library.get_all_datasets()
         for dataset in all_datasets:
-            if dataset["title"].find("GNPS") == -1:
+            if not "GNPS" in dataset["title"].upper():
                 continue
-            total_valid_metadata_entries, files_added = process_metadata_import(dataset["dataset"], dryrun=True)
+            
+            try:
+                total_valid_metadata_entries, files_added = process_metadata_import(dataset["dataset"], dryrun=False)
+            except KeyboardInterrupt:
+                raise
+            except:
+                total_valid_metadata_entries = -1
+                files_added = -1
 
             summary_dict = {}
             summary_dict["total_valid_metadata_entries"] = total_valid_metadata_entries
@@ -112,15 +119,14 @@ def main():
             summary_list.append(summary_dict)
 
             try:
-                pd.DataFrame(summary_dict).to_csv("/app/database/add_metadata_summary.tsv", sep="\t", index=False)
+                pd.DataFrame(summary_list).to_csv("/app/database/add_metadata_summary.tsv", sep="\t", index=False)
             except:
                 continue
         
-        
-
     elif mode == "dataset":
         dataset_accession = sys.argv[2]
-        process_metadata_import(dataset_accession)
+        total_valid_metadata_entries, files_added = process_metadata_import(dataset_accession)
+        print(total_valid_metadata_entries, files_added)
 
 
 if __name__ == "__main__":
