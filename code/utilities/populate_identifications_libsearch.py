@@ -14,8 +14,8 @@ def main():
     input_identifications = sys.argv[1]
 
     parser = argparse.ArgumentParser(description='Importing Identification Data')
-    parser.add_argument('input_identifications', help='JSON for NPAtlas')
-    parser.add_argument('--tasks', default=None, help='JSON for GNPS')
+    parser.add_argument('input_identifications', help='Identifications Filename')
+    parser.add_argument('--tasks', default=None, help='List of GNPS Tasks for Library ID')
 
     args = parser.parse_args()
 
@@ -24,26 +24,21 @@ def main():
         #Identifications is missing
         if args.tasks != None:
             print("Downloading Identifications")
-            df = pd.read_csv(args.tasks, sep=None)
-            all_tasks = df.to_dict(orient="dict")
+            df = pd.read_csv(args.tasks, sep="\t")
+            all_tasks = df.to_dict(orient="records")
             all_data_df = []
             for task in all_tasks:
+                print(task)
                 taskid = task["taskid"]
-                url = "http://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=DB_result/" % (taskid)
-                r = requests.get(url)
-                data_df = pd.DataFrame(r.text)
-                all_data_df.apend(data_df)
+                url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=DB_result/" % (taskid)
+                data_df = pd.read_csv(url, sep="\t")
+                print(taskid, len(data_df))
+                all_data_df.append(data_df)
 
             merged_df = pd.concat(all_data_df)
             merged_df.to_csv(args.input_identifications, sep="\t", index=False)
 
-    Filename.create_table(True)
-    Attribute.create_table(True)
-    AttributeTerm.create_table(True)
-    Compound.create_table(True)
-    CompoundFilenameConnection.create_table(True)
-    FilenameAttributeConnection.create_table(True)
-
+    #Actually Populating the Data
     all_files_in_db = Filename.select()
     all_files_in_db_set = set([filename.filepath for filename in all_files_in_db])
 
