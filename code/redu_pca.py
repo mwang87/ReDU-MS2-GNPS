@@ -10,12 +10,7 @@ import matplotlib.pyplot as plt
 from skbio.stats.ordination import OrdinationResults
 from emperor import Emperor
 import scipy.sparse as sps
-
-PATH_TO_GLOBAL_OCCURRENCES = "/app/database/all_identifications.tsv"
-PATH_TO_COMPONENT_MATRIX = "/app/temp/component_matrix.csv" #eigenvectors output by calculate_master_projection
-PATH_TO_ORIGINAL_PCA = "/app/temp/original_pca.csv" #original PCA matrix of the original files
-PATH_TO_ORIGINAL_MAPPING_FILE =  "/app/database/all_sampleinformation.tsv" #global ReDU metadata
-
+import config
 
 ### Given a file input occurrence table, creates the eigen vectors file defined above PATH_TO_COMPONENT_MATRIX, and PCA project of these files PATH_TO_ORIGINAL_PCA
 def calculate_master_projection(input_file_occurrences_table, components = 5):  
@@ -71,20 +66,20 @@ def calculate_master_projection(input_file_occurrences_table, components = 5):
     #place eigenvalues and percent variance on the end of this file so it can be used for emperor projection
     df_temp.loc[len(compound_list)] = eigenvalues
     df_temp.loc[len(compound_list)+1] = percent_variance
-    df_temp.to_csv(PATH_TO_COMPONENT_MATRIX)
+    df_temp.to_csv(config.PATH_TO_COMPONENT_MATRIX)
     
     sklearn_output = pca.transform(new_matrix) #using sklearn to transform the output
     
     #saving the "master pca" calculated by this function as a csv
     df_temp = pd.DataFrame(data = sklearn_output, index = sample_list)
-    df_temp.to_csv(PATH_TO_ORIGINAL_PCA)
+    df_temp.to_csv(config.PATH_TO_ORIGINAL_PCA)
 
 ### Given a new file occurrence table, creates a projection of the new data along with the old data and saves as a png output
 def project_new_data(new_file_occurrence_table, output_file):
     new_matrix = np.array([]) 
     file_list = []
 
-    component_matrix = pd.read_csv(PATH_TO_COMPONENT_MATRIX, sep = ",") #read in the eigenvectors
+    component_matrix = pd.read_csv(config.PATH_TO_COMPONENT_MATRIX, sep = ",") #read in the eigenvectors
     
     #grab the eigenvalues, percent explained variance values, and then drop them from the dataframe
     eigenvalues = list(component_matrix.iloc[-2,:])[1:]
@@ -134,7 +129,7 @@ def project_new_data(new_file_occurrence_table, output_file):
     new_pca_df["type"] = "new"
 
     #load and format the original pca
-    original_pca_df = pd.read_csv(PATH_TO_ORIGINAL_PCA, sep = ",")
+    original_pca_df = pd.read_csv(config.PATH_TO_ORIGINAL_PCA, sep = ",")
     original_pca_df.rename(columns = {'Unnamed: 0': 'SampleID'}, inplace = True)
     original_pca_df.set_index(['SampleID'], inplace=True)
     original_pca_df["type"] = "OG"
@@ -159,7 +154,7 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
     ores = OrdinationResults(long_method_name = "principal component analysis", short_method_name = "pcoa", eigvals = eigvals, samples = samples, proportion_explained = p_explained)
     
     #this first part is for the global metadata file
-    global_metadata = pd.read_csv(PATH_TO_ORIGINAL_MAPPING_FILE, sep = "\t")
+    global_metadata = pd.read_csv(config.PATH_TO_ORIGINAL_MAPPING_FILE, sep = "\t")
     global_metadata.rename(columns = {'filename': 'SampleID'}, inplace = True)
     global_metadata["type"] = "Global Data"
     global_metadata.set_index("SampleID", inplace = True)
