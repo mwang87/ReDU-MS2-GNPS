@@ -19,6 +19,3 @@ services:
       - ../database/:/app/database
       - ../temp/:/app/temp
     command: /app/utilities/continuous_metadata_update.sh
-
-  redis:
-    image: redis
