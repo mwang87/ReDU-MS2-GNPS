@@ -67,9 +67,7 @@ def resolve_metadata_filename_to_all_files(filename, dataset_files):
 def rewrite_metadata(metadata_filename):
     """
     Metadata Fields Rewrite
-
     Fields changed and will need to be rewritten
-
     """
 
     metadata_df = pd.read_csv(metadata_filename, sep="\t")

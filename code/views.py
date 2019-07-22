@@ -12,10 +12,8 @@ import util
 import pandas as pd
 import requests
 #import requests_cache
-
 import metadata_validator
-#GLOBALS
-GLOBAL_REDU_LIBRARY_SEARCH_TASK = "058564829a434277a5899f92fe4825a9"
+import config
 
 #requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
@@ -589,7 +587,7 @@ def addmetadata():
 
 @app.route('/dump', methods=['GET'])
 def dump():
-    return send_file('./all_sampleinformation.tsv', cache_timeout=1, as_attachment=True, attachment_filename="all_sampleinformation.tsv")
+    return send_file(config.PATH_TO_ORIGINAL_MAPPING_FILE, cache_timeout=1, as_attachment=True, attachment_filename="all_sampleinformation.tsv")
 
 
 
@@ -665,32 +663,33 @@ def analyzelibrarysearch():
 
 import uuid
 import redu_pca
+import config
 
 @app.route('/processcomparemultivariate', methods=['GET'])
 def processcomparemultivariate():
+    if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
+        print("Missing Global Data")
+        return abort(500)
 
-    #Making sure we have the local filenames
-    if not os.path.isfile(redu_pca.PATH_TO_COMPONENT_MATRIX):
+    #Making sure we calculate global datata
+    if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
         print("Retrieving Global Identifications")
 
-        if not os.path.isfile(redu_pca.PATH_TO_GLOBAL_OCCURRENCES):
-            remote_url = "http://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=DB_result/" % (GLOBAL_REDU_LIBRARY_SEARCH_TASK)
-            r = requests.get(remote_url)
-            with open(redu_pca.PATH_TO_GLOBAL_OCCURRENCES, 'wb') as f:
-                f.write(r.content)
+        redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
 
-        redu_pca.calculate_master_projection(redu_pca.PATH_TO_GLOBAL_OCCURRENCES)
-
+    #Making sure we grab down user query
     task_id = request.args['task']
-    new_analysis_filename = os.path.join(app.config['UPLOAD_FOLDER'], str(uuid.uuid4()))
-    print(os.listdir(app.config['UPLOAD_FOLDER']))
-    #Making sure we have the local compound name
-    remote_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=compound_filename_occurences/" % (task_id)
+    new_analysis_filename = os.path.join(app.config['UPLOAD_FOLDER'], task_id)
+    if not os.path.isfile(new_analysis_filename):
+        #Making sure we have the local compound name
+        remote_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=compound_filename_occurences/" % (task_id)
     
-    r = requests.get(remote_url)
-    with open(new_analysis_filename, 'wb') as f:
-        f.write(r.content)
-                                                             
+        r = requests.get(remote_url)
+        with open(new_analysis_filename, 'wb') as f:
+            f.write(r.content)
+
+    #Actually doing Analysis                                                         
     output_folder = ("./tempuploads")
     redu_pca.project_new_data(new_analysis_filename, output_folder)
+
     return send_file("./tempuploads/index.html")
