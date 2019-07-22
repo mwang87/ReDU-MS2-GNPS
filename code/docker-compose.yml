@@ -7,6 +7,7 @@ services:
       - "5005:5001"
     volumes:
       - ../database/:/app/database
+      - ../temp/:/app/temp
     command: /app/run_production_server.sh
     environment:
       - VIRTUAL_HOST=redu.ucsd.edu
