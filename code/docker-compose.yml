@@ -9,9 +9,6 @@ services:
       - ../database/:/app/database
       - ../temp/:/app/temp
     command: /app/run_production_server.sh
-    environment:
-      - VIRTUAL_HOST=redu.ucsd.edu
-      - VIRTUAL_PORT=5005
 
   redu-ms2-populate:
     build: .
