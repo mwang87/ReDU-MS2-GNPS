@@ -17,7 +17,7 @@ def calculate_master_projection(input_file_occurrences_table, components = 5):
     print("made it to original projection function")	
     #load data from master GNPS occurance table into memory
     df_temp = pd.read_csv(input_file_occurrences_table, sep = "\t")
-    
+         
     all_compound_occurances = df_temp["Compound_Name"]
     all_file_occurances = df_temp["full_CCMS_path"]
     
@@ -44,14 +44,21 @@ def calculate_master_projection(input_file_occurrences_table, components = 5):
     
     #convert it into the correct format for the return
     sparse_occ_matrix = pd.DataFrame(index = list(unique_compounds), columns = list(unique_sample), data = matrix)
-        
-    #separate the sparse matrix into a compound list, value matrix, and samples names
-    compound_list = list(sparse_occ_matrix.index)
-    sample_list = list(sparse_occ_matrix.columns)
-    new_matrix = sparse_occ_matrix.values.T #align so that the "features" are column headers
-    
-    #format the sample list so it can be merged later with metadata
-    sample_list = [("f." + item) for item in sample_list]
+    print(sparse_occ_matrix.shape)    
+
+    #bring in metadata
+    master_metadata_file = pd.read_csv(config.PATH_TO_ORIGINAL_MAPPING_FILE, "\t")
+    master_sample_list = master_metadata_file["filename"].tolist()
+ 
+    #reformatting the sample names for comparison
+    sample_list = ["f." + item for item in list(sparse_occ_matrix.columns)]
+    sparse_occ_matrix.columns = sample_list
+            
+    #fitlering out samples thta are not contained within the metadata    
+    sparse_occ_matrix = sparse_occ_matrix.loc[:, sparse_occ_matrix.columns.isin(master_sample_list)]
+    new_sample_list = sparse_occ_matrix.columns
+    compound_list = list(sparse_occ_matrix.index)    
+    new_matrix = sparse_occ_matrix.T.values #align so that the "features" are column headers
     
     #bring sklearn components into play
     pca = PCA(n_components = components) #creating the instance
@@ -71,7 +78,7 @@ def calculate_master_projection(input_file_occurrences_table, components = 5):
     sklearn_output = pca.transform(new_matrix) #using sklearn to transform the output
     
     #saving the "master pca" calculated by this function as a csv
-    df_temp = pd.DataFrame(data = sklearn_output, index = sample_list)
+    df_temp = pd.DataFrame(data = sklearn_output, index = new_sample_list)
     df_temp.to_csv(config.PATH_TO_ORIGINAL_PCA)
 
 ### Given a new file occurrence table, creates a projection of the new data along with the old data and saves as a png output
@@ -155,15 +162,19 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
     
     #this first part is for the global metadata file
     global_metadata = pd.read_csv(config.PATH_TO_ORIGINAL_MAPPING_FILE, sep = "\t")
+    global_metadata_headers = global_metadata.columns.tolist()
     global_metadata.rename(columns = {'filename': 'SampleID'}, inplace = True)
     global_metadata["type"] = "Global Data"
     global_metadata.set_index("SampleID", inplace = True)
     
     #this part is for the user uploaded metadata file
     metadata_uploaded = pd.DataFrame({"SampleID": new_files, "type":["Your Data"] * len(new_files)})
+    for item in global_metadata_headers:
+        metadata_uploaded[item] = ["Your Data"] * len(new_files)
     metadata_uploaded.set_index("SampleID", inplace = True)
         
     common = pd.concat([global_metadata, metadata_uploaded])
+   
 
     #so you need to align the metadata and the files contained within the ordination file BEFORE feeding it into the Emperor thing otherwise it doesn't like to output results  
     final_metadata, unused = common.align(samples, join = "right", axis = 0)
