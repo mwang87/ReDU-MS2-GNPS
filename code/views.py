@@ -11,11 +11,11 @@ import uuid
 import util
 import pandas as pd
 import requests
-#import requests_cache
+import requests_cache
 import metadata_validator
 import config
 
-#requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
+requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
 black_list_attribute = ["SubjectIdentifierAsRecorded", "UniqueSubjectID", "UBERONOntologyIndex", "DOIDOntologyIndex", "ComorbidityListDOIDIndex"]
 
