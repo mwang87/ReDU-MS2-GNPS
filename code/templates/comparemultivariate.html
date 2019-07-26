@@ -1,0 +1,64 @@
+(% extends "layout.html" %)
+
+(% block content %)
+
+
+<div id="app-4" class="container-fluid justify-content-center align-items-center">
+    <br>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-12 text-center">
+            <h2>Project your data (library search results) onto the PCA of public data</h2>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    
+    <br>
+
+    <div id="displayer">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <div class="text-center">
+                    <input type="text" class="form-control" name="task" id="task"
+                        placeholder="Enter GNPS Library Search Task ID">
+                </div>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <div class="text-center">
+                    <button id="analyzebutton" class="btn btn-primary" onclick="myFunction()">Create PCA</button>
+                </div>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <div id="display">
+                </div>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+        remote_url = "/processcomparemultivariate?task=" + $("#task").val()
+        $('#display').prepend($('<img>',{id:'pca',src: remote_url}))
+        window.location.replace(remote_url)
+    }
+</script>
+
+(% endblock %)
