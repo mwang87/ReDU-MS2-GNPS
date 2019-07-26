@@ -1,6 +1,7 @@
 (% extends "layout.html" %)
-
 (% block content %)
+
+
 
 
 <div id="app-4" class="container-fluid justify-content-center align-items-center">
@@ -10,11 +11,22 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-12 text-center">
             <h2>Explore Multivariate Analysis of Public Data</h2>
+            <h3>Positive Ion Mode and Reverse Phase (C18) Chromatography</h3>
         </div>
         <div class="col-sm-1"></div>
     </div>
 
+    <br>
 </div>
 
+<body onLoad="myFunction();">
+
+<script>
+    function myFunction() {
+        remote_url = "/displayglobalmultivariate"
+        $('#display').prepend($('<img>', {id:'pca',src: remote_url}))
+        window.location.replace(remote_url)
+    }
+</script>
 
 (% endblock %)
