@@ -11,11 +11,11 @@ import uuid
 import util
 import pandas as pd
 import requests
-import requests_cache
+#import requests_cache
 import metadata_validator
 import config
 
-requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
+#requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
 black_list_attribute = ["SubjectIdentifierAsRecorded", "UniqueSubjectID", "UBERONOntologyIndex", "DOIDOntologyIndex", "ComorbidityListDOIDIndex"]
 
@@ -375,7 +375,7 @@ def queryfilesbycompound():
 
 @app.route('/compoundenrichment', methods=['POST'])
 def compoundenrichment():
-    blacklist_attributes = ["ATTRIBUTE_DatasetAccession", "ATTRIBUTE_Curated_BodyPartOntologyIndex", "UniqueSubjectID", "LatitudeandLongitude", "SubjectIdentifierAsRecorded", "SampleCollectionDateandTime", "AgeInYears", "DepthorAltitudeMeters"]
+    blacklist_attributes = ["ATTRIBUTE_DatasetAccession", "ATTRIBUTE_Curated_BodyPartOntologyIndex"]
 
     compoundname = request.form['compoundname']
     compound_db = Compound.select().where(Compound.compoundname == compoundname)
@@ -398,8 +398,8 @@ def compoundenrichment():
     print(all_metadata[0])
 
     for attribute_term_pair in all_metadata:
-        #if attribute_term_pair["categoryname"].find("ATTRIBUTE_") == -1:
-        #    continue
+        if attribute_term_pair["categoryname"].find("ATTRIBUTE_") == -1:
+            continue
 
         if attribute_term_pair["categoryname"] in blacklist_attributes:
             continue
@@ -664,6 +664,31 @@ def analyzelibrarysearch():
 import uuid
 import redu_pca
 import config
+
+@app.route("/displayglobalmultivariate", methods = ["GET"])
+def displayglobalmultivariate():
+    if not os.path.isfile(config.PATH_TO_ORIGINAL_PCA):
+        print("Missing Global PCA Calculation")
+        return abort(500)
+    else:
+        print("Begin Getting Global PCA")    
+        df_temp  = pd.read_csv(config.PATH_TO_ORIGINAL_PCA)
+        full_file_list = df_temp["Unnamed: 0"].tolist() 
+        df_temp.drop("Unnamed: 0", axis = 1, inplace = True)       
+        sklearn_output = df_temp.values
+        
+        df_temp = pd.read_csv(config.PATH_TO_EIGENVALUES)
+        eigenvalues = df_temp["0"].tolist()
+
+        df_temp = pd.read_csv(config.PATH_TO_EIGENVALUES)
+        percent_variance = df_temp["0"].tolist() 
+
+        output_file = ("./tempuploads/global")
+
+        redu_pca.emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file)
+
+    return send_file("./tempuploads/global/index.html")
+
 
 @app.route('/processcomparemultivariate', methods=['GET'])
 def processcomparemultivariate():
