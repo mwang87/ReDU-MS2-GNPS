@@ -668,24 +668,22 @@ import config
 @app.route("/displayglobalmultivariate", methods = ["GET"])
 def displayglobalmultivariate():
     if not os.path.isfile(config.PATH_TO_ORIGINAL_PCA):
-        print("Missing Global PCA Calculation")
-        return abort(500)
-    else:
-        print("Begin Getting Global PCA")    
-        df_temp  = pd.read_csv(config.PATH_TO_ORIGINAL_PCA)
-        full_file_list = df_temp["Unnamed: 0"].tolist() 
-        df_temp.drop("Unnamed: 0", axis = 1, inplace = True)       
-        sklearn_output = df_temp.values
+        print("Missing Global PCA Calculation, Calculating")
+        redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
+    
+    print("Begin Getting Global PCA")    
+    df_temp  = pd.read_csv(config.PATH_TO_ORIGINAL_PCA)
+    full_file_list = df_temp["Unnamed: 0"].tolist() 
+    df_temp.drop("Unnamed: 0", axis = 1, inplace = True)       
+    sklearn_output = df_temp.values
         
-        df_temp = pd.read_csv(config.PATH_TO_EIGENVALUES)
-        eigenvalues = df_temp["0"].tolist()
+    component_matrix = pd.read_csv(config.PATH_TO_COMPONENT_MATRIX)
+    eigenvalues = list(component_matrix.iloc[-2,:])[1:]
+    percent_variance = list(component_matrix.iloc[-1,:])[1:]
+        
+    output_file = ("./tempuploads/global")
 
-        df_temp = pd.read_csv(config.PATH_TO_EIGENVALUES)
-        percent_variance = df_temp["0"].tolist() 
-
-        output_file = ("./tempuploads/global")
-
-        redu_pca.emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file)
+    redu_pca.emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file)
 
     return send_file("./tempuploads/global/index.html")
 

@@ -44,7 +44,7 @@ def calculate_master_projection(input_file_occurrences_table, components = 5):
     
     #convert it into the correct format for the return
     sparse_occ_matrix = pd.DataFrame(index = list(unique_compounds), columns = list(unique_sample), data = matrix)
-    print(sparse_occ_matrix.shape)    
+     
 
     #bring in metadata
     master_metadata_file = pd.read_csv(config.PATH_TO_ORIGINAL_MAPPING_FILE, "\t")
@@ -65,12 +65,8 @@ def calculate_master_projection(input_file_occurrences_table, components = 5):
     pca.fit(new_matrix) #fitting the data 
     
     eigenvalues = list(pca.explained_variance_) #eigenvalue vector
-    df_temp = pd.DataFrame(eigenvalues)
-    df_temp.to_csv(config.PATH_TO_EIGENVALUES) #saving it out for Tableu replacement
-                           
+                               
     percent_variance = list(pca.explained_variance_ratio_ ) #also needed for emperor percent variance explained
-    df_temp = pd.DataFrame(percent_variance)
-    df_temp.to_csv(config.PATH_TO_PERCENTVARIANCE) #saving it out for Tableu replacement
  
     
     #calculate the component matrix and save it for projection at a later time
@@ -160,6 +156,7 @@ def project_new_data(new_file_occurrence_table, output_file):
 ###function takes in all the calculated outputs, both sklearn and manual and places them into the ordination results formate specified by skbio and then feeds it into the emperor thing to output a plot   
 
 def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file, new_files = None):
+    print("Made it to Emperor Function!")
     #read in sklearn output and format accordingly for emperor intake
     eigvals = pd.Series(data = eigenvalues)
     samples = pd.DataFrame(data = sklearn_output, index = full_file_list)
