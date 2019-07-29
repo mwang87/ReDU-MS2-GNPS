@@ -590,7 +590,9 @@ def dump():
     return send_file(config.PATH_TO_ORIGINAL_MAPPING_FILE, cache_timeout=1, as_attachment=True, attachment_filename="all_sampleinformation.tsv")
 
 
-
+@app.route('/ReDUValidator', methods = ["GET"])
+def ReDUValidator():
+    return render_template('ReDUValidator.html')
 
 
 
