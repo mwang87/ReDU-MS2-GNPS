@@ -12,7 +12,7 @@ def main():
 
     task_id_list = []
 
-    PARALLISM = 10
+    PARALLISM = 20
     for i in range(PARALLISM):
         partition_filenames = all_filenames[i::PARALLISM]
         
