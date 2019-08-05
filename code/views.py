@@ -551,7 +551,10 @@ def dashboard():
 def homepage():
     total_files = Filename.select().count()
     total_identifications = CompoundFilenameConnection.select().count()
-    return render_template('homepage.html', total_files=total_files, total_identifications=total_identifications)
+    total_compounds = Compound.select().count()
+    return render_template('homepage.html', total_files=total_files, \
+        total_identifications=total_identifications, 
+        total_compounds=total_compounds)
 
 @app.route('/globalmultivariate', methods=['GET'])
 def globalmultivariate():
@@ -683,7 +686,7 @@ def displayglobalmultivariate():
     component_matrix = pd.read_csv(config.PATH_TO_COMPONENT_MATRIX)
     eigenvalues = list(component_matrix.iloc[-2,:])[1:]
     percent_variance = list(component_matrix.iloc[-1,:])[1:]
-        
+    
     output_file = ("./tempuploads/global")
 
     redu_pca.emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file)
