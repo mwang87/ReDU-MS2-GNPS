@@ -22,9 +22,9 @@ def test_file_enrichment():
     key_value = next(iter(data[0]))
 
     if (key_value == 'filepath'):
-        return(0)
+        exit(0)
     else:
-        return(-1)
+        exit(1)
 
 
 def test_compound_enrichment():
@@ -35,9 +35,9 @@ def test_compound_enrichment():
    key_value = data[0]
    
    if key_value == 'attribute_name':
-       return(0)
+       exit(0)
    else:
-       return(-1)
+       exit(1)
 
 def test_your_pca():
    params = {'task': SAMPLE_TASK_ID}
@@ -47,9 +47,9 @@ def test_your_pca():
    file_size = sys.getsizeof(data) 
       
    if (file_size < 28000000):
-       return(-1)
+       exit(1)
    else:
-       return(0)   
+       exit(0)   
 
 
 def test_global_pca():
@@ -58,10 +58,10 @@ def test_global_pca():
     file_size = sys.getsizeof(data)
             
     if (file_size < 27762100):
-        return(-1)
+        exit(1)
     
     else:
-        return(0)
+        exit(0)
  
 def main(): 
     test_global_pca()
