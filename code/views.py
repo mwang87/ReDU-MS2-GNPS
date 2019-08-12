@@ -375,7 +375,7 @@ def queryfilesbycompound():
 
 @app.route('/compoundenrichment', methods=['POST'])
 def compoundenrichment():
-    blacklist_attributes = ["ATTRIBUTE_DatasetAccession", "ATTRIBUTE_Curated_BodyPartOntologyIndex"]
+    blacklist_attributes = ["ATTRIBUTE_DatasetAccession", "ATTRIBUTE_Curated_BodyPartOntologyIndex", "filename", "UniqueSubjectID", "UBERONOntologyIndex", "SubjectIdentifierAsRecorded", "SampleCollectionDateandTime", "LatitudeandLongitude", "InternalStandardsUsed", "DepthorAltitudeMeters", "DOIDOntologyIndex", "Country", "ComorbidityListDOIDIndex", "AgeInYears"]
 
     compoundname = request.form['compoundname']
     compound_db = Compound.select().where(Compound.compoundname == compoundname)
