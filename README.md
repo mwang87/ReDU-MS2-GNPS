@@ -1,7 +1,7 @@
 ## Welcome to ReDU-MS2 :)
-ReDU-MS2 is a web-based user interface that can be used to easily Analyze Your Data or Analyze Public Data mass spectrometry data, specifically MS2 (aka tandem mass spectrometry, MS2, MS/MS) data. The user interface allows one to select public mass spectrometry files in MassIVE, a public mass spectrometry data repository, based on a curated set of sample information and launch reanalyses in the Global Natural Products Social Molecular Networking GNPS platform.
+ReDU-MS2 is a web-based user interface that can be used to easily mass spectrometry data, specifically MS2 (aka tandem mass spectrometry, MS2, MS/MS) data. The user interface allows one to select public mass spectrometry files in MassIVE, a public mass spectrometry data repository, based on curated sample information and launch reanalyses on the Global Natural Products Social Molecular Networking GNPS platform.
 
-MS2 data, specifically product ion scans, are obtained from user-submitted open-source data files (.mzXML) and analyzed de novo using molecular networking and chemical annotations within GNPS. This is a community effort and everyone is encourage to participate by submitting their own data and sample information.
+MS2 data, specifically product ion scans, are obtained from user-submitted open-source data files (.mzXML or .mzML) and analyzed de novo using molecular networking and chemical annotations within GNPS. This is a community effort and everyone is encourage to participate by submitting their own data and sample information.
 
 
 ## Sample Information Format
