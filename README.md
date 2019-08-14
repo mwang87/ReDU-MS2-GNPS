@@ -1,20 +1,26 @@
-## Welcome to ReDU-MS2 :)
-ReDU-MS2 is a web-based user interface that can be used to easily mass spectrometry data, specifically MS2 (aka tandem mass spectrometry, MS2, MS/MS) data. The user interface allows one to select public mass spectrometry files in MassIVE, a public mass spectrometry data repository, based on curated sample information and launch reanalyses on the Global Natural Products Social Molecular Networking GNPS platform.
+# Welcome to ReDU :)
+## Reanalysis of Data User Interface
 
-MS2 data, specifically product ion scans, are obtained from user-submitted open-source data files (.mzXML or .mzML) and analyzed de novo using molecular networking and chemical annotations within GNPS. This is a community effort and everyone is encourage to participate by submitting their own data and sample information.
+[ReDU](https://redu.ucsd.edu/) is a community- and data-driven approach to find and reuse public data containing tandem MS data at the repository scale. ReDU is a launchpad for co- or re-analysis of public data via the Global Natural Product Social Molecular Networking Platform [(GNPS)](https://gnps.ucsd.edu/ProteoSAFe/static/gnps-splash.jsp). Our aim is to empower researchers to put their data in the context of public data as well as explore questions using public data at the repository scale.
 
+**This is a community effort and everyone is encouraged to participate by submitting their own data and sample information [instructions](https://mwang87.github.io/ReDU-MS2-Documentation/HowtoContribute). The sharing of new applications (and code) which use ReDU is highly encouraged.**
 
-## Sample Information Format
-This is a .tsv file that requires a column for the dataset accession with header MassiveID. Then attributes that will be included as metadata categories can be found via a link to the template for providing sample information. This is located in the ReDU-MS2 documentation. Sample information format can then be verified via the "ReDU Sample Information Validator Link". The use of consistent and curated metadata is key to enabling community re-use of data!
-
-
-## Data Availability 
-All sample information can be downloaded from the ReDU-MS2 homepage by clicking "Download Database". Anyone who creates a custom code is encouraged to share it with the rest of ReDU-MS2 users. Individual files can be queried for associated sample information by name through the "File Query - Sample Information" link. 
-
+## We are developing two main branches of functionality:
 
 ## Analyze Your Data
-You can compare your data to public data by projecting it on to a pre-calculated PCA plot of the public data. Additonally, you can coanalyze your data with the public data through GNPS by launching Molecular Networking, Library Search, Chemical Enrichment Analysis. 
-
-
-## Analyze the Public Data
-All public data can be explored through a PCA interface. Chemical enrichment analysis and file association information is also viewable, and data can be filtered based on the provided sample information table. Furthermore, files can selected using this same sample information table for re-analysis in GNPS. Molecular Networking, Library Search, and Chemical Enrichment Analysis can all be run through GNPS 
+* [Compare Your Data to Public Data via Multivariate Analysis](https://mwang87.github.io/ReDU-MS2-Documentation/AnalyzeYourData_MultivariateComparisons) - Projection of your data onto a precalculated principal components analysis score plot of public data. <br>
+* [Co-analyze Your Data with Public Data at GNPS](https://mwang87.github.io/ReDU-MS2-Documentation/AnalyzeYourData_CoAnalysis_at_GNPS) - Select files using sample information and assemble public data in groups as desired using the file selector. Launching an analysis loads the files from [MassIVE](https://massive.ucsd.edu/ProteoSAFe/static/massive.jsp) at which point users can add their own data. The following co-analyses can be launched:
+  * Molecular Networking at GNPS
+  * Library Search at GNPS
+  
+## Analyze Public Data
+* [Explore Multivariate Analysis of Public Data](https://mwang87.github.io/ReDU-MS2-Documentation/AnalyzePublicData_MultivariateComparisons) - Explore precalculated principal components analysis score plot of public data. <br>
+* [Explore Chemical Annotations and Associated Sample Information in all Public Data](https://mwang87.github.io/ReDU-MS2-Documentation/AnalyzePublicData_ChemicalEnrichment) - Precalculated using public data and default GNPS parameters <br>
+* [Re-analyze Public Data at GNPS](https://mwang87.github.io/ReDU-MS2-Documentation/PublicData_Reanalysis_at_GNPS) - Select files using sample information and assemble public data in groups as desired using the file selector. The following co-analyses can be launched:
+  * Molecular Networking at GNPS
+  * Library Search at GNPS
+  * Chemical Enrichment Analysis
+  * Sample Information Association
+ 
+## Data Availability
+All sample information can be downloaded from the ReDU-MS2 homepage by clicking "Download Database". The ReDU identification database is publicly available and accessible via GNPS/MassIVE (gnps.ucsd.edu), MSV000084206.
