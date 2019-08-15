@@ -26,7 +26,6 @@ def test_data_dump():
     else:
         sys.exit(0)
 
-
 def test_attribute_filtration():
     query_url = BASE_URL + URL_SEVEN
     response = requests.get(query_url)
