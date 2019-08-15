@@ -11,6 +11,49 @@ URL_THREE = "ReDUValidator" #optional
 URL_FIVE = "compoundfilename"
 TEST_COMPOUND = "2,5-Dimethoxyphenethylamine"
 URL_SIX = "compoundenrichment"
+URL_FOUR  = "/attributes"
+URL_SEVEN = "attribute/MassSpectrometer/attributeterms?filters=%5B%5D"
+URL_EIGHT = "dump"
+
+def test_data_dump():
+    query_url = BASE_URL + URL_EIGHT
+    response = requests.get(query_url)
+    data = response.content
+    file_size = sys.getsizeof(data)
+    
+    if file_size < 17762000:
+        sys.exit(1)
+    else:
+        sys.exit(0)
+
+
+def test_attribute_filtration():
+    query_url = BASE_URL + URL_SEVEN
+    response = requests.get(query_url)
+    data = json.loads(response.content)
+    key_value = list(data[0].keys())
+    print(key_value)
+    expected_keys = ["attributename", "attributeterm", "ontologyterm", "countfiles"]
+
+    if (key_value == expected_keys):
+        sys.exit(0)
+    else:
+        sys.exit(1)
+
+
+def test_attribute_terms_display():
+    query_url = BASE_URL + URL_FOUR
+    response = requests.get(query_url)
+    data = json.loads(response.content)
+    key_value = list(data[0].keys())
+
+    expected_keys = ["attribute_name", "attributedisplay", "countterms"]
+
+    if (key_value == expected_keys):
+        sys.exit(0)
+
+    else:
+        sys.exit(1)
 
 
 def test_file_enrichment():
@@ -22,22 +65,24 @@ def test_file_enrichment():
     key_value = next(iter(data[0]))
 
     if (key_value == 'filepath'):
-        exit(0)
+       sys.exit(0)
+       
     else:
-        exit(1)
-
+        sys.exit(1)
 
 def test_compound_enrichment():
    query_url = BASE_URL + URL_SIX  
    params = {'compoundname' : TEST_COMPOUND}
    response = requests.post(query_url, params )
-   data = json.loads(response.content)
-   key_value = data[0]
+   data = json.loads(response.content)  
+   key_value = list(data[0].keys())
    
-   if key_value == 'attribute_name':
-       exit(0)
+   expected_keys = ["attribute_name", "attribute_term", "totalfiles", "compoundfiles", "percentage"]
+    
+   if key_value == expected_keys:
+       sys.exit(0)
    else:
-       exit(1)
+       sys.exit(1)
 
 def test_your_pca():
    params = {'task': SAMPLE_TASK_ID}
@@ -47,9 +92,9 @@ def test_your_pca():
    file_size = sys.getsizeof(data) 
       
    if (file_size < 28000000):
-       exit(1)
-   else:
-       exit(0)   
+       sys.exit(1)
+   else: 
+       sys.exit(0)   
 
 
 def test_global_pca():
@@ -58,16 +103,13 @@ def test_global_pca():
     file_size = sys.getsizeof(data)
             
     if (file_size < 27762100):
-        exit(1)
+        sys.exit(1)
     
     else:
-        exit(0)
- 
-def main(): 
-    test_global_pca()
-    test_your_pca()
-    test_compound_enrichment()   
-    test_file_enrichment()
+        sys.exit(0)
+
+def main():
+    test_attribute_filtration()
 
 if __name__ == "__main__":
-   main()
+    main()
