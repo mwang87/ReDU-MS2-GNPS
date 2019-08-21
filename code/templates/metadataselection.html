@@ -294,36 +294,81 @@
             return {}
         },
         methods: {
-            launchlibrarysearch: function(event){
+            // launchlibrarysearch: function(event){
+            //     total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
+            //     unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
+            //     unique_list_files = Array.from(new Set(unique_list_files));
+
+            //     $.ajax({
+            //         url: "/analyzelibrarysearch",
+            //         method: "POST",
+            //         data: {
+            //             files: JSON.stringify(unique_list_files)
+            //         },
+            //         success: function(response) {
+            //             task = response["taskid"]
+
+            //             if(task == null){
+            //                 alert("Error Launching Job")
+            //             }
+            //             else{
+            //                 analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/result.jsp?task=" + task
+            //                 var win = window.open(analysis_url, '_blank');
+            //                 win.focus();
+            //             }
+            //         },
+            //         dataType: "json"
+            //     });
+            // }
+            setupnetworking: function(event) {
+                //Checking there are no file intersections
                 total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
                 unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
                 unique_list_files = Array.from(new Set(unique_list_files));
+                if(total_number_of_files != unique_list_files.length){
+                    alert("Warning: some files belong to multiple groups! Might cause some issues on GNPS")
+                }
 
-                $.ajax({
-                    url: "/analyzelibrarysearch",
-                    method: "POST",
-                    data: {
-                        files: JSON.stringify(unique_list_files)
-                    },
-                    success: function(response) {
-                        task = response["taskid"]
+                //Forming parameters
+                params_dict = {};
+                params_dict["desc"] = "Meta-Analysis on GNPS"
+                params_dict["workflow"] = "METABOLOMICS-SNETS-V2"
+                params_dict["library_on_server"] = "d.speclibs;"
+                params_dict["spec_on_server"] = generateGNPSfilestring(this.$parent.groupG1)
+                params_dict["spec_on_server_group2"] = generateGNPSfilestring(this.$parent.groupG2)
+                params_dict["spec_on_server_group3"] = generateGNPSfilestring(this.$parent.groupG3)
+                params_dict["spec_on_server_group4"] = generateGNPSfilestring(this.$parent.groupG4)
+                params_dict["spec_on_server_group5"] = generateGNPSfilestring(this.$parent.groupG5)
+                params_dict["spec_on_server_group6"] = generateGNPSfilestring(this.$parent.groupG6)
 
-                        if(task == null){
-                            alert("Error Launching Job")
-                        }
-                        else{
-                            analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/result.jsp?task=" + task
-                            var win = window.open(analysis_url, '_blank');
-                            win.focus();
-                        }
-                    },
-                    dataType: "json"
-                });
+                //analysis_url = "https://ccms-internal.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
+                analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
+                var win = window.open(analysis_url, '_blank');
+                win.focus();
+            },
+            setuplibrarysearch: function(event){
+                total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
+                unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
+                unique_list_files = Array.from(new Set(unique_list_files));
+                if(total_number_of_files != unique_list_files.length){
+                    alert("Warning: some files belong to multiple groups! Might cause some issues on GNPS")
+                }
+
+                //Forming parameters
+                params_dict = {};
+                params_dict["desc"] = "Meta-Analysis on GNPS"
+                params_dict["workflow"] = "MOLECULAR-LIBRARYSEARCH-V2"
+                params_dict["library_on_server"] = "d.speclibs;"
+                params_dict["spec_on_server"] = generateGNPSfilestring(this.$parent.groupG1)
+
+                analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
+                var win = window.open(analysis_url, '_blank');
+                win.focus();
             }
         },
-        template: '<div> <button class="btn btn-primary btn-block" v-on:click="launchlibrarysearch">Launch GNPS Molecular Networking</button> \
+        template: '<div> <button class="btn btn-primary btn-block" v-on:click="setupnetworking">Set Up Re-Analysis with GNPS Molecular Networking</button> \
         <br> \
-            <button class="btn btn-primary btn-block" v-on:click="launchlibrarysearch">Launch GNPS Library Search</button> \
+            <button class="btn btn-primary btn-block" v-on:click="setuplibrarysearch">Set Up Re-Analysis with GNPS Library Search</button> \
         <br> \
         </div>'
     })
@@ -425,9 +470,9 @@
                 win.focus();
             }
         },
-        template: '<div><button class="btn btn-primary btn-block" v-on:click="setupnetworking">Coanalyze with GNPS Molecular Networking</button> \
+        template: '<div><button class="btn btn-primary btn-block" v-on:click="setupnetworking">Set Up Co-Analysis with GNPS Molecular Networking</button> \
         <br> \
-        <button class="btn btn-primary btn-block" v-on:click="setuplibrarysearch">Coanalyze with GNPS Library Search</button> \
+        <button class="btn btn-primary btn-block" v-on:click="setuplibrarysearch">Set Up Co-Analysis with GNPS Library Search</button> \
         </div>'
     })
 

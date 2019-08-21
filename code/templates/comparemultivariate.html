@@ -40,6 +40,16 @@
             <div class="col-sm"></div>
         </div>
 
+        <br>
+        <div class="row">
+           <div class="col-sm"></div>
+           <div class="col-sm">
+               <div class="text-center">
+                    <button id="analyzebutton" class="btn btn-info" onclick="newFunction()">Click for Example</button>
+               </div>
+           </div>
+           <div class="col-sm"></div>
+        </div>           
 
         <div class="row">
             <div class="col-sm"></div>
@@ -57,8 +67,14 @@
     function myFunction() {
         remote_url = "/processcomparemultivariate?task=" + $("#task").val()
         $('#display').prepend($('<img>',{id:'pca',src: remote_url}))
-        window.location.replace(remote_url)        
+        window.location.replace(remote_url)
     }
-</script>
+
+    function newFunction(){
+        remote_url = "/processcomparemultivariate?task=" + "f39c94cb7afe4568950bf61cdb8fee0d"
+        window.location.replace(remote_url)
+    }
+
+</script>    
 
 (% endblock %)

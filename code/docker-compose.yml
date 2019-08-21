@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  redu-ms2-web:
+    build: .
+    ports:
+      - "5005:5001"
+    volumes:
+      - ../database/:/app/database
+      - ../temp/:/app/temp
+    command: /app/run_production_server.sh
+
+  redu-ms2-populate:
+    build: .
+    volumes:
+      - ../database/:/app/database
+      - ../temp/:/app/temp
+    command: /app/utilities/continuous_metadata_update.sh

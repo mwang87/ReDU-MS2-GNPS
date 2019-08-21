@@ -1,21 +1,44 @@
 
 import sys
+import os
+import argparse
 sys.path.insert(0, "..")
 
 from models import *
 from collections import defaultdict
 import csv
+import requests
+import pandas as pd
 
 def main():
-    Filename.create_table(True)
-    Attribute.create_table(True)
-    AttributeTerm.create_table(True)
-    Compound.create_table(True)
-    CompoundFilenameConnection.create_table(True)
-    FilenameAttributeConnection.create_table(True)
-
     input_identifications = sys.argv[1]
 
+    parser = argparse.ArgumentParser(description='Importing Identification Data')
+    parser.add_argument('input_identifications', help='Identifications Filename')
+    parser.add_argument('--tasks', default=None, help='List of GNPS Tasks for Library ID')
+
+    args = parser.parse_args()
+
+    #Checking that the input identiifcations are present
+    if not os.path.isfile(args.input_identifications):
+        #Identifications is missing
+        if args.tasks != None:
+            print("Downloading Identifications")
+            df = pd.read_csv(args.tasks, sep="\t")
+            all_tasks = df.to_dict(orient="records")
+            all_data_df = []
+            for task in all_tasks:
+                print(task)
+                taskid = task["taskid"]
+                url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=DB_result/" % (taskid)
+                data_df = pd.read_csv(url, sep="\t")
+                print(taskid, len(data_df))
+                all_data_df.append(data_df)
+
+            merged_df = pd.concat(all_data_df)
+            merged_df.to_csv(args.input_identifications, sep="\t", index=False)
+
+    #Actually Populating the Data
     all_files_in_db = Filename.select()
     all_files_in_db_set = set([filename.filepath for filename in all_files_in_db])
 
