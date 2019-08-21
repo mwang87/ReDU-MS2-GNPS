@@ -44,7 +44,6 @@ def calculate_master_projection(input_file_occurrences_table, components = 5):
     
     #convert it into the correct format for the return
     sparse_occ_matrix = pd.DataFrame(index = list(unique_compounds), columns = list(unique_sample), data = matrix)
-     
 
     #bring in metadata
     master_metadata_file = pd.read_csv(config.PATH_TO_ORIGINAL_MAPPING_FILE, "\t")
@@ -169,6 +168,7 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
     global_metadata.rename(columns = {'filename': 'SampleID'}, inplace = True)
     global_metadata["type"] = "Global Data"
     global_metadata.set_index("SampleID", inplace = True)
+
     common = global_metadata    
 
     #this part is for the user uploaded metadata file
@@ -179,6 +179,7 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
         metadata_uploaded.set_index("SampleID", inplace = True)
         
         common = pd.concat([global_metadata, metadata_uploaded])
+
    
 
     #so you need to align the metadata and the files contained within the ordination file BEFORE feeding it into the Emperor thing otherwise it doesn't like to output results  
