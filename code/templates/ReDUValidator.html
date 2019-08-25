@@ -1,0 +1,118 @@
+(% extends "layout.html" %)
+
+(% block content %)
+
+<!--
+  DO NOT SIMPLY COPY THOSE LINES. Download the JS and CSS files from the
+  latest release (https://github.com/enyo/dropzone/releases/latest), and
+  host them yourself!
+-->
+<script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+
+<style>
+    .dropzone { border: 2px dashed #0087F7; border-radius: 5px; background: white; margin: 20px}
+    .dropzone .dz-message { font-weight: 400; }
+    .dropzone .dz-message .note { font-size: 0.8em; font-weight: 200; display: block; margin-top: 1.4rem; }
+    .container-fluid { min-height: 100%; height: 100%;}
+</style>
+
+
+<div>
+    <div class="container-fluid">
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-sm"></div>
+          <div class="col-sm text-center">
+              <h2>ReDU Sample Information Validator</h2>
+          </div>
+          <div class="col-sm"></div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-2" id=""></div>
+            <div class="dropzone col-md-8" id="validate">
+                <div class="dz-message">The Validator! Drop Sample Information Files Here or Click to Select</div>
+            </div>
+            <div class="col-md-2" id=""></div>
+        </div>
+
+        <div id="app-4" class="container-fluid">
+            <br>
+            <h2 class="text-center">Sample Information Summary</h2>
+            <br>
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="stat in stats">
+                        <td>{{stat.type}}</td>
+                        <td>{{stat.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h3 class="text-center">Sample Information Validation Errors (First 500)</h3>
+            <br>
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>Header</th>
+                        <th>Line Number</th>
+                        <th>Error String</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="error in errors">
+                        <td>{{error.header}}</td>
+                        <td>{{error.line_number}}</td>
+                        <td>{{error.error_string}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    validatedropzone = new Dropzone("#validate", { url: "validate", maxFilesize: 200, parallelUploads:1});
+    validatedropzone.on("success", function(file, response) {
+        validation_json = JSON.parse(response)
+        app4._data.errors = validation_json.errors.slice(0, 500);
+        app4._data.stats = validation_json.stats;
+        app4._data.pass_validation = validation_json.status;
+
+        if(validation_json.status){
+            alert("Sample Information File Passed Validation!")
+        }
+        else{
+            alert("Sample Information File Failed Validation! Please Check Errors Below.")
+        }
+    });
+
+    validatedropzone.on("error", function(file) {
+
+    });
+
+    var app4 = new Vue({
+        el: '#app-4',
+        methods: {
+        },
+        data: {
+            pass_validation: null,
+            errors: [],
+            stats: []
+        }
+    })
+</script>
+
+(% endblock %)

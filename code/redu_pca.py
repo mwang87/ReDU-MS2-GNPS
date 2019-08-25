@@ -44,7 +44,6 @@ def calculate_master_projection(input_file_occurrences_table, components = 5):
     
     #convert it into the correct format for the return
     sparse_occ_matrix = pd.DataFrame(index = list(unique_compounds), columns = list(unique_sample), data = matrix)
-    print(sparse_occ_matrix.shape)    
 
     #bring in metadata
     master_metadata_file = pd.read_csv(config.PATH_TO_ORIGINAL_MAPPING_FILE, "\t")
@@ -63,9 +62,11 @@ def calculate_master_projection(input_file_occurrences_table, components = 5):
     #bring sklearn components into play
     pca = PCA(n_components = components) #creating the instance
     pca.fit(new_matrix) #fitting the data 
-
-    eigenvalues = list(pca.explained_variance_) #eigenvalue vector                               
-    percent_variance = list(pca.explained_variance_ratio_ ) #also needed for emperor percent variance explained 
+    
+    eigenvalues = list(pca.explained_variance_) #eigenvalue vector
+                               
+    percent_variance = list(pca.explained_variance_ratio_ ) #also needed for emperor percent variance explained
+ 
     
     #calculate the component matrix and save it for projection at a later time
     component_matrix = pca.components_
@@ -148,12 +149,13 @@ def project_new_data(new_file_occurrence_table, output_file):
     full_file_list = list(all_pca_df.index)
     
     #call and create an emperor output for the old data and the new projected data
-    emperor_output(values_only, full_file_list, eigenvalues, percent_variance, new_sample_list, output_file)
+    emperor_output(values_only, full_file_list, eigenvalues, percent_variance, output_file, new_sample_list)
     
 
 ###function takes in all the calculated outputs, both sklearn and manual and places them into the ordination results formate specified by skbio and then feeds it into the emperor thing to output a plot   
 
-def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, new_files, output_file):
+def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file, new_files = None):
+    print("Made it to Emperor Function!")
     #read in sklearn output and format accordingly for emperor intake
     eigvals = pd.Series(data = eigenvalues)
     samples = pd.DataFrame(data = sklearn_output, index = full_file_list)
@@ -166,19 +168,24 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
     global_metadata.rename(columns = {'filename': 'SampleID'}, inplace = True)
     global_metadata["type"] = "Global Data"
     global_metadata.set_index("SampleID", inplace = True)
-    
+
+    common = global_metadata    
+
     #this part is for the user uploaded metadata file
-    metadata_uploaded = pd.DataFrame({"SampleID": new_files, "type":["Your Data"] * len(new_files)})
-    for item in global_metadata_headers:
-        metadata_uploaded[item] = ["Your Data"] * len(new_files)
-    metadata_uploaded.set_index("SampleID", inplace = True)
+    if new_files != None:
+        metadata_uploaded = pd.DataFrame({"SampleID": new_files, "type":["Your Data"] * len(new_files)})
+        for item in global_metadata_headers:
+            metadata_uploaded[item] = ["Your Data"] * len(new_files)
+        metadata_uploaded.set_index("SampleID", inplace = True)
         
-    common = pd.concat([global_metadata, metadata_uploaded])
+        common = pd.concat([global_metadata, metadata_uploaded])
+
    
 
     #so you need to align the metadata and the files contained within the ordination file BEFORE feeding it into the Emperor thing otherwise it doesn't like to output results  
     final_metadata, unused = common.align(samples, join = "right", axis = 0)
-   
+    
+  
     #call stuff to ouput an emperor plot
     emp = Emperor(ores, final_metadata, remote = True)
            

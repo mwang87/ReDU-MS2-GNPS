@@ -375,14 +375,14 @@ def queryfilesbycompound():
 
 @app.route('/compoundenrichment', methods=['POST'])
 def compoundenrichment():
-    blacklist_attributes = ["ATTRIBUTE_DatasetAccession", "ATTRIBUTE_Curated_BodyPartOntologyIndex", "UniqueSubjectID", "LatitudeandLongitude", "SubjectIdentifierAsRecorded", "SampleCollectionDateandTime", "AgeInYears", "DepthorAltitudeMeters"]
+    blacklist_attributes = ["ATTRIBUTE_DatasetAccession", "ATTRIBUTE_Curated_BodyPartOntologyIndex", "filename", "UniqueSubjectID", "UBERONOntologyIndex", "SubjectIdentifierAsRecorded", "SampleCollectionDateandTime", "LatitudeandLongitude", "InternalStandardsUsed", "DepthorAltitudeMeters", "DOIDOntologyIndex", "Country", "ComorbidityListDOIDIndex", "AgeInYears"]
 
     compoundname = request.form['compoundname']
     compound_db = Compound.select().where(Compound.compoundname == compoundname)
 
     compound_filenames = [filename.filepath for filename in Filename.select().join(CompoundFilenameConnection).where(CompoundFilenameConnection.compound==compound_db)]
 
-
+    
     enrichment_list = []
 
     if "filenames" in request.form:
@@ -392,23 +392,19 @@ def compoundenrichment():
     else:
         filter_filenames = set([filename.filepath for filename in Filename.select()])
 
-    all_metadata = FilenameAttributeConnection.select(Attribute.categoryname, AttributeTerm.term, fn.COUNT(FilenameAttributeConnection.filename).alias('ct')).join(Attribute).switch(FilenameAttributeConnection).join(AttributeTerm).group_by(Attribute.categoryname, AttributeTerm.term).dicts()
-
-    print(len(all_metadata))
-    print(all_metadata[0])
-
+    all_metadata = FilenameAttributeConnection.select(Attribute.categoryname, AttributeTerm.term, fn.COUNT(FilenameAttributeConnection.filename).alias('ct')).join(Attribute).switch(FilenameAttributeConnection).join(AttributeTerm).group_by(Attribute.categoryname, AttributeTerm.term).dicts()    
+     
     for attribute_term_pair in all_metadata:
-        #if attribute_term_pair["categoryname"].find("ATTRIBUTE_") == -1:
+        # if attribute_term_pair["categoryname"].find("ATTRIBUTE_") == -1:
         #    continue
 
         if attribute_term_pair["categoryname"] in blacklist_attributes:
             continue
-
-        print(attribute_term_pair)
-
+        
+        
         attribute_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term_pair["term"]).where(FilenameAttributeConnection.attribute == attribute_term_pair["categoryname"])
         attribute_filenames = set([filename.filepath for filename in attribute_files_db]).intersection(filter_filenames)
-
+        
         if len(attribute_filenames) > 0:
             intersection_filenames = set(compound_filenames).intersection(set(attribute_filenames)).intersection(filter_filenames)
 
@@ -550,7 +546,9 @@ def dashboard():
 @app.route('/', methods=['GET'])
 def homepage():
     total_files = Filename.select().count()
-    return render_template('homepage.html', total_files=total_files)
+    total_identifications = CompoundFilenameConnection.select().count()
+    total_compounds = Compound.select().count()
+    return render_template('homepage.html', total_files=total_files, total_identifications=total_identifications, total_compounds=total_compounds)
 
 @app.route('/globalmultivariate', methods=['GET'])
 def globalmultivariate():
@@ -590,7 +588,9 @@ def dump():
     return send_file(config.PATH_TO_ORIGINAL_MAPPING_FILE, cache_timeout=1, as_attachment=True, attachment_filename="all_sampleinformation.tsv")
 
 
-
+@app.route('/ReDUValidator', methods = ["GET"])
+def ReDUValidator():
+    return render_template('ReDUValidator.html')
 
 
 
@@ -603,7 +603,7 @@ def allowed_file_metadata(filename):
 @app.route('/validate', methods=['POST'])
 def validate():
     request_file = request.files['file']
-
+    print(request_file)
     #Invalid File Types
     if not allowed_file_metadata(request_file.filename):
         error_dict = {}
@@ -619,16 +619,19 @@ def validate():
         validation_dict["stats"].append({"type":"valid_rows", "value": 0})
 
         return json.dumps(validation_dict)
-
+    
+    
     local_filename = os.path.join(app.config['UPLOAD_FOLDER'], str(uuid.uuid4()))
     request_file.save(local_filename)
-
+     
     """Trying stuff out with pandas"""
     metadata_df = pd.read_csv(local_filename, sep="\t")
+    print("METADATA")
+    print(metadata_df)
     metadata_df.to_csv(local_filename, index=False, sep="\t")
 
     metadata_validator.rewrite_metadata(local_filename)
-
+    
     pass_validation, failures, errors_list, valid_rows, total_rows = metadata_validator.perform_validation(local_filename)
 
     validation_dict = {}
@@ -664,6 +667,29 @@ def analyzelibrarysearch():
 import uuid
 import redu_pca
 import config
+
+@app.route("/displayglobalmultivariate", methods = ["GET"])
+def displayglobalmultivariate():
+    if not os.path.isfile(config.PATH_TO_ORIGINAL_PCA):
+        print("Missing Global PCA Calculation, Calculating")
+        redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
+    
+    print("Begin Getting Global PCA")    
+    df_temp  = pd.read_csv(config.PATH_TO_ORIGINAL_PCA)
+    full_file_list = df_temp["Unnamed: 0"].tolist() 
+    df_temp.drop("Unnamed: 0", axis = 1, inplace = True)       
+    sklearn_output = df_temp.values
+        
+    component_matrix = pd.read_csv(config.PATH_TO_COMPONENT_MATRIX)
+    eigenvalues = list(component_matrix.iloc[-2,:])[1:]
+    percent_variance = list(component_matrix.iloc[-1,:])[1:]
+    
+    output_file = ("./tempuploads/global")
+
+    redu_pca.emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file)
+
+    return send_file("./tempuploads/global/index.html")
+
 
 @app.route('/processcomparemultivariate', methods=['GET'])
 def processcomparemultivariate():

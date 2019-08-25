@@ -11,7 +11,7 @@ populate_identification:
 	docker run -it -v $(PWD)/../database/:/app/database -v $(PWD)/../temp/:/app/temp --rm  gnpsmetadata /app/utilities/populate_identifications.sh
 
 global_search:
-	docker run -it -v $(PWD)/../database/:/app/database -v $(PWD)/../temp/:/app/temp --rm  gnpsmetadata /app/populate_global_search.sh
+	docker run -it -v $(PWD)/../database/:/app/database -v $(PWD)/../temp/:/app/temp --rm  gnpsmetadata /app/run_redu_librarysearch.sh
 
 interactive:
 	docker run -it -v $(PWD)/../database/:/app/database -v $(PWD)/../temp/:/app/temp -p 5006:5001 --rm --name gnpsmetadata gnpsmetadata /app/run_production_server.sh
