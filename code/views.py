@@ -725,8 +725,8 @@ def processcomparemultivariate():
             df.to_csv(new_analysis_filename, sep="\t", index=False)
             #TODO: demangle with params filename
         elif task_type == "METABOLOMICS-SNETS-V2":
-            remote_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=clusterinfo/".format(task_id)
-            clusters_df = pd.read_csv(remote_url, sep="\t")
+            clusters_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=clusterinfo/".format(task_id)
+            clusters_df = pd.read_csv(clusters_url, sep="\t")
 
             identifications_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=result_specnets_DB/".format(task_id)
             identifications_df = pd.read_csv(identifications_url, sep="\t")
@@ -738,9 +738,33 @@ def processcomparemultivariate():
 
             inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
         elif task_type == "FEATURE-BASED-MOLECULAR-NETWORKING":
-            remote_url = ""
+            quantification_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=quantification_table_reformatted/".format(task_id)
+            print(quantification_url)
+            quantification_df = pd.read_csv(quantification_url, sep=",")
             
+            quantification_records = quantification_df.to_dict(orient="records")
 
+            compound_presence_records = []
+            for record in quantification_records:
+                for key in record:
+                    if "Peak area" in key:
+                        if record[key] > 0:
+                            presence_dict = {}
+                            presence_dict["SpectrumFile"] = key.replace("Peak area", "")
+                            presence_dict["#ClusterIdx"] = record["row ID"]
+                            
+                            compound_presence_records.append(presence_dict)
+
+            identifications_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=librarysearch_results_file_DB/".format(task_id)
+            identifications_df = pd.read_csv(identifications_url, sep="\t")
+
+            inner_df = clusters_df.merge(identifications_df, how="inner", left_on="#ClusterIdx", right_on="#Scan#")
+            inner_df = inner_df[["SpectrumFile", "Compound_Name"]]
+
+            print(inner_df.head())
+            print(len(inner_df))
+
+            inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
         #Making sure we have the local compound name
         remote_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=compound_filename_occurences/" % (task_id)
         r = requests.get(remote_url)
