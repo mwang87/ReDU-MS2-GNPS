@@ -4,13 +4,13 @@ library(tidyr)
 library(ggplot2)
 setwd("~/Research/Projects/ReDU_MS2")
 
-df <- fread("Manuscript/Data/ReDU_chemical_enrichment.txt", sep="\t", header=TRUE)
+df <- fread("Manuscript/Data/ReDU_chemical_enrichment_bacteria.txt", sep="\t", header=TRUE)
 
 df[1:5,1:7]
 colnames(df) <- c("Chemical",
-                  "# Human Blood (n=711)","Human Blood (n=711)",
-                  "# Human Urine (n=307)","Human Urine (n=307)",
-                  "# Human Fecal (n=5114)","Human Fecal (n=5114)"
+                  "# 1423|Bacillus subtilis (n=89)","1423|Bacillus subtilis (n=89)",
+                  "# 1280|Staphylococcus aureus (n=49)","1280|Staphylococcus aureus (n=49)",
+                  "# 1883|Streptomyces (n=7)","1883|Streptomyces (n=7)"
                   #"# of G4","Proportion of G4",
                   #"# of G5","Proportion of G5",
                   #"# of G6","Proportion of G6",
@@ -20,10 +20,8 @@ df <- df[,c(1,3,5,7)]
 
 df_gather <- gather(data=df, sample, proportion, 2:length(df))
 
-chemical <- "Spectral Match to Urobilin from NIST14"
-#chemical <- "Bilirubin"
-#chemical <- "Stercobilin"
-#chemical <- "Spectral Match to L-Kynurenine from NIST14"
+#chemical <- "Surfactin_C14"
+chemical <- "Spectral Match to Cholic acid from NIST14"
 
 df_plot <- subset(df_gather, df_gather$Chemical == chemical)
 
