@@ -15,6 +15,28 @@ URL_FOUR  = "/attributes"
 URL_SEVEN = "attribute/MassSpectrometer/attributeterms?filters=%5B%5D"
 URL_EIGHT = "dump"
 
+def test_pca_library_search(self):
+    query_url = BASE_URL + "processcomparemultivariate?task={}".format("f39c94cb7afe4568950bf61cdb8fee0d")
+    r = requests.get(query_url)
+    r.raise_for_status()
+
+    return 0
+
+def test_pca_metabolomics_snets(self):
+    query_url = BASE_URL + "processcomparemultivariate?task={}".format("1ad7bc366aef45ce81d2dfcca0a9a5e7")
+    r = requests.get(query_url)
+    r.raise_for_status()
+
+    return 0
+
+def test_pca_feature_based(self):
+    query_url = BASE_URL + "processcomparemultivariate?task={}".format("ec0e6f4d63e44cb0bedf35cb283a869f")
+    r = requests.get(query_url)
+    r.raise_for_status()
+
+    return 0
+
+
 def test_data_dump():
     query_url = BASE_URL + URL_EIGHT
     response = requests.get(query_url)
@@ -23,8 +45,6 @@ def test_data_dump():
     
     if file_size < 17762000:
         sys.exit(1)
-    else:
-        sys.exit(0)
 
 def test_attribute_filtration():
     query_url = BASE_URL + URL_SEVEN
@@ -34,10 +54,10 @@ def test_attribute_filtration():
     print(key_value)
     expected_keys = ["attributename", "attributeterm", "ontologyterm", "countfiles"]
 
-    if (key_value == expected_keys):
-        sys.exit(0)
-    else:
+    if (key_value != expected_keys):
         sys.exit(1)
+
+    return 0
 
 
 def test_attribute_terms_display():
@@ -48,12 +68,10 @@ def test_attribute_terms_display():
 
     expected_keys = ["attribute_name", "attributedisplay", "countterms"]
 
-    if (key_value == expected_keys):
-        sys.exit(0)
-
-    else:
+    if (key_value != expected_keys):
         sys.exit(1)
 
+    return 0
 
 def test_file_enrichment():
     query_url = BASE_URL + URL_FIVE
@@ -63,37 +81,36 @@ def test_file_enrichment():
 
     key_value = next(iter(data[0]))
 
-    if (key_value == 'filepath'):
-       sys.exit(0)
+    if (key_value != 'filepath'):
+       sys.exit(1)
        
-    else:
-        sys.exit(1)
+    return 0
 
 def test_compound_enrichment():
-   query_url = BASE_URL + URL_SIX  
-   params = {'compoundname' : TEST_COMPOUND}
-   response = requests.post(query_url, params )
-   data = json.loads(response.content)  
-   key_value = list(data[0].keys())
+    query_url = BASE_URL + URL_SIX  
+    params = {'compoundname' : TEST_COMPOUND}
+    response = requests.post(query_url, params )
+    data = json.loads(response.content)  
+    key_value = list(data[0].keys())
    
-   expected_keys = ["attribute_name", "attribute_term", "totalfiles", "compoundfiles", "percentage"]
+    expected_keys = ["attribute_name", "attribute_term", "totalfiles", "compoundfiles", "percentage"]
     
-   if key_value == expected_keys:
-       sys.exit(0)
-   else:
-       sys.exit(1)
+    if key_value != expected_keys:
+        sys.exit(1)
+   
+    return 0
 
 def test_your_pca():
-   params = {'task': SAMPLE_TASK_ID}
-   query_url = BASE_URL + URL_TWO
-   response = requests.get(query_url, params = params)
-   data = response.content
-   file_size = sys.getsizeof(data) 
+    params = {'task': SAMPLE_TASK_ID}
+    query_url = BASE_URL + URL_TWO
+    response = requests.get(query_url, params = params)
+    data = response.content
+    file_size = sys.getsizeof(data) 
       
-   if (file_size < 28000000):
+    if (file_size < 28000000):
        sys.exit(1)
-   else: 
-       sys.exit(0)   
+
+    return 0
 
 
 def test_global_pca():
@@ -104,11 +121,4 @@ def test_global_pca():
     if (file_size < 27762100):
         sys.exit(1)
     
-    else:
-        sys.exit(0)
-
-def main():
-    test_attribute_filtration()
-
-if __name__ == "__main__":
-    main()
+    return 0
