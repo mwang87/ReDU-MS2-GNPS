@@ -765,12 +765,6 @@ def processcomparemultivariate():
 
             inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
 
-        #Making sure we have the local compound name
-        remote_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=compound_filename_occurences/" % (task_id)
-        r = requests.get(remote_url)
-        with open(new_analysis_filename, 'wb') as f:
-            f.write(r.content)
-
     #Actually doing Analysis
     output_folder = ("./tempuploads")
     redu_pca.project_new_data(new_analysis_filename, output_folder)
