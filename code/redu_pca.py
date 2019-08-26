@@ -102,15 +102,36 @@ def project_new_data(new_file_occurrence_table, output_file):
 
     #reformat the occurance table for the new data being fed in
     new_data = pd.read_csv(new_file_occurrence_table, sep = "\t")
+    all_compound_occurances = new_data["Compound_Name"]
+    all_file_occurances = new_data["full_CCMS_path"]
     
-    new_compound_list = new_data["LibraryID"].tolist()
-    new_data.drop(labels=["LibraryID", "TotalFiles"], axis=1, inplace=True)
-    just_matrix = new_data.values
-    	
-    new_sample_list = list(new_data.columns.values)
-       
-    new_sparse_occ_matrix = pd.DataFrame(data = just_matrix, index = new_compound_list, columns = new_sample_list)
-    	     	
+    #create a new dataframe with only the information needed to reconstruct, redundant but easier to see
+    compounds_filname_df = pd.DataFrame({"Compound_Name" : all_compound_occurances, "full_CCMS_path" : all_file_occurances})
+    
+    #sorting dataframe by sample in order to help? speed up things
+    compounds_filname_df.sort_values(by = "Compound_Name", axis = 0, inplace = True)
+    
+    #determine the header for the new table
+    unique_compounds, compound_index = np.unique(compounds_filname_df["Compound_Name"], return_inverse = True)
+    
+    #determine the unique samples for the new table
+    unique_sample, file_index = np.unique(compounds_filname_df["full_CCMS_path"], return_inverse = True)
+    
+    all_compounds = list(compounds_filname_df["Compound_Name"])
+    all_samples = list(compounds_filname_df["full_CCMS_path"])
+    
+    #create a matrix from the coordinates given
+    data = [1] * len(compound_index)
+    
+    matrix = sps.coo_matrix((data, (compound_index, file_index)), shape = None).todok().toarray()
+    #handling duplicates within the array
+    matrix[matrix > 0] = 1
+    
+    #convert it into the correct format for the return
+    new_sparse_occ_matrix = pd.DataFrame(index = list(unique_compounds), columns = list(unique_sample), data = matrix)
+
+    new_compound_list = list(unique_compounds)        
+    new_sample_list = list(unique_sample)    	     	
     #determine which compounds are common between the original and new datasets
     find_common_compounds = [item for item in new_compound_list if item in old_compound_list]
 

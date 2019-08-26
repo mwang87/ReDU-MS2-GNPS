@@ -28,5 +28,9 @@ RUN pip3 install seaborn
 #RUN export DEBIAN_FRONTEND=noninteractive
 #RUN apt-get install -y r-base r-base-dev
 
+RUN apt-get update -y
+RUN apt-get install -y git-core
+RUN pip3 install git+https://github.com/mwang87/CCMS_ProteoSAFe_pythonAPI.git
+
 COPY . /app
 WORKDIR /app
