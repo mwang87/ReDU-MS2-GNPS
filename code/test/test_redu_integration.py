@@ -30,7 +30,7 @@ def test_pca_metabolomics_snets(self):
     return 0
 
 def test_pca_feature_based(self):
-    query_url = BASE_URL + "processcomparemultivariate?task={}".format("ec0e6f4d63e44cb0bedf35cb283a869f")
+    query_url = BASE_URL + "processcomparemultivariate?task={}".format("bb49a839face44cbb5ec3e6f855e7285")
     r = requests.get(query_url)
     r.raise_for_status()
 
