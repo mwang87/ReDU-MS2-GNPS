@@ -733,7 +733,7 @@ def processcomparemultivariate():
 
             inner_df = clusters_df.merge(identifications_df, how="inner", left_on="#ClusterIdx", right_on="#Scan#")
             inner_df = inner_df[["#Filename", "Compound_Name"]]
-            inner_df["SpectrumFile"] = inner_df["#Filename"]
+            inner_df["full_CCMS_path"] = inner_df["#Filename"]
             inner_df = inner_df[["full_CCMS_path", "Compound_Name"]]
 
             inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
