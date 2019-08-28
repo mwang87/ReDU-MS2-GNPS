@@ -1,4 +1,4 @@
-# Welcome to ReDU :)
+# Welcome to ReDU
 ## Reanalysis of Data User Interface
 
 [ReDU](https://redu.ucsd.edu/) is a community- and data-driven approach to find and reuse public data containing tandem MS data at the repository scale. ReDU is a launchpad for co- or re-analysis of public data via the Global Natural Product Social Molecular Networking Platform [(GNPS)](https://gnps.ucsd.edu/ProteoSAFe/static/gnps-splash.jsp). Our aim is to empower researchers to put their data in the context of public data as well as explore questions using public data at the repository scale.
