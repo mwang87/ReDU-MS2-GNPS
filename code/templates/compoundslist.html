@@ -100,16 +100,24 @@
                 $('#datatable').DataTable( {
                     data: response,
                     columns: [
-                        { data: "compound" , title: "Compound"}
+                        { data: "compound" , title: "Compound"}, 
+                        { data: "count" , title: "Number of Files"}, 
+                        { data: "compound" , title: "View Files"}, 
+                        { data: "compound" , title: "Associated Sample Information"}
                     ],
-                    pageLength: 30
-                    // columnDefs: [ {
-                    //     "targets": 2,
-                    //     "data": null,
-                    //     "render": function ( data, type, row, meta ) {
-                    //     return '<a href="/status?task='+data+'">View Task</a>';
-                    //     }
-                    // }],
+                    pageLength: 30,
+                    columnDefs: [ {
+                        "targets": 2,
+                        "data": null,
+                        "render": function ( data, type, row, meta ) {
+                        return '<a class="btn btn-warning btn-block" target="_blank" href="/status?compoundfilename?compoundname='+data['compound']+'">View Files</a>';
+                        }}, 
+                        {
+                        "targets": 3,
+                        "data": null,
+                        "render": function ( data, type, row, meta ) {
+                        return '<a class="btn btn-warning btn-block" target="_blank" href="/status?compoundenrichmentdashboard?compoundname='+data['compound']+'">View Associations</a>';
+                        }}]
                 } );
 
             }
