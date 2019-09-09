@@ -1,3 +1,4 @@
 *.pyc
 code/credentials.py
+*credentials.py
 database/metadata.db

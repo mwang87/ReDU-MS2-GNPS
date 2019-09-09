@@ -561,10 +561,13 @@ def globalmultivariate():
 def comparemultivariate():
     return render_template('comparemultivariate.html')
 
-
 @app.route('/compoundslist', methods=['GET'])
 def compoundslist():
     return render_template('compoundslist.html')
+
+@app.route('/compoundfilenamelist', methods=['GET'])
+def compoundfilenamelist():
+    return render_template('compoundfilelist.html')
 
 @app.route('/compoundenrichmentdashboard', methods=['GET'])
 def compoundenrichmentview():
@@ -696,15 +699,14 @@ def displayglobalmultivariate():
 
 @app.route('/processcomparemultivariate', methods=['GET'])
 def processcomparemultivariate():
-    # if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
-    #     print("Missing Global Data")
-    #     return abort(500)
+    #Making sure we calculate global datata
+    if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
+        if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
+            print("Missing Global Data")
+            return abort(500)
 
-    # #Making sure we calculate global datata
-    # if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
-    #     print("Retrieving Global Identifications")
-
-    #     redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
+        print("Missing Global PCA Calculation, Calculating")
+        redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
 
     #Making sure we grab down user query
     task_id = request.args['task']
@@ -739,7 +741,6 @@ def processcomparemultivariate():
             inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
         elif task_type == "FEATURE-BASED-MOLECULAR-NETWORKING":
             quantification_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=quantification_table_reformatted/".format(task_id)
-            #quantification_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=quantification_table/".format(task_id)
             quantification_df = pd.read_csv(quantification_url, sep=",")
             
             quantification_records = quantification_df.to_dict(orient="records")

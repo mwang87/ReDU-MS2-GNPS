@@ -2,22 +2,8 @@
 
 (% block content %)
 
-<style>
-tbody {
-    display:block;
-    height:800px;
-    overflow:auto;
-}
-thead, tbody tr {
-    display:table;
-    width:100%;
-    table-layout:fixed;
-}
-thead {
-    width: calc( 100% - 1em )
-}
-
-</style>
+<script src="/static/datatables/datatables.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/static/datatables/datatables.min.css" crossorigin="anonymous">
 
 <div id="app-4" class="container-fluid justify-content-center align-items-center">
     <div class="row">
@@ -34,59 +20,8 @@ thead {
         <h2>Chemicals Annotated via GNPS</h2>
     </div>
 
-    <div>
-        <table class="table table-sm table-striped">
-            <thead>
-              <tr>
-                <th>
-                    Chemical
-                    <i class="fa fa-sort-alpha-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('compound')"></i>
-                    <i class="fa fa-sort-alpha-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('compound')"></i>
-                </th>
-                <th>
-                    # Files in G1 ( % Files)
-                    <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count1')"></i>
-                    <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count1')"></i>
-                </th>
-                <th>
-                    # Files in G2 ( % Files)
-                    <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count2')"></i>
-                    <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count2')"></i>
-                </th>
-                <th>
-                    # Files in G3 ( % Files)
-                    <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count3')"></i>
-                    <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count3')"></i>
-                </th>
-                <th>
-                    # Files in G4 ( % Files)
-                    <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count4')"></i>
-                    <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count4')"></i>
-                </th>
-                <th>
-                    # Files in G5 ( % Files)
-                    <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count5')"></i>
-                    <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count5')"></i>
-                </th>
-                <th>
-                    # Files in G6 ( % Files)
-                    <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('count6')"></i>
-                    <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('count6')"></i>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr v-for="compoundobject in compoundlist">
-                    <td>{{compoundobject.compound}}</td>
-                    <td>{{compoundobject.count1}} ({{compoundobject.count1_norm}}%)</td>
-                    <td>{{compoundobject.count2}} ({{compoundobject.count2_norm}}%)</td>
-                    <td>{{compoundobject.count3}} ({{compoundobject.count3_norm}}%)</td>
-                    <td>{{compoundobject.count4}} ({{compoundobject.count4_norm}}%)</td>
-                    <td>{{compoundobject.count5}} ({{compoundobject.count5_norm}}%)</td>
-                    <td>{{compoundobject.count6}} ({{compoundobject.count6_norm}}%)</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="table table-striped">
+        <table id="datatable" class="display" width="100%"></table>
     </div>
 </div>
 
@@ -102,23 +37,6 @@ var app4 = new Vue({
         compoundlist: []
     }
 })
-
-function sortdesccolumn(column_name) {
-    app4.compoundlist.sort(function(a, b) {
-        if(a[column_name] < b[column_name]) return 1;
-        if(a[column_name] > b[column_name]) return -1;
-        return 0
-    });
-}
-
-function sortasccolumn(column_name) {
-    app4.compoundlist.sort(function(a, b) {
-        if(a[column_name] < b[column_name]) return -1;
-        if(a[column_name] > b[column_name]) return 1;
-        return 0
-    });
-}
-
 
 // Get the hash and make the query
 all_files = JSON.parse(decodeURIComponent(window.location.hash).slice(1))
@@ -140,12 +58,31 @@ $.ajax({
     },
     success: function(componentObject) {
         return function(response) {
-            console.log(response);
-            app4.compoundlist = response
+            $('#datatable').DataTable( {
+                data: response,
+                columns: [
+                    { data: "compound" , title: "Compound", width: "20%"}, 
+                    { data: "count1" , title: "Files in G1"}, 
+                    { data: "count2" , title: "Files in G2"}, 
+                    { data: "count3" , title: "Files in G3"}, 
+                    { data: "count4" , title: "Files in G4"}, 
+                    { data: "count5" , title: "Files in G5"}, 
+                    { data: "count6" , title: "Files in G6"},
+                    { data: "count1_norm" , title: "% in G1"}, 
+                    { data: "count2_norm" , title: "% in G2"}, 
+                    { data: "count3_norm" , title: "% in G3"}, 
+                    { data: "count4_norm" , title: "% in G4"}, 
+                    { data: "count5_norm" , title: "% in G5"}, 
+                    { data: "count6_norm" , title: "% in G6"}
+                ],
+                pageLength: 30,
+                } );
+
         }
     }(this),
     dataType: "json"
 });
+
 </script>
 
 (% endblock %)
