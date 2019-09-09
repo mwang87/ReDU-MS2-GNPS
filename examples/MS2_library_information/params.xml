@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<parameters>
+<parameter name="RUN_CLUSTER">NO</parameter>
+<parameter name="RUN_CONVERT">NO</parameter>
+<parameter name="RUN_DEREPLICATOR">NO</parameter>
+<parameter name="RUN_GLOBALNETWORK">NO</parameter>
+<parameter name="RUN_LIBRARY_FILES_CREATION">YES</parameter>
+<parameter name="RUN_MOLECULEEXPLORER">NO</parameter>
+<parameter name="RUN_REPORTER">NO</parameter>
+<parameter name="RUN_SEARCH">NO</parameter>
+<parameter name="desc">Test Library Creation [9]</parameter>
+<parameter name="email">miw023@ucsd.edu</parameter>
+<parameter name="task">ba6a5b6a1c0946b3a641c67ad59fb2df</parameter>
+<parameter name="user">mwang87</parameter>
+<parameter name="uuid">1E14A8E2-5075-0001-3D8A-6940F0501B9D</parameter>
+<parameter name="workflow">LIVING-DATA-SEARCH</parameter>
+<parameter name="workflow_version">1.2.5</parameter>
+</parameters>

@@ -14,6 +14,9 @@ import requests
 import requests_cache
 import metadata_validator
 import config
+import pandas as pd
+
+from ccmsproteosafepythonapi import proteosafe
 
 requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
 
@@ -693,28 +696,76 @@ def displayglobalmultivariate():
 
 @app.route('/processcomparemultivariate', methods=['GET'])
 def processcomparemultivariate():
-    if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
-        print("Missing Global Data")
-        return abort(500)
+    # if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
+    #     print("Missing Global Data")
+    #     return abort(500)
 
-    #Making sure we calculate global datata
-    if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
-        print("Retrieving Global Identifications")
+    # #Making sure we calculate global datata
+    # if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
+    #     print("Retrieving Global Identifications")
 
-        redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
+    #     redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
 
     #Making sure we grab down user query
     task_id = request.args['task']
     new_analysis_filename = os.path.join(app.config['UPLOAD_FOLDER'], task_id)
-    if not os.path.isfile(new_analysis_filename):
-        #Making sure we have the local compound name
-        remote_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=compound_filename_occurences/" % (task_id)
     
-        r = requests.get(remote_url)
-        with open(new_analysis_filename, 'wb') as f:
-            f.write(r.content)
+    if not os.path.isfile(new_analysis_filename):
+        #TODO: Check the task type, get the URL specific for it, then reformat...
+        task_information = proteosafe.get_task_information("gnps.ucsd.edu", task_id)
 
-    #Actually doing Analysis                                                         
+        print(task_information)
+
+        task_type = task_information["workflow"]
+
+        if task_type == "MOLECULAR-LIBRARYSEARCH-V2":
+            remote_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=DB_result/".format(task_id)
+            df = pd.read_csv(remote_url, sep="\t")
+            df = df[["full_CCMS_path", "Compound_Name"]]
+            df.to_csv(new_analysis_filename, sep="\t", index=False)
+            #TODO: demangle with params filename
+        elif task_type == "METABOLOMICS-SNETS-V2":
+            clusters_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=clusterinfo/".format(task_id)
+            clusters_df = pd.read_csv(clusters_url, sep="\t")
+
+            identifications_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=result_specnets_DB/".format(task_id)
+            identifications_df = pd.read_csv(identifications_url, sep="\t")
+
+            inner_df = clusters_df.merge(identifications_df, how="inner", left_on="#ClusterIdx", right_on="#Scan#")
+            inner_df = inner_df[["#Filename", "Compound_Name"]]
+            inner_df["full_CCMS_path"] = inner_df["#Filename"]
+            inner_df = inner_df[["full_CCMS_path", "Compound_Name"]]
+
+            inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
+        elif task_type == "FEATURE-BASED-MOLECULAR-NETWORKING":
+            quantification_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=quantification_table_reformatted/".format(task_id)
+            #quantification_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=quantification_table/".format(task_id)
+            quantification_df = pd.read_csv(quantification_url, sep=",")
+            
+            quantification_records = quantification_df.to_dict(orient="records")
+
+            compound_presence_records = []
+            for record in quantification_records:
+                for key in record:
+                    if "Peak area" in key:
+                        if record[key] > 0:
+                            presence_dict = {}
+                            presence_dict["full_CCMS_path"] = key.replace("Peak area", "")
+                            presence_dict["#ClusterIdx"] = record["row ID"]
+                            
+                            compound_presence_records.append(presence_dict)
+            
+            compound_presence_df = pd.DataFrame(compound_presence_records)
+
+            identifications_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=DB_result/".format(task_id)
+            identifications_df = pd.read_csv(identifications_url, sep="\t")
+
+            inner_df = compound_presence_df.merge(identifications_df, how="inner", left_on="#ClusterIdx", right_on="#Scan#")
+            inner_df = inner_df[["full_CCMS_path", "Compound_Name"]]
+
+            inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
+
+    #Actually doing Analysis
     output_folder = ("./tempuploads")
     redu_pca.project_new_data(new_analysis_filename, output_folder)
 
