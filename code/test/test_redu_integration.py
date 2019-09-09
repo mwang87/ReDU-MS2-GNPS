@@ -116,8 +116,7 @@ def test_your_pca():
 def test_global_pca():
     response = requests.get(BASE_URL + URL_ONE)
     data = response.content
-    file_size = sys.getsizeof(data)
-    print(file_size)    
+    file_size = sys.getsizeof(data)    
 
     if (file_size < 27760000):
         sys.exit(1)
