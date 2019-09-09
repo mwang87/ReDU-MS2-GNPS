@@ -5,26 +5,6 @@
 <script src="/static/datatables/datatables.min.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/datatables/datatables.min.css" crossorigin="anonymous">
 
-
-<!-- 
-    <style>
-    tbody {
-        display:block;
-        height:800px;
-        overflow:auto;
-    }
-    thead, tbody tr {
-        display:table;
-        width:100%;
-        table-layout:fixed;
-    }
-    thead {
-        width: calc( 100% - 1em )
-    }
-
-    </style> -->
-
-
     <div id="app-4" class="container-fluid justify-content-center align-items-center">
         <div class="row">
             <div class="col-sm"></div>
@@ -45,46 +25,7 @@
         </div>
     </div>
     
-
-
     <script>
-    // Vue.component('compoundfiles-linkout', {
-    //     props: ['compoundname'],
-    //     data: function() {
-    //         return {}
-    //     },
-    //     methods: {
-    //         clickMe: function(event) {
-    //             analysis_url = "/compoundfilename?compoundname=" + encodeURIComponent(this.$props["compoundname"])
-    //             var win = window.open(analysis_url, '_blank');
-    //             win.focus();
-    //         }
-    //     },
-    //     template: '<div><button class="btn btn-warning btn-block" style="margin-bottom:4px" v-on:click="clickMe">View Files</button></div>'
-    // })
-
-    // Vue.component('compoundenrichment-linkout', {
-    //     props: ['compoundname'],
-    //     data: function() {
-    //         return {}
-    //     },
-    //     methods: {
-    //         clickMe: function(event) {
-    //             analysis_url = "/compoundenrichmentdashboard?compound=" + encodeURIComponent(this.$props["compoundname"]) + "#" + encodeURIComponent(all_files_string)
-    //             var win = window.open(analysis_url, '_blank');
-    //             win.focus();
-    //         }
-    //     },
-    //     template: '<div><button class="btn btn-warning btn-block" style="margin-bottom:4px" v-on:click="clickMe">View Associations</button></div>'
-    // })
-
-    // var app4 = new Vue({
-    //     el: '#app-4',
-    //     methods: {},
-    //     data: {
-    //         compoundlist: []
-    //     }
-    // })
 
     url = "/compounds"
 
