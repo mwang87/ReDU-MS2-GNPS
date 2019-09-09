@@ -66,7 +66,7 @@ def test_attribute_terms_display():
     data = json.loads(response.content)
     key_value = list(data[0].keys())
 
-    expected_keys = ["attribute_name", "attributedisplay", "countterms"]
+    expected_keys = ["attributename", "attributedisplay", "countterms"]
 
     if (key_value != expected_keys):
         sys.exit(1)
