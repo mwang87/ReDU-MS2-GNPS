@@ -98,7 +98,7 @@
         success: function(componentObject) {
             return function(response) {
                 $('#datatable').DataTable( {
-                    data: tasklist,
+                    data: response,
                     columns: [
                         { data: "compound" , title: "Compound"}
                     ], 
