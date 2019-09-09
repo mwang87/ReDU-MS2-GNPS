@@ -116,13 +116,19 @@ $.ajax({
             $('#datatable').DataTable( {
                 data: response,
                 columns: [
-                    { data: "compound" , title: "Compound"}, 
+                    { data: "compound" , title: "Compound", width: "20%"}, 
                     { data: "count1" , title: "Files in G1"}, 
                     { data: "count2" , title: "Files in G2"}, 
                     { data: "count3" , title: "Files in G3"}, 
                     { data: "count4" , title: "Files in G4"}, 
                     { data: "count5" , title: "Files in G5"}, 
-                    { data: "count6" , title: "Files in G6"}
+                    { data: "count6" , title: "Files in G6"},
+                    { data: "count1_norm" , title: "% in G1"}, 
+                    { data: "count2_norm" , title: "% in G2"}, 
+                    { data: "count3_norm" , title: "% in G3"}, 
+                    { data: "count4_norm" , title: "% in G4"}, 
+                    { data: "count5_norm" , title: "% in G5"}, 
+                    { data: "count6_norm" , title: "% in G6"}
                 ],
                 pageLength: 30,
                 // columnDefs: [ {
@@ -143,6 +149,7 @@ $.ajax({
     }(this),
     dataType: "json"
 });
+
 </script>
 
 (% endblock %)
