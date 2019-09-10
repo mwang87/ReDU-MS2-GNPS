@@ -2,22 +2,8 @@
 
 (% block content %)
 
-<style>
-tbody {
-    display:block;
-    height:800px;
-    overflow:auto;
-}
-thead, tbody tr {
-    display:table;
-    width:100%;
-    table-layout:fixed;
-}
-thead {
-    width: calc( 100% - 1em )
-}
-
-</style>
+<script src="/static/datatables/datatables.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/static/datatables/datatables.min.css" crossorigin="anonymous">
 
     <div id="app-4" class="container-fluid">
         <br>
@@ -32,35 +18,10 @@ thead {
             </div>
             <query-results></query-results>
         </div>
-        <div>{{results.length}} Metadata</div>
-        <table class="table table-sm table-striped">
-            <thead>
-                  <tr>
-                    <th>Attribute</th>
-                    <th>Term</th>
-                    <th>Observations</th>
-                    <th>
-                        Total Files
-                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('totalfiles')"></i>
-                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('totalfiles')"></i>
-                    </th>
-                    <th>
-                        Percentage
-                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" style="cursor: pointer;" onclick="sortdesccolumn('percentage')"></i>
-                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" style="cursor: pointer;" onclick="sortasccolumn('percentage')"></i>
-                    </th>
-                  </tr>
-            </thead>
-            <tbody>
-                <tr v-for="result in results">
-                    <td>{{result.attribute_name}}</td>
-                    <td>{{result.attribute_term}}</td>
-                    <td>{{result.compoundfiles}}</td>
-                    <td>{{result.totalfiles}}</td>
-                    <td>{{result.percentage}}</td>
-                </tr>
-            </tbody>
-        </table>
+        
+        <div class="table table-striped">
+            <table id="datatable" class="display" width="100%"></table>
+        </div>
     </div>
 
     <script>
@@ -69,20 +30,19 @@ thead {
             all_files = JSON.parse(decodeURIComponent(window.location.hash).slice(1))["filenames"]
         }
 
-        function sortdesccolumn(column_name) {
-            app4.results.sort(function(a, b) {
-                if(a[column_name] < b[column_name]) return 1;
-                if(a[column_name] > b[column_name]) return -1;
-                return 0
-            });
-        }
+        function renderDataTable(results){
+            $('#datatable').DataTable( {
+                    data: results,
+                    columns: [
+                        { data: "attribute_name" , title: "Attribute"}, 
+                        { data: "attribute_term" , title: "Term"}, 
+                        { data: "compoundfiles" , title: "Observations"}, 
+                        { data: "totalfiles" , title: "Total Files"},
+                        { data: "percentage" , title: "Percentage"}
+                    ],
+                    pageLength: 30
+                } );
 
-        function sortasccolumn(column_name) {
-            app4.results.sort(function(a, b) {
-                if(a[column_name] < b[column_name]) return -1;
-                if(a[column_name] > b[column_name]) return 1;
-                return 0
-            });
         }
 
         function querycompound() {
@@ -91,7 +51,7 @@ thead {
                 type: "POST",
                 success: function(componentObject) {
                     return function(response) {
-                        app4._data.results = response
+                        renderDataTable(response)
                     }
                 }(this),
                 data: {
@@ -108,7 +68,7 @@ thead {
                 type: "POST",
                 success: function(componentObject) {
                     return function(response) {
-                        app4._data.results = response
+                        renderDataTable(response)
                     }
                 }(this),
                 data: {
@@ -117,7 +77,6 @@ thead {
                 dataType: "json"
             });
         }
-
 
         Vue.component('query-results', {
             props: [],
@@ -131,6 +90,7 @@ thead {
             },
             template: '<div><button  v-bind:class=classSelection v-on:click="clickMe()">Query Compound</button></div>'
         })
+
         var app4 = new Vue({
             el: '#app-4',
             methods: {
