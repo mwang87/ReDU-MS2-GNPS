@@ -15,7 +15,6 @@ import requests_cache
 import metadata_validator
 import config
 import pandas as pd
-import random
 from ccmsproteosafepythonapi import proteosafe
 
 requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
@@ -707,13 +706,11 @@ def processcomparemultivariate():
         files_to_filter = [item[2:] for item in files_of_interest]
         new_df = full_occ_table[full_occ_table["full_CCMS_path"].isin(files_to_filter)]
         sklearn_output, new_sample_list, eigenvalues, percent_variance = redu_pca.calculate_master_projection(new_df, 5, True) 
-       
-        random_id = random.randint(0,1000000)
 
-        output_folder = ("./tempuploads/%s" %(random_id))
+        output_folder = ("./tempuploads/" + str(uuid.uuid4()))
         redu_pca.emperor_output(sklearn_output, new_sample_list, eigenvalues, percent_variance, output_folder)
         
-        return(send_file("./tempuploads/%s/index.html" %(random_id)))
+        return(send_file(os.path.join(output_folder, "index.html")))
     else:
         #Making sure we calculate global datata
         if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
