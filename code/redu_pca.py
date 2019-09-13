@@ -13,11 +13,16 @@ import scipy.sparse as sps
 import config
 
 ### Given a file input occurrence table, creates the eigen vectors file defined above PATH_TO_COMPONENT_MATRIX, and PCA project of these files PATH_TO_ORIGINAL_PCA
-def calculate_master_projection(input_file_occurrences_table, components = 5):  
-    print("made it to original projection function")	
-    #load data from master GNPS occurance table into memory
-    df_temp = pd.read_csv(input_file_occurrences_table, sep = "\t")
-         
+def calculate_master_projection(input_file_occurrences_table, components = 5, smol_pca = False):  
+    print("made it to original projection function")
+
+    if smol_pca is False:
+        #load data from master GNPS occurance table into memory
+        df_temp = pd.read_csv(input_file_occurrences_table, sep = "\t")
+    
+    else:
+        df_temp = input_file_occurrences_table
+
     all_compound_occurances = df_temp["Compound_Name"]
     all_file_occurances = df_temp["full_CCMS_path"]
     
@@ -74,13 +79,19 @@ def calculate_master_projection(input_file_occurrences_table, components = 5):
     #place eigenvalues and percent variance on the end of this file so it can be used for emperor projection
     df_temp.loc[len(compound_list)] = eigenvalues
     df_temp.loc[len(compound_list)+1] = percent_variance
-    df_temp.to_csv(config.PATH_TO_COMPONENT_MATRIX)
+    
+    if smol_pca is False:
+        df_temp.to_csv(config.PATH_TO_COMPONENT_MATRIX)
     
     sklearn_output = pca.transform(new_matrix) #using sklearn to transform the output
     
-    #saving the "master pca" calculated by this function as a csv
-    df_temp = pd.DataFrame(data = sklearn_output, index = new_sample_list)
-    df_temp.to_csv(config.PATH_TO_ORIGINAL_PCA)
+    if smol_pca is False:
+        #saving the "master pca" calculated by this function as a csv
+        df_temp = pd.DataFrame(data = sklearn_output, index = new_sample_list)
+        df_temp.to_csv(config.PATH_TO_ORIGINAL_PCA)
+
+    if smol_pca is True:
+        return(sklearn_output, new_sample_list, eigenvalues, percent_variance)    
 
 ### Given a new file occurrence table, creates a projection of the new data along with the old data and saves as a png output
 def project_new_data(new_file_occurrence_table, output_file):
@@ -209,10 +220,11 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
   
     #call stuff to ouput an emperor plot
     emp = Emperor(ores, final_metadata, remote = True)
-           
+               
     # create an output directory
     os.makedirs(output_file, exist_ok=True)
 
     with open(os.path.join(output_file, 'index.html'), 'w') as f:
         f.write(emp.make_emperor(standalone = True))
         emp.copy_support_files(output_file)
+
