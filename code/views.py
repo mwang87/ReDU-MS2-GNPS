@@ -25,7 +25,6 @@ black_list_attribute = ["SubjectIdentifierAsRecorded", "UniqueSubjectID", "UBERO
 def resolve_ontology(attribute, term):
     if attribute == "ATTRIBUTE_BodyPart":
         url = "https://www.ebi.ac.uk/ols/api/ontologies/uberon/terms?iri=http://purl.obolibrary.org/obo/%s" % (term.replace(":", "_"))
-        print(url)
         try:
             requests.get(url)
             ontology_json = json.loads(requests.get(url).text)
@@ -38,7 +37,6 @@ def resolve_ontology(attribute, term):
 
     if attribute == "ATTRIBUTE_Disease":
         url = "https://www.ebi.ac.uk/ols/api/ontologies/doid/terms?iri=http://purl.obolibrary.org/obo/%s" % (term.replace(":", "_"))
-        print(url)
         try:
             ontology_json = requests.get(url).json()
             #print(json.dumps(ontology_json))
@@ -48,7 +46,6 @@ def resolve_ontology(attribute, term):
         except:
             return term
 
-    print((attribute, term))
     if attribute == "ATTRIBUTE_DatasetAccession":
         try:
             url = "https://massive.ucsd.edu/ProteoSAFe/proxi/datasets?resultType=full&accession=%s" % (term)
@@ -350,8 +347,6 @@ def querycompounds():
     all_compounds = []
 
     all_compounds_db = CompoundFilenameConnection.select(CompoundFilenameConnection.compound, fn.COUNT(CompoundFilenameConnection.compound).alias('count')).join(Compound).group_by(CompoundFilenameConnection.compound).dicts()
-    print(len(all_compounds_db))
-    print(all_compounds_db[0])
 
     for compound in all_compounds_db:
         compound_dict = {}
@@ -434,17 +429,12 @@ def filesenrichment():
 
     all_metadata = FilenameAttributeConnection.select(Attribute.categoryname, AttributeTerm.term, fn.COUNT(FilenameAttributeConnection.filename).alias('ct')).join(Attribute).switch(FilenameAttributeConnection).join(AttributeTerm).group_by(Attribute.categoryname, AttributeTerm.term).dicts()
 
-    print(len(all_metadata))
-    print(all_metadata[0])
-
     for attribute_term_pair in all_metadata:
         if attribute_term_pair["categoryname"].find("ATTRIBUTE_") == -1:
             continue
 
         if attribute_term_pair["categoryname"] in blacklist_attributes:
             continue
-
-        print(attribute_term_pair)
 
         attribute_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term_pair["term"]).where(FilenameAttributeConnection.attribute == attribute_term_pair["categoryname"])
         attribute_filenames = set([filename.filepath for filename in attribute_files_db]).intersection(filter_filenames)
@@ -515,7 +505,6 @@ def plottags():
     output_percent_png = os.path.join("static", "temp", uuid_to_use + "_percent.png")
 
     cmd = "Rscript %s %s %s %s %s" % ("Meta_Analysis_Plot_Example.r", input_filename, output_counts_png, output_percent_png, sourcelevel)
-    print(cmd)
     os.system(cmd)
 
     return json.dumps({"uuid" : uuid_to_use})
@@ -608,7 +597,6 @@ def allowed_file_metadata(filename):
 @app.route('/validate', methods=['POST'])
 def validate():
     request_file = request.files['file']
-    print(request_file)
     #Invalid File Types
     if not allowed_file_metadata(request_file.filename):
         error_dict = {}
@@ -631,8 +619,6 @@ def validate():
      
     """Trying stuff out with pandas"""
     metadata_df = pd.read_csv(local_filename, sep="\t")
-    print("METADATA")
-    print(metadata_df)
     metadata_df.to_csv(local_filename, index=False, sep="\t")
 
     metadata_validator.rewrite_metadata(local_filename)
