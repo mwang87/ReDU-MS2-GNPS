@@ -414,11 +414,8 @@
         <button class="btn btn-primary btn-block" v-on:click="launchcompoundenrichment">Launch Sample Information Association</button>\
         </div>'
     })
-
-
-
-
-    Vue.component('analysis-gnps-setup', {
+        
+        Vue.component('analysis-gnps-setup', {
         data: function() {
             return {}
         },
@@ -473,27 +470,9 @@
                 total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
                 unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
                 unique_list_files = Array.from(new Set(unique_list_files));
-               
-                $.ajax({
-                     url: "/processcomparemultivariate",
-                     method: "POST",
-                     data: { files: JSON.stringify(unique_list_files)},         
-                        
-                     success: function(data){
-                        var w =   window.open('about:blank', "projectselectpoints");
-                        w.document.open();
-                        w.document.write(data);
-                        w.document.close();
-
-                        },
-
-
-                     error: function(data, error){
-                     alert("Something went wrong!")
-                     }
-                      
-                     });
-            }
+                remote_url = "/processcomparemultivariate?files=" + JSON.stringify(unique_list_files)
+                window.location.replace(remote_url) 
+                }
         },
 
         template: '<div><button class="btn btn-primary btn-block" v-on:click="setupnetworking">Set Up Co-Analysis with GNPS Molecular Networking</button> \
