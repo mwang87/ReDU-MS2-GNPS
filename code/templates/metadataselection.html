@@ -158,12 +158,19 @@
         },
         methods: {
             clickMe: function(event) {
+                $("#loadMe").modal({
+                    backdrop: "static", //remove ability to close modal with click
+                    keyboard: false, //remove option to close with keyboard
+                    show: true //Display loader!
+                });
+
                 $.ajax({
                     url: "/attribute/" + this.$props["attributename"] + "/attributeterms",
                     data: {
                         filters: JSON.stringify(this.$parent.filterTerms)
                     },
                     success: function(componentObject) {
+                        $("#loadMe").modal("hide");
                         return function(response) {
                             componentObject.$emit("update-attribute", response)
                         }
