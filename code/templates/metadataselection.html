@@ -170,8 +170,8 @@
                         filters: JSON.stringify(this.$parent.filterTerms)
                     },
                     success: function(componentObject) {
-                        $("#loadMe").modal("hide");
                         return function(response) {
+                            $("#loadMe").modal("hide");
                             componentObject.$emit("update-attribute", response)
                         }
                     }(this),
