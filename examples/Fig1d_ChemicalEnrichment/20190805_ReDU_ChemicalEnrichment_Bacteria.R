@@ -21,9 +21,14 @@ df <- df[,c(1,3,5,7)]
 df_gather <- gather(data=df, sample, proportion, 2:length(df))
 
 #chemical <- "Surfactin_C14"
-chemical <- "Spectral Match to Cholic acid from NIST14"
+chemical <- "Spectral Match to PyroGlu-Ile from NIST14"
 
 df_plot <- subset(df_gather, df_gather$Chemical == chemical)
+
+
+df_plot$sample <- factor(df_plot$sample,
+                         levels = c('1423|Bacillus subtilis (n=89)', '1280|Staphylococcus aureus (n=49)',
+                                    '1883|Streptomyces (n=7)') )
 
 plot <- ggplot(df_plot,aes(x=as.factor(sample), as.numeric(proportion*100)))+
                  geom_bar(aes(fill=sample), stat="identity", width=0.75)+
