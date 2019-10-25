@@ -72,6 +72,9 @@ def rewrite_metadata(metadata_filename):
 
     metadata_df = pd.read_csv(metadata_filename, sep="\t")
 
+    #Limiting the number of rows
+    metadata_df = metadata_df.truncate(after=2000)
+
     #Rewriting Year of Analysis
     metadata_list = metadata_df.to_dict(orient="records")
     for metadata_obj in metadata_list:
@@ -79,9 +82,6 @@ def rewrite_metadata(metadata_filename):
             metadata_obj["YearOfAnalysis"] = str(int(float(metadata_obj["YearOfAnalysis"])))
         except:
             continue
-
-    #Limiting the number of rows
-    metadata_df = metadata_df.truncate(after=2000)
 
     metadata_df = pd.DataFrame(metadata_list)
     metadata_df.to_csv(metadata_filename, sep="\t", index=False)
