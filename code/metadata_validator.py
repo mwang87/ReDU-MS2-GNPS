@@ -80,6 +80,9 @@ def rewrite_metadata(metadata_filename):
         except:
             continue
 
+    #Limiting the number of rows
+    metadata_df = metadata_df.truncate(after=2000)
+
     metadata_df = pd.DataFrame(metadata_list)
     metadata_df.to_csv(metadata_filename, sep="\t", index=False)
 
