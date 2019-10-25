@@ -155,8 +155,13 @@ def perform_validation(filename):
             error_dict["header"] = column
             error_dict["line_number"] = line_number + 1 #0 Indexed with 0 being the header row
             error_dict["error_string"] = str(my_validator.failures[column][line_number])
-
             errors_list.append(error_dict)
+
+            if len(errors_list) > 500:
+                break
+
+        if len(errors_list) > 500:
+            break
 
     for missing_field in my_validator.missing_fields:
         error_dict = {}
