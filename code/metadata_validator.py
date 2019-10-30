@@ -72,6 +72,9 @@ def rewrite_metadata(metadata_filename):
 
     metadata_df = pd.read_csv(metadata_filename, sep="\t")
 
+    #Limiting the number of rows
+    metadata_df = metadata_df.truncate(after=2000)
+
     #Rewriting Year of Analysis
     metadata_list = metadata_df.to_dict(orient="records")
     for metadata_obj in metadata_list:
@@ -152,8 +155,13 @@ def perform_validation(filename):
             error_dict["header"] = column
             error_dict["line_number"] = line_number + 1 #0 Indexed with 0 being the header row
             error_dict["error_string"] = str(my_validator.failures[column][line_number])
-
             errors_list.append(error_dict)
+
+            if len(errors_list) > 500:
+                break
+
+        if len(errors_list) > 500:
+            break
 
     for missing_field in my_validator.missing_fields:
         error_dict = {}
