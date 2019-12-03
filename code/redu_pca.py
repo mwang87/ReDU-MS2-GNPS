@@ -3,7 +3,7 @@ from numpy import mean
 import pandas as pd
 import sys
 import os
-import csv
+import csv 
 import seaborn
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
@@ -11,100 +11,78 @@ from skbio.stats.ordination import OrdinationResults
 from emperor import Emperor
 import scipy.sparse as sps
 import config
+from numpy import genfromtxt
+import collections
 
 ### Given a file input occurrence table, creates the eigen vectors file defined above PATH_TO_COMPONENT_MATRIX, and PCA project of these files PATH_TO_ORIGINAL_PCA
-def calculate_master_projection(input_file_occurrences_table, components = 5, smol_pca = False):  
-    print("made it to original projection function")
-
+def calculate_master_projection(input_file_occurrences_table, components = 3, smol_pca = False):  
+    print("Calulating Master Projection")
+    #determine whether or not this is a full calculation
     if smol_pca is False:
         #load data from master GNPS occurance table into memory
-        df_temp = pd.read_csv(input_file_occurrences_table, sep = "\t")
-    
+        df_temp = pd.read_table(input_file_occurrences_table)    
     else:
+        #whole table has already been passed
         df_temp = input_file_occurrences_table
 
+    #reading in filenames and compound names
     all_compound_occurances = df_temp["Compound_Name"]
-    all_file_occurances = df_temp["full_CCMS_path"]
-    
-    #create a new dataframe with only the information needed to reconstruct, redundant but easier to see
-    compounds_filname_df = pd.DataFrame({"Compound_Name" : all_compound_occurances, "full_CCMS_path" : all_file_occurances})
-    
-    #sorting dataframe by sample in order to help? speed up things
-    compounds_filname_df.sort_values(by = "Compound_Name", axis = 0, inplace = True)
+    all_file_occurances = df_temp["full_CCMS_path"]  
     
     #determine the header for the new table
-    unique_compounds, compound_index = np.unique(compounds_filname_df["Compound_Name"], return_inverse = True)
+    unique_compounds, compound_index = np.unique(all_compound_occurances, return_inverse = True)
     
     #determine the unique samples for the new table
-    unique_sample, file_index = np.unique(compounds_filname_df["full_CCMS_path"], return_inverse = True)
-    
-    all_compounds = list(compounds_filname_df["Compound_Name"])
-    all_samples = list(compounds_filname_df["full_CCMS_path"])
+    unique_sample, file_index = np.unique(all_file_occurances, return_inverse = True)
     
     #create a matrix from the coordinates given
     data = [1] * len(compound_index)
     matrix = sps.coo_matrix((data, (compound_index, file_index)), shape = None).todok().toarray()
+    
     #handling duplicates within the array
     matrix[matrix > 0] = 1
     
     #convert it into the correct format for the return
     sparse_occ_matrix = pd.DataFrame(index = list(unique_compounds), columns = list(unique_sample), data = matrix)
-
-    #bring in metadata
-    master_metadata_file = pd.read_csv(config.PATH_TO_ORIGINAL_MAPPING_FILE, "\t")
-    master_sample_list = master_metadata_file["filename"].tolist()
- 
-    #reformatting the sample names for comparison
-    sample_list = ["f." + item for item in list(sparse_occ_matrix.columns)]
-    sparse_occ_matrix.columns = sample_list
-            
-    #fitlering out samples thta are not contained within the metadata    
-    sparse_occ_matrix = sparse_occ_matrix.loc[:, sparse_occ_matrix.columns.isin(master_sample_list)]
-    new_sample_list = sparse_occ_matrix.columns
-    compound_list = list(sparse_occ_matrix.index)    
     new_matrix = sparse_occ_matrix.T.values #align so that the "features" are column headers
     
     #bring sklearn components into play
-    pca = PCA(n_components = components) #creating the instance
-    pca.fit(new_matrix) #fitting the data 
+    pca = PCA(n_components = components, copy = False) #creating the instance
+    sklearn_output = pca.fit_transform(new_matrix) #fitting the data 
     
     eigenvalues = list(pca.explained_variance_) #eigenvalue vector
-                               
     percent_variance = list(pca.explained_variance_ratio_ ) #also needed for emperor percent variance explained
- 
-    
-    #calculate the component matrix and save it for projection at a later time
-    component_matrix = pca.components_
-    df_temp = pd.DataFrame(data = component_matrix.T, index = compound_list)
-    #place eigenvalues and percent variance on the end of this file so it can be used for emperor projection
-    df_temp.loc[len(compound_list)] = eigenvalues
-    df_temp.loc[len(compound_list)+1] = percent_variance
-    
+   
+    print("GLOBAL")
+    unique_sample = ["f." + item for item in unique_sample]
     if smol_pca is False:
-        df_temp.to_csv(config.PATH_TO_COMPONENT_MATRIX)
-    
-    sklearn_output = pca.transform(new_matrix) #using sklearn to transform the output
-    
-    if smol_pca is False:
-        #saving the "master pca" calculated by this function as a csv
-        df_temp = pd.DataFrame(data = sklearn_output, index = new_sample_list)
+        #calculate the component matrix and save it for projection at a later time
+        component_matrix = pca.components_
+        component_df = pd.DataFrame(data = component_matrix.T, index = unique_compounds)
+        component_df.to_csv(config.PATH_TO_COMPONENT_MATRIX)
+
+        #save eigenvalues and percent variance for later
+        df_temp = pd.DataFrame({"eigenvalues" : eigenvalues, "percent_variance" : percent_variance})
+        df_temp.to_csv(config.PATH_TO_EIGS)
+        
+        #save principle components for later
+        df_temp = pd.DataFrame(data = sklearn_output, index = unique_sample)
         df_temp.to_csv(config.PATH_TO_ORIGINAL_PCA)
 
     if smol_pca is True:
-        return(sklearn_output, new_sample_list, eigenvalues, percent_variance)    
+        return(sklearn_output, unique_sample, eigenvalues, percent_variance)    
 
 ### Given a new file occurrence table, creates a projection of the new data along with the old data and saves as a png output
 def project_new_data(new_file_occurrence_table, output_file):
     new_matrix = np.array([]) 
     file_list = []
-
-    component_matrix = pd.read_csv(config.PATH_TO_COMPONENT_MATRIX, sep = ",") #read in the eigenvectors
-    
-    #grab the eigenvalues, percent explained variance values, and then drop them from the dataframe
-    eigenvalues = list(component_matrix.iloc[-2,:])[1:]
-    percent_variance = list(component_matrix.iloc[-1,:])[1:]
-    component_matrix = component_matrix.iloc[:-2,:]
-    
+    print(new_file_occurrence_table)
+    #load components, eigenvalues, and percent variance
+    component_matrix = pd.read_csv(config.PATH_TO_COMPONENT_MATRIX, sep = ",")
+    eig_var_df = pd.read_csv(config.PATH_TO_EIGS, sep = ",")
+    eigenvalues = eig_var_df["eigenvalues"].tolist()
+    percent_variance = eig_var_df["percent_variance"].tolist()
+   
     #format eignevectors accordingly, since dataframes change when you read them is as a csv
     component_matrix.rename(columns = {'Unnamed: 0': 'SampleID'}, inplace = True)
     component_matrix.set_index(['SampleID'], inplace=True)
@@ -112,24 +90,21 @@ def project_new_data(new_file_occurrence_table, output_file):
     old_compound_list = list(component_matrix.index) #list of all compounds found in the master projection and format to match
 
     #reformat the occurance table for the new data being fed in
-    new_data = pd.read_csv(new_file_occurrence_table, sep = "\t")
+    new_data = pd.read_table(new_file_occurrence_table)
     all_compound_occurances = new_data["Compound_Name"]
     all_file_occurances = new_data["full_CCMS_path"]
-    
-    #create a new dataframe with only the information needed to reconstruct, redundant but easier to see
-    compounds_filname_df = pd.DataFrame({"Compound_Name" : all_compound_occurances, "full_CCMS_path" : all_file_occurances})
-    
+     
     #sorting dataframe by sample in order to help? speed up things
-    compounds_filname_df.sort_values(by = "Compound_Name", axis = 0, inplace = True)
+    new_data.sort_values(by = "Compound_Name", axis = 0, inplace = True)
     
     #determine the header for the new table
-    unique_compounds, compound_index = np.unique(compounds_filname_df["Compound_Name"], return_inverse = True)
+    unique_compounds, compound_index = np.unique(new_data["Compound_Name"], return_inverse = True)
     
     #determine the unique samples for the new table
-    unique_sample, file_index = np.unique(compounds_filname_df["full_CCMS_path"], return_inverse = True)
+    unique_sample, file_index = np.unique(new_data["full_CCMS_path"], return_inverse = True)
     
-    all_compounds = list(compounds_filname_df["Compound_Name"])
-    all_samples = list(compounds_filname_df["full_CCMS_path"])
+    all_compounds = list(new_data["Compound_Name"])
+    all_samples = list(new_data["full_CCMS_path"])
     
     #create a matrix from the coordinates given
     data = [1] * len(compound_index)
@@ -164,15 +139,12 @@ def project_new_data(new_file_occurrence_table, output_file):
     
     #format new projection into a dataframe 
     new_pca_df = pd.DataFrame(data = visualize_stuff, index = new_sample_list)
-    new_pca_df.index.name = 'SampleID'
+    new_pca_df.index.name = 'Unnamed: 0'
     new_pca_df.columns = new_pca_df.columns.astype(str)
-    new_pca_df["type"] = "new"
 
     #load and format the original pca
     original_pca_df = pd.read_csv(config.PATH_TO_ORIGINAL_PCA, sep = ",")
-    original_pca_df.rename(columns = {'Unnamed: 0': 'SampleID'}, inplace = True)
-    original_pca_df.set_index(['SampleID'], inplace=True)
-    original_pca_df["type"] = "OG"
+    original_pca_df.set_index(['Unnamed: 0'], inplace=True) 
 
     all_pca_df = pd.concat([original_pca_df, new_pca_df]) #merging the two dataframes together
     
@@ -183,43 +155,61 @@ def project_new_data(new_file_occurrence_table, output_file):
     #call and create an emperor output for the old data and the new projected data
     emperor_output(values_only, full_file_list, eigenvalues, percent_variance, output_file, new_sample_list)
     
-
-###function takes in all the calculated outputs, both sklearn and manual and places them into the ordination results formate specified by skbio and then feeds it into the emperor thing to output a plot   
-
-def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file, new_files = None):
-    print("Made it to Emperor Function!")
+###currently at 1.8 seconds for 450 samples
+###function takes in all the calculated outputs and places them into the ordination results and then feeds it into the emperor thing to output a plot   
+def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file, new_files = []): 
     #read in sklearn output and format accordingly for emperor intake
     eigvals = pd.Series(data = eigenvalues)
     samples = pd.DataFrame(data = sklearn_output, index = full_file_list)
+    samples.index.rename("SampleID", inplace = True)
     p_explained = pd.Series(data = percent_variance)
     ores = OrdinationResults(long_method_name = "principal component analysis", short_method_name = "pcoa", eigvals = eigvals, samples = samples, proportion_explained = p_explained)
     
-    #this first part is for the global metadata file
-    global_metadata = pd.read_csv(config.PATH_TO_ORIGINAL_MAPPING_FILE, sep = "\t")
-    global_metadata_headers = global_metadata.columns.tolist()
-    global_metadata.rename(columns = {'filename': 'SampleID'}, inplace = True)
-    global_metadata["type"] = "Global Data"
-    global_metadata.set_index("SampleID", inplace = True)
+    #reorder, rename and add column to global metadata
+    with open(config.PATH_TO_ORIGINAL_MAPPING_FILE, 'r') as infile, open("temp_csv.tsv", "a") as outfile:
+        reader = csv.DictReader(infile, delimiter = "\t") 
 
-    common = global_metadata    
-
-    #this part is for the user uploaded metadata file
-    if new_files != None:
-        metadata_uploaded = pd.DataFrame({"SampleID": new_files, "type":["Your Data"] * len(new_files)})
-        for item in global_metadata_headers:
-            metadata_uploaded[item] = ["Your Data"] * len(new_files)
-        metadata_uploaded.set_index("SampleID", inplace = True)
+        #reorder the columns 
+        headers = reader.fieldnames
+        headers.insert(0, headers.pop(headers.index("filename"))) 
         
-        common = pd.concat([global_metadata, metadata_uploaded])
+        #rename columns
+        renamer = {"filename" : "SampleID"}
+        new_columns = [renamer.get(x,x) for  x in headers]
+        new_columns.append("Type")
 
-   
+        writer = csv.writer(outfile, delimiter = "\t")
+        writer.writerow(new_columns) 
+    
+        if len(new_files) != 0: 
+            #write data and add a column
+            for item in reader:
+                temp_row = [item[k] for k in headers]
+                temp_row.insert(0, temp_row.pop())
+            
+                #adding columns based on the type of the data
+                if item["filename"] in new_files:
+                    temp_row.append("Your Data")
+                else:
+                    temp_row.append("Global Data") 
+                writer.writerow(temp_row)
+
+        #this whole loop is expensive in terms of time
+        else:
+            for item in reader:
+                temp_row = [item[k] for k in headers]
+                temp_row.insert(0, temp_row.pop())
+                writer.writerow(temp_row)
+
+    #test code  
+    df = pd.read_table("temp_csv.tsv")
+    df.set_index("SampleID", inplace = True)
 
     #so you need to align the metadata and the files contained within the ordination file BEFORE feeding it into the Emperor thing otherwise it doesn't like to output results  
-    final_metadata, unused = common.align(samples, join = "right", axis = 0)
+    final_metadata, unused = df.align(samples,join = "right", axis = 0)    
     
-  
     #call stuff to ouput an emperor plot
-    emp = Emperor(ores, final_metadata, remote = True)
+    emp = Emperor(ores, final_metadata , remote = True)
                
     # create an output directory
     os.makedirs(output_file, exist_ok=True)
