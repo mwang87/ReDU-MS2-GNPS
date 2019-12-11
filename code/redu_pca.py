@@ -207,7 +207,10 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
     
     #so you need to align the metadata and the files contained within the ordination file BEFORE feeding it into the Emperor thing otherwise it doesn't like to output results  
     final_metadata, unused = df.align(samples,join = "right", axis = 0)    
-    #fixing to project data with no associated metadata
+    
+    #fixing to project data with no associated metadata 
+
+    ###EDIT THAT NEEDS TO BE MADE, PROPOGATE THIS FOR EVERYTHIG THAT DOES NOT CONTIAN METATDATA FOR CLARITY
     fixing_type_category = final_metadata["Type"].tolist()
     fixing_type_category = [str(item).replace("nan", "Your Data, No Metadata") for item in fixing_type_category]
     final_metadata["Type"] = fixing_type_category 
