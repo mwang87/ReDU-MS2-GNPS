@@ -511,7 +511,7 @@ def plottags():
 
 
 #Launch Job
-import credentials
+#import credentials
 
 #Summarize Files Per Comparison Group
 @app.route('/explorerdashboard', methods=['GET'])
@@ -680,34 +680,41 @@ def displayglobalmultivariate():
 
     return send_file("./tempuploads/global/index.html")
 
-from line_profiler import LineProfiler
+#from line_profiler import LineProfiler
 
-@app.route('/processcomparemultivariate', methods=['GET'])
-def processcomparemultivariate():
+@app.route('/processcomparemultivariate', methods=['GET', 'POST'])
+def processcomparemultivariate(): 
     #determine which functions get called
     try:
         files_of_interest = json.loads(request.args["files"])
-    except: 
-        files_of_interest = [] 
+    except:
+        files_of_interest = []
 
     #determine if it's a recalculation of data
     if len(files_of_interest) != 0:  
         print("Build a new PCA from scratch for the individual")
-        full_occ_table = pd.read_table(config.PATH_TO_GLOBAL_OCCURRENCES)    
+        files_of_interest = [item[2:] for item in files_of_interest]
         
-        #format files_of_interest to match the occ table
-        files_of_interest = [item[2:].replace("%20", " ") for item in files_of_interest]
-        new_df = full_occ_table[full_occ_table["full_CCMS_path"].isin(files_of_interest)]
-       # lp = LineProfiler()
-       # lp_wrapper = lp(redu_pca.calculate_master_projection)
-      #  sklearn_output, new_sample_list, eigenvalues, percent_variance = lp_wrapper(new_df, 3, True)
-       # lp.print_stats()
+        if os.path.isfile(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES):
+            print("Parsed Global Occurrences File Found")
+            full_occ_table = pd.read_table(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES)
+            new_df = full_occ_table[full_occ_table["full_CCMS_path"].isin(files_of_interest)]       
+        
+        else:
+            print("Creating Parsed Global Occurrences File")
+            full_occ_table = pd.read_table(config.PATH_TO_GLOBAL_OCCURRENCES)
+            col1 = full_occ_table["full_CCMS_path"].tolist()
+            col2 = full_occ_table["Compound_Name"].tolist()
+            new_df = pd.DataFrame({"full_CCMS_path" : col1, "Compound_Name" : col2})
+            new_df.to_csv(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES, sep = "\t")
+            new_df = new_df[new_df["full_CCMS_path"].isin(files_of_interest)]
+
         sklearn_output, new_sample_list, eigenvalues, percent_variance = redu_pca.calculate_master_projection(new_df, 3, True) 
         output_folder = ("./tempuploads/" + str(uuid.uuid4()))
         redu_pca.emperor_output(sklearn_output, new_sample_list, eigenvalues, percent_variance, output_folder)
-       
+                
         return(send_file(os.path.join(output_folder, "index.html")))
-    
+     
     #determine if it's a projection of data
     else:
         print("Project data on to the PCA")

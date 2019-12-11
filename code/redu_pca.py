@@ -24,7 +24,7 @@ def calculate_master_projection(input_file_occurrences_table, components = 3, sm
     else:
         #whole table has already been passed
         df_temp = input_file_occurrences_table
-
+    print(df_temp)
     #reading in filenames and compound names
     all_compound_occurances = df_temp["Compound_Name"]
     all_file_occurances = df_temp["full_CCMS_path"]  
@@ -157,7 +157,7 @@ def project_new_data(new_file_occurrence_table, output_file):
     
 ###currently at 1.8 seconds for 450 samples
 ###function takes in all the calculated outputs and places them into the ordination results and then feeds it into the emperor thing to output a plot   
-def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file, new_files = []): 
+def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file, new_files = []):   
     #read in sklearn output and format accordingly for emperor intake
     eigvals = pd.Series(data = eigenvalues)
     samples = pd.DataFrame(data = sklearn_output, index = full_file_list)
@@ -193,7 +193,7 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
                 else:
                     temp_row.append("Global Data") 
                 writer.writerow(temp_row)
-
+                
         #this whole loop is expensive in terms of time
         else:
             for item in reader:
@@ -204,10 +204,14 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
     #test code  
     df = pd.read_table("temp_csv.tsv")
     df.set_index("SampleID", inplace = True)
-
+    
     #so you need to align the metadata and the files contained within the ordination file BEFORE feeding it into the Emperor thing otherwise it doesn't like to output results  
     final_metadata, unused = df.align(samples,join = "right", axis = 0)    
-    
+    #fixing to project data with no associated metadata
+    fixing_type_category = final_metadata["Type"].tolist()
+    fixing_type_category = [str(item).replace("nan", "Your Data, No Metadata") for item in fixing_type_category]
+    final_metadata["Type"] = fixing_type_category 
+
     #call stuff to ouput an emperor plot
     emp = Emperor(ores, final_metadata , remote = True)
                
@@ -217,4 +221,5 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
     with open(os.path.join(output_file, 'index.html'), 'w') as f:
         f.write(emp.make_emperor(standalone = True))
         emp.copy_support_files(output_file)
+
 
