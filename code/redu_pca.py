@@ -159,6 +159,10 @@ def project_new_data(new_file_occurrence_table, output_file):
 ###function takes in all the calculated outputs and places them into the ordination results and then feeds it into the emperor thing to output a plot   
 def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file, new_files = []):   
     #read in sklearn output and format accordingly for emperor intake
+    print("FULL FILE LIST")
+    print(full_file_list)
+    print("NEW FILES")
+    print(new_files)
     eigvals = pd.Series(data = eigenvalues)
     samples = pd.DataFrame(data = sklearn_output, index = full_file_list)
     samples.index.rename("SampleID", inplace = True)
@@ -166,7 +170,7 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
     ores = OrdinationResults(long_method_name = "principal component analysis", short_method_name = "pcoa", eigvals = eigvals, samples = samples, proportion_explained = p_explained)
     
     #reorder, rename and add column to global metadata
-    with open(config.PATH_TO_ORIGINAL_MAPPING_FILE, 'r') as infile, open("temp_csv.tsv", "a") as outfile:
+    with open(config.PATH_TO_ORIGINAL_MAPPING_FILE, 'r') as infile, open("%s_temp.tsv" %(output_file), "a") as outfile:
         reader = csv.DictReader(infile, delimiter = "\t") 
 
         #reorder the columns 
@@ -202,18 +206,16 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
                 writer.writerow(temp_row)
 
     #test code  
-    df = pd.read_table("temp_csv.tsv")
+    df = pd.read_table("%s_temp.tsv" %(output_file))
     df.set_index("SampleID", inplace = True)
     
     #so you need to align the metadata and the files contained within the ordination file BEFORE feeding it into the Emperor thing otherwise it doesn't like to output results  
     final_metadata, unused = df.align(samples,join = "right", axis = 0)    
-    
-    #fixing to project data with no associated metadata 
-
-    ###EDIT THAT NEEDS TO BE MADE, PROPOGATE THIS FOR EVERYTHIG THAT DOES NOT CONTIAN METATDATA FOR CLARITY
-    fixing_type_category = final_metadata["Type"].tolist()
-    fixing_type_category = [str(item).replace("nan", "Your Data, No Metadata") for item in fixing_type_category]
-    final_metadata["Type"] = fixing_type_category 
+    print(final_metadata) 
+    #fixing_type_category = final_metadata["Type"].tolist()
+    #fix for if your data has no associated metadata for PCA projection
+    #fixing_type_category = [str(item).replace("nan", "Your Data") for item in fixing_type_category]
+    #final_metadata["Type"] = fixing_type_category 
 
     #call stuff to ouput an emperor plot
     emp = Emperor(ores, final_metadata , remote = True)

@@ -683,15 +683,10 @@ def displayglobalmultivariate():
 #from line_profiler import LineProfiler
 
 @app.route('/processcomparemultivariate', methods=['GET', 'POST'])
-def processcomparemultivariate(): 
-    #determine which functions get called
-    try:
-        files_of_interest = json.loads(request.args["files"])
-    except:
-        files_of_interest = []
-
+def processcomparemultivariate():
     #determine if it's a recalculation of data
-    if len(files_of_interest) != 0:  
+    if request.method == 'POST':
+        files_of_interest = json.loads(request.form["files"])
         print("Build a new PCA from scratch for the individual")
         files_of_interest = [item[2:] for item in files_of_interest]
         
@@ -699,7 +694,7 @@ def processcomparemultivariate():
             print("Parsed Global Occurrences File Found")
             full_occ_table = pd.read_table(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES)
             new_df = full_occ_table[full_occ_table["full_CCMS_path"].isin(files_of_interest)]       
-        
+
         else:
             print("Creating Parsed Global Occurrences File")
             full_occ_table = pd.read_table(config.PATH_TO_GLOBAL_OCCURRENCES)
@@ -708,7 +703,9 @@ def processcomparemultivariate():
             new_df = pd.DataFrame({"full_CCMS_path" : col1, "Compound_Name" : col2})
             new_df.to_csv(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES, sep = "\t")
             new_df = new_df[new_df["full_CCMS_path"].isin(files_of_interest)]
-
+        
+        print("NEW DF")
+        print(new_df)
         sklearn_output, new_sample_list, eigenvalues, percent_variance = redu_pca.calculate_master_projection(new_df, 3, True) 
         output_folder = ("./tempuploads/" + str(uuid.uuid4()))
         redu_pca.emperor_output(sklearn_output, new_sample_list, eigenvalues, percent_variance, output_folder)
@@ -716,7 +713,7 @@ def processcomparemultivariate():
         return(send_file(os.path.join(output_folder, "index.html")))
      
     #determine if it's a projection of data
-    else:
+    if request.method == 'GET':
         print("Project data on to the PCA")
         #Making sure we calculate global datata
         if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
