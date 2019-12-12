@@ -687,12 +687,13 @@ def processcomparemultivariate():
     #determine if it's a recalculation of data
     if request.method == 'POST':
         files_of_interest = json.loads(request.form["files"])
+        print(files_of_interest)
         print("Build a new PCA from scratch for the individual")
         files_of_interest = [item[2:] for item in files_of_interest]
         
         if os.path.isfile(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES):
             print("Parsed Global Occurrences File Found")
-            full_occ_table = pd.read_table(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES)
+            full_occ_table = pd.read_table(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES) 
             new_df = full_occ_table[full_occ_table["full_CCMS_path"].isin(files_of_interest)]       
 
         else:

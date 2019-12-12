@@ -212,10 +212,10 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
     #so you need to align the metadata and the files contained within the ordination file BEFORE feeding it into the Emperor thing otherwise it doesn't like to output results  
     final_metadata, unused = df.align(samples,join = "right", axis = 0)    
     print(final_metadata) 
-    #fixing_type_category = final_metadata["Type"].tolist()
+    fixing_type_category = final_metadata["Type"].tolist()
     #fix for if your data has no associated metadata for PCA projection
-    #fixing_type_category = [str(item).replace("nan", "Your Data") for item in fixing_type_category]
-    #final_metadata["Type"] = fixing_type_category 
+    fixing_type_category = [str(item).replace("nan", "Your Data") for item in fixing_type_category]
+    final_metadata["Type"] = fixing_type_category 
 
     #call stuff to ouput an emperor plot
     emp = Emperor(ores, final_metadata , remote = True)

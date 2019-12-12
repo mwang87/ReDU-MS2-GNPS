@@ -423,19 +423,17 @@
               
                 
 
-             //   $.post( "/processcomparemultivariate", {files: JSON.stringify(unique_list_files)})
-               //    .done(function(data)
-              //     {
-              //      var win = window.open();
-              //      win.document.write(data);
-             //       win.document.close();
-             //       win.focus();
-             //      }); 
+                $.post( "/processcomparemultivariate", {files: JSON.stringify(unique_list_files)})
+                   .done(function(data)
+                   {
+                   var win = window.open();
+                    win.document.write(data);
+                    win.document.close();
+                    win.focus();
+                   }); 
 
                     
-                remote_url = "/processcomparemultivariate?files=" + JSON.stringify(unique_list_files)
-                window.location.replace(remote_url) 
-             }
+            }
 
 
         },
