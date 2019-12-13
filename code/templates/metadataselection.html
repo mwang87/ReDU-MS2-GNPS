@@ -371,7 +371,9 @@
                 var win = window.open(analysis_url, '_blank');
                 win.focus();
             }
-        },
+
+      
+       },
         template: '<div> <button class="btn btn-primary btn-block" v-on:click="setupnetworking">Set Up Re-Analysis with GNPS Molecular Networking</button> \
         <br> \
             <button class="btn btn-primary btn-block" v-on:click="setuplibrarysearch">Set Up Re-Analysis with GNPS Library Search</button> \
@@ -414,34 +416,13 @@
                 analysis_url = "/compoundslist#" + encodeURIComponent(JSON.stringify(params_dict))
                 var win = window.open(analysis_url, '_blank');
                 win.focus();
-            },
-
-            setuppca: function(event) {
-                total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
-                unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
-                unique_list_files = Array.from(new Set(unique_list_files));
-              
-                
-
-                $.post( "/processcomparemultivariate", {files: JSON.stringify(unique_list_files)})
-                   .done(function(data)
-                   {
-                   var win = window.open();
-                    win.document.write(data);
-                    win.document.close();
-                    win.focus();
-                   }); 
-
-                    
             }
 
-
+         
         },
         template: '<div><button class="btn btn-primary btn-block" v-on:click="launchenrichment">Launch Chemical Enrichment Analysis</button> \
         <br> \
         <button class="btn btn-primary btn-block" v-on:click="launchcompoundenrichment">Launch Sample Information Association</button>\
-        <br> \
-        <button class = "btn btn-primary btn-block" v-on:click="setuppca">Launch PCA</button> \
         <br> \
         </div>'
     })
@@ -495,13 +476,31 @@
                 analysis_url = "https://gnps.ucsd.edu/ProteoSAFe/index.jsp?#" + encodeURIComponent(JSON.stringify(params_dict))
                 var win = window.open(analysis_url, '_blank');
                 win.focus();
+            },
+             setuppca: function(event) {
+                total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
+                unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
+                unique_list_files = Array.from(new Set(unique_list_files));
+              
+                $.post( "/processcomparemultivariate", {files: JSON.stringify(unique_list_files)})
+                   .done(function(data)
+                   {
+                   var win = window.open();
+                    win.document.write(data);
+                    win.document.close();
+                    win.focus();
+                   }); 
+       
             }
-
+       
          },
 
         template: '<div><button class="btn btn-primary btn-block" v-on:click="setupnetworking">Set Up Co-Analysis with GNPS Molecular Networking</button> \
         <br> \
         <button class="btn btn-primary btn-block" v-on:click="setuplibrarysearch">Set Up Co-Analysis with GNPS Library Search</button> \
+        <br> \
+        <button class = "btn btn-primary btn-block" v-on:click="setuppca">Launch PCA of Selected Files</button> \
+        <br> \
         </div>'
 
 
