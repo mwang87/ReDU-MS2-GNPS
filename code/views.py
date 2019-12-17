@@ -15,6 +15,7 @@ import requests_cache
 import metadata_validator
 import config
 import pandas as pd
+import ast
 from ccmsproteosafepythonapi import proteosafe
 
 requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
@@ -304,7 +305,7 @@ def viewattributeterms(attribute):
 
 #Returns all the terms given an attribute along with file counts for each term
 @app.route('/attribute/<attribute>/attributeterm/<term>/files', methods=['GET'])
-def viewfilesattributeattributeterm(attribute, term):
+def viewfilesattributeattributeterm(attribute, term): 
     all_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == term).where(FilenameAttributeConnection.attribute == attribute)
     all_files = set([file_db.filepath for file_db in all_files_db])
 
@@ -317,7 +318,7 @@ def viewfilesattributeattributeterm(attribute, term):
     intersection_set = set.intersection(*all_filtered_files_list)
 
     output_list = []
-
+    
     for filepath in intersection_set:
         output_dict = {}
         output_dict["attribute"] = attribute
@@ -343,17 +344,32 @@ def summarizefiles():
 
 # Lists all Compounds
 @app.route('/compounds', methods=['GET'])
-def querycompounds():
+def querycompounds(): 
+    file_list = []
+    try:
+        file_list = ast.literal_eval(request.args["files"])["filenames"]
+    except:
+        pass 
     all_compounds = []
-
-    all_compounds_db = CompoundFilenameConnection.select(CompoundFilenameConnection.compound, fn.COUNT(CompoundFilenameConnection.compound).alias('count')).join(Compound).group_by(CompoundFilenameConnection.compound).dicts()
-
-    for compound in all_compounds_db:
-        compound_dict = {}
-        compound_dict["compound"] = compound["compound"]
-        compound_dict["count"] = compound["count"]
-
-        all_compounds.append(compound_dict)
+    
+    #in the case we display all compounds from all files
+    if len(file_list) == 0:
+        all_compounds_db = CompoundFilenameConnection.select(CompoundFilenameConnection.compound, fn.COUNT(CompoundFilenameConnection.compound).alias('count')).join(Compound).group_by(CompoundFilenameConnection.compound).dicts()
+        for compound in all_compounds_db:
+            compound_dict = {}
+            compound_dict["compound"]= compound["compound"]
+            compound_dict["count"] = compound["count"]
+            all_compounds.append(compound_dict)
+    
+    #in the case of file filtration based on metadata
+    else:
+        all_compounds_db = CompoundFilenameConnection.select(CompoundFilenameConnection.compound, fn.COUNT(CompoundFilenameConnection.compound).alias('count')).where(CompoundFilenameConnection.filename.in_(file_list)).join(Compound).group_by(CompoundFilenameConnection.compound).dicts()
+    
+        for compound in all_compounds_db: 
+            compound_dict = {}
+            compound_dict["compound"] = compound["compound"]
+            compound_dict["count"] = compound["count"]
+            all_compounds.append(compound_dict)
 
     return json.dumps(all_compounds)
 
@@ -513,8 +529,6 @@ def plottags():
 #Launch Job
 import credentials
 
-
-
 #Summarize Files Per Comparison Group
 @app.route('/explorerdashboard', methods=['GET'])
 def explorerdashboard():
@@ -660,7 +674,7 @@ import redu_pca
 import config
 
 @app.route("/displayglobalmultivariate", methods = ["GET"])
-def displayglobalmultivariate():
+def displayglobalmultivariate(): 
     if not os.path.isfile(config.PATH_TO_ORIGINAL_PCA):
         print("Missing Global PCA Calculation, Calculating")
         redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
@@ -672,36 +686,48 @@ def displayglobalmultivariate():
     sklearn_output = df_temp.values
         
     component_matrix = pd.read_csv(config.PATH_TO_COMPONENT_MATRIX)
-    eigenvalues = list(component_matrix.iloc[-2,:])[1:]
-    percent_variance = list(component_matrix.iloc[-1,:])[1:]
-    
+    eig_var_df = pd.read_csv(config.PATH_TO_EIGS)
+    eigenvalues = eig_var_df["eigenvalues"].tolist()
+    percent_variance = eig_var_df["percent_variance"].tolist()
+
     output_file = ("./tempuploads/global")
 
     redu_pca.emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file)
 
     return send_file("./tempuploads/global/index.html")
 
+#from line_profiler import LineProfiler
 
-@app.route('/processcomparemultivariate', methods=['GET'])
+@app.route('/processcomparemultivariate', methods=['GET', 'POST'])
 def processcomparemultivariate():
-    #determine which functions get called
-    try:
-        files_of_interest = json.loads(request.args["files"])
-    except: 
-        files_of_interest = [] 
+    #determine if it's a recalculation of data
+    if request.method == 'POST':
+        files_of_interest = json.loads(request.form["files"]) 
+        files_of_interest = [item[2:] for item in files_of_interest]
+        
+        if os.path.isfile(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES):
+            print("Parsed Global Occurrences File Found")
+            full_occ_table = pd.read_table(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES) 
+            new_df = full_occ_table[full_occ_table["full_CCMS_path"].isin(files_of_interest)]       
 
-    if len(files_of_interest) != 0: 
-        print("Files are subselected.")
-        full_occ_table = pd.read_csv(config.PATH_TO_GLOBAL_OCCURRENCES, sep = "\t")     
-        files_to_filter = [item[2:] for item in files_of_interest] 
-        new_df = full_occ_table[full_occ_table["full_CCMS_path"].isin(files_to_filter)] 
-        sklearn_output, new_sample_list, eigenvalues, percent_variance = redu_pca.calculate_master_projection(new_df, 5, True) 
+        else:
+            print("Creating Parsed Global Occurrences File")
+            full_occ_table = pd.read_table(config.PATH_TO_GLOBAL_OCCURRENCES)
+            col1 = full_occ_table["full_CCMS_path"].tolist()
+            col2 = full_occ_table["Compound_Name"].tolist()
+            new_df = pd.DataFrame({"full_CCMS_path" : col1, "Compound_Name" : col2})
+            new_df.to_csv(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES, sep = "\t")
+            new_df = new_df[new_df["full_CCMS_path"].isin(files_of_interest)]
+         
+        sklearn_output, new_sample_list, eigenvalues, percent_variance = redu_pca.calculate_master_projection(new_df, 3, True) 
         output_folder = ("./tempuploads/" + str(uuid.uuid4()))
         redu_pca.emperor_output(sklearn_output, new_sample_list, eigenvalues, percent_variance, output_folder)
-        
+                
         return(send_file(os.path.join(output_folder, "index.html")))
-
-    else:
+     
+    #determine if it's a projection of data
+    if request.method == 'GET':
+        print("Project data on to the PCA")
         #Making sure we calculate global datata
         if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
             if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
@@ -710,11 +736,11 @@ def processcomparemultivariate():
 
             print("Missing Global PCA Calculation, Calculating")
             redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
-    
+            
         #Making sure we grab down user query
-        task_id = request.args['task']
+        task_id = request.args['task'] 
         new_analysis_filename = os.path.join(app.config['UPLOAD_FOLDER'], task_id)
-    
+        
         if not os.path.isfile(new_analysis_filename):
             #TODO: Check the task type, get the URL specific for it, then reformat...
             task_information = proteosafe.get_task_information("gnps.ucsd.edu", task_id)
@@ -766,11 +792,11 @@ def processcomparemultivariate():
 
                 inner_df = compound_presence_df.merge(identifications_df, how="inner", left_on="#ClusterIdx", right_on="#Scan#")
                 inner_df = inner_df[["full_CCMS_path", "Compound_Name"]]
-
+    
                 inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
-
+        
         #Actually doing Analysis
         output_folder = ("./tempuploads")
         redu_pca.project_new_data(new_analysis_filename, output_folder)
-
+       
         return send_file("./tempuploads/index.html")
