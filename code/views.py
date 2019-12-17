@@ -15,7 +15,6 @@ import requests_cache
 import metadata_validator
 import config
 import pandas as pd
-import ast
 from ccmsproteosafepythonapi import proteosafe
 
 requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
@@ -344,32 +343,17 @@ def summarizefiles():
 
 # Lists all Compounds
 @app.route('/compounds', methods=['GET'])
-def querycompounds(): 
-    file_list = []
-    try:
-        file_list = ast.literal_eval(request.args["files"])["filenames"]
-    except:
-        pass 
+def querycompounds():
     all_compounds = []
-    
-    #in the case we display all compounds from all files
-    if len(file_list) == 0:
-        all_compounds_db = CompoundFilenameConnection.select(CompoundFilenameConnection.compound, fn.COUNT(CompoundFilenameConnection.compound).alias('count')).join(Compound).group_by(CompoundFilenameConnection.compound).dicts()
-        for compound in all_compounds_db:
-            compound_dict = {}
-            compound_dict["compound"]= compound["compound"]
-            compound_dict["count"] = compound["count"]
-            all_compounds.append(compound_dict)
-    
-    #in the case of file filtration based on metadata
-    else:
-        all_compounds_db = CompoundFilenameConnection.select(CompoundFilenameConnection.compound, fn.COUNT(CompoundFilenameConnection.compound).alias('count')).where(CompoundFilenameConnection.filename.in_(file_list)).join(Compound).group_by(CompoundFilenameConnection.compound).dicts()
-    
-        for compound in all_compounds_db: 
-            compound_dict = {}
-            compound_dict["compound"] = compound["compound"]
-            compound_dict["count"] = compound["count"]
-            all_compounds.append(compound_dict)
+
+    all_compounds_db = CompoundFilenameConnection.select(CompoundFilenameConnection.compound, fn.COUNT(CompoundFilenameConnection.compound).alias('count')).join(Compound).group_by(CompoundFilenameConnection.compound).dicts()
+
+    for compound in all_compounds_db:
+        compound_dict = {}
+        compound_dict["compound"] = compound["compound"]
+        compound_dict["count"] = compound["count"]
+
+        all_compounds.append(compound_dict)
 
     return json.dumps(all_compounds)
 
