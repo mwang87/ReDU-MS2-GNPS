@@ -115,3 +115,20 @@ def test_global_pca():
         return 1
     
     return 0
+
+def test_filtration_dataset_accession():
+    query_url = BASE_URL + "attribute/"
+    params = {"attributename" : "datasetaccession"}
+    print("HERE") 
+    r = requests.post(url = query_url, data = params)
+    print(r)
+
+    #redirect_url = r.json()[""]
+
+def main():
+    print("YOLO")
+    test_filtration_dataset_accession()
+
+if __name__ == "__ main__":
+    print("hererere")
+    main()
