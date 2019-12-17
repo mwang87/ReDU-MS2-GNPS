@@ -150,7 +150,7 @@ def project_new_data(new_file_occurrence_table, output_file):
     
     #create things to be passed to emperor output
     values_only = all_pca_df.to_numpy()
-    full_file_list = list(all_pca_df.index) 
+    full_file_list = list(all_pca_df.index)
     
     #call and create an emperor output for the old data and the new projected data
     emperor_output(values_only, full_file_list, eigenvalues, percent_variance, output_file, new_sample_list)
@@ -158,26 +158,65 @@ def project_new_data(new_file_occurrence_table, output_file):
 ###currently at 1.8 seconds for 450 samples
 ###function takes in all the calculated outputs and places them into the ordination results and then feeds it into the emperor thing to output a plot   
 def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file, new_files = []):   
+    #read in sklearn output and format accordingly for emperor intake
+    print("FULL FILE LIST")
+    print(full_file_list)
+    print("NEW FILES")
+    print(new_files)
     eigvals = pd.Series(data = eigenvalues)
     samples = pd.DataFrame(data = sklearn_output, index = full_file_list)
     samples.index.rename("SampleID", inplace = True)
     p_explained = pd.Series(data = percent_variance)
     ores = OrdinationResults(long_method_name = "principal component analysis", short_method_name = "pcoa", eigvals = eigvals, samples = samples, proportion_explained = p_explained)
-     
-    #read in all sample metadata 
-    df = pd.read_table(config.PATH_TO_ORIGINAL_MAPPING_FILE)
-    df.rename(columns={"filename" : "SampleID"}, inplace = True)
+    
+    #reorder, rename and add column to global metadata
+    with open(config.PATH_TO_ORIGINAL_MAPPING_FILE, 'r') as infile, open("%s_temp.tsv" %(output_file), "a") as outfile:
+        reader = csv.DictReader(infile, delimiter = "\t") 
+
+        #reorder the columns 
+        headers = reader.fieldnames
+        headers.insert(0, headers.pop(headers.index("filename"))) 
+        
+        #rename columns
+        renamer = {"filename" : "SampleID"}
+        new_columns = [renamer.get(x,x) for  x in headers]
+        new_columns.append("Type")
+
+        writer = csv.writer(outfile, delimiter = "\t")
+        writer.writerow(new_columns) 
+    
+        if len(new_files) != 0: 
+            #write data and add a column
+            for item in reader:
+                temp_row = [item[k] for k in headers]
+                temp_row.insert(0, temp_row.pop())
+            
+                #adding columns based on the type of the data
+                if item["filename"] in new_files:
+                    temp_row.append("Your Data")
+                else:
+                    temp_row.append("Global Data") 
+                writer.writerow(temp_row)
+                
+        #this whole loop is expensive in terms of time
+        else:
+            for item in reader:
+                temp_row = [item[k] for k in headers]
+                temp_row.insert(0, temp_row.pop())
+                writer.writerow(temp_row)
+
+    #test code  
+    df = pd.read_table("%s_temp.tsv" %(output_file))
     df.set_index("SampleID", inplace = True)
     
-    #handling the case in which the pca is a projection
-    if len(new_files) != 0:
-        df["Type"] =  "Global"
-        new_meta = pd.DataFrame({"SampleID" : new_files, "Type": "Your Data"})
-        new_meta.set_index("SampleID", inplace = True)
-        df = pd.concat([df, new_meta], axis = 0, join = "outer")
-      
+    #so you need to align the metadata and the files contained within the ordination file BEFORE feeding it into the Emperor thing otherwise it doesn't like to output results  
     final_metadata, unused = df.align(samples,join = "right", axis = 0)    
-    
+    print(final_metadata) 
+    fixing_type_category = final_metadata["Type"].tolist()
+    #fix for if your data has no associated metadata for PCA projection
+    fixing_type_category = [str(item).replace("nan", "Your Data") for item in fixing_type_category]
+    final_metadata["Type"] = fixing_type_category 
+
     #call stuff to ouput an emperor plot
     emp = Emperor(ores, final_metadata , remote = True)
                
