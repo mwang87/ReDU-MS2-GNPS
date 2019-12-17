@@ -527,7 +527,7 @@ def plottags():
 
 
 #Launch Job
-#import credentials
+import credentials
 
 #Summarize Files Per Comparison Group
 @app.route('/explorerdashboard', methods=['GET'])
@@ -702,9 +702,7 @@ def displayglobalmultivariate():
 def processcomparemultivariate():
     #determine if it's a recalculation of data
     if request.method == 'POST':
-        files_of_interest = json.loads(request.form["files"])
-        print(files_of_interest)
-        print("Build a new PCA from scratch for the individual")
+        files_of_interest = json.loads(request.form["files"]) 
         files_of_interest = [item[2:] for item in files_of_interest]
         
         if os.path.isfile(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES):
@@ -720,9 +718,7 @@ def processcomparemultivariate():
             new_df = pd.DataFrame({"full_CCMS_path" : col1, "Compound_Name" : col2})
             new_df.to_csv(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES, sep = "\t")
             new_df = new_df[new_df["full_CCMS_path"].isin(files_of_interest)]
-        
-        print("NEW DF")
-        print(new_df)
+         
         sklearn_output, new_sample_list, eigenvalues, percent_variance = redu_pca.calculate_master_projection(new_df, 3, True) 
         output_folder = ("./tempuploads/" + str(uuid.uuid4()))
         redu_pca.emperor_output(sklearn_output, new_sample_list, eigenvalues, percent_variance, output_folder)
@@ -742,7 +738,7 @@ def processcomparemultivariate():
             redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
             
         #Making sure we grab down user query
-        task_id = request.args['task']
+        task_id = request.args['task'] 
         new_analysis_filename = os.path.join(app.config['UPLOAD_FOLDER'], task_id)
         
         if not os.path.isfile(new_analysis_filename):
