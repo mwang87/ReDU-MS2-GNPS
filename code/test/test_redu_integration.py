@@ -41,16 +41,20 @@ def test_data_dump():
     return 0
 
 def test_attribute_filtration():
-    query_url = BASE_URL + "attribute/MassSpectrometer/attributeterms?filters=%5B%5D"
+    attribute = "ATTRIBUTE_DatasetAccession"
+    url_2 = 'attribute/%s/attributeterms?filters=%%5B%%5D' %attribute 
+    query_url = BASE_URL + url_2
     response = requests.get(query_url)
-    data = json.loads(response.content)
-    key_value = list(data[0].keys())
-    expected_keys = ["attributename", "attributeterm", "ontologyterm", "countfiles"]
+    response.raise_for_status()
 
-    if (key_value != expected_keys):
-        return 1
+    #data = json.loads(response.content)
+   # key_value = list(data[0].keys())
+   # expected_keys = ["attributename", "attributeterm", "ontologyterm", "countfiles"]
 
-    return 0
+    #if (key_value != expected_keys):
+    #    return 1
+
+    #return 0
 
 
 def test_attribute_terms_display():
