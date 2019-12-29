@@ -7,6 +7,12 @@ BASE_URL = "https://redu.ucsd.edu/"
 SAMPLE_TASK_ID = "ffa003f6c4d844188f1f751d34c649b0"
 TEST_COMPOUND = "2,5-Dimethoxyphenethylamine"
 
+def test_heartbeat():
+    url = f"https://{BASE_URL}/heartbeat"
+    r = requests.get(url)
+    r.raise_for_status()
+
+
 def test_pca_library_search():
     query_url = BASE_URL + "processcomparemultivariate?task={}".format("f39c94cb7afe4568950bf61cdb8fee0d")
     r = requests.get(query_url)
