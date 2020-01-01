@@ -672,9 +672,13 @@ import redu_pca
 import config
 
 @app.route("/displayglobalmultivariate", methods = ["GET"])
-def displayglobalmultivariate(): 
+def displayglobalmultivariate():
     if not os.path.isfile(config.PATH_TO_ORIGINAL_PCA):
         print("Missing Global PCA Calculation, Calculating")
+        if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
+            #Get the actual all identifictions file
+            import urllib
+            urllib.urlretreive("ftp://massive.ucsd.edu/MSV000084206/other/ReDU_all_identifications.tsv", config.PATH_TO_GLOBAL_OCCURRENCES)
         redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
     
     print("Begin Getting Global PCA")    
