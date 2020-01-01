@@ -18,21 +18,15 @@ def test_pca_library_search():
     r = requests.get(query_url)
     r.raise_for_status()
 
-    return 0
-
 def test_pca_metabolomics_snets():
     query_url = f"{SERVER_URL}/processcomparemultivariate?task=1ad7bc366aef45ce81d2dfcca0a9a5e7"
     r = requests.get(query_url)
     r.raise_for_status()
 
-    return 0
-
 def test_pca_feature_based():
     query_url = f"{SERVER_URL}/processcomparemultivariate?task=bb49a839face44cbb5ec3e6f855e7285"
     r = requests.get(query_url)
     r.raise_for_status()
-
-    return 0
 
 
 def test_data_dump():
@@ -40,11 +34,8 @@ def test_data_dump():
     response = requests.get(query_url)
     data = response.content
     file_size = sys.getsizeof(data)
-    
-    if file_size < 17762000:
-        return 1
 
-    return 0
+    assert(file_size > 17762000)
 
 def test_attribute_filtration():
     attribute = "ATTRIBUTE_DatasetAccession"
@@ -70,10 +61,8 @@ def test_attribute_terms_fields():
 
     expected_keys = ["attributename", "attributedisplay", "countterms"]
 
-    if (key_value != expected_keys):
-        return 1
+    assert(key_value == expected_keys)
 
-    return 0
 
 def test_attribute_list():
     query_url = f"{SERVER_URL}/attributes"
@@ -107,32 +96,23 @@ def test_compound_enrichment():
     key_value = list(data[0].keys())
    
     expected_keys = ["attribute_name", "attribute_term", "totalfiles", "compoundfiles", "percentage"]
-    
-    if key_value != expected_keys:
-        return 1
-   
-    return 0
+
+    assert(expected_keys == key_value)
 
 def test_your_pca():
     params = {'task': SAMPLE_TASK_ID}
     query_url = f"{SERVER_URL}/processcomparemultivariate"
     response = requests.get(query_url, params = params)
     data = response.content
-    file_size = sys.getsizeof(data) 
-      
-    if (file_size < 28000000):
-       return 1
-
-    return 0
+    file_size = sys.getsizeof(data)
+    
+    assert(file_size > 28000000)
 
 
 def test_global_pca():
     query_url = f"{SERVER_URL}/displayglobalmultivariate"
     response = requests.get(query_url)
     data = response.content
-    file_size = sys.getsizeof(data)    
+    file_size = sys.getsizeof(data)
 
-    if (file_size < 27760000):
-        return 1
-    
-    return 0
+    assert(file_size > 27760000)
