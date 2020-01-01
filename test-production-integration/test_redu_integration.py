@@ -116,3 +116,10 @@ def test_global_pca():
     file_size = sys.getsizeof(data)
 
     assert(file_size > 27760000)
+
+
+def testing_massive_api():
+    url = "https://massive.ucsd.edu/ProteoSAFe//proxi/v0.1/datasets?filter=MSV000084741&function=datasets"
+    r = requests.get(url)
+    r.json()
+    r.raise_for_status()
