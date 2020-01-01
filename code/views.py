@@ -671,17 +671,24 @@ import uuid
 import redu_pca
 import config
 
+#This displays global PCoA of public data as a web url
 @app.route("/displayglobalmultivariate", methods = ["GET"])
 def displayglobalmultivariate():
     if not os.path.isfile(config.PATH_TO_ORIGINAL_PCA):
         print("Missing Global PCA Calculation, Calculating")
         if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
             #Get the actual all identifictions file
-            import urllib
-            urllib.urlretreive("ftp://massive.ucsd.edu/MSV000084206/other/ReDU_all_identifications.tsv", config.PATH_TO_GLOBAL_OCCURRENCES)
+            import urllib.request as request
+            from contextlib import closing
+            import shutil
+
+            with closing(request.urlopen('ftp://massive.ucsd.edu/MSV000084206/other/ReDU_all_identifications.tsv')) as r:
+                with open(config.PATH_TO_GLOBAL_OCCURRENCES, 'wb') as f:
+                    shutil.copyfileobj(r, f)
+
         redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
     
-    print("Begin Getting Global PCA")    
+    print("Begin Getting Global PCA")
     df_temp  = pd.read_csv(config.PATH_TO_ORIGINAL_PCA)
     full_file_list = df_temp["Unnamed: 0"].tolist() 
     df_temp.drop("Unnamed: 0", axis = 1, inplace = True)       
@@ -698,8 +705,7 @@ def displayglobalmultivariate():
 
     return send_file("./tempuploads/global/index.html")
 
-#from line_profiler import LineProfiler
-
+###TODO: What does this do? 
 @app.route('/processcomparemultivariate', methods=['GET', 'POST'])
 def processcomparemultivariate():
     #determine if it's a recalculation of data
