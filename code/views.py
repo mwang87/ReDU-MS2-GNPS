@@ -40,7 +40,6 @@ def resolve_ontology(attribute, term):
         url = "https://www.ebi.ac.uk/ols/api/ontologies/doid/terms?iri=http://purl.obolibrary.org/obo/%s" % (term.replace(":", "_"))
         try:
             ontology_json = requests.get(url).json()
-            #print(json.dumps(ontology_json))
             return ontology_json["_embedded"]["terms"][0]["label"]
         except KeyboardInterrupt:
             raise
@@ -49,13 +48,12 @@ def resolve_ontology(attribute, term):
 
     if attribute == "ATTRIBUTE_DatasetAccession":
         try:
-            url = "https://massive.ucsd.edu/ProteoSAFe/proxi/datasets?resultType=full&accession=%s" % (term)
+            url = f"https://massive.ucsd.edu/ProteoSAFe//proxi/v0.1/datasets?filter={term}&function=datasets"
             dataset_information = requests.get(url).json()
-            return dataset_information[0]["title"]
+            return dataset_information["title"]
         except:
             raise
-            return term
-
+            #raise Exception(url)
 
     return term
 
@@ -276,7 +274,7 @@ def viewattributeterms(attribute):
     attribute_db = Attribute.select().where(Attribute.categoryname == attribute)
     all_terms_db = AttributeTerm.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attribute == attribute_db).group_by(AttributeTerm.term)
 
-    filters_list = json.loads(request.args['filters'])
+    filters_list = json.loads(request.values.get('filters', "[]"))
 
     output_list = []
 
