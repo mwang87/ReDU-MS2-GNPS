@@ -62,7 +62,7 @@ def test_attribute_filtration():
     #return 0
 
 
-def test_attribute_terms_display():
+def test_attribute_terms_fields():
     query_url = f"{SERVER_URL}/attributes/"
     response = requests.get(query_url)
     data = json.loads(response.content)
@@ -74,6 +74,17 @@ def test_attribute_terms_display():
         return 1
 
     return 0
+
+def test_attribute_list():
+    query_url = f"{SERVER_URL}/attributes"
+    r = requests.get(query_url)
+    all_attributes = r.json()
+    for attribute in all_attributes:
+        attribute_name = attribute["attributename"]
+        query_url = f"{SERVER_URL}/attribute/{attribute_name}/attributeterms?filters=%%5B%%5D"
+        response = requests.get(query_url)
+        response.raise_for_status()
+        
 
 def test_file_enrichment():
     query_url = f"{SERVER_URL}/compoundfilename"
