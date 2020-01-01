@@ -13,21 +13,6 @@ def test_heartbeat():
     r.raise_for_status()
 
 
-def test_pca_library_search():
-    query_url = f"{SERVER_URL}/processcomparemultivariate?task=f39c94cb7afe4568950bf61cdb8fee0d"
-    r = requests.get(query_url)
-    r.raise_for_status()
-
-def test_pca_metabolomics_snets():
-    query_url = f"{SERVER_URL}/processcomparemultivariate?task=1ad7bc366aef45ce81d2dfcca0a9a5e7"
-    r = requests.get(query_url)
-    r.raise_for_status()
-
-def test_pca_feature_based():
-    query_url = f"{SERVER_URL}/processcomparemultivariate?task=bb49a839face44cbb5ec3e6f855e7285"
-    r = requests.get(query_url)
-    r.raise_for_status()
-
 
 def test_data_dump():
     query_url = f"{SERVER_URL}/dump"
@@ -99,6 +84,22 @@ def test_compound_enrichment():
 
     assert(expected_keys == key_value)
 
+
+def test_pca_library_search():
+    query_url = f"{SERVER_URL}/processcomparemultivariate?task=f39c94cb7afe4568950bf61cdb8fee0d"
+    r = requests.get(query_url)
+    r.raise_for_status()
+
+def test_pca_metabolomics_snets():
+    query_url = f"{SERVER_URL}/processcomparemultivariate?task=1ad7bc366aef45ce81d2dfcca0a9a5e7"
+    r = requests.get(query_url)
+    r.raise_for_status()
+
+def test_pca_feature_based():
+    query_url = f"{SERVER_URL}/processcomparemultivariate?task=bb49a839face44cbb5ec3e6f855e7285"
+    r = requests.get(query_url)
+    r.raise_for_status()
+
 def test_your_pca():
     params = {'task': SAMPLE_TASK_ID}
     query_url = f"{SERVER_URL}/processcomparemultivariate"
@@ -106,7 +107,7 @@ def test_your_pca():
     data = response.content
     file_size = sys.getsizeof(data)
     
-    assert(file_size > 28000000)
+    assert(file_size > 22000000)
 
 
 def test_global_pca():
@@ -115,7 +116,7 @@ def test_global_pca():
     data = response.content
     file_size = sys.getsizeof(data)
 
-    assert(file_size > 27760000)
+    assert(file_size > 22760000)
 
 
 def testing_massive_api():
