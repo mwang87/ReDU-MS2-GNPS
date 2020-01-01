@@ -39,7 +39,7 @@ def test_data_dump():
 
 def test_attribute_filtration():
     attribute = "ATTRIBUTE_DatasetAccession"
-    query_url = f"{SERVER_URL}/attribute/{attribute}/attributeterms?filters=%%5B%%5D"
+    query_url = f"{SERVER_URL}/attribute/{attribute}/attributeterms?filters=[]"
     response = requests.get(query_url)
     response.raise_for_status()
 
@@ -54,9 +54,9 @@ def test_attribute_filtration():
 
 
 def test_attribute_terms_fields():
-    query_url = f"{SERVER_URL}/attributes/"
+    query_url = f"{SERVER_URL}/attributes"
     response = requests.get(query_url)
-    data = json.loads(response.content)
+    data = response.json()
     key_value = list(data[0].keys())
 
     expected_keys = ["attributename", "attributedisplay", "countterms"]
@@ -70,7 +70,7 @@ def test_attribute_list():
     all_attributes = r.json()
     for attribute in all_attributes:
         attribute_name = attribute["attributename"]
-        query_url = f"{SERVER_URL}/attribute/{attribute_name}/attributeterms?filters=%%5B%%5D"
+        query_url = f"{SERVER_URL}/attribute/{attribute_name}/attributeterms?filters=[]"
         response = requests.get(query_url)
         response.raise_for_status()
         
