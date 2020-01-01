@@ -2,14 +2,6 @@
 (% block content %)
 
 <div id="app-4" class="container-fluid justify-content-center align-items-center">
-    <!-- <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm text-center">
-            <h2>Metadata Analysis Selection Dashboard</h2>
-        </div>
-        <div class="col-sm-1"></div>
-    </div> -->
-
     <br>
 
     <div class="row">
@@ -28,7 +20,6 @@
                 <h3>Selection Summary</h3>
             </div>
 
-            <!-- <analysis-gobutton></analysis-gobutton> -->
             <analysis-display-selection></analysis-display-selection>
         </div>
 
@@ -158,11 +149,11 @@
         },
         methods: {
             clickMe: function(event) {
-               //$("#loadMe").modal({
-                 // backdrop: "static", //remove ability to close modal with click
-                   // keyboard: false, //remove option to close with keyboard
-                  //  show: true //Display loader!
-            //    });
+               $("#loadMe").modal({
+                 backdrop: "static", //remove ability to close modal with click
+                   keyboard: false, //remove option to close with keyboard
+                   show: true //Display loader!
+               });
 
                 $.ajax({
                     url: "/attribute/" + this.$props["attributename"] + "/attributeterms",
