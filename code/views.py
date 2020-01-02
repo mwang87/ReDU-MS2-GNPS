@@ -40,7 +40,6 @@ def resolve_ontology(attribute, term):
         url = "https://www.ebi.ac.uk/ols/api/ontologies/doid/terms?iri=http://purl.obolibrary.org/obo/%s" % (term.replace(":", "_"))
         try:
             ontology_json = requests.get(url).json()
-            #print(json.dumps(ontology_json))
             return ontology_json["_embedded"]["terms"][0]["label"]
         except KeyboardInterrupt:
             raise
@@ -49,13 +48,12 @@ def resolve_ontology(attribute, term):
 
     if attribute == "ATTRIBUTE_DatasetAccession":
         try:
-            url = "https://massive.ucsd.edu/ProteoSAFe/proxi/datasets?resultType=full&accession=%s" % (term)
+            url = f"https://massive.ucsd.edu/ProteoSAFe//proxi/v0.1/datasets?filter={term}&function=datasets"
             dataset_information = requests.get(url).json()
-            return dataset_information[0]["title"]
+            return dataset_information["title"]
         except:
             raise
-            return term
-
+            #raise Exception(url)
 
     return term
 
@@ -276,7 +274,7 @@ def viewattributeterms(attribute):
     attribute_db = Attribute.select().where(Attribute.categoryname == attribute)
     all_terms_db = AttributeTerm.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attribute == attribute_db).group_by(AttributeTerm.term)
 
-    filters_list = json.loads(request.args['filters'])
+    filters_list = json.loads(request.values.get('filters', "[]"))
 
     output_list = []
 
@@ -673,13 +671,24 @@ import uuid
 import redu_pca
 import config
 
+#This displays global PCoA of public data as a web url
 @app.route("/displayglobalmultivariate", methods = ["GET"])
-def displayglobalmultivariate(): 
+def displayglobalmultivariate():
     if not os.path.isfile(config.PATH_TO_ORIGINAL_PCA):
         print("Missing Global PCA Calculation, Calculating")
+        if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
+            #Get the actual all identifictions file
+            import urllib.request as request
+            from contextlib import closing
+            import shutil
+
+            with closing(request.urlopen('ftp://massive.ucsd.edu/MSV000084206/other/ReDU_all_identifications.tsv')) as r:
+                with open(config.PATH_TO_GLOBAL_OCCURRENCES, 'wb') as f:
+                    shutil.copyfileobj(r, f)
+
         redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
     
-    print("Begin Getting Global PCA")    
+    print("Begin Getting Global PCA")
     df_temp  = pd.read_csv(config.PATH_TO_ORIGINAL_PCA)
     full_file_list = df_temp["Unnamed: 0"].tolist() 
     df_temp.drop("Unnamed: 0", axis = 1, inplace = True)       
@@ -696,8 +705,7 @@ def displayglobalmultivariate():
 
     return send_file("./tempuploads/global/index.html")
 
-#from line_profiler import LineProfiler
-
+###TODO: What does this do? 
 @app.route('/processcomparemultivariate', methods=['GET', 'POST'])
 def processcomparemultivariate():
     #determine if it's a recalculation of data
