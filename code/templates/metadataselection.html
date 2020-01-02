@@ -150,9 +150,9 @@
         methods: {
             clickMe: function(event) {
                $("#loadMe").modal({
-                 backdrop: "static", //remove ability to close modal with click
-                   keyboard: false, //remove option to close with keyboard
-                   show: true //Display loader!
+                    backdrop: "static", //remove ability to close modal with click
+                    keyboard: false, //remove option to close with keyboard
+                    show: true //Display loader!
                });
 
                 $.ajax({
@@ -472,16 +472,27 @@
                 total_number_of_files = this.$parent.groupG1.length + this.$parent.groupG2.length + this.$parent.groupG3.length + this.$parent.groupG4.length + this.$parent.groupG5.length + this.$parent.groupG6.length
                 unique_list_files = extractFilenamesToList(this.$parent.groupG1.concat(this.$parent.groupG2, this.$parent.groupG3, this.$parent.groupG4, this.$parent.groupG5, this.$parent.groupG6));
                 unique_list_files = Array.from(new Set(unique_list_files));
+
+                $("#loadMe").modal({
+                    backdrop: "static", //remove ability to close modal with click
+                    keyboard: false, //remove option to close with keyboard
+                    show: true //Display loader!
+                });
               
-                $.post( "/processcomparemultivariate", {files: JSON.stringify(unique_list_files)})
-                   .done(function(data)
-                   {
-                   var win = window.open();
-                    win.document.write(data);
-                    win.document.close();
-                    win.focus();
-                   }); 
-       
+                $.ajax( {
+                    type: "POST",
+                    url: "/processcomparemultivariate", 
+                    data: {
+                        files: JSON.stringify(unique_list_files)
+                    },
+                    success: function(data){
+                        $("#loadMe").modal("hide");
+                        //document.write(data)
+                        //TODO: Implement this
+                        alert("Implement Me")
+                    }
+                });
+
             }
        
          },
