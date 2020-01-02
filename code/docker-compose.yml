@@ -9,7 +9,7 @@ services:
       - ../database/:/app/database
       - ../temp/:/app/temp
       - ../logs/:/app/logs
-    command: /app/run_production_server.sh
+    command: /app/run_server.sh
 
   redu-ms2-populate:
     build: .
