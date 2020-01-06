@@ -46,12 +46,19 @@
         }
 
         function querycompound() {
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+
             $.ajax({
                 url: "/compoundenrichment",
                 type: "POST",
                 success: function(componentObject) {
                     return function(response) {
                         renderDataTable(response)
+                        $("#loadMe").modal("hide")
                     }
                 }(this),
                 data: {
@@ -63,12 +70,19 @@
         }
 
         function queryfiles() {
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+
             $.ajax({
                 url: "/filesenrichment",
                 type: "POST",
                 success: function(componentObject) {
                     return function(response) {
                         renderDataTable(response)
+                        $("#loadMe").modal("hide")
                     }
                 }(this),
                 data: {
