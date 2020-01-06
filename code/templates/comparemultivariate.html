@@ -34,7 +34,7 @@
             <div class="col-sm"></div>
             <div class="col-sm">
                 <div class="text-center">
-                    <button id="analyzebutton" class="btn btn-primary" onclick="myFunction()">Create PCA</button>
+                    <button id="analyzebutton" class="btn btn-primary" onclick="createMyPCA()">Create PCA</button>
                 </div>
             </div>
             <div class="col-sm"></div>
@@ -45,7 +45,7 @@
            <div class="col-sm"></div>
            <div class="col-sm">
                <div class="text-center">
-                    <button id="analyzebutton" class="btn btn-info" onclick="newFunction()">Click for Example</button>
+                    <button id="analyzebutton" class="btn btn-info" onclick="clickExample()">Click for Example</button>
                </div>
            </div>
            <div class="col-sm"></div>
@@ -64,13 +64,20 @@
 </div>
 
 <script>
-    function myFunction() {
-        remote_url = "/processcomparemultivariate?task=" + $("#task").val()
-        $('#display').prepend($('<img>',{id:'pca',src: remote_url}))
-        window.location.replace(remote_url)
+    function createMyPCA() {
+        user_entered_task = $("#task").val()
+
+        if(user_entered_task.length() != 32){
+            alert("Please enter a valid GNPS Task ID")
+        }
+        else{
+            remote_url = "/processcomparemultivariate?task=" + $("#task").val()
+            $('#display').prepend($('<img>',{id:'pca',src: remote_url}))
+            window.location.replace(remote_url)
+        }
     }
 
-    function newFunction(){
+    function clickExample(){
         remote_url = "/processcomparemultivariate?task=" + "f39c94cb7afe4568950bf61cdb8fee0d"
         window.location.replace(remote_url)
     }
