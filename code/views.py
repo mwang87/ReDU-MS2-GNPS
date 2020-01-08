@@ -527,22 +527,6 @@ def plottags():
 #Launch Job
 import credentials
 
-#Summarize Files Per Comparison Group
-@app.route('/explorerdashboard', methods=['GET'])
-def explorerdashboard():
-    return render_template('explorerdashboard.html')
-
-#Summarize Files Per Comparison Group
-@app.route('/tagdashboard', methods=['GET'])
-def tagdashboard():
-    return render_template('tagdashboard.html')
-
-
-@app.route('/dashboard', methods=['GET'])
-def dashboard():
-    return render_template('dashboard.html')
-
-
 
 """ Production Views """
 
