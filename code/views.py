@@ -528,6 +528,7 @@ def plottags():
 import credentials
 
 
+
 """ Production Views """
 
 @app.route('/', methods=['GET'])
@@ -553,6 +554,11 @@ def compoundslist():
 def compoundfilenamelist():
     return render_template('compoundfilelist.html')
 
+#Summarize Files Per Comparison Group
+@app.route('/explorerdashboard', methods=['GET'])
+def explorerdashboard():
+    return render_template('explorerdashboard.html')
+
 @app.route('/compoundenrichmentdashboard', methods=['GET'])
 def compoundenrichmentview():
     return render_template('compoundenrichment.html')
@@ -569,14 +575,9 @@ def heartbeat():
 def datalookup():
     return render_template('datalookup.html')
 
-@app.route('/addmetadata', methods=['GET'])
-def addmetadata():
-    return render_template('addmetadata.html')
-
 @app.route('/dump', methods=['GET'])
 def dump():
     return send_file(config.PATH_TO_ORIGINAL_MAPPING_FILE, cache_timeout=1, as_attachment=True, attachment_filename="all_sampleinformation.tsv")
-
 
 @app.route('/ReDUValidator', methods = ["GET"])
 def ReDUValidator():

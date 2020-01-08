@@ -28,15 +28,6 @@ def test_attribute_filtration():
     response = requests.get(query_url)
     response.raise_for_status()
 
-    #data = json.loads(response.content)
-   # key_value = list(data[0].keys())
-   # expected_keys = ["attributename", "attributeterm", "ontologyterm", "countfiles"]
-
-    #if (key_value != expected_keys):
-    #    return 1
-
-    #return 0
-
 
 def test_attribute_terms_fields():
     query_url = f"{SERVER_URL}/attributes"
@@ -47,7 +38,6 @@ def test_attribute_terms_fields():
     expected_keys = ["attributename", "attributedisplay", "countterms"]
 
     assert(key_value == expected_keys)
-
 
 def test_attribute_list():
     query_url = f"{SERVER_URL}/attributes"
@@ -123,4 +113,11 @@ def testing_massive_api():
     url = "https://massive.ucsd.edu/ProteoSAFe//proxi/v0.1/datasets?filter=MSV000084741&function=datasets"
     r = requests.get(url)
     r.json()
+    r.raise_for_status()
+
+
+def test_groups_comparison():
+    url = f"{SERVER_URL}/explorer"
+    params = {'G1' : ["f.MSV000082490/ccms_peak/mzXML/Samples/Skin/SH793_RA5_01_27710.mzML"]}
+    response = requests.post(url, params )
     r.raise_for_status()

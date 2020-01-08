@@ -118,6 +118,15 @@
             }
         })
 
+        //Setting the Spinner on load
+        setTimeout(function() {
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+        }, 1);
+
         var params = new window.URLSearchParams(window.location.search);
         if(params.has("compound") == true){
             $("#compound").val(params.get("compound"))

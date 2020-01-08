@@ -27,6 +27,15 @@
     
     <script>
 
+    //Setting the Spinner
+    setTimeout(function() {
+        $("#loadMe").modal({
+            backdrop: "static", //remove ability to close modal with click
+            keyboard: false, //remove option to close with keyboard
+            show: true //Display loader!
+        });
+    }, 1);
+
     url = "/compounds"
 
     all_files_string = decodeURIComponent(window.location.hash).slice(1)
@@ -38,6 +47,8 @@
         },
         success: function(componentObject) {
             return function(response) {
+                $("#loadMe").modal("hide") //Hiding Modal
+
                 $('#datatable').DataTable( {
                     data: response,
                     columns: [
