@@ -32,21 +32,21 @@
 
         function renderDataTable(results){
             $('#datatable').DataTable( {
-                    data: results,
-                    columns: [
-                        { data: "attribute_name" , title: "Attribute"}, 
-                        { data: "attribute_term" , title: "Term"}, 
-                        { data: "compoundfiles" , title: "Observations"}, 
-                        { data: "totalfiles" , title: "Total Files"},
-                        { data: "percentage" , title: "Percentage"}
-                    ],
-                    pageLength: 30,
-                    dom: 'Bflrtip',
-                    buttons: [
-                        'copy', 'csv', 'excel'
-                    ]
-                } );
-
+                destroy: true,
+                data: results,
+                columns: [
+                    { data: "attribute_name" , title: "Attribute"}, 
+                    { data: "attribute_term" , title: "Term"}, 
+                    { data: "compoundfiles" , title: "Observations"}, 
+                    { data: "totalfiles" , title: "Total Files"},
+                    { data: "percentage" , title: "Percentage"}
+                ],
+                pageLength: 30,
+                dom: 'Bflrtip',
+                buttons: [
+                    'copy', 'csv', 'excel'
+                ]
+            } );
         }
 
         function querycompound() {
