@@ -659,7 +659,7 @@ import config
 #This displays global PCoA of public data as a web url
 @app.route("/displayglobalmultivariate", methods = ["GET"])
 def displayglobalmultivariate():
-    if not os.path.isfile(config.PATH_TO_ORIGINAL_PCA):
+    if not (os.path.isfile(config.PATH_TO_ORIGINAL_PCA) and os.path.isfile(config.PATH_TO_EIGS)):
         print("Missing Global PCA Calculation, Calculating")
         if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
             #Get the actual all identifictions file
