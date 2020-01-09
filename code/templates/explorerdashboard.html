@@ -38,6 +38,15 @@ var app4 = new Vue({
     }
 })
 
+//Setting the Spinner
+setTimeout(function() {
+    $("#loadMe").modal({
+        backdrop: "static", //remove ability to close modal with click
+        keyboard: false, //remove option to close with keyboard
+        show: true //Display loader!
+    });
+}, 1);
+
 // Get the hash and make the query
 all_files = JSON.parse(decodeURIComponent(window.location.hash).slice(1))
 
@@ -58,6 +67,8 @@ $.ajax({
     },
     success: function(componentObject) {
         return function(response) {
+            $("#loadMe").modal("hide") //Hiding Modal
+
             $('#datatable').DataTable( {
                 data: response,
                 columns: [
@@ -76,6 +87,10 @@ $.ajax({
                     { data: "count6_norm" , title: "% in G6"}
                 ],
                 pageLength: 30,
+                dom: 'Bflrtip',
+                buttons: [
+                    'copy', 'csv', 'excel'
+                ]
                 } );
 
         }

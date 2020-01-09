@@ -329,12 +329,12 @@ def viewfilesattributeattributeterm(attribute, term):
 #Summarize Files Per Comparison Group
 @app.route('/explorer', methods=['POST'])
 def summarizefiles():
-    all_files_G1 = json.loads(request.form["G1"])
-    all_files_G2 = json.loads(request.form["G2"])
-    all_files_G3 = json.loads(request.form["G3"])
-    all_files_G4 = json.loads(request.form["G4"])
-    all_files_G5 = json.loads(request.form["G5"])
-    all_files_G6 = json.loads(request.form["G6"])
+    all_files_G1 = json.loads(request.values.get("G1", "[]"))
+    all_files_G2 = json.loads(request.values.get("G2", "[]"))
+    all_files_G3 = json.loads(request.values.get("G3", "[]"))
+    all_files_G4 = json.loads(request.values.get("G4", "[]"))
+    all_files_G5 = json.loads(request.values.get("G5", "[]"))
+    all_files_G6 = json.loads(request.values.get("G6", "[]"))
 
     output = count_compounds_in_files(all_files_G1, all_files_G2, all_files_G3, all_files_G4, all_files_G5, all_files_G6)
 
@@ -527,21 +527,6 @@ def plottags():
 #Launch Job
 import credentials
 
-#Summarize Files Per Comparison Group
-@app.route('/explorerdashboard', methods=['GET'])
-def explorerdashboard():
-    return render_template('explorerdashboard.html')
-
-#Summarize Files Per Comparison Group
-@app.route('/tagdashboard', methods=['GET'])
-def tagdashboard():
-    return render_template('tagdashboard.html')
-
-
-@app.route('/dashboard', methods=['GET'])
-def dashboard():
-    return render_template('dashboard.html')
-
 
 
 """ Production Views """
@@ -569,6 +554,11 @@ def compoundslist():
 def compoundfilenamelist():
     return render_template('compoundfilelist.html')
 
+#Summarize Files Per Comparison Group
+@app.route('/explorerdashboard', methods=['GET'])
+def explorerdashboard():
+    return render_template('explorerdashboard.html')
+
 @app.route('/compoundenrichmentdashboard', methods=['GET'])
 def compoundenrichmentview():
     return render_template('compoundenrichment.html')
@@ -585,14 +575,9 @@ def heartbeat():
 def datalookup():
     return render_template('datalookup.html')
 
-@app.route('/addmetadata', methods=['GET'])
-def addmetadata():
-    return render_template('addmetadata.html')
-
 @app.route('/dump', methods=['GET'])
 def dump():
     return send_file(config.PATH_TO_ORIGINAL_MAPPING_FILE, cache_timeout=1, as_attachment=True, attachment_filename="all_sampleinformation.tsv")
-
 
 @app.route('/ReDUValidator', methods = ["GET"])
 def ReDUValidator():

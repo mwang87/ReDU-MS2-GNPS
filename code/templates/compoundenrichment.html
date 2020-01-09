@@ -32,26 +32,37 @@
 
         function renderDataTable(results){
             $('#datatable').DataTable( {
-                    data: results,
-                    columns: [
-                        { data: "attribute_name" , title: "Attribute"}, 
-                        { data: "attribute_term" , title: "Term"}, 
-                        { data: "compoundfiles" , title: "Observations"}, 
-                        { data: "totalfiles" , title: "Total Files"},
-                        { data: "percentage" , title: "Percentage"}
-                    ],
-                    pageLength: 30
-                } );
-
+                destroy: true,
+                data: results,
+                columns: [
+                    { data: "attribute_name" , title: "Attribute"}, 
+                    { data: "attribute_term" , title: "Term"}, 
+                    { data: "compoundfiles" , title: "Observations"}, 
+                    { data: "totalfiles" , title: "Total Files"},
+                    { data: "percentage" , title: "Percentage"}
+                ],
+                pageLength: 30,
+                dom: 'Bflrtip',
+                buttons: [
+                    'copy', 'csv', 'excel'
+                ]
+            } );
         }
 
         function querycompound() {
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+
             $.ajax({
                 url: "/compoundenrichment",
                 type: "POST",
                 success: function(componentObject) {
                     return function(response) {
                         renderDataTable(response)
+                        $("#loadMe").modal("hide")
                     }
                 }(this),
                 data: {
@@ -63,12 +74,19 @@
         }
 
         function queryfiles() {
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+
             $.ajax({
                 url: "/filesenrichment",
                 type: "POST",
                 success: function(componentObject) {
                     return function(response) {
                         renderDataTable(response)
+                        $("#loadMe").modal("hide")
                     }
                 }(this),
                 data: {
@@ -99,6 +117,15 @@
                 results: []
             }
         })
+
+        //Setting the Spinner on load
+        setTimeout(function() {
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+        }, 1);
 
         var params = new window.URLSearchParams(window.location.search);
         if(params.has("compound") == true){
