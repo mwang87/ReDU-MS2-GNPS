@@ -659,7 +659,7 @@ import config
 #This displays global PCoA of public data as a web url
 @app.route("/displayglobalmultivariate", methods = ["GET"])
 def displayglobalmultivariate():
-    if not os.path.isfile(config.PATH_TO_ORIGINAL_PCA):
+    if not (os.path.isfile(config.PATH_TO_ORIGINAL_PCA) and os.path.isfile(config.PATH_TO_EIGS)):
         print("Missing Global PCA Calculation, Calculating")
         if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
             #Get the actual all identifictions file
@@ -690,6 +690,12 @@ def displayglobalmultivariate():
 
     return send_file("./tempuploads/global/index.html")
 
+###This takes the selected PCA and redirects it to a new page
+@app.route('/selectedpcaviews', methods=['GET'])
+def selectedpcaviews():
+    pcaid = request.args['pcaid']
+    return(send_file(os.path.join('./tempuploads', pcaid, 'index.html')))
+
 ###TODO: What does this do? 
 @app.route('/processcomparemultivariate', methods=['GET', 'POST'])
 def processcomparemultivariate():
@@ -713,10 +719,10 @@ def processcomparemultivariate():
             new_df = new_df[new_df["full_CCMS_path"].isin(files_of_interest)]
          
         sklearn_output, new_sample_list, eigenvalues, percent_variance = redu_pca.calculate_master_projection(new_df, 3, True) 
-        output_folder = ("./tempuploads/" + str(uuid.uuid4()))
+        pcaid = str(uuid.uuid4())
+        output_folder = ("./tempuploads/" + pcaid) 
         redu_pca.emperor_output(sklearn_output, new_sample_list, eigenvalues, percent_variance, output_folder)
-                
-        return(send_file(os.path.join(output_folder, "index.html")))
+        return(pcaid) 
      
     #determine if it's a projection of data
     if request.method == 'GET':
