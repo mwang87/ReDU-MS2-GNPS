@@ -329,12 +329,12 @@ def viewfilesattributeattributeterm(attribute, term):
 #Summarize Files Per Comparison Group
 @app.route('/explorer', methods=['POST'])
 def summarizefiles():
-    all_files_G1 = json.loads(request.form["G1"])
-    all_files_G2 = json.loads(request.form["G2"])
-    all_files_G3 = json.loads(request.form["G3"])
-    all_files_G4 = json.loads(request.form["G4"])
-    all_files_G5 = json.loads(request.form["G5"])
-    all_files_G6 = json.loads(request.form["G6"])
+    all_files_G1 = json.loads(request.values.get("G1", "[]"))
+    all_files_G2 = json.loads(request.values.get("G2", "[]"))
+    all_files_G3 = json.loads(request.values.get("G3", "[]"))
+    all_files_G4 = json.loads(request.values.get("G4", "[]"))
+    all_files_G5 = json.loads(request.values.get("G5", "[]"))
+    all_files_G6 = json.loads(request.values.get("G6", "[]"))
 
     output = count_compounds_in_files(all_files_G1, all_files_G2, all_files_G3, all_files_G4, all_files_G5, all_files_G6)
 

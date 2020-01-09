@@ -118,6 +118,12 @@ def testing_massive_api():
 
 def test_groups_comparison():
     url = f"{SERVER_URL}/explorer"
-    params = {'G1' : ["f.MSV000082490/ccms_peak/mzXML/Samples/Skin/SH793_RA5_01_27710.mzML"]}
-    r = requests.post(url, params )
+    params = {'G1' : json.dumps(["f.MSV000082490/ccms_peak/mzXML/Samples/Skin/SH793_RA5_01_27710.mzML"]), 
+    'G2' : "[]",
+    'G3' : "[]",
+    'G4' : "[]",
+    'G5' : "[]",
+    'G6' : "[]"
+    }
+    r = requests.post(url, data=params)
     r.raise_for_status()
