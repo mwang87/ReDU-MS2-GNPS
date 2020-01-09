@@ -486,10 +486,9 @@
                         files: JSON.stringify(unique_list_files)
                     },
                     success: function(data){
-                        $("#loadMe").modal("hide");
-                        //document.write(data)
-                        //TODO: Implement this
-                        alert("Implement Me")
+                        $("#loadMe").modal("hide");                        
+                        window.location.replace('/selectedpcaviews?pcaid=' + data);
+                        
                     }
                 });
 
@@ -501,10 +500,10 @@
         <br> \
         <button class="btn btn-primary btn-block" v-on:click="setuplibrarysearch">Set Up Co-Analysis with GNPS Library Search (requires GNPS Login)</button> \
         <br> \
+        <button class = "btn btn-primary btn-block" v-on:click="setuppca">Launch PCA of Selected Files</button> \
+        <br> \
         </div>'
 
-        //<button class = "btn btn-primary btn-block" v-on:click="setuppca">Launch PCA of Selected Files</button> \
-        //<br> \
 
 
     })
