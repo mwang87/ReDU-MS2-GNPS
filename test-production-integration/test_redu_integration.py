@@ -108,6 +108,15 @@ def test_global_pca():
 
     assert(file_size > 22760000)
 
+def test_selected_pca(): 
+    list_files = ["f.MSV000083388/ccms_peak/Negative Mode/1_n_blk_LCMSblk_50MeOH_01.mzML", "f.MSV000083388/ccms_peak/Negative Mode/1_n_blk_LCMSblk_50MeOH_02.mzML", "f.MSV000083388/ccms_peak/Negative Mode/1_n_blk_LCMSblk_50MeOH_03.mzML"] 
+    params = {'files' : json.dumps(list_files)}
+    query_url_pca = f"{SERVER_URL}/processcomparemultivariate"
+    response = requests.post(query_url_pca, data = params) 
+    pcaid = response.content
+    query_url_view = f"{SERVER_URL}/selectedpcaviews?pcaid=%s" %(str(pcaid))
+    response = requests.get(query_url_view)
+    response.raise_for_status()
 
 def testing_massive_api():
     url = "https://massive.ucsd.edu/ProteoSAFe//proxi/v0.1/datasets?filter=MSV000084741&function=datasets"
