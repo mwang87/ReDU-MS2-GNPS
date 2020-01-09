@@ -35,7 +35,7 @@ attach:
 #Docker Compose
 server-compose-interactive:
 	docker-compose build
-	docker-compose up
+	docker-compose --log-level DEBUG up 
 
 server-compose-production:
 	docker-compose build
