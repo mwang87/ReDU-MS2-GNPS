@@ -693,7 +693,7 @@ def displayglobalmultivariate():
 ###This takes the file selected PCA and redirects it to a new page for user viewing
 @app.route('/fileselectedpcaviews', methods=['GET'])
 def selectedpcaviews():
-    pcaid = request.args['pcaid']
+    pcaid = str(request.args['pcaid'])
     return(send_file(os.path.join('./tempuploads', pcaid, 'index.html')))
 
 ###This is the backend funtion for re-calcualtion of pca based on the files selected by user

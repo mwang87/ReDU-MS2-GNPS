@@ -31,6 +31,7 @@ RUN pip3 install seaborn
 RUN apt-get update -y
 RUN apt-get install -y git-core
 RUN pip3 install git+https://github.com/mwang87/CCMS_ProteoSAFe_pythonAPI.git
+RUN pip3 install bokeh
 
 COPY . /app
 WORKDIR /app
