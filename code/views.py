@@ -430,7 +430,22 @@ def compoundenrichment():
 
     enrichment_list = sorted(enrichment_list, key=lambda list_object: list_object["percentage"], reverse=True)
 
-    return json.dumps(enrichment_list)
+    # Creating Bokeh Plot Here
+    enrichment_df = pd.DataFrame(enrichment_list)
+    
+    # Finding all non-zero entries
+    enrichment_df = enrichment_df[enrichment_df["totalfiles"] != 0]
+    all_attributes = list(set(list(enrichment_df["attribute_name"])))
+
+    drawing_dict = {}
+
+    
+
+    return_dict = {}
+    return_dict["enrichment_list"] = enrichment_list
+    return_dict["drawings"] = drawing_dict
+
+    return json.dumps(return_dict)
 
 @app.route('/filesenrichment', methods=['POST'])
 def filesenrichment():
