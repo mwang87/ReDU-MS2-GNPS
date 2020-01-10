@@ -481,13 +481,13 @@
               
                 $.ajax( {
                     type: "POST",
-                    url: "/processcomparemultivariate", 
+                    url: "/fileselectedpca", 
                     data: {
                         files: JSON.stringify(unique_list_files)
                     },
                     success: function(data){
                         $("#loadMe").modal("hide");                        
-                        window.location.replace('/selectedpcaviews?pcaid=' + data);
+                        window.location.replace('/fileselectedpcaviews?pcaid=' + data);
                         
                     }
                 });
