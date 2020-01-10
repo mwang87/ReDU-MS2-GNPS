@@ -8,7 +8,6 @@ import os
 import csv
 import json
 import uuid
-import util
 import pandas as pd
 import requests
 import requests_cache
@@ -644,13 +643,6 @@ def validate():
         print("Cannot Remove File")
 
     return json.dumps(validation_dict)
-
-@app.route('/analyzelibrarysearch', methods=['POST'])
-def analyzelibrarysearch():
-    all_files = json.loads(request.form["files"])
-    taskid = util.launch_GNPS_librarysearchworkflow(all_files, "Meta-Analysis on GNPS", credentials.USERNAME, credentials.PASSWORD, "miw023@ucsd.edu")
-    return json.dumps({"taskid": taskid})
-
 
 import uuid
 import redu_pca
