@@ -23,6 +23,10 @@
             <div><button class="btn btn btn-block" onclick="querycompound()">Query Compound</button></div>
         </div>
         
+        <div id="charts">
+
+        </div>
+
         <div class="table table-striped">
             <table id="datatable" class="display" width="100%"></table>
         </div>
@@ -53,6 +57,11 @@
             } );
         }
 
+        function renderBarPlots(charts_dict){
+            console.log(charts_dict)
+            //$("#charts").val()
+        }
+
         function querycompound() {
             $("#loadMe").modal({
                 backdrop: "static", //remove ability to close modal with click
@@ -66,6 +75,7 @@
                 success: function(componentObject) {
                     return function(response) {
                         renderDataTable(response["enrichment_list"])
+                        renderBarPlots(response["drawings"])
                         $("#loadMe").modal("hide")
                     }
                 }(this),
@@ -90,6 +100,7 @@
                 success: function(componentObject) {
                     return function(response) {
                         renderDataTable(response["enrichment_list"])
+                        renderBarPlots(response["drawings"])
                         $("#loadMe").modal("hide")
                     }
                 }(this),
