@@ -439,7 +439,23 @@ def compoundenrichment():
 
     drawing_dict = {}
 
-    
+    for attribute in all_attributes:
+        filtered_df = enrichment_df[enrichment_df["attribute_name"] == attribute]
+
+        from bokeh.plotting import figure
+        from bokeh.embed import components
+
+        all_terms = list(filtered_df["attribute_term"])
+        all_percentage = list(filtered_df["percentage"])
+        plot = figure(x_range=all_terms, plot_height=250, title="Counts")
+        plot.vbar(x=all_terms, top=all_percentage, width=0.9)
+        script, div = components(plot)
+
+        draw_dict = {}
+        draw_dict["script"] = script
+        draw_dict["div"] = div
+
+        drawing_dict[attribute] = draw_dict
 
     return_dict = {}
     return_dict["enrichment_list"] = enrichment_list
