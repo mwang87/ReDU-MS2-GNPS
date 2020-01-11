@@ -445,10 +445,10 @@ def compoundenrichment():
 
     for attribute in all_attributes:
         filtered_df = enrichment_df[enrichment_df["attribute_name"] == attribute]
-        
+
         all_terms = list(filtered_df["attribute_term"])
         all_percentage = list(filtered_df["percentage"])
-        plot = figure(x_range=all_terms, plot_height=250, title="{} Percentage of Terms".format(attribute))
+        plot = figure(x_range=all_terms, plot_height=600, title="{} Percentage of Terms".format(attribute))
         plot.vbar(x=all_terms, top=all_percentage, width=0.9)
         tab = Panel(child=plot, title=attribute)
 
