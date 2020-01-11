@@ -59,7 +59,8 @@
 
         function renderBarPlots(charts_dict){
             console.log(charts_dict)
-            //$("#charts").val()
+            $("#charts").html(charts_dict["YearOfAnalysis"]["div"])
+            $("#charts").append(charts_dict["YearOfAnalysis"]["script"]);
         }
 
         function querycompound() {
