@@ -437,15 +437,15 @@ def compoundenrichment():
     enrichment_df = enrichment_df[enrichment_df["totalfiles"] != 0]
     all_attributes = list(set(list(enrichment_df["attribute_name"])))
 
+    from bokeh.models import Panel, Tabs
+    from bokeh.plotting import figure
+    from bokeh.embed import components
     
     all_tabs = []
 
     for attribute in all_attributes:
         filtered_df = enrichment_df[enrichment_df["attribute_name"] == attribute]
-
-        from bokeh.plotting import figure
-        from bokeh.embed import components
-
+        
         all_terms = list(filtered_df["attribute_term"])
         all_percentage = list(filtered_df["percentage"])
         plot = figure(x_range=all_terms, plot_height=250, title="{} Percentage of Terms".format(attribute))
