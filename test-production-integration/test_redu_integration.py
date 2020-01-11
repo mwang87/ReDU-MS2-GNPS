@@ -66,7 +66,7 @@ def test_compound_enrichment():
     params = {'compoundname' : TEST_COMPOUND}
     response = requests.post(query_url, params )
     data = json.loads(response.content)  
-    key_value = list(data[0].keys())
+    key_value = list(data["enrichment_list"][0].keys())
    
     expected_keys = ["attribute_name", "attribute_term", "totalfiles", "compoundfiles", "percentage"]
 
