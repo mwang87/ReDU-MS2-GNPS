@@ -429,7 +429,50 @@ def compoundenrichment():
 
     enrichment_list = sorted(enrichment_list, key=lambda list_object: list_object["percentage"], reverse=True)
 
-    return json.dumps(enrichment_list)
+    # Creating Bokeh Plot Here
+    enrichment_df = pd.DataFrame(enrichment_list)
+    
+    # Finding all non-zero entries
+    enrichment_df = enrichment_df[enrichment_df["totalfiles"] != 0]
+    all_attributes = list(set(list(enrichment_df["attribute_name"])))
+
+    from bokeh.models import Panel, Tabs
+    from bokeh.plotting import figure
+    from bokeh.embed import components
+    
+    all_tabs = []
+
+    for attribute in all_attributes:
+        filtered_df = enrichment_df[enrichment_df["attribute_name"] == attribute]
+
+        all_terms = list(filtered_df["attribute_term"])
+        all_percentage = list(filtered_df["percentage"])
+        plot = figure(x_range=all_terms, plot_height=600, plot_width=900, title="{} Percentage of Terms".format(attribute))
+        plot.vbar(x=all_terms, top=all_percentage, width=0.9)
+        tab = Panel(child=plot, title=attribute)
+
+        all_tabs.append(tab)
+
+        # script, div = components(plot)
+
+        # draw_dict = {}
+        # draw_dict["script"] = script
+        # draw_dict["div"] = div
+
+        # drawing_dict[attribute] = draw_dict
+
+    tabs = Tabs(tabs=all_tabs)
+    script, div = components(tabs)
+
+    drawing_dict = {}
+    drawing_dict["div"] = div
+    drawing_dict["script"] = script
+
+    return_dict = {}
+    return_dict["enrichment_list"] = enrichment_list
+    return_dict["drawings"] = drawing_dict
+
+    return json.dumps(return_dict)
 
 @app.route('/filesenrichment', methods=['POST'])
 def filesenrichment():
