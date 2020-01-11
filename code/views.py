@@ -437,7 +437,8 @@ def compoundenrichment():
     enrichment_df = enrichment_df[enrichment_df["totalfiles"] != 0]
     all_attributes = list(set(list(enrichment_df["attribute_name"])))
 
-    drawing_dict = {}
+    
+    all_tabs = []
 
     for attribute in all_attributes:
         filtered_df = enrichment_df[enrichment_df["attribute_name"] == attribute]
@@ -449,13 +450,24 @@ def compoundenrichment():
         all_percentage = list(filtered_df["percentage"])
         plot = figure(x_range=all_terms, plot_height=250, title="{} Percentage of Terms".format(attribute))
         plot.vbar(x=all_terms, top=all_percentage, width=0.9)
-        script, div = components(plot)
+        tab = Panel(child=plot, title=attribute)
 
-        draw_dict = {}
-        draw_dict["script"] = script
-        draw_dict["div"] = div
+        all_tabs.append(tab)
 
-        drawing_dict[attribute] = draw_dict
+        # script, div = components(plot)
+
+        # draw_dict = {}
+        # draw_dict["script"] = script
+        # draw_dict["div"] = div
+
+        # drawing_dict[attribute] = draw_dict
+
+    tabs = Tabs(tabs=all_tabs)
+    script, div = components(tabs)
+
+    drawing_dict = {}
+    drawing_dict["div"] = div
+    drawing_dict["script"] = script
 
     return_dict = {}
     return_dict["enrichment_list"] = enrichment_list
