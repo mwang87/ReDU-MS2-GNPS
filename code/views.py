@@ -8,7 +8,6 @@ import os
 import csv
 import json
 import uuid
-import util
 import pandas as pd
 import requests
 import requests_cache
@@ -430,7 +429,50 @@ def compoundenrichment():
 
     enrichment_list = sorted(enrichment_list, key=lambda list_object: list_object["percentage"], reverse=True)
 
-    return json.dumps(enrichment_list)
+    # Creating Bokeh Plot Here
+    enrichment_df = pd.DataFrame(enrichment_list)
+    
+    # Finding all non-zero entries
+    enrichment_df = enrichment_df[enrichment_df["totalfiles"] != 0]
+    all_attributes = list(set(list(enrichment_df["attribute_name"])))
+
+    from bokeh.models import Panel, Tabs
+    from bokeh.plotting import figure
+    from bokeh.embed import components
+    
+    all_tabs = []
+
+    for attribute in all_attributes:
+        filtered_df = enrichment_df[enrichment_df["attribute_name"] == attribute]
+
+        all_terms = list(filtered_df["attribute_term"])
+        all_percentage = list(filtered_df["percentage"])
+        plot = figure(x_range=all_terms, plot_height=600, plot_width=900, title="{} Percentage of Terms".format(attribute))
+        plot.vbar(x=all_terms, top=all_percentage, width=0.9)
+        tab = Panel(child=plot, title=attribute)
+
+        all_tabs.append(tab)
+
+        # script, div = components(plot)
+
+        # draw_dict = {}
+        # draw_dict["script"] = script
+        # draw_dict["div"] = div
+
+        # drawing_dict[attribute] = draw_dict
+
+    tabs = Tabs(tabs=all_tabs)
+    script, div = components(tabs)
+
+    drawing_dict = {}
+    drawing_dict["div"] = div
+    drawing_dict["script"] = script
+
+    return_dict = {}
+    return_dict["enrichment_list"] = enrichment_list
+    return_dict["drawings"] = drawing_dict
+
+    return json.dumps(return_dict)
 
 @app.route('/filesenrichment', methods=['POST'])
 def filesenrichment():
@@ -645,13 +687,6 @@ def validate():
 
     return json.dumps(validation_dict)
 
-@app.route('/analyzelibrarysearch', methods=['POST'])
-def analyzelibrarysearch():
-    all_files = json.loads(request.form["files"])
-    taskid = util.launch_GNPS_librarysearchworkflow(all_files, "Meta-Analysis on GNPS", credentials.USERNAME, credentials.PASSWORD, "miw023@ucsd.edu")
-    return json.dumps({"taskid": taskid})
-
-
 import uuid
 import redu_pca
 import config
@@ -690,112 +725,113 @@ def displayglobalmultivariate():
 
     return send_file("./tempuploads/global/index.html")
 
-###This takes the selected PCA and redirects it to a new page
-@app.route('/selectedpcaviews', methods=['GET'])
+###This takes the file selected PCA and redirects it to a new page for user viewing
+@app.route('/fileselectedpcaviews', methods=['GET'])
 def selectedpcaviews():
-    pcaid = request.args['pcaid']
+    pcaid = str(request.args['pcaid'])
     return(send_file(os.path.join('./tempuploads', pcaid, 'index.html')))
 
-###TODO: What does this do? 
-@app.route('/processcomparemultivariate', methods=['GET', 'POST'])
-def processcomparemultivariate():
-    #determine if it's a recalculation of data
-    if request.method == 'POST':
-        files_of_interest = json.loads(request.form["files"]) 
-        files_of_interest = [item[2:] for item in files_of_interest]
-        
-        if os.path.isfile(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES):
-            print("Parsed Global Occurrences File Found")
-            full_occ_table = pd.read_table(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES) 
-            new_df = full_occ_table[full_occ_table["full_CCMS_path"].isin(files_of_interest)]       
-
-        else:
-            print("Creating Parsed Global Occurrences File")
-            full_occ_table = pd.read_table(config.PATH_TO_GLOBAL_OCCURRENCES)
-            col1 = full_occ_table["full_CCMS_path"].tolist()
-            col2 = full_occ_table["Compound_Name"].tolist()
-            new_df = pd.DataFrame({"full_CCMS_path" : col1, "Compound_Name" : col2})
-            new_df.to_csv(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES, sep = "\t")
-            new_df = new_df[new_df["full_CCMS_path"].isin(files_of_interest)]
-         
-        sklearn_output, new_sample_list, eigenvalues, percent_variance = redu_pca.calculate_master_projection(new_df, 3, True) 
-        pcaid = str(uuid.uuid4())
-        output_folder = ("./tempuploads/" + pcaid) 
-        redu_pca.emperor_output(sklearn_output, new_sample_list, eigenvalues, percent_variance, output_folder)
-        return(pcaid) 
-     
-    #determine if it's a projection of data
-    if request.method == 'GET':
-        print("Project data on to the PCA")
-        #Making sure we calculate global datata
-        if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
-            if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
-                print("Missing Global Data")
-                return abort(500)
-
-            print("Missing Global PCA Calculation, Calculating")
-            redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
-            
-        #Making sure we grab down user query
-        task_id = request.args['task'] 
-        new_analysis_filename = os.path.join(app.config['UPLOAD_FOLDER'], task_id)
-        
-        if not os.path.isfile(new_analysis_filename):
-            #TODO: Check the task type, get the URL specific for it, then reformat...
-            task_information = proteosafe.get_task_information("gnps.ucsd.edu", task_id)
-
-            print(task_information)
-
-            task_type = task_information["workflow"]
-
-            if task_type == "MOLECULAR-LIBRARYSEARCH-V2":
-                remote_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=DB_result/".format(task_id)
-                df = pd.read_csv(remote_url, sep="\t")
-                df = df[["full_CCMS_path", "Compound_Name"]]
-                df.to_csv(new_analysis_filename, sep="\t", index=False)
-                #TODO: demangle with params filename
-            elif task_type == "METABOLOMICS-SNETS-V2":
-                clusters_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=clusterinfo/".format(task_id)
-                clusters_df = pd.read_csv(clusters_url, sep="\t")
-
-                identifications_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=result_specnets_DB/".format(task_id)
-                identifications_df = pd.read_csv(identifications_url, sep="\t")
-
-                inner_df = clusters_df.merge(identifications_df, how="inner", left_on="#ClusterIdx", right_on="#Scan#")
-                inner_df = inner_df[["#Filename", "Compound_Name"]]
-                inner_df["full_CCMS_path"] = inner_df["#Filename"]
-                inner_df = inner_df[["full_CCMS_path", "Compound_Name"]]
-
-                inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
-            elif task_type == "FEATURE-BASED-MOLECULAR-NETWORKING":
-                quantification_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=quantification_table_reformatted/".format(task_id)
-                quantification_df = pd.read_csv(quantification_url, sep=",")
-            
-                quantification_records = quantification_df.to_dict(orient="records")
-
-                compound_presence_records = []
-                for record in quantification_records:
-                    for key in record:
-                        if "Peak area" in key:
-                            if record[key] > 0:
-                                presence_dict = {}
-                                presence_dict["full_CCMS_path"] = key.replace("Peak area", "")
-                                presence_dict["#ClusterIdx"] = record["row ID"]
-                            
-                                compound_presence_records.append(presence_dict)
-            
-                compound_presence_df = pd.DataFrame(compound_presence_records)
-
-                identifications_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=DB_result/".format(task_id)
-                identifications_df = pd.read_csv(identifications_url, sep="\t")
-
-                inner_df = compound_presence_df.merge(identifications_df, how="inner", left_on="#ClusterIdx", right_on="#Scan#")
-                inner_df = inner_df[["full_CCMS_path", "Compound_Name"]]
+###This is the backend funtion for re-calcualtion of pca based on the files selected by user
+@app.route('/fileselectedpca', methods=['POST'])
+def fileselectedpca():
+    files_of_interest = json.loads(request.form["files"]) 
+    files_of_interest = [item[2:] for item in files_of_interest]
     
-                inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
+    #making sure the abbreviated metadata is available
+    if os.path.isfile(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES):
+        print("Parsed Global Occurrences File Found")
+        full_occ_table = pd.read_table(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES) 
+        new_df = full_occ_table[full_occ_table["full_CCMS_path"].isin(files_of_interest)]       
+    
+    #creating the abbreviated metadata file if not found
+    else:
+        print("Creating Parsed Global Occurrences File")
+        full_occ_table = pd.read_table(config.PATH_TO_GLOBAL_OCCURRENCES)
+        col1 = full_occ_table["full_CCMS_path"].tolist()
+        col2 = full_occ_table["Compound_Name"].tolist()
+        new_df = pd.DataFrame({"full_CCMS_path" : col1, "Compound_Name" : col2})
+        new_df.to_csv(config.PATH_TO_PARSED_GLOBAL_OCCURRENCES, sep = "\t")
+        new_df = new_df[new_df["full_CCMS_path"].isin(files_of_interest)]
+         
+    sklearn_output, new_sample_list, eigenvalues, percent_variance = redu_pca.calculate_master_projection(new_df, 3, True) 
+    pcaid = str(uuid.uuid4())
+    output_folder = ("./tempuploads/" + pcaid) 
+    
+    redu_pca.emperor_output(sklearn_output, new_sample_list, eigenvalues, percent_variance, output_folder)
+    
+    return(pcaid) 
+ 
+###This allows the user to project their data on the the global data in a principal component analysis plot 
+@app.route('/processcomparemultivariate', methods=['GET'])
+def processcomparemultivariate():
+    #Making sure we calculate global datata
+    if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
+        if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
+            print("Missing Global Data")
+            return abort(500)
+
+        print("Missing Global PCA Calculation, Calculating")
+        redu_pca.calculate_master_projection(config.PATH_TO_GLOBAL_OCCURRENCES)
+            
+    #Making sure we grab down user query
+    task_id = request.args['task'] 
+    new_analysis_filename = os.path.join(app.config['UPLOAD_FOLDER'], task_id)
         
-        #Actually doing Analysis
-        output_folder = ("./tempuploads")
-        redu_pca.project_new_data(new_analysis_filename, output_folder)
+    if not os.path.isfile(new_analysis_filename):
+        #TODO: Check the task type, get the URL specific for it, then reformat...
+        task_information = proteosafe.get_task_information("gnps.ucsd.edu", task_id)
+        print(task_information)
+
+        task_type = task_information["workflow"]
+
+        if task_type == "MOLECULAR-LIBRARYSEARCH-V2":
+            remote_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=DB_result/".format(task_id)
+            df = pd.read_csv(remote_url, sep="\t")
+            df = df[["full_CCMS_path", "Compound_Name"]]
+            df.to_csv(new_analysis_filename, sep="\t", index=False)
+        #TODO: demangle with params filename
+        elif task_type == "METABOLOMICS-SNETS-V2":
+            clusters_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=clusterinfo/".format(task_id)
+            clusters_df = pd.read_csv(clusters_url, sep="\t")
+
+            identifications_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=result_specnets_DB/".format(task_id)
+            identifications_df = pd.read_csv(identifications_url, sep="\t")
+
+            inner_df = clusters_df.merge(identifications_df, how="inner", left_on="#ClusterIdx", right_on="#Scan#")
+            inner_df = inner_df[["#Filename", "Compound_Name"]]
+            inner_df["full_CCMS_path"] = inner_df["#Filename"]
+            inner_df = inner_df[["full_CCMS_path", "Compound_Name"]]
+
+            inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
+        elif task_type == "FEATURE-BASED-MOLECULAR-NETWORKING":
+            quantification_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=quantification_table_reformatted/".format(task_id)
+            quantification_df = pd.read_csv(quantification_url, sep=",")
+            
+            quantification_records = quantification_df.to_dict(orient="records")
+
+            compound_presence_records = []
+            for record in quantification_records:
+                for key in record:
+                    if "Peak area" in key:
+                        if record[key] > 0:
+                            presence_dict = {}
+                            presence_dict["full_CCMS_path"] = key.replace("Peak area", "")
+                            presence_dict["#ClusterIdx"] = record["row ID"]
+                            
+                            compound_presence_records.append(presence_dict)
+            
+            compound_presence_df = pd.DataFrame(compound_presence_records)
+
+            identifications_url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&block=main&file=DB_result/".format(task_id)
+            identifications_df = pd.read_csv(identifications_url, sep="\t")
+
+            inner_df = compound_presence_df.merge(identifications_df, how="inner", left_on="#ClusterIdx", right_on="#Scan#")
+            inner_df = inner_df[["full_CCMS_path", "Compound_Name"]]
+    
+            inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
+        
+    #Actually doing Analysis
+    output_folder = ("./tempuploads")
+    redu_pca.project_new_data(new_analysis_filename, output_folder)
        
-        return send_file("./tempuploads/index.html")
+    return send_file("./tempuploads/index.html")
