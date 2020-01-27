@@ -827,12 +827,13 @@ def processcomparemultivariate():
 
             inner_df = compound_presence_df.merge(identifications_df, how="inner", left_on="#ClusterIdx", right_on="#Scan#")
             inner_df = inner_df[["full_CCMS_path", "Compound_Name"]]
-    
+
             inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
         
 
     if "neighbor" in request.values:
-        return json.dumps(redu_pca.project_new_data(new_analysis_filename, output_folder, calculate_neighbors=True))
+        neighbors_list = redu_pca.project_new_data(new_analysis_filename, None, calculate_neighbors=True)
+        return render_template("multivariateneighbors.html", neighbors_list=neighbors_list)
     else:
         #Actually doing Analysis
         output_folder = ("./tempuploads")

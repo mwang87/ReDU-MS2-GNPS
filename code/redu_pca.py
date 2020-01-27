@@ -147,7 +147,23 @@ def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors
     original_pca_df.set_index(['Unnamed: 0'], inplace=True) 
 
     if calculate_neighbors:
-        return []
+        all_neighbors = []
+        for i in range(len(new_pca_df)):
+            neighbor_distances_df = pd.DataFrame()
+            neighbor_distances_df["distance"] = pd.DataFrame(new_pca_df.to_numpy()[i].dot(original_pca_df.to_numpy().T))[0].abs()
+            neighbor_distances_df["filename"] = original_pca_df.index
+
+            neighbor_distances_df = neighbor_distances_df.sort_values("distance")
+            df = pd.read_table(config.PATH_TO_ORIGINAL_MAPPING_FILE)
+            neighbor_distances_df = neighbor_distances_df.merge(df, how="left", left_on="filename", right_on="filename")
+            neighbor_distances_df["query"] = new_pca_df.index[i]
+
+            all_neighbors += neighbor_distances_df.to_dict(orient="records")[:100]
+
+        return all_neighbors
+
+
+
 
     all_pca_df = pd.concat([original_pca_df, new_pca_df]) #merging the two dataframes together
     
