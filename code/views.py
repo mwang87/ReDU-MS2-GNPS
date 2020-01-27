@@ -830,8 +830,12 @@ def processcomparemultivariate():
     
             inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
         
-    #Actually doing Analysis
-    output_folder = ("./tempuploads")
-    redu_pca.project_new_data(new_analysis_filename, output_folder)
-       
-    return send_file("./tempuploads/index.html")
+
+    if "neighbor" in request.values:
+        return json.dumps(redu_pca.project_new_data(new_analysis_filename, output_folder, calculate_neighbors=True))
+    else:
+        #Actually doing Analysis
+        output_folder = ("./tempuploads")
+        redu_pca.project_new_data(new_analysis_filename, output_folder)
+        
+        return send_file("./tempuploads/index.html")
