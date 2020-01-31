@@ -54,8 +54,9 @@
         <div class="row">
             <div class="col-sm"></div>
             <div class="col-sm">
-                <div id="display">
-                </div>
+                <form>
+                <input class="messageCheckbox" type="checkbox" value="1" name="Display Nearest Neighbor"> Display Nearest Neighbor<br>
+                </form>
             </div>
             <div class="col-sm"></div>
         </div>
@@ -71,7 +72,14 @@
             alert("Please enter a valid GNPS Task ID")
         }
         else{
-            remote_url = "/processcomparemultivariate?task=" + $("#task").val()
+            var knn = 0
+            var inputElements = document.querySelector('.messageCheckbox');
+             
+            if(inputElements.checked){
+                knn = inputElements.value;
+            } 
+            
+            remote_url = "/processcomparemultivariate?task=" + $("#task").val() + "&knn=" + knn
             $('#display').prepend($('<img>',{id:'pca',src: remote_url}))
             window.location.replace(remote_url)
         }
