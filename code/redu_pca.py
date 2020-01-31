@@ -73,7 +73,7 @@ def calculate_master_projection(input_file_occurrences_table, components = 3, sm
         return(sklearn_output, unique_sample, eigenvalues, percent_variance)    
 
 ### Given a new file occurrence table, creates a projection of the new data along with the old data and saves as a png output
-def project_new_data(new_file_occurrence_table, output_file):
+def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors=False):
     new_matrix = np.array([]) 
     file_list = []
     print(new_file_occurrence_table)
@@ -145,6 +145,25 @@ def project_new_data(new_file_occurrence_table, output_file):
     #load and format the original pca
     original_pca_df = pd.read_csv(config.PATH_TO_ORIGINAL_PCA, sep = ",")
     original_pca_df.set_index(['Unnamed: 0'], inplace=True) 
+
+    if calculate_neighbors:
+        all_neighbors = []
+        for i in range(len(new_pca_df)):
+            neighbor_distances_df = pd.DataFrame()
+            neighbor_distances_df["distance"] = pd.DataFrame(new_pca_df.to_numpy()[i].dot(original_pca_df.to_numpy().T))[0].abs()
+            neighbor_distances_df["filename"] = original_pca_df.index
+
+            neighbor_distances_df = neighbor_distances_df.sort_values("distance")
+            df = pd.read_table(config.PATH_TO_ORIGINAL_MAPPING_FILE)
+            neighbor_distances_df = neighbor_distances_df.merge(df, how="left", left_on="filename", right_on="filename")
+            neighbor_distances_df["query"] = new_pca_df.index[i]
+
+            all_neighbors += neighbor_distances_df.to_dict(orient="records")[:100]
+
+        return all_neighbors
+
+
+
 
     all_pca_df = pd.concat([original_pca_df, new_pca_df]) #merging the two dataframes together
     
