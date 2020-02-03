@@ -13,6 +13,7 @@ import scipy.sparse as sps
 import config
 from numpy import genfromtxt
 import collections
+import scipy
 
 ### Given a file input occurrence table, creates the eigen vectors file defined above PATH_TO_COMPONENT_MATRIX, and PCA project of these files PATH_TO_ORIGINAL_PCA
 def calculate_master_projection(input_file_occurrences_table, components = 3, smol_pca = False):  
@@ -157,21 +158,19 @@ def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors
     
     if calculate_neighbors:
         all_neighbors = [] 
-        for i in range(len(new_pca_df)):
-            neighbor_distances_df = pd.DataFrame()
-            neighbor_distances_df["distance"] = pd.DataFrame(new_pca_df.to_numpy()[i].dot(original_pca_df.to_numpy().T))[0].abs()
-            print(neighbor_distances_df)
-            neighbor_distances_df["distance"] = np.sqrt((neighbor_distances_df['distance']))
+        ary = scipy.spatial.distance.cdist(new_pca_df, original_pca_df, metric='euclidean')    
+        
+        for i in range(len(ary)):
+            neighbor_distances_df = pd.DataFrame()            
             neighbor_distances_df["filename"] = original_pca_df.index
-            print(neighbor_distances_df)
-
+            neighbor_distances_df["distance"] = ary[i,:]
             neighbor_distances_df = neighbor_distances_df.sort_values("distance")
             df = pd.read_table(config.PATH_TO_ORIGINAL_MAPPING_FILE)
             neighbor_distances_df = neighbor_distances_df.merge(df, how="left", left_on="filename", right_on="filename")
             neighbor_distances_df["query"] = new_pca_df.index[i]
 
             all_neighbors += neighbor_distances_df.to_dict(orient="records")[:100]
-               
+              
         return(all_neighbors)
    
 ###function takes in all the calculated outputs and places them into the ordination results and then feeds it into the emperor thing to output a plot   
