@@ -76,7 +76,7 @@ def calculate_master_projection(input_file_occurrences_table, components = 3, sm
 def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors=False):
     new_matrix = np.array([]) 
     file_list = []
-    print(new_file_occurrence_table)
+    
     #load components, eigenvalues, and percent variance
     component_matrix = pd.read_csv(config.PATH_TO_COMPONENT_MATRIX, sep = ",")
     eig_var_df = pd.read_csv(config.PATH_TO_EIGS, sep = ",")
@@ -145,26 +145,7 @@ def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors
     #load and format the original pca
     original_pca_df = pd.read_csv(config.PATH_TO_ORIGINAL_PCA, sep = ",")
     original_pca_df.set_index(['Unnamed: 0'], inplace=True) 
-
-    if calculate_neighbors:
-        all_neighbors = []
-        for i in range(len(new_pca_df)):
-            neighbor_distances_df = pd.DataFrame()
-            neighbor_distances_df["distance"] = pd.DataFrame(new_pca_df.to_numpy()[i].dot(original_pca_df.to_numpy().T))[0].abs()
-            neighbor_distances_df["filename"] = original_pca_df.index
-
-            neighbor_distances_df = neighbor_distances_df.sort_values("distance")
-            df = pd.read_table(config.PATH_TO_ORIGINAL_MAPPING_FILE)
-            neighbor_distances_df = neighbor_distances_df.merge(df, how="left", left_on="filename", right_on="filename")
-            neighbor_distances_df["query"] = new_pca_df.index[i]
-
-            all_neighbors += neighbor_distances_df.to_dict(orient="records")[:100]
-
-        return all_neighbors
-
-
-
-
+    
     all_pca_df = pd.concat([original_pca_df, new_pca_df]) #merging the two dataframes together
     
     #create things to be passed to emperor output
@@ -174,7 +155,25 @@ def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors
     #call and create an emperor output for the old data and the new projected data
     emperor_output(values_only, full_file_list, eigenvalues, percent_variance, output_file, new_sample_list)
     
-###currently at 1.8 seconds for 450 samples
+    if calculate_neighbors:
+        all_neighbors = [] 
+        for i in range(len(new_pca_df)):
+            neighbor_distances_df = pd.DataFrame()
+            neighbor_distances_df["distance"] = pd.DataFrame(new_pca_df.to_numpy()[i].dot(original_pca_df.to_numpy().T))[0].abs()
+            print(neighbor_distances_df)
+            neighbor_distances_df["distance"] = np.sqrt((neighbor_distances_df['distance']))
+            neighbor_distances_df["filename"] = original_pca_df.index
+            print(neighbor_distances_df)
+
+            neighbor_distances_df = neighbor_distances_df.sort_values("distance")
+            df = pd.read_table(config.PATH_TO_ORIGINAL_MAPPING_FILE)
+            neighbor_distances_df = neighbor_distances_df.merge(df, how="left", left_on="filename", right_on="filename")
+            neighbor_distances_df["query"] = new_pca_df.index[i]
+
+            all_neighbors += neighbor_distances_df.to_dict(orient="records")[:100]
+               
+        return(all_neighbors)
+   
 ###function takes in all the calculated outputs and places them into the ordination results and then feeds it into the emperor thing to output a plot   
 def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file, new_files = []):   
     eigvals = pd.Series(data = eigenvalues)
@@ -202,7 +201,7 @@ def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance
                
     # create an output directory
     os.makedirs(output_file, exist_ok=True)
-
+    
     with open(os.path.join(output_file, 'index.html'), 'w') as f:
         f.write(emp.make_emperor(standalone = True))
         emp.copy_support_files(output_file)
