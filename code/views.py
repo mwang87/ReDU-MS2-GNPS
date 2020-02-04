@@ -765,7 +765,7 @@ def fileselectedpca():
 @app.route('/processcomparemultivariate', methods=['GET'])
 def processcomparemultivariate():
 
-    knn = request.args['knn']
+    knn = request.args.get("knn", "0")
     if knn == "0":
         nearest_neighbors = False
     else:

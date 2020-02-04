@@ -78,6 +78,10 @@ def test_pca_library_search():
     r = requests.get(query_url)
     r.raise_for_status()
 
+    query_url = f"{SERVER_URL}/processcomparemultivariate?task=f39c94cb7afe4568950bf61cdb8fee0d&knn=1"
+    r = requests.get(query_url)
+    r.raise_for_status()
+
 def test_pca_metabolomics_snets():
     query_url = f"{SERVER_URL}/processcomparemultivariate?task=1ad7bc366aef45ce81d2dfcca0a9a5e7"
     r = requests.get(query_url)
@@ -120,12 +124,12 @@ def test_selected_pca():
     response = requests.get(query_url_view)
     response.raise_for_status()
 
+
 def testing_massive_api():
     url = "https://massive.ucsd.edu/ProteoSAFe//proxi/v0.1/datasets?filter=MSV000084741&function=datasets"
     r = requests.get(url)
     r.json()
     r.raise_for_status()
-
 
 def test_groups_comparison():
     url = f"{SERVER_URL}/explorer"
