@@ -74,13 +74,21 @@ def calculate_master_projection(input_file_occurrences_table, components = 3, sm
         return(sklearn_output, unique_sample, eigenvalues, percent_variance)    
 
 ### Given a new file occurrence table, creates a projection of the new data along with the old data and saves as a png output
-def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors=False):
+def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors=False, unit_test=False):
     new_matrix = np.array([]) 
     file_list = []
-    
-    #load components, eigenvalues, and percent variance
-    component_matrix = pd.read_csv(config.PATH_TO_COMPONENT_MATRIX, sep = ",")
-    eig_var_df = pd.read_csv(config.PATH_TO_EIGS, sep = ",")
+
+    if unit_test:
+        component_matrix = pd.read_csv("./reference_data/component_matrix.csv")
+        eig_var_df = pd.read_csv("./reference_data/eigs_var.csv")
+        original_pca_df = pd.read_csv("./reference_data/original_pca.csv")
+        
+    else:
+        #load components, eigenvalues, and percent variance
+        component_matrix = pd.read_csv(config.PATH_TO_COMPONENT_MATRIX, sep = ",")
+        eig_var_df = pd.read_csv(config.PATH_TO_EIGS, sep = ",")
+        original_pca_df = pd.read_csv(config.PATH_TO_ORIGINAL_PCA, sep = ",")
+
     eigenvalues = eig_var_df["eigenvalues"].tolist()
     percent_variance = eig_var_df["percent_variance"].tolist()
    
@@ -144,7 +152,6 @@ def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors
     new_pca_df.columns = new_pca_df.columns.astype(str)
 
     #load and format the original pca
-    original_pca_df = pd.read_csv(config.PATH_TO_ORIGINAL_PCA, sep = ",")
     original_pca_df.set_index(['Unnamed: 0'], inplace=True) 
     if calculate_neighbors:
         all_neighbors = [] 
@@ -155,7 +162,11 @@ def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors
             neighbor_distances_df["filename"] = original_pca_df.index
             neighbor_distances_df["distance"] = ary[i,:]
             neighbor_distances_df = neighbor_distances_df.sort_values("distance")
-            df = pd.read_table(config.PATH_TO_ORIGINAL_MAPPING_FILE)
+            df = original_pca_df
+            if unit_test:
+                df = pd.read_table("./reference_data/all_sampleinformation.tsv")
+            else:
+                df = pd.read_table(config.PATH_TO_ORIGINAL_MAPPING_FILE)
             neighbor_distances_df = neighbor_distances_df.merge(df, how="left", left_on="filename", right_on="filename")
             neighbor_distances_df["query"] = new_pca_df.index[i]
 
@@ -170,19 +181,23 @@ def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors
     full_file_list = list(all_pca_df.index) 
     
     #call and create an emperor output for the old data and the new projected data
-    emperor_output(values_only, full_file_list, eigenvalues, percent_variance, output_file, new_sample_list)
+    emperor_output(values_only, full_file_list, eigenvalues, percent_variance, output_file, new_sample_list, unit_test)
     
   
 ###function takes in all the calculated outputs and places them into the ordination results and then feeds it into the emperor thing to output a plot   
-def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file, new_files = []):   
+def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file, new_files = [], unit_test=False):   
     eigvals = pd.Series(data = eigenvalues)
     samples = pd.DataFrame(data = sklearn_output, index = full_file_list)
     samples.index.rename("SampleID", inplace = True)
     p_explained = pd.Series(data = percent_variance)
     ores = OrdinationResults(long_method_name = "principal component analysis", short_method_name = "pcoa", eigvals = eigvals, samples = samples, proportion_explained = p_explained)
      
-    #read in all sample metadata 
-    df = pd.read_table(config.PATH_TO_ORIGINAL_MAPPING_FILE)
+    if unit_test:
+        df = pd.read_table("./reference_data/all_sampleinformation.tsv")
+    else:
+        #read in all sample metadata 
+        df = pd.read_table(config.PATH_TO_ORIGINAL_MAPPING_FILE)
+    
     df.rename(columns={"filename" : "SampleID"}, inplace = True)
     df.set_index("SampleID", inplace = True)
     
