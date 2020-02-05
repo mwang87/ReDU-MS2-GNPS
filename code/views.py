@@ -764,13 +764,12 @@ def fileselectedpca():
 
 @app.route('/processcomparemultivariate', methods=['GET'])
 def processcomparemultivariate():
-
-    knn = request.args.get("knn", "0")
+    knn = request.args.get("knn")
+    
     if knn == "0":
         nearest_neighbors = False
     else:
         nearest_neighbors = True
-
     #Making sure we calculate global datata
     if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
         if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):

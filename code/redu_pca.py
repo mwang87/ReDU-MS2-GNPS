@@ -146,20 +146,10 @@ def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors
     #load and format the original pca
     original_pca_df = pd.read_csv(config.PATH_TO_ORIGINAL_PCA, sep = ",")
     original_pca_df.set_index(['Unnamed: 0'], inplace=True) 
-    
-    all_pca_df = pd.concat([original_pca_df, new_pca_df]) #merging the two dataframes together
-    
-    #create things to be passed to emperor output
-    values_only = all_pca_df.to_numpy()
-    full_file_list = list(all_pca_df.index) 
-    
-    #call and create an emperor output for the old data and the new projected data
-    emperor_output(values_only, full_file_list, eigenvalues, percent_variance, output_file, new_sample_list)
-    
     if calculate_neighbors:
         all_neighbors = [] 
         ary = scipy.spatial.distance.cdist(new_pca_df, original_pca_df, metric='euclidean')    
-        
+       
         for i in range(len(ary)):
             neighbor_distances_df = pd.DataFrame()            
             neighbor_distances_df["filename"] = original_pca_df.index
@@ -172,7 +162,17 @@ def project_new_data(new_file_occurrence_table, output_file, calculate_neighbors
             all_neighbors += neighbor_distances_df.to_dict(orient="records")[:100]
               
         return(all_neighbors)
-   
+    
+    all_pca_df = pd.concat([original_pca_df, new_pca_df]) #merging the two dataframes together
+    
+    #create things to be passed to emperor output
+    values_only = all_pca_df.to_numpy()
+    full_file_list = list(all_pca_df.index) 
+    
+    #call and create an emperor output for the old data and the new projected data
+    emperor_output(values_only, full_file_list, eigenvalues, percent_variance, output_file, new_sample_list)
+    
+  
 ###function takes in all the calculated outputs and places them into the ordination results and then feeds it into the emperor thing to output a plot   
 def emperor_output(sklearn_output, full_file_list, eigenvalues, percent_variance, output_file, new_files = []):   
     eigvals = pd.Series(data = eigenvalues)
