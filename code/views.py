@@ -866,7 +866,7 @@ def processcomparemultivariate():
             
 
 
-        return render_template("multivariateneighbors.html", neighbors_list=neighbors_list, consensus_list=output_consensus_list)
+        return render_template("multivariateneighbors.html", neighbors_list=neighbors_df.to_dict(orient="records"), consensus_list=output_consensus_list)
     else:
         #Actually doing Analysis
         output_folder = ("./tempuploads")
