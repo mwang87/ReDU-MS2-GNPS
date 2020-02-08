@@ -764,13 +764,12 @@ def fileselectedpca():
 
 @app.route('/processcomparemultivariate', methods=['GET'])
 def processcomparemultivariate():
-
-    knn = request.args.get("knn", "0")
+    knn = request.args.get("knn")
+    
     if knn == "0":
         nearest_neighbors = False
     else:
         nearest_neighbors = True
-
     #Making sure we calculate global datata
     if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
         if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
@@ -840,7 +839,34 @@ def processcomparemultivariate():
 
     if nearest_neighbors:
         neighbors_list = redu_pca.project_new_data(new_analysis_filename, None, calculate_neighbors=True)
-        return render_template("multivariateneighbors.html", neighbors_list=neighbors_list)
+        # Creating Consensus Neighbors
+        neighbors_df = pd.DataFrame(neighbors_list)
+        MAX_DISTANCE = 0.2
+        neighbors_df = neighbors_df[neighbors_df["distance"] < MAX_DISTANCE]
+
+        output_consensus_list = []
+        query_files = set(neighbors_df["query"])
+        for query_file in query_files:
+            filtered_neighbors_df = neighbors_df[neighbors_df["query"] == query_file]
+
+            field_to_consider = ["MassSpectrometer", "SampleType", "SampleTypeSub1"]
+
+            for attribute in field_to_consider:
+                grouped_df = filtered_neighbors_df.groupby(by=[attribute]).count()
+                grouped_df[attribute] = grouped_df.index
+                for neighbor in grouped_df.to_dict(orient="records"):
+                    output_consensus_dict = {}
+                    output_consensus_dict["query"] = query_file
+                    output_consensus_dict["attribute"] = attribute
+                    output_consensus_dict["term"] = neighbor[attribute]
+                    output_consensus_dict["count"] = neighbor["filename"]
+
+                    output_consensus_list.append(output_consensus_dict)
+
+            
+
+
+        return render_template("multivariateneighbors.html", neighbors_list=neighbors_df.to_dict(orient="records"), consensus_list=output_consensus_list)
     else:
         #Actually doing Analysis
         output_folder = ("./tempuploads")

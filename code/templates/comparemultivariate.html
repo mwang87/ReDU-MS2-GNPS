@@ -45,14 +45,13 @@
         <div class="row">
            <div class="col-sm"></div>
            <div class="col-sm">
-               <div class="text-center">
-                    <a id="analyzebutton" class="btn btn-info" href="/processcomparemultivariate?task=f39c94cb7afe4568950bf61cdb8fee0d">Click for Example PCA</button>
-                    <a id="analyzebutton" class="btn btn-info" href="/processcomparemultivariate?task=f39c94cb7afe4568950bf61cdb8fee0d&knn=1">Click for Example Nearest Neighbor</button>
+               <div class="text-center">    
+                    <a id="analyzebutton" class="btn btn-info" href="/processcomparemultivariate?task=f39c94cb7afe4568950bf61cdb8fee0d&knn=0">Click for Example PCA</a>
+                    <a id="analyzebutton" class="btn btn-info" href="/processcomparemultivariate?task=f39c94cb7afe4568950bf61cdb8fee0d&knn=1">Click for Example Nearest Neighbor</a>
                </div>
            </div>
            <div class="col-sm"></div>
         </div>
-        
     </div>
 </div>
 
@@ -65,7 +64,7 @@
         }
         else{
             remote_url = "/processcomparemultivariate?task=" + $("#task").val() + "&knn=0"
-            $('#display').prepend($('<img>',{id:'pca',src: remote_url}))
+            //$('#display').prepend($('<img>',{id:'pca',src: remote_url}))
             window.location.replace(remote_url)
         }
     }
@@ -78,7 +77,7 @@
         }
         else{
             remote_url = "/processcomparemultivariate?task=" + $("#task").val() + "&knn=1"
-            $('#display').prepend($('<img>',{id:'pca',src: remote_url}))
+            //$('#display').prepend($('<img>',{id:'pca',src: remote_url}))
             window.location.replace(remote_url)
         }
     }

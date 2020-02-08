@@ -16,9 +16,21 @@
 
     <hr>
 
+    <h2>Conensus Neighbors</h2>
+
+    <div class="table table-striped">
+        <table id="consensustable" class="display" width="100%"></table>
+    </div>
+
+    <hr>
+
+    <h2>All Neighbors</h2>
+
     <div class="table table-striped">
         <table id="datatable" class="display" width="100%"></table>
     </div>
+
+    
 </div>
 
 <script>
@@ -32,6 +44,24 @@ $( document ).ready(function() {
             { data: "distance" , title: "distance"},
             { data: "SampleType" , title: "SampleType"},
             { data: "SampleTypeSub1" , title: "SampleTypeSub1"},
+            { data: "MassSpectrometer" , title: "MassSpectrometer"},
+        ],
+        pageLength: 30,
+        dom: 'Bflrtip',
+        buttons: [
+            'copy', 'csv', 'excel'
+        ]
+    } );
+});
+
+$( document ).ready(function() {
+    $('#consensustable').DataTable( {
+        data: (( consensus_list | tojson )),
+        columns: [
+            { data: "query" , title: "query"},
+            { data: "attribute" , title: "attribute"},
+            { data: "term" , title: "term"},
+            { data: "count" , title: "count"}
         ],
         pageLength: 30,
         dom: 'Bflrtip',
