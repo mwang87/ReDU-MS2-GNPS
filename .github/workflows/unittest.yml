@@ -20,6 +20,7 @@ jobs:
         pip install requests
         pip install ftputil
         pip install vladiate
+        pip install pandas
     - name: Test with pytest
       run: |
         pip install nose2
