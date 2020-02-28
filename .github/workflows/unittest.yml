@@ -21,6 +21,7 @@ jobs:
         pip install ftputil
         pip install vladiate
         pip install pandas
+        pip install xmltodict
     - name: Test with pytest
       run: |
         pip install nose2
