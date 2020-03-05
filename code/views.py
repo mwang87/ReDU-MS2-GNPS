@@ -628,6 +628,19 @@ def ReDUValidator():
 
 
 # API End Points
+def automated_search():
+    df = pd.read_table(config.PATH_TO_ORIGINAL_MAPPING_FILE)
+    filenames = df["filename"].tolist()
+    batch_size = 1000
+    batch_num = len(filenames) // batch_size
+    row = []
+    for x in range(batch_num):
+        files = filenames[(batch_size * x):(batch_size * (x+1))]
+        string_temp = ';'.join(files)
+        row.append(string_temp)
+
+    new_file = pd.DataFrame({"filename": row})
+    new_file.to_csv("automated_search_filenames.tsv", sep="\t")
 
 def allowed_file_metadata(filename):
     return '.' in filename and \
@@ -694,6 +707,7 @@ import config
 #This displays global PCoA of public data as a web url
 @app.route("/displayglobalmultivariate", methods = ["GET"])
 def displayglobalmultivariate():
+    automated_search()
     if not (os.path.isfile(config.PATH_TO_ORIGINAL_PCA) and os.path.isfile(config.PATH_TO_EIGS)):
         print("Missing Global PCA Calculation, Calculating")
         if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
