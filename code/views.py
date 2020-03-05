@@ -760,10 +760,17 @@ def fileselectedpca():
     redu_pca.emperor_output(sklearn_output, new_sample_list, eigenvalues, percent_variance, output_folder)
     
     return(pcaid) 
- 
-###This allows the user to project their data on the the global data in a principal component analysis plot 
+
+
 @app.route('/processcomparemultivariate', methods=['GET'])
 def processcomparemultivariate():
+
+    knn = request.args.get("knn", "0")
+    if knn == "0":
+        nearest_neighbors = False
+    else:
+        nearest_neighbors = True
+
     #Making sure we calculate global datata
     if not os.path.isfile(config.PATH_TO_COMPONENT_MATRIX):
         if not os.path.isfile(config.PATH_TO_GLOBAL_OCCURRENCES):
@@ -827,11 +834,16 @@ def processcomparemultivariate():
 
             inner_df = compound_presence_df.merge(identifications_df, how="inner", left_on="#ClusterIdx", right_on="#Scan#")
             inner_df = inner_df[["full_CCMS_path", "Compound_Name"]]
-    
+
             inner_df.to_csv(new_analysis_filename, sep="\t", index=False)
         
-    #Actually doing Analysis
-    output_folder = ("./tempuploads")
-    redu_pca.project_new_data(new_analysis_filename, output_folder)
-       
-    return send_file("./tempuploads/index.html")
+
+    if nearest_neighbors:
+        neighbors_list = redu_pca.project_new_data(new_analysis_filename, None, calculate_neighbors=True)
+        return render_template("multivariateneighbors.html", neighbors_list=neighbors_list)
+    else:
+        #Actually doing Analysis
+        output_folder = ("./tempuploads")
+        redu_pca.project_new_data(new_analysis_filename, output_folder)
+        
+        return send_file("./tempuploads/index.html")

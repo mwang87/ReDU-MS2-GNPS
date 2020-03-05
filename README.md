@@ -1,6 +1,7 @@
 # Welcome to ReDU
 
 ![](https://github.com/mwang87/ReDU-MS2-GNPS/workflows/production-integration/badge.svg)
+![unit test](https://github.com/mwang87/ReDU-MS2-GNPS/workflows/unit%20test/badge.svg)
 
 ## Reanalysis of Data User Interface
 

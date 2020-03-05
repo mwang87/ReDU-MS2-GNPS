@@ -1,0 +1,49 @@
+(% extends "layout.html" %)
+
+(% block content %)
+
+<script src="/static/datatables/datatables.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/static/datatables/datatables.min.css" crossorigin="anonymous">
+
+<div id="app-4" class="container-fluid justify-content-center align-items-center">
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm text-center">
+            <h2>Comparison Neighbors</h2>
+        </div>
+        <div class="col-sm"></div>
+    </div>
+
+    <hr>
+
+    <div class="table table-striped">
+        <table id="datatable" class="display" width="100%"></table>
+    </div>
+</div>
+
+<script>
+
+$( document ).ready(function() {
+    $('#datatable').DataTable( {
+        data: (( neighbors_list | tojson )),
+        columns: [
+            { data: "query" , title: "query"},
+            { data: "filename" , title: "filename"},
+            { data: "distance" , title: "distance"},
+            { data: "SampleType" , title: "SampleType"},
+            { data: "SampleTypeSub1" , title: "SampleTypeSub1"},
+        ],
+        pageLength: 30,
+        dom: 'Bflrtip',
+        buttons: [
+            'copy', 'csv', 'excel'
+        ]
+    } );
+});
+
+
+
+
+</script>
+
+(% endblock %)
