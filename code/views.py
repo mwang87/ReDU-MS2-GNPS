@@ -626,9 +626,9 @@ def ReDUValidator():
     return render_template('ReDUValidator.html')
 
 
-
 # API End Points
-def automated_search():
+@app.route('/metabatchdump', methods=['GET'])
+def metabatchdump():
     df = pd.read_table(config.PATH_TO_ORIGINAL_MAPPING_FILE)
     filenames = df["filename"].tolist()
     batch_size = 1000
@@ -640,7 +640,7 @@ def automated_search():
         row.append(string_temp)
 
     new_file = pd.DataFrame({"filename": row})
-    new_file.to_csv("automated_search_filenames.tsv", sep="\t")
+    return new_file.to_csv(sep="\t", index=False)
 
 def allowed_file_metadata(filename):
     return '.' in filename and \
