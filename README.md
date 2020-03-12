@@ -1,6 +1,7 @@
 # Welcome to ReDU
 
 ![](https://github.com/mwang87/ReDU-MS2-GNPS/workflows/production-integration/badge.svg)
+![unit test](https://github.com/mwang87/ReDU-MS2-GNPS/workflows/unit%20test/badge.svg)
 
 ## Reanalysis of Data User Interface
 
@@ -8,23 +9,22 @@
 
 **This is a community effort and everyone is encouraged to participate by submitting their own data and sample information [instructions](https://mwang87.github.io/ReDU-MS2-Documentation/HowtoContribute). The sharing of new applications (and code) which use ReDU is highly encouraged.**
 
-## We are developing two main branches of functionality:
+## Testing Procedure
 
-## Analyze Your Data
-* [Compare Your Data to Public Data via Multivariate Analysis](https://mwang87.github.io/ReDU-MS2-Documentation/AnalyzeYourData_MultivariateComparisons) - Projection of your data onto a precalculated principal components analysis score plot of public data. <br>
-* [Co-analyze Your Data with Public Data at GNPS](https://mwang87.github.io/ReDU-MS2-Documentation/AnalyzeYourData_CoAnalysis_at_GNPS) - Select files using sample information and assemble public data in groups as desired using the file selector. Launching an analysis loads the files from [MassIVE](https://massive.ucsd.edu/ProteoSAFe/static/massive.jsp) at which point users can add their own data. The following co-analyses can be launched:
-  * Set Up Co-Analysis with GNPS Molecular Networking (requires GNPS Login)
-  * Set Up Co-Analysis with GNPS Library Search (requires GNPS Login)
-  * Launch PCA of Selected Files
-  
-## Analyze Public Data
-* [Explore Multivariate Analysis of Public Data](https://mwang87.github.io/ReDU-MS2-Documentation/AnalyzePublicData_MultivariateComparisons) - Explore precalculated principal components analysis score plot of public data. <br>
-* [Chemical Explorer](https://mwang87.github.io/ReDU-MS2-Documentation/AnalyzePublicData_ChemicalEnrichment) - Explore table of precalculated annotations in  public data and default GNPS parameters. Find files and explore sample information associations. <br>
-* [Re-analyze Public Data at GNPS](https://mwang87.github.io/ReDU-MS2-Documentation/PublicData_Reanalysis_at_GNPS) - Select files using sample information and assemble public data in groups as desired using the file selector. The following re-analyses can be launched:
-  * Set Up Co-Analysis with GNPS Molecular Networking (requires GNPS Login)
-  * Set Up Co-Analysis with GNPS Library Search (requires GNPS Login)
-  * Launch Group Comparator
-  * Launch Chemical Explorer 
- 
-## Data Availability
-All sample information can be downloaded from the ReDU-MS2 homepage by clicking "Download Database". The ReDU identification database is publicly available and accessible via GNPS/MassIVE (gnps.ucsd.edu), MSV000084206.
+To get ReDU up and running on your local system, it should be as easy as
+
+```
+server-compose-interactive
+```
+
+## Updating ReDU Data Procedure
+
+One of the key steps in ReDU is the updating of the database to include the latest identifications for files within ReDU. These are the following steps:
+
+1. Download batch template for GNPS at ```/metabatchdump```
+1. Run Batch Workflow for Spectral Library Search
+1. Get the set of tasks as tsv and save to [here](https://github.com/mwang87/ReDU-MS2-GNPS/blob/refactor-read-me-for-developers/database/global_tasks.tsv). 
+1. Remove database [here](https://github.com/mwang87/ReDU-MS2-GNPS/tree/refactor-read-me-for-developers/database)
+1. Run XXX command to drop identifications table
+1. Start ReDU back up and it will autopopulate
+
