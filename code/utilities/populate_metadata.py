@@ -160,18 +160,3 @@ def populate_dataset_metadata(input_metadata_filename):
         print(dataset_accession, len(metadata_by_accession[dataset_accession]), added_files)
 
     return total_added_files
-
-def main():
-    input_metadata_filename = sys.argv[1]
-    populate_dataset_metadata(input_metadata_filename)
-
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
-    main()

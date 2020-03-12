@@ -23,8 +23,7 @@ One of the key steps in ReDU is the updating of the database to include the late
 
 1. Download batch template for GNPS at ```/metabatchdump```
 1. Run Batch Workflow for Spectral Library Search
-1. Get the set of tasks as tsv and save to [here](https://github.com/mwang87/ReDU-MS2-GNPS/blob/refactor-read-me-for-developers/database/global_tasks.tsv). 
-1. Remove database [here](https://github.com/mwang87/ReDU-MS2-GNPS/tree/refactor-read-me-for-developers/database)
-1. Run XXX command to drop identifications table
+1. Get the set of tasks as tsv and save to [here](https://github.com/mwang87/ReDU-MS2-GNPS/blob/master/database/global_tasks.tsv). 
+1. Remove database [here](https://github.com/mwang87/ReDU-MS2-GNPS/tree/master/database)
 1. Start ReDU back up and it will autopopulate
 

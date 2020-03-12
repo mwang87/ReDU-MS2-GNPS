@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd utilities
-python3 ./search_dataset_metadata.py all
+python3 ./populate_database.py --importmetadata all
