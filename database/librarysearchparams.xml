@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<parameters>
+<parameter name="ANALOG_SEARCH">0</parameter>
+<parameter name="FILTER_LIBRARY">1</parameter>
+<parameter name="FILTER_PRECURSOR_WINDOW">1</parameter>
+<parameter name="FILTER_SNR_PEAK_INT">0.0</parameter>
+<parameter name="FILTER_STDDEV_PEAK_INT">0.0</parameter>
+<parameter name="MAX_SHIFT_MASS">100.0</parameter>
+<parameter name="MIN_MATCHED_PEAKS">6</parameter>
+<parameter name="MIN_PEAK_INT">0.0</parameter>
+<parameter name="SCORE_THRESHOLD">0.7</parameter>
+<parameter name="SEARCH_LIBQUALITY">3</parameter>
+<parameter name="TOP_K_RESULTS">1</parameter>
+<parameter name="WINDOW_FILTER">1</parameter>
+<parameter name="desc">GNPS All REDU LIBRARY SEARCH</parameter>
+<parameter name="email">liyanshen@ytu.edu.cn</parameter>
+<parameter name="library_on_server">d.speclibs;</parameter>
+<parameter name="reanalyzed_datasets">MSV000083777</parameter>
+<parameter name="spec_on_server">${filename}</parameter>
+<parameter name="tolerance.Ion_tolerance">0.5</parameter>
+<parameter name="tolerance.PM_tolerance">2.0</parameter>
+<parameter name="workflow">MOLECULAR-LIBRARYSEARCH-V2</parameter>
+<parameter name="workflow_version">release_10.1</parameter>
+</parameters>
