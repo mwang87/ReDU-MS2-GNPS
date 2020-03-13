@@ -107,9 +107,14 @@ def import_identification(task_filename, output_identifications_filename, force=
     for task in all_tasks:
         taskid = task["taskid"]
         url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=DB_result/" % (taskid)
-        data_df = pd.read_csv(url, sep="\t")
-        print(taskid, len(data_df))
-        all_data_df.append(data_df)
+        try:
+            data_df = pd.read_csv(url, sep="\t")
+            print(taskid, len(data_df))
+            all_data_df.append(data_df)
+        except KeyboardInterrupt:
+            raise
+        except:
+            pass
 
     merged_df = pd.concat(all_data_df)
     merged_df.to_csv(output_identifications_filename, sep="\t", index=False)
