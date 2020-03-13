@@ -566,11 +566,6 @@ def plottags():
     return json.dumps({"uuid" : uuid_to_use})
 
 
-#Launch Job
-import credentials
-
-
-
 """ Production Views """
 
 @app.route('/', methods=['GET'])
