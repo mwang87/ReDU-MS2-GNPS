@@ -63,12 +63,8 @@ def resolve_metadata_filename_to_all_files(filename, dataset_files):
 
     print("ACCEPTED", acceptable_filenames)
 
-    # NOTE: We allow for ambiguity if there are two options becuase of possible bugs in 
-    # Massive Conversion to ccms_peak. This has been brought to the attention of Jeremy Carver
-    # And may result in false positive connections between metadata
+    # NOTE: We are revising to not allow ambiguity anymore
     if len(acceptable_filenames) == 1:
-        return acceptable_filenames[0]
-    if len(acceptable_filenames) == 2:
         return acceptable_filenames[0]
     return None
 
