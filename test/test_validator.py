@@ -8,7 +8,10 @@ def test_valid():
     for valid_filename in valid_files:
         print(valid_filename)
         passes_validation, failures, errors_list, valid_rows, row_count = metadata_validator.perform_validation(valid_filename)
+        dataset_success, result_string, matched_dataset_items = metadata_validator.perform_validation_against_massive(valid_filename)
+        print(len(valid_rows), row_count, dataset_success, matched_dataset_items)
         assert(passes_validation is True)
+        assert(matched_dataset_items == len(valid_rows))
 
 def test_invalid():
     invalid_files = glob.glob("data/validator/invalid*")
