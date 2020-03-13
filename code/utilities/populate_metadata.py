@@ -9,7 +9,6 @@ import ming_fileio_library
 import ming_proteosafe_library
 import metadata_validator
 import ftputil
-import credentials
 
 try:
     import redis
@@ -30,7 +29,6 @@ def get_dataset_files(dataset_accession, collection_name):
 
     if dataset_files is None:
         dataset_files = ming_proteosafe_library.get_all_files_in_dataset_folder_ftp(dataset_accession, collection_name, massive_host=massive_host)
-        #dataset_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, collection_name, credentials.USERNAME, credentials.PASSWORD)
         try:
             redis_client.set(dataset_accession, json.dumps(dataset_files), ex=3600)
         except:
