@@ -14,6 +14,7 @@ import ftputil
 import pandas as pd
 import argparse
 from models import *
+import csv
 
 massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
 
