@@ -17,6 +17,14 @@ To get ReDU up and running on your local system, it should be as easy as
 server-compose-interactive
 ```
 
+## Unit Testing
+
+We have unit tests to test the validators. There are several naming conventions:
+
+1. ```valid_*``` - These are valid files implying passing validation and finding the same number of files in MassIVE
+1. ```invalid_*``` - These are invalid files that fail validation
+1. ```invaliddata_*``` - These are valid files that pass validation but fail to match with data in MassIVE
+
 ## Updating ReDU Data Procedure
 
 One of the key steps in ReDU is the updating of the database to include the latest identifications for files within ReDU. These are the following steps:
