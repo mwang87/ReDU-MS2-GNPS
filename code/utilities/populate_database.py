@@ -96,6 +96,7 @@ def process_metadata_import(dataset_accession, dryrun=False):
 
 def import_identification(task_filename, output_identifications_filename, force=False):
     number_of_compounds = Compound.select().count()
+    
     if number_of_compounds > 0 and force is False:
         print("Compounds Already Imported")
         return
@@ -118,6 +119,7 @@ def import_identification(task_filename, output_identifications_filename, force=
             pass
 
     merged_df = pd.concat(all_data_df)
+    print("Total Identifications", len(merged_df))
     merged_df.to_csv(output_identifications_filename, sep="\t", index=False)
 
     # Populating Database
