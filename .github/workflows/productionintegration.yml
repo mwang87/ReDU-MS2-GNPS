@@ -1,7 +1,6 @@
 name: production-integration
 
 on: 
-  push:
   schedule:
    - cron:  '*/60 * * * *'
 
