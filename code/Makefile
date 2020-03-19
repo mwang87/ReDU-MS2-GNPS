@@ -37,6 +37,10 @@ server-compose-interactive:
 	docker-compose build
 	docker-compose --log-level DEBUG up 
 
+server-compose-background:
+	docker-compose build
+	docker-compose up -d 
+
 server-compose-production:
 	docker-compose build
 	docker-compose -f docker-compose.yml -f docker-compose-production.yml up -d

@@ -26,6 +26,7 @@ def get_dataset_files(dataset_accession, collection_name):
         massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
 
     dataset_files = ming_proteosafe_library.get_all_files_in_dataset_folder_ftp(dataset_accession, collection_name, massive_host=massive_host)
+
     return dataset_files
 
 def perform_validation_against_massive(filename):
@@ -43,8 +44,8 @@ def perform_validation_against_massive(filename):
 
     all_resolved_filenames = []
     for query_filename in metadata["filename"]:
-        print(query_filename)
         dataset_filename = resolve_metadata_filename_to_all_files(query_filename, dataset_files)
+        print(query_filename, dataset_filename)
 
         if dataset_filename == None:
             continue
@@ -54,14 +55,20 @@ def perform_validation_against_massive(filename):
     return True, "Success", len(all_resolved_filenames)
 
 def resolve_metadata_filename_to_all_files(filename, dataset_files):
-    stripped_extension = ming_fileio_library.get_filename_without_extension(filename)
+    stripped_extension = ming_fileio_library.get_filename_without_extension(filename) + "."
 
-    acceptable_filenames = ["f." + dataset_filename for dataset_filename in dataset_files if dataset_filename.find(stripped_extension) != -1]
+    print(stripped_extension)
 
-    if len(acceptable_filenames) != 1:
-        return None
+    acceptable_filenames = ["f." + dataset_filename for dataset_filename in dataset_files if stripped_extension in dataset_filename]
 
-    return acceptable_filenames[0]
+    print("ACCEPTED", acceptable_filenames)
+
+    # NOTE: We are revising to not allow ambiguity anymore
+    if len(acceptable_filenames) == 1:
+        return acceptable_filenames[0]
+    return None
+
+    
 
 
 def rewrite_metadata(metadata_filename):

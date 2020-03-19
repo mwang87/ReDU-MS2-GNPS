@@ -12,8 +12,8 @@
 <parameter name="SEARCH_LIBQUALITY">3</parameter>
 <parameter name="TOP_K_RESULTS">1</parameter>
 <parameter name="WINDOW_FILTER">1</parameter>
-<parameter name="desc">GNPS All REDU LIBRARY SEARCH</parameter>
-<parameter name="email">liyanshen@ytu.edu.cn</parameter>
+<parameter name="desc">GNPS All REDU LIBRARY SEARCH ${id}</parameter>
+<parameter name="email">mwang87@gmail.com</parameter>
 <parameter name="library_on_server">d.speclibs;</parameter>
 <parameter name="reanalyzed_datasets">MSV000083777</parameter>
 <parameter name="spec_on_server">${filename}</parameter>
