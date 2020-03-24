@@ -1,4 +1,4 @@
-GNPS Annotation	Chemical	Attribute	Term	Observations	Total Files  	Percentage
+GNPS Annotation	Chemical	Attribute	Term	Observations	Total FilesÂ Â 	Percentage
 Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	acetonitrile-isopropanol-water (3:3:2)	6	6	1
 Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	acetonitrile-water (7:3)	6	6	1
 Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	methanol (100%)	6	6	1
