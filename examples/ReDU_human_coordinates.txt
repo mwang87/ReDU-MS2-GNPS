@@ -1,0 +1,19 @@
+Human_Body_Part	X	Y	Z	Radii
+anal region	95	3842	0	80
+arm skin	3634	1672	0	80
+axilla skin	3634	1228	0	80
+blood plasma	95	1588	0	80
+blood serum	95	2157	0	80
+feces	95	3067	0	80
+head or neck skin	3634	245	0	80
+milk	95	1180	0	80
+nasal cavity	95	160	0	80
+not applicable	95	4150	0	80
+oral cavity	95	515	0	80
+saliva	95	851	0	80
+skin of leg	3634	2919	0	80
+skin of manus	3634	2289	0	80
+skin of pes	3634	3626	0	80
+skin of trunk	3634	755	0	80
+urine	95	2667	0	80
+vagina	95	3464	0	80
