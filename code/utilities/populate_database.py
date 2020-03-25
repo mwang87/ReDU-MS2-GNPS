@@ -10,9 +10,11 @@ import metadata_validator
 import ming_fileio_library
 import ming_proteosafe_library
 import populate_metadata
-import credentials
 import ftputil
 import pandas as pd
+import argparse
+from models import *
+import csv
 
 massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
 
@@ -22,6 +24,7 @@ def find_dataset_metadata(dataset_accession, useftp=False):
         all_other_files = []
         all_update_files = ming_proteosafe_library.get_all_files_in_dataset_folder_ftp(dataset_accession, "updates", includefilemetadata=True, massive_host=massive_host)
     else:
+        import credentials
         all_other_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, "other", credentials.USERNAME, credentials.PASSWORD, includefilemetadata=True)
         all_update_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, "updates", credentials.USERNAME, credentials.PASSWORD, includefilemetadata=True)
 
@@ -91,10 +94,84 @@ def process_metadata_import(dataset_accession, dryrun=False):
 
     return len(metadata_df), added_files_count
 
+def import_identification(task_filename, output_identifications_filename, force=False):
+    number_of_compounds = Compound.select().count()
+    
+    if number_of_compounds > 0 and force is False:
+        print("Compounds Already Imported")
+        return
+
+    # Download Identifications
+    print("Downloading Identifications")
+    df = pd.read_csv(task_filename, sep="\t")
+    all_tasks = df.to_dict(orient="records")
+    all_data_df = []
+    for task in all_tasks:
+        taskid = task["taskid"]
+        url = "https://gnps.ucsd.edu/ProteoSAFe/DownloadResultFile?task=%s&block=main&file=DB_result/" % (taskid)
+        try:
+            data_df = pd.read_csv(url, sep="\t")
+            print(taskid, len(data_df))
+            all_data_df.append(data_df)
+        except KeyboardInterrupt:
+            raise
+        except:
+            pass
+
+    merged_df = pd.concat(all_data_df)
+    print("Total Identifications", len(merged_df))
+    merged_df.to_csv(output_identifications_filename, sep="\t", index=False)
+
+    # Populating Database
+    all_files_in_db = Filename.select()
+    all_files_in_db_set = set([filename.filepath for filename in all_files_in_db])
+
+    processed_key = set()
+
+    with open(output_identifications_filename) as csvfile:
+        reader = csv.DictReader(csvfile, delimiter='\t')
+        line_count = 0
+        for row in reader:
+            line_count += 1
+
+            if line_count % 1000 == 0:
+                print(line_count)
+
+            try:
+                original_path = "f." + row["full_CCMS_path"]
+
+                if not original_path in all_files_in_db_set:
+                    continue
+
+                key = original_path + ":" + row["Compound_Name"]
+
+                if key in processed_key:
+                    continue
+
+                filename_db = Filename.get(filepath=original_path)
+                compound_db, status = Compound.get_or_create(compoundname=row['Compound_Name'])
+                join_db = CompoundFilenameConnection.get_or_create(filename=filename_db, compound=compound_db)
+
+                processed_key.add(key)
+            except KeyboardInterrupt:
+                raise
+            except:
+                print("ERROR")
+                continue
 
 def main():
-    mode = sys.argv[1]
-    if mode == "all":
+    parser = argparse.ArgumentParser(description='Importing Database')
+    parser.add_argument('--importmetadata', default=None, help='Imports metadata, options are all, dataset, file')
+    parser.add_argument('--metadatafile', help='Imports metadata filename')
+    parser.add_argument('--metadataaccession', help='Imports metadata accession')
+
+    parser.add_argument('--importidentifications', default=None, help='Imports identifications, from task file')
+    parser.add_argument('--identifications_output', help='identifications_output')
+
+    args = parser.parse_args()
+
+    # Importing Metadata First
+    if args.importmetadata == "all":
         summary_list = []
 
         all_datasets = ming_proteosafe_library.get_all_datasets()
@@ -122,10 +199,17 @@ def main():
             except:
                 continue
         
-    elif mode == "dataset":
-        dataset_accession = sys.argv[2]
-        total_valid_metadata_entries, files_added = process_metadata_import(dataset_accession)
+    elif args.importmetadata == "dataset":
+        total_valid_metadata_entries, files_added = process_metadata_import(args.metadataaccession)
         print(total_valid_metadata_entries, files_added)
+
+    elif args.importmetadata == "file":
+        populate_metadata.populate_dataset_metadata(args.metadatafile)
+
+
+    # Import Library Identifications
+    if args.importidentifications is not None:
+        import_identification(args.importidentifications, args.identifications_output)
 
 
 if __name__ == "__main__":

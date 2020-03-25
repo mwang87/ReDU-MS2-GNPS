@@ -2,4 +2,4 @@
 #This script syncs down the identifications for all files and then shoves it into the database
 
 cd utilities
-python3 ./populate_identifications_libsearch.py /app/database/all_identifications.tsv --tasks /app/database/global_tasks.tsv
+python3 ./populate_database.py --importidentifications /app/database/global_tasks.tsv --identifications_output /app/database/all_identifications.tsv

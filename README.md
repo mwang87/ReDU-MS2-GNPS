@@ -17,14 +17,21 @@ To get ReDU up and running on your local system, it should be as easy as
 server-compose-interactive
 ```
 
+## Unit Testing
+
+We have unit tests to test the validators. There are several naming conventions:
+
+1. ```valid_*``` - These are valid files implying passing validation and finding the same number of files in MassIVE
+1. ```invalid_*``` - These are invalid files that fail validation
+1. ```invaliddata_*``` - These are valid files that pass validation but fail to match with data in MassIVE
+
 ## Updating ReDU Data Procedure
 
 One of the key steps in ReDU is the updating of the database to include the latest identifications for files within ReDU. These are the following steps:
 
 1. Download batch template for GNPS at ```/metabatchdump```
 1. Run Batch Workflow for Spectral Library Search
-1. Get the set of tasks as tsv and save to [here](https://github.com/mwang87/ReDU-MS2-GNPS/blob/refactor-read-me-for-developers/database/global_tasks.tsv). 
-1. Remove database [here](https://github.com/mwang87/ReDU-MS2-GNPS/tree/refactor-read-me-for-developers/database)
-1. Run XXX command to drop identifications table
+1. Get the set of tasks as tsv and save to [here](https://github.com/mwang87/ReDU-MS2-GNPS/blob/master/database/global_tasks.tsv). 
+1. Remove database [here](https://github.com/mwang87/ReDU-MS2-GNPS/tree/master/database)
 1. Start ReDU back up and it will autopopulate
 

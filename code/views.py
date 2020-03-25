@@ -566,11 +566,6 @@ def plottags():
     return json.dumps({"uuid" : uuid_to_use})
 
 
-#Launch Job
-import credentials
-
-
-
 """ Production Views """
 
 @app.route('/', methods=['GET'])
@@ -633,13 +628,16 @@ def metabatchdump():
     filenames = df["filename"].tolist()
     batch_size = 1000
     batch_num = len(filenames) // batch_size
-    row = []
+    output_list = []
     for x in range(batch_num):
         files = filenames[(batch_size * x):(batch_size * (x+1))]
         string_temp = ';'.join(files)
-        row.append(string_temp)
+        output_dict = {}
+        output_dict["filename"] = string_temp
+        output_dict["id"] = x
+        output_list.append(output_dict)
 
-    new_file = pd.DataFrame({"filename": row})
+    new_file = pd.DataFrame(output_list)
     return new_file.to_csv(sep="\t", index=False)
 
 def allowed_file_metadata(filename):
