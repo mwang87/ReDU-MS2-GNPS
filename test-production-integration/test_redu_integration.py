@@ -12,8 +12,6 @@ def test_heartbeat():
     r = requests.get(url)
     r.raise_for_status()
 
-
-
 def test_data_dump():
     query_url = f"{SERVER_URL}/dump"
     response = requests.get(query_url)
@@ -68,7 +66,7 @@ def test_compound_enrichment():
     params = {'compoundname' : TEST_COMPOUND}
     response = requests.post(query_url, params )
     data = json.loads(response.content)  
-    key_value = list(data[0].keys())
+    key_value = list(data["enrichment_list"][0].keys())
    
     expected_keys = ["attribute_name", "attribute_term", "totalfiles", "compoundfiles", "percentage"]
 
@@ -108,13 +106,26 @@ def test_global_pca():
 
     assert(file_size > 22760000)
 
+def test_selected_pca(): 
+    list_files = ["f.MSV000083388/ccms_peak/Negative Mode/1_n_blk_LCMSblk_50MeOH_01.mzML", "f.MSV000083388/ccms_peak/Negative Mode/1_n_blk_LCMSblk_50MeOH_02.mzML", "f.MSV000083388/ccms_peak/Negative Mode/1_n_blk_LCMSblk_50MeOH_03.mzML"] 
+    params = {'files' : json.dumps(list_files)}
+    query_url_pca = f"{SERVER_URL}/fileselectedpca"
+    response = requests.post(query_url_pca, data = params) 
+
+    import time
+    time.sleep(1)
+
+    pcaid = response.text
+    query_url_view = f"{SERVER_URL}/fileselectedpcaviews?pcaid={pcaid}"
+    response = requests.get(query_url_view)
+    response.raise_for_status()
+
 
 def testing_massive_api():
     url = "https://massive.ucsd.edu/ProteoSAFe//proxi/v0.1/datasets?filter=MSV000084741&function=datasets"
     r = requests.get(url)
     r.json()
     r.raise_for_status()
-
 
 def test_groups_comparison():
     url = f"{SERVER_URL}/explorer"

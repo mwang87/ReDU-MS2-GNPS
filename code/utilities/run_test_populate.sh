@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd utilities
-python3 ./search_dataset_metadata.py dataset MSV000083388
+python3 ./populate_database.py --importmetadata dataset --metadataaccession MSV000083388

@@ -68,7 +68,12 @@
                         "targets": 3,
                         "data": null,
                         "render": function ( data, type, row, meta ) {
-                        return '<a class="btn btn-warning btn-block" target="_blank" href="/compoundenrichmentdashboard?compound='+row['compound']+'">View Associations</a>';
+                            enrichment_url = 'href="/compoundenrichmentdashboard?compound='+row['compound']
+                            if(window.location.hash) {
+                                enrichment_url += window.location.hash
+                            }
+                            button_text = '<a class="btn btn-warning btn-block" target="_blank" ' + enrichment_url + '">View Associations</a>';
+                            return button_text
                         }}],
                     dom: 'Bflrtip',
                     buttons: [
