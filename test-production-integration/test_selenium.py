@@ -39,6 +39,7 @@ class TestInterfaceready(unittest.TestCase):
         
         #clicking the button
         python_button = self.driver.find_element(By.ID, 'querycompound')
+
         python_button.click()
         #time.sleep(60)
 
