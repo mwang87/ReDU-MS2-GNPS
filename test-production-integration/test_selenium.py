@@ -6,6 +6,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
 import unittest, time, re
 import os
 
@@ -15,7 +16,7 @@ class TestInterfaceready(unittest.TestCase):
     def setUp(self):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
-        self.driver = webdriver.Chrome(options=options)
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         #self.driver = webdriver.PhantomJS()
         self.driver.implicitly_wait(30)
         self.vars = {}
@@ -24,7 +25,7 @@ class TestInterfaceready(unittest.TestCase):
         self.driver.quit()
 
     def test_compound_enrichment(self):
-        #going to the page
+        #going to the page 
         self.driver.get("{}/compoundenrichmentdashboard?compound=ESCITALOPRAM%20OXALATE".format(SERVER_URL))
         #self.driver.get("http://localhost:5006/compoundenrichmentdashboard?compound=ESCITALOPRAM%20OXALATE")
         time.sleep(1) 
