@@ -15,8 +15,8 @@ class TestInterfaceready(unittest.TestCase):
     def setUp(self):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
-        self.driver = webdriver.Chrome(options=options)
-        #self.driver = webdriver.PhantomJS()
+        #self.driver = webdriver.Chrome(options=options)
+        self.driver = webdriver.PhantomJS()
         self.driver.implicitly_wait(30)
         self.vars = {}
         
@@ -25,8 +25,9 @@ class TestInterfaceready(unittest.TestCase):
 
     def test_compound_enrichment(self):
         #going to the page
-        self.driver.get("{}/compoundenrichmentdashboard?compound=ESCITALOPRAM%20OXALATE".format(SERVER_URL))
-        #self.driver.get("http://localhost:5006/compoundenrichmentdashboard?compound=ESCITALOPRAM%20OXALATE")
+        url = "{}/compoundenrichmentdashboard?compound=ESCITALOPRAM%20OXALATE".format(SERVER_URL)
+        print(url)
+        self.driver.get(url)
         time.sleep(1) 
         
         wait = WebDriverWait(self.driver, 180)

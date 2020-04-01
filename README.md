@@ -25,6 +25,12 @@ We have unit tests to test the validators. There are several naming conventions:
 1. ```invalid_*``` - These are invalid files that fail validation
 1. ```invaliddata_*``` - These are valid files that pass validation but fail to match with data in MassIVE
 
+To run all unit tests, we are using act to run github actions locally:
+
+```make test-push```
+
+to simulate a push to the repository and run the full suite of unit tests exactly as we'd run at github. 
+
 ## Updating ReDU Data Procedure
 
 One of the key steps in ReDU is the updating of the database to include the latest identifications for files within ReDU. These are the following steps:
