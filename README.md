@@ -31,6 +31,10 @@ To run all unit tests, we are using act to run github actions locally:
 
 to simulate a push to the repository and run the full suite of unit tests exactly as we'd run at github. 
 
+To simulate selenium and production integration tests:
+
+```make test-schedule```
+
 ## Updating ReDU Data Procedure
 
 One of the key steps in ReDU is the updating of the database to include the latest identifications for files within ReDU. These are the following steps:
