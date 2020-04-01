@@ -20,10 +20,20 @@
                     <input class="form-control" type="text" placeholder="Enter Compound Name" id="compound">
                 </div>
             </div>
-            <div><button class="btn btn-primary btn-block" onclick="querycompound()">Query Compound</button></div>
+            <div id=querycompound><button class="btn btn-primary btn-block" onclick="querycompound()">Query Compound</button></div>
         </div>
 
-        <div id="charts"></div>
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-12 text-center">
+                <div id="charts"></div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        
+        <hr>
 
         <div class="table table-striped">
             <table id="datatable" class="display" width="100%"></table>
