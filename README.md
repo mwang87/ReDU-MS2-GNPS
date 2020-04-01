@@ -25,7 +25,7 @@ We have unit tests to test the validators. There are several naming conventions:
 1. ```invalid_*``` - These are invalid files that fail validation
 1. ```invaliddata_*``` - These are valid files that pass validation but fail to match with data in MassIVE
 
-To run all unit tests, we are using act to run github actions locally:
+To run all unit tests, we are using [act](https://github.com/nektos/act) to run github actions locally:
 
 ```make test-push```
 
