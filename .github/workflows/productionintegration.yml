@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install Chrome Standalone
-      uses: selenium/selenium/standalone-chrome
+      uses: selenium/standalone-chrome
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
