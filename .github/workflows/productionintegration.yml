@@ -8,11 +8,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    container:
+      image: selenium/standalone-chrome
       
     steps:
     - uses: actions/checkout@v1
-    - name: Install Chrome Standalone
-      uses: selenium/standalone-chrome
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
