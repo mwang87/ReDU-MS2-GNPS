@@ -15,7 +15,7 @@ jobs:
         volumes:
           - /dev/shm:/dev/shm
         ports:
-          - "4444:4444"           
+          - 4444:4444           
     steps:
     - uses: actions/checkout@v1
     - name: Set up Python 3.7
