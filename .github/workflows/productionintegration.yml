@@ -3,13 +3,9 @@ name: production-integration
 on: 
   schedule:
    - cron:  '*/60 * * * *'
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    container:
-      image: selenium/standalone-chrome
       
     steps:
     - uses: actions/checkout@v1
