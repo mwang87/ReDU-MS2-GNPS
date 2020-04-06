@@ -13,7 +13,7 @@
         </div>
         <div class="col-sm-1"></div>
     </div>
-    
+
     <br>
 
     <div id="displayer">
@@ -35,7 +35,8 @@
             <div class="col-sm">
                 <div class="text-center">
                     <button id="analyzebutton" class="btn btn-primary" onclick="createMyPCA()">View PCA</button>
-                    <button id="analyzebutton" class="btn btn-primary" onclick="createNearestNeighborPCA()">View Nearest Neighbors</button>
+                    <button id="analyzebutton" class="btn btn-primary" onclick="createNearestNeighborPCA()">View Nearest
+                        Neighbors</button>
                 </div>
             </div>
             <div class="col-sm"></div>
@@ -43,16 +44,20 @@
 
         <br>
         <div class="row">
-           <div class="col-sm"></div>
-           <div class="col-sm">
-               <div class="text-center">
-                    <a id="analyzebutton" class="btn btn-info" href="/processcomparemultivariate?task=f39c94cb7afe4568950bf61cdb8fee0d">Click for Example PCA</button>
-                    <a id="analyzebutton" class="btn btn-info" href="/processcomparemultivariate?task=f39c94cb7afe4568950bf61cdb8fee0d&knn=1">Click for Example Nearest Neighbor</button>
-               </div>
-           </div>
-           <div class="col-sm"></div>
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <div class="text-center">
+                    <a id="analyzebutton" class="btn btn-info"
+                        href="/processcomparemultivariate?task=f39c94cb7afe4568950bf61cdb8fee0d">Click for Example
+                        PCA</button></a>
+                    <a id="analyzebutton" class="btn btn-info"
+                        href="/processcomparemultivariate?task=f39c94cb7afe4568950bf61cdb8fee0d&knn=1">Click for
+                        Example Nearest Neighbor</button></a>
+                </div>
+            </div>
+            <div class="col-sm"></div>
         </div>
-        
+
     </div>
 </div>
 
@@ -60,12 +65,12 @@
     function createMyPCA() {
         user_entered_task = $("#task").val()
 
-        if(user_entered_task.length != 32){
+        if (user_entered_task.length != 32) {
             alert("Please enter a valid GNPS Task ID")
         }
-        else{
+        else {
             remote_url = "/processcomparemultivariate?task=" + $("#task").val() + "&knn=0"
-            $('#display').prepend($('<img>',{id:'pca',src: remote_url}))
+            $('#display').prepend($('<img>', { id: 'pca', src: remote_url }))
             window.location.replace(remote_url)
         }
     }
@@ -73,22 +78,22 @@
     function createNearestNeighborPCA() {
         user_entered_task = $("#task").val()
 
-        if(user_entered_task.length != 32){
+        if (user_entered_task.length != 32) {
             alert("Please enter a valid GNPS Task ID")
         }
-        else{
+        else {
             remote_url = "/processcomparemultivariate?task=" + $("#task").val() + "&knn=1"
-            $('#display').prepend($('<img>',{id:'pca',src: remote_url}))
+            $('#display').prepend($('<img>', { id: 'pca', src: remote_url }))
             window.location.replace(remote_url)
         }
     }
 
 
-    function clickExample(){
+    function clickExample() {
         remote_url = "/processcomparemultivariate?task=" + "f39c94cb7afe4568950bf61cdb8fee0d"
         window.location.replace(remote_url)
     }
 
-</script>    
+</script>
 
 (% endblock %)
