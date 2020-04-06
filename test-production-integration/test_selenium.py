@@ -27,9 +27,7 @@ class TestInterfaceready(unittest.TestCase):
 
     def test_compound_enrichment(self):
         #going to the page
-        #url = "https://redu.ucsd.edu/compoundenrichmentdashboard?compound=ESCITALOPRAM%20OXALATE"
         url = "{}/compoundenrichmentdashboard?compound=ESCITALOPRAM%20OXALATE".format(SERVER_URL)
-        #url = "http://localhost:5006/compoundenrichmentdashboard?compound=ESCITALOPRAM%20OXALATE"  
         
         self.driver.get(url)
         time.sleep(1)

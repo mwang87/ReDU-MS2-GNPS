@@ -20,4 +20,5 @@ jobs:
         pip install chromedriver-binary==80.0.3987.16.0
     - name: Test with Selenium
       run: |
-        cd test-production-integration	&& nose2 -v test_selenium
+        cd test-production-integration	&& export SERVER_URL="http://dorresteintesthub.ucsd.edu:5005" && nose2 -v test_selenium && cd ..
+        cd test-production-integration	&& export SERVER_URL="https://redu.ucsd.edu" && nose2 -v test_selenium && cd ..
