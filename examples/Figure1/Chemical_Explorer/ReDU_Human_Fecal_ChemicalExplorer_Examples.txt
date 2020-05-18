@@ -1,0 +1,190 @@
+GNPS Annotation	Chemical	Attribute	Term	Observations	Total Files  	Percentage
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	acetonitrile-isopropanol-water (3:3:2)	6	6	1
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	acetonitrile-water (7:3)	6	6	1
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	methanol (100%)	6	6	1
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	methanol-acetonitrile (3:7)	6	6	1
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	methanol-water (3:2)	6	6	1
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	methanol-water (4:1)	6	6	1
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	methanol-water (7:3)	6	6	1
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	methanol-water (9:1)	3	3	1
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	HumanPopulationDensity	not applicable	61	63	0.968253968
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	YearOfAnalysis	2019	61	63	0.968253968
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	YearOfAnalysis	2016	30	31	0.967741935
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	LifeStage	Adolescence (8 yrs < x <= 18 yrs)	151	169	0.893491124
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	DOIDCommonName	diabetes mellitus	49	56	0.875
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	HealthStatus	chronic illness	119	140	0.85
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	DOIDCommonName	inflammatory bowel disease	70	84	0.833333333
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	acetonitrile (100%)	5	6	0.833333333
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	ethanol-water (1:1)	5	6	0.833333333
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	LifeStage	Middle Adulthood (45 yrs < x <= 65 yrs)	736	933	0.788853162
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	DOIDCommonName	disease NOS	1125	1428	0.787815126
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	LifeStage	Later Adulthood (>65 yrs)	251	325	0.772307692
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	HealthStatus	unhealthy (NOS)	1240	1686	0.735468565
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	LifeStage	Early Adulthood (18 yrs < x <= 45 yrs)	727	995	0.730653266
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	LifeStage	Early Childhood (2 yrs < x <=8 yrs)	67	93	0.720430108
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	MassSpectrometer	impact|MS:1002077	296	447	0.662192394
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleCollectionMethod	"solid material, fresh"	257	397	0.647355164
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	methanol-water (1:1)	407	634	0.641955836
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	HumanPopulationDensity	Urban	2113	3470	0.608933718
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	DOIDCommonName	Crohn's disease	118	197	0.598984772
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	LifeStage	not collected	435	735	0.591836735
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	DOIDCommonName	ulcerative colitis	78	136	0.573529412
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	YearOfAnalysis	2018	421	748	0.562834225
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	BiologicalSex	female	1309	2372	0.551854975
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleTypeSub1	tissue	76	138	0.550724638
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	BiologicalSex	male	1192	2264	0.526501767
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	MassSpectrometer	impact HD|MS:1002667	2023	3971	0.509443465
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	TermsofPosition	not applicable	2518	5048	0.49881141
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	IonizationSourceAndPolarity	electrospray ionization (positive)	2532	5081	0.498327101
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	ChromatographyAndPhase	reverse phase (C18)	2532	5114	0.495111459
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	NCBITaxonomy	9606|Homo sapiens	2532	5114	0.495111459
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleType	animal	2532	5114	0.495111459
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	UBERONBodyPartName	feces	2532	5114	0.495111459
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleTypeSub1	biofluid	2456	4976	0.493569132
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleCollectionMethod	"swabs, dry"	2266	4696	0.48253833
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	YearOfAnalysis	2017	2020	4272	0.472846442
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleExtractionMethod	ethanol-water (9:1)	2070	4423	0.468008139
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	HumanPopulationDensity	not collected	192	443	0.433408578
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	SampleCollectionMethod	"solid material, frozen"	9	21	0.428571429
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	DOIDCommonName	no disease reported	1068	2960	0.360810811
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	HealthStatus	healthy	1068	2960	0.360810811
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	HealthStatus	not applicable	91	262	0.347328244
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	MassSpectrometer	Q Exactive|MS:1001911	213	696	0.306034483
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	LifeStage	not specified	1	4	0.25
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	DOIDCommonName	primary bacterial infectious disease	14	66	0.212121212
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	HealthStatus	acute illness	14	66	0.212121212
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	TermsofPosition	not collected	14	66	0.212121212
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	DOIDCommonName	sleep deprivation	9	55	0.163636364
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	HumanPopulationDensity	Rural	166	1138	0.145869947
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	LifeStage	Infancy (<2 yrs)	164	1859	0.088219473
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	BiologicalSex	not collected	31	477	0.064989518
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	DOIDCommonName	not applicable	1	132	0.007575758
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	BiologicalSex	not applicable	0	1	0
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	IonizationSourceAndPolarity	electrospray ionization (negative)	0	33	0
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	12-Ketodeoxycholic acid	LifeStage	not applicable	0	1	0
+Cholic acid	Cholic acid	BiologicalSex	not applicable	1	1	1
+Cholic acid	Cholic acid	LifeStage	not applicable	1	1	1
+Cholic acid	Cholic acid	HumanPopulationDensity	Rural	1077	1138	0.946397188
+Cholic acid	Cholic acid	DOIDCommonName	Crohn's disease	156	197	0.791878173
+Cholic acid	Cholic acid	DOIDCommonName	ulcerative colitis	106	136	0.779411765
+Cholic acid	Cholic acid	LifeStage	Infancy (<2 yrs)	1420	1859	0.763851533
+Cholic acid	Cholic acid	MassSpectrometer	impact|MS:1002077	332	447	0.742729306
+Cholic acid	Cholic acid	SampleCollectionMethod	"solid material, fresh"	263	397	0.662468514
+Cholic acid	Cholic acid	DOIDCommonName	diabetes mellitus	36	56	0.642857143
+Cholic acid	Cholic acid	HumanPopulationDensity	not collected	281	443	0.634311512
+Cholic acid	Cholic acid	SampleExtractionMethod	methanol-water (1:1)	379	634	0.597791798
+Cholic acid	Cholic acid	DOIDCommonName	no disease reported	1590	2960	0.537162162
+Cholic acid	Cholic acid	HealthStatus	healthy	1590	2960	0.537162162
+Cholic acid	Cholic acid	YearOfAnalysis	2018	398	748	0.532085561
+Cholic acid	Cholic acid	SampleCollectionMethod	"solid material, frozen"	11	21	0.523809524
+Cholic acid	Cholic acid	LifeStage	not collected	369	735	0.502040816
+Cholic acid	Cholic acid	LifeStage	not specified	2	4	0.5
+Cholic acid	Cholic acid	BiologicalSex	male	1049	2264	0.463339223
+Cholic acid	Cholic acid	DOIDCommonName	primary bacterial infectious disease	30	66	0.454545455
+Cholic acid	Cholic acid	HealthStatus	acute illness	30	66	0.454545455
+Cholic acid	Cholic acid	TermsofPosition	not collected	30	66	0.454545455
+Cholic acid	Cholic acid	SampleTypeSub1	biofluid	2173	4976	0.436696141
+Cholic acid	Cholic acid	IonizationSourceAndPolarity	electrospray ionization (positive)	2173	5081	0.427671718
+Cholic acid	Cholic acid	ChromatographyAndPhase	reverse phase (C18)	2173	5114	0.424912006
+Cholic acid	Cholic acid	NCBITaxonomy	9606|Homo sapiens	2173	5114	0.424912006
+Cholic acid	Cholic acid	SampleType	animal	2173	5114	0.424912006
+Cholic acid	Cholic acid	UBERONBodyPartName	feces	2173	5114	0.424912006
+Cholic acid	Cholic acid	TermsofPosition	not applicable	2143	5048	0.424524564
+Cholic acid	Cholic acid	YearOfAnalysis	2017	1770	4272	0.414325843
+Cholic acid	Cholic acid	LifeStage	Adolescence (8 yrs < x <= 18 yrs)	69	169	0.408284024
+Cholic acid	Cholic acid	SampleExtractionMethod	ethanol-water (9:1)	1794	4423	0.405607054
+Cholic acid	Cholic acid	SampleCollectionMethod	"swabs, dry"	1899	4696	0.404386712
+Cholic acid	Cholic acid	MassSpectrometer	impact HD|MS:1002667	1593	3971	0.401158398
+Cholic acid	Cholic acid	BiologicalSex	female	938	2372	0.39544688
+Cholic acid	Cholic acid	BiologicalSex	not collected	185	477	0.387840671
+Cholic acid	Cholic acid	MassSpectrometer	Q Exactive|MS:1001911	248	696	0.356321839
+Cholic acid	Cholic acid	HealthStatus	not applicable	92	262	0.351145038
+Cholic acid	Cholic acid	HealthStatus	chronic illness	47	140	0.335714286
+Cholic acid	Cholic acid	HealthStatus	unhealthy (NOS)	414	1686	0.245551601
+Cholic acid	Cholic acid	HumanPopulationDensity	Urban	815	3470	0.234870317
+Cholic acid	Cholic acid	LifeStage	Early Childhood (2 yrs < x <=8 yrs)	20	93	0.215053763
+Cholic acid	Cholic acid	DOIDCommonName	disease NOS	242	1428	0.169467787
+Cholic acid	Cholic acid	YearOfAnalysis	2016	5	31	0.161290323
+Cholic acid	Cholic acid	LifeStage	Early Adulthood (18 yrs < x <= 45 yrs)	139	995	0.139698492
+Cholic acid	Cholic acid	DOIDCommonName	inflammatory bowel disease	11	84	0.130952381
+Cholic acid	Cholic acid	LifeStage	Later Adulthood (>65 yrs)	40	325	0.123076923
+Cholic acid	Cholic acid	LifeStage	Middle Adulthood (45 yrs < x <= 65 yrs)	113	933	0.121114684
+Cholic acid	Cholic acid	DOIDCommonName	not applicable	2	132	0.015151515
+Cholic acid	Cholic acid	DOIDCommonName	sleep deprivation	0	55	0
+Cholic acid	Cholic acid	HumanPopulationDensity	not applicable	0	63	0
+Cholic acid	Cholic acid	IonizationSourceAndPolarity	electrospray ionization (negative)	0	33	0
+Cholic acid	Cholic acid	SampleExtractionMethod	acetonitrile (100%)	0	6	0
+Cholic acid	Cholic acid	SampleExtractionMethod	acetonitrile-isopropanol-water (3:3:2)	0	6	0
+Cholic acid	Cholic acid	SampleExtractionMethod	acetonitrile-water (7:3)	0	6	0
+Cholic acid	Cholic acid	SampleExtractionMethod	ethanol-water (1:1)	0	6	0
+Cholic acid	Cholic acid	SampleExtractionMethod	methanol (100%)	0	6	0
+Cholic acid	Cholic acid	SampleExtractionMethod	methanol-acetonitrile (3:7)	0	6	0
+Cholic acid	Cholic acid	SampleExtractionMethod	methanol-water (3:2)	0	6	0
+Cholic acid	Cholic acid	SampleExtractionMethod	methanol-water (4:1)	0	6	0
+Cholic acid	Cholic acid	SampleExtractionMethod	methanol-water (7:3)	0	6	0
+Cholic acid	Cholic acid	SampleExtractionMethod	methanol-water (9:1)	0	3	0
+Cholic acid	Cholic acid	SampleTypeSub1	tissue	0	138	0
+Cholic acid	Cholic acid	YearOfAnalysis	2019	0	63	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleExtractionMethod	acetonitrile-isopropanol-water (3:3:2)	6	6	1
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleExtractionMethod	ethanol-water (1:1)	6	6	1
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleExtractionMethod	methanol (100%)	6	6	1
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleExtractionMethod	methanol-acetonitrile (3:7)	6	6	1
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleExtractionMethod	methanol-water (3:2)	6	6	1
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleExtractionMethod	methanol-water (4:1)	6	6	1
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleExtractionMethod	methanol-water (7:3)	6	6	1
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleExtractionMethod	methanol-water (9:1)	3	3	1
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	HumanPopulationDensity	not applicable	61	63	0.968253968
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	YearOfAnalysis	2019	61	63	0.968253968
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleExtractionMethod	acetonitrile (100%)	5	6	0.833333333
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleExtractionMethod	acetonitrile-water (7:3)	5	6	0.833333333
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	DOIDCommonName	inflammatory bowel disease	61	84	0.726190476
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleTypeSub1	tissue	61	138	0.442028986
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	HealthStatus	chronic illness	61	140	0.435714286
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleCollectionMethod	"solid material, fresh"	61	397	0.153652393
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	MassSpectrometer	Q Exactive|MS:1001911	61	696	0.087643678
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	LifeStage	Middle Adulthood (45 yrs < x <= 65 yrs)	67	933	0.071811361
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	BiologicalSex	male	71	2264	0.031360424
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	LifeStage	Later Adulthood (>65 yrs)	6	325	0.018461538
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	TermsofPosition	not applicable	74	5048	0.014659271
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	IonizationSourceAndPolarity	electrospray ionization (positive)	74	5081	0.014564062
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	ChromatographyAndPhase	reverse phase (C18)	74	5114	0.014470082
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	NCBITaxonomy	9606|Homo sapiens	74	5114	0.014470082
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleType	animal	74	5114	0.014470082
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	UBERONBodyPartName	feces	74	5114	0.014470082
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleExtractionMethod	methanol-water (1:1)	6	634	0.009463722
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	DOIDCommonName	disease NOS	10	1428	0.007002801
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	HealthStatus	unhealthy (NOS)	10	1686	0.005931198
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	HumanPopulationDensity	Urban	13	3470	0.003746398
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	MassSpectrometer	impact HD|MS:1002667	13	3971	0.003273735
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	YearOfAnalysis	2017	13	4272	0.003043071
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleExtractionMethod	ethanol-water (9:1)	13	4423	0.002939182
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleCollectionMethod	"swabs, dry"	13	4696	0.002768313
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleTypeSub1	biofluid	13	4976	0.00261254
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	BiologicalSex	female	3	2372	0.001264755
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	DOIDCommonName	no disease reported	3	2960	0.001013514
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	HealthStatus	healthy	3	2960	0.001013514
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	LifeStage	Early Adulthood (18 yrs < x <= 45 yrs)	1	995	0.001005025
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	BiologicalSex	not applicable	0	1	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	BiologicalSex	not collected	0	477	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	DOIDCommonName	Crohn's disease	0	197	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	DOIDCommonName	diabetes mellitus	0	56	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	DOIDCommonName	not applicable	0	132	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	DOIDCommonName	primary bacterial infectious disease	0	66	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	DOIDCommonName	sleep deprivation	0	55	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	DOIDCommonName	ulcerative colitis	0	136	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	HealthStatus	acute illness	0	66	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	HealthStatus	not applicable	0	262	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	HumanPopulationDensity	Rural	0	1138	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	HumanPopulationDensity	not collected	0	443	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	IonizationSourceAndPolarity	electrospray ionization (negative)	0	33	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	LifeStage	Adolescence (8 yrs < x <= 18 yrs)	0	169	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	LifeStage	Early Childhood (2 yrs < x <=8 yrs)	0	93	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	LifeStage	Infancy (<2 yrs)	0	1859	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	LifeStage	not applicable	0	1	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	LifeStage	not collected	0	735	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	LifeStage	not specified	0	4	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	MassSpectrometer	impact|MS:1002077	0	447	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	SampleCollectionMethod	"solid material, frozen"	0	21	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	TermsofPosition	not collected	0	66	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	YearOfAnalysis	2016	0	31	0
+"Massbank:EA280204 Rosuvastatin|(E,3R,5R)-7-[4-(4-fluorophenyl)-2-(methyl-methylsulfonylamino)-6-propan-2-ylpyrimidin-5-yl]-3,5-dihydroxyhept-6-enoic acid"	Rosuvastatin	YearOfAnalysis	2018	0	748	0
