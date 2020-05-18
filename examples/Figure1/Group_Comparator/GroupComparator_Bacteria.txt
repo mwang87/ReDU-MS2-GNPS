@@ -1,0 +1,481 @@
+Chemical	G1_Number	G1_Proportion	G2_Number	G2_Proportion	G3_Number	G3_Proportion
+(-)-Riboflavin	2	0.02	0	0.00	0	0.00
+"(1R,7R)-7-ethenyl-1,4a,7-trimethyl-3,4,4b,5,6,9,10,10a-octahydro-2H-phenanthrene-1-carboxylic acid"	0	0.00	1	0.02	0	0.00
+"(2E,6E,10Z)-12-hydroxy-10-(hydroxymethyl)-6-methyl-2-(4-methylpent-3-enyl)dodeca-2,6,10-trienoic acid"	3	0.03	0	0.00	0	0.00
+"(2S,3R,4S,5S,6R)-2-[3-hydroxy-5-[(Z)-2-(4-hydroxyphenyl)ethenyl]phenoxy]-6-(hydroxymethyl)oxane-3,4,5-triol"	3	0.03	0	0.00	0	0.00
+"(2S,3R,4S,5S,6R)-2-[4-(2-hydroxyethyl)phenoxy]-6-(hydroxymethyl)oxane-3,4,5-triol"	0	0.00	3	0.06	0	0.00
+"(3S,4R,6aR,6bS,8aS,11R,12R,12aS,14bR)-3,12-dihydroxy-4,6a,6b,11,12,14b-hexamethyl-8a-[(2S,3R,4S,5S,6R)-3,4,5-trihydroxy-6-[[(2R,3R,4S,5S,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxymethyl]oxan-2-yl]oxycarbonyl-1,2,3,4a,5,6,7,8,9,10,11,12a,14,14a-tetradecahydropicene-4-carboxylic acid"	76	0.85	0	0.00	0	0.00
+"(3S,4R,6aR,6bS,8aS,11R,12R,14bR)-3,12-dihydroxy-4,6a,6b,11,12,14b-hexamethyl-8a-[3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxycarbonyl-1,2,3,4a,5,6,7,8,9,10,11,12a,14,14a-tetradecahydropicene-4-carboxylic acid"	54	0.60	0	0.00	0	0.00
+"(E)-2-(hydroxymethyl)-3-(3-oxo-5-propan-2-yl-4,5,6,7-tetrahydro-1H-2-benzofuran-4-yl)prop-2-enoic acid"	1	0.01	0	0.00	0	0.00
+0358_Sulfamethazine	16	0.17	0	0.00	0	0.00
+"1,2,3,4-tetrahydroharmane-3-carboxylic acid"	0	0.00	2	0.04	0	0.00
+"1-(4-hydroxyphenyl)-3-[(2R,3R,4S,5S,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxypropan-1-one"	1	0.01	0	0.00	0	0.00
+"2-(4-hydroxyphenyl)-7-[(2S,3R,4S,5S,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxy-2,3-dihydrochromen-4-one"	2	0.02	2	0.04	3	0.42
+"2-[4-[(3R,3aR,6S,6aR)-3-(3,4-dimethoxyphenyl)-1,3,3a,4,6,6a-hexahydrofuro[3,4-c]furan-6-yl]-2-methoxyphenoxy]-6-(hydroxymethyl)oxane-3,4,5-triol"	0	0.00	0	0.00	1	0.14
+"2-chloro-1,3,8-trihydroxy-6-(hydroxymethyl)anthracene-9,10-dione"	1	0.01	0	0.00	0	0.00
+2-hydroxy-3-(2-hydroxyacetoxy)propyl palmitate	24	0.26	0	0.00	0	0.00
+2-hydroxycinnamic acid	0	0.00	1	0.02	0	0.00
+"2-methyl-3-[(2S,3R,4S,5S,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxypyran-4-one"	0	0.00	1	0.02	0	0.00
+"3,7-Epoxycaryophyllan-6-One"	0	0.00	0	0.00	1	0.14
+3-(3-oxo-1H-indol-2-ylidene)-1H-indol-2-one	1	0.01	0	0.00	0	0.00
+3-Epilupeol	1	0.01	0	0.00	0	0.00
+"4'-ethenyl-2'-hydroxy-1,4',4a-trimethyl-5-oxospiro[2,3,4,7,8,8a-hexahydronaphthalene-6,1'-cyclopentane]-1-carboxylic acid"	1	0.01	0	0.00	0	0.00
+"5,7-dihydroxy-2-[4-[(2S,3R,4S,5S,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxyphenyl]-3-[(2S,3R,4S,5S,6R)-3,4,5-trihydroxy-6-[[(2R,3R,4R,5R,6S)-3,4,5-trihydroxy-6-methyloxan-2-yl]oxymethyl]oxan-2-yl]oxychromen-4-one"	6	0.06	0	0.00	0	0.00
+5-HYDROXY-L-TRYPTOPHAN	0	0.00	27	0.55	0	0.00
+"5-hydroxy-3-[(2S,3R,4S,5S)-4-hydroxy-5-(hydroxymethyl)-3-[(2S,3R,4R,5R,6S)-3,4,5-trihydroxy-6-methyloxan-2-yl]oxyoxolan-2-yl]oxy-2-(4-hydroxyphenyl)-7-methoxychromen-4-one"	32	0.35	0	0.00	5	0.71
+"6-(furan-3-yl)-13-hydroxy-5,12,16,16-tetramethyl-7,10,17-trioxahexacyclo[13.3.3.0,?.0,.0?,.0?,]henicos-19-ene-8,14,21-trione"	0	0.00	0	0.00	1	0.14
+"7,8-dimethylalloxazine (lumichrome)"	0	0.00	1	0.02	0	0.00
+7-Hydroxy-4'-methoxyflavone - 50eV	0	0.00	0	0.00	1	0.14
+"7-hydroxy-2-[4-[(2S,3R,4S,5S,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxyphenyl]-2,3-dihydrochromen-4-one"	0	0.00	1	0.02	0	0.00
+"8-(2,3-dihydroxy-3-methylbutyl)-7-methoxychromen-2-one"	0	0.00	1	0.02	0	0.00
+"9-hydroxy-7-(2-hydroxypropan-2-yl)-1,4a-dimethyl-2,3,4,9,10,10a-hexahydrophenanthrene-1-carboxylic acid"	5	0.05	0	0.00	0	0.00
+ALIZARIN	0	0.00	2	0.04	0	0.00
+Arginine	0	0.00	13	0.26	0	0.00
+Avobenzone (Parsol 1789)	1	0.01	0	0.00	0	0.00
+BALSALAZIDE	2	0.02	0	0.00	0	0.00
+BIOTIN	2	0.02	13	0.26	0	0.00
+Bamylocin_A_55902_dereplictor_pv_3.81406e-16	16	0.17	0	0.00	0	0.00
+Benzalkonium chloride (C12)	12	0.13	0	0.00	0	0.00
+Beta-Caryophyllene Alcohol	0	0.00	1	0.02	0	0.00
+Biotin	1	0.01	0	0.00	0	0.00
+Bis(2-ethylhexyl) phthalate	0	0.00	0	0.00	1	0.14
+CAPSAICIN	2	0.02	0	0.00	0	0.00
+Cer(d18:0/0:0); [M+H]+ C18H40N1O2	23	0.25	0	0.00	0	0.00
+Cer(d18:0/16:0(2OH)); [M+H]+ C34H70N1O4	0	0.00	0	0.00	2	0.28
+Cer(d18:0/16:0); [M+H]+ C34H70N1O3	82	0.92	0	0.00	2	0.28
+Cer(d18:0/18:0); [M+H]+ C36H74N1O3	39	0.43	0	0.00	0	0.00
+Cholic Acid	0	0.00	0	0.00	4	0.57
+Cholic acid	0	0.00	0	0.00	4	0.57
+Citrulline	0	0.00	1	0.02	0	0.00
+ClonidineHCl [homodimer]	0	0.00	1	0.02	0	0.00
+CocamidopropylBetaine	10	0.11	0	0.00	0	0.00
+Contaminant vial septum ThermoFisher C5000-44B	4	0.04	0	0.00	0	0.00
+Cyclo(Pro-Phe)	0	0.00	1	0.02	0	0.00
+D-PANTOTHENIC ACID	0	0.00	2	0.04	0	0.00
+D-Tryptophan	7	0.07	0	0.00	0	0.00
+DEET (Diethyltoluamide)	0	0.00	0	0.00	2	0.28
+DG(14:0/16:0/0:0); [M+NH4]+ C33H68N1O5	4	0.04	0	0.00	0	0.00
+DG(15:0/16:0/0:0); [M+NH4]+ C34H70N1O5	20	0.22	0	0.00	0	0.00
+Dextrorphan-d3	1	0.01	0	0.00	0	0.00
+Diallyl Trisulfide	0	0.00	2	0.04	0	0.00
+Diglycosyl diacylglycerol C31	8	0.08	0	0.00	0	0.00
+Diglycosyl diacylglycerol C32	3	0.03	0	0.00	0	0.00
+Divaricatinic acid	1	0.01	0	0.00	0	0.00
+Epi-Tumanoic acid D	0	0.00	5	0.10	0	0.00
+Eplerenone	2	0.02	0	0.00	0	0.00
+Esperin_25136_dereplictor_pv_2.4944e-30	69	0.77	0	0.00	0	0.00
+FERULATE	1	0.01	0	0.00	0	0.00
+FOLIC ACID	0	0.00	15	0.30	0	0.00
+Fenoxycarb	0	0.00	1	0.02	0	0.00
+GLYCOCHENODEOXYCHOLIC ACID	0	0.00	0	0.00	2	0.28
+Glutamic acid	0	0.00	4	0.08	0	0.00
+Glycocholic acid	0	0.00	0	0.00	2	0.28
+HMDB:HMDB00032-51 7-Dehydrocholesterol	0	0.00	0	0.00	1	0.14
+HMDB:HMDB00033-54 Carnosine	1	0.01	0	0.00	0	0.00
+HMDB:HMDB00671-924 Indolelactic acid	1	0.01	0	0.00	0	0.00
+HMDB:HMDB00748-1065 L-3-Phenyllactic acid	1	0.01	0	0.00	0	0.00
+HMDB:HMDB01830-1684 Progesterone	1	0.01	0	0.00	0	0.00
+HMDB:HMDB01868-1753 5-Methoxysalicylic acid	0	0.00	0	0.00	1	0.14
+HMDB:HMDB02434-2107 Hydroquinone	0	0.00	1	0.02	0	0.00
+HYDROQUINONE	0	0.00	6	0.12	0	0.00
+"Haematommic Acid, Ethyl Ester"	0	0.00	3	0.06	0	0.00
+Indigo Carmine	1	0.01	0	0.00	0	0.00
+Indole-3-carboxylic acid_120169	0	0.00	0	0.00	1	0.14
+L-PHENYLALANINE	0	0.00	46	0.93	0	0.00
+L-VALINE	0	0.00	2	0.04	0	0.00
+LEVODOPA	4	0.04	0	0.00	0	0.00
+Laxaphycin_D_47962_dereplictor_pv_2.7753e-14	0	0.00	48	0.97	0	0.00
+Leupeptin analogue LVR (or VLR)	1	0.01	0	0.00	0	0.00
+Lichenysin-G1a_44118_dereplictor_pv_1.16768e-21	1	0.01	0	0.00	0	0.00
+Lichenysin-G9a_44293_dereplictor_pv_1.35381e-27	45	0.50	0	0.00	0	0.00
+Lichenysin_A_38808_dereplictor_pv_8.81201e-29	73	0.82	0	0.00	1	0.14
+Linezolid	1	0.01	0	0.00	0	0.00
+Lipopeptide_NO_56362_dereplictor_pv_1.44974e-28	51	0.57	0	0.00	0	0.00
+Lysine	0	0.00	25	0.51	0	0.00
+MLS000028388-01!PHYSOSTIGMINE SALICYLATE	0	0.00	0	0.00	1	0.14
+MLS000028461-01!URSODEOXYCHOLIC ACID	1	0.01	0	0.00	1	0.14
+MLS000069638-01!ADENOSINE5536-17-4	0	0.00	0	0.00	1	0.14
+"MLS001148623-01!9H-PYRIDO[3,4-B]INDOLE"	0	0.00	0	0.00	1	0.14
+"MLS001333179-01!N,N-Diethyl-3-methylbenzamide134-62-3"	0	0.00	0	0.00	1	0.14
+MLS002153196-01!N6-CYCLOPENTYLADENOSINE	6	0.06	0	0.00	0	0.00
+MLS002153377-01!1-PIPERIDINYLETHYL-1H-INDOLE-3-CARBOXYLATE HYDROCHLORIDE135938-17-9	7	0.07	0	0.00	0	0.00
+MLS002153959-01!Napelline5008-52-6	7	0.07	0	0.00	0	0.00
+MLS002415761-01!	1	0.01	0	0.00	0	0.00
+MLS002695918-01!70356-09-1	0	0.00	0	0.00	1	0.14
+MMV020512	8	0.08	0	0.00	0	0.00
+"Maribasin B (NCGC00385300-01!3-[6,12,22-tris(2-amino-2-oxoethyl)-19-(hydroxymethyl)-9-[(4-hydroxyphenyl)methyl]-16-(10-methylundecyl)-2,5,8,11,14,18,21,24-octaoxo-1,4,7,10,13,17,20,23-octazabicyclo[23.3.0]octacosan-3-yl]propanamide)"	26	0.29	0	0.00	0	0.00
+Massbank: Cholesterol	2	0.02	0	0.00	0	0.00
+Massbank:BML00367 Eserine	0	0.00	0	0.00	1	0.14
+Massbank:BML01191 L-Tryptophan	4	0.04	0	0.00	0	0.00
+Massbank:CE000230 Tyrosine	0	0.00	1	0.02	0	0.00
+Massbank:CE000660 Glutamate	0	0.00	1	0.02	0	0.00
+Massbank:CE000661 Glutamate	0	0.00	13	0.26	0	0.00
+"Massbank:EA018109 Sulfamethazine|4-amino-N-(4,6-dimethylpyrimidin-2-yl)benzenesulfonamide|4-amino-N-(4,6-dimethyl-2-pyrimidinyl)benzenesulfonamide"	3	0.03	0	0.00	0	0.00
+"Massbank:EA018110 Sulfamethazine|4-amino-N-(4,6-dimethylpyrimidin-2-yl)benzenesulfonamide|4-amino-N-(4,6-dimethyl-2-pyrimidinyl)benzenesulfonamide"	3	0.03	0	0.00	0	0.00
+Massbank:EA027609 Ciprofloxacin|1-cyclopropyl-6-fluoro-4-keto-7-piperazin-4-ium-1-yl-quinoline-3-carboxylate	6	0.06	0	0.00	0	0.00
+"Massbank:EA282812 Methadone|6-(dimethylamino)-4,4-diphenyl-3-heptanone"	0	0.00	0	0.00	1	0.14
+Massbank:EA294011 Fenoxycarb| N-[2-(4-phenoxyphenoxy)ethyl]carbamic acid ethyl ester	0	0.00	2	0.04	0	0.00
+Massbank:KNA00095 L-Arginine|(S)-2-Amino-5-guanidinovaleric acid|L-(+)-Arginine	0	0.00	5	0.10	0	0.00
+Massbank:KNA00414 L-Arginine|(S)-2-Amino-5-guanidinovaleric acid|L-(+)-Arginine	0	0.00	19	0.38	0	0.00
+Massbank:KO002085 N-Acetylglutamate|N-Acetyl-L-glutamate|N-Acetyl-L-glutamic acid	0	0.00	1	0.02	0	0.00
+Massbank:KO002220 N-Acetylhistidine|N-Acetyl-L-histidine	0	0.00	1	0.02	0	0.00
+Massbank:KO002624 Cyprodinil	0	0.00	0	0.00	1	0.14
+Massbank:KO002829 Eserine|Physostigmine	0	0.00	0	0.00	1	0.14
+Massbank:KO002924 D-Gln|D-2-Aminoglutaramic acid|D-Glutamine	0	0.00	2	0.04	0	0.00
+Massbank:KO002950 L-Glu|L-Glutamate|L-Glutaminic acid|L-Glutamic acid	0	0.00	2	0.04	0	0.00
+Massbank:KO002980 Glu-Glu	0	0.00	22	0.44	0	0.00
+Massbank:KO002981 Glu-Glu	0	0.00	2	0.04	0	0.00
+Massbank:KO004073 Trp|Tryptophan|L-Tryptophan|(S)-alpha-Amino-beta-(3-indolyl)-propionic acid	0	0.00	2	0.04	0	0.00
+Massbank:KO008908 Cyprodinil	1	0.01	0	0.00	0	0.00
+Massbank:KO009090 Bestatin|Ubenimex	0	0.00	0	0.00	1	0.14
+Massbank:MT000016 gamma-Glutamylleucine	0	0.00	9	0.18	0	0.00
+Massbank:MT000040 Glycodeoxycholic acid|glycodeoxycholate	0	0.00	0	0.00	2	0.28
+Massbank:PB000419 Arginine|2-amino-5-(diaminomethylideneamino)pentanoic acid	0	0.00	11	0.22	0	0.00
+Massbank:PB000446 Cystine|2-amino-3-(2-amino-3-hydroxy-3-oxopropyl)disulfanylpropanoic acid	0	0.00	1	0.02	0	0.00
+"Massbank:PB003761 Norharmane|9H-pyrido[3,4-b]indole"	0	0.00	0	0.00	1	0.14
+Massbank:PB006082 Tryptophan|(2S)-2-amino-3-(1H-indol-3-yl)propanoic acid	0	0.00	12	0.24	0	0.00
+Massbank:PB006084 Tryptophan|(2S)-2-amino-3-(1H-indol-3-yl)propanoic acid	1	0.01	0	0.00	0	0.00
+Massbank:PR100395 N-Acetyl-DL-aspartic acid|Ac-Asp|NAA|N-Acetyl-aspartate|N-Acetylaspartate|2-acetamidobutanedioic acid	0	0.00	2	0.04	0	0.00
+Massbank:PR101045 Indole-3-carboxylic acid|3-Indolylcarboxylic Acid|3-Indoleformic Acid	0	0.00	0	0.00	1	0.14
+Massbank:UF415902 2-Hyroxybiphenyl|2-phenylphenol	0	0.00	2	0.04	0	0.00
+"MassbankEU:ET080503 LID_180.1018_12.9|Acetamide, N-(2,6-dimethylphenyl)-2-hydroxy-|N-(2,6-dimethylphenyl)-2-hydroxyacetamide"	1	0.01	0	0.00	0	0.00
+MassbankEU:ET120401 NVE_280.1909_11.8	0	0.00	1	0.02	0	0.00
+MassbankEU:ET131203 OCP_211.0633_14.3|4-(2-chlorophenyl)piperazin-2-one	0	0.00	0	0.00	1	0.14
+"MassbankEU:SM836003 Indoline|Indoline|2,3-dihydro-1H-indole"	0	0.00	1	0.02	0	0.00
+"MassbankEU:SM850301 Sulfamethazine|4-amino-N-(4,6-dimethylpyrimidin-2-yl)benzenesulfonamide"	8	0.08	0	0.00	0	0.00
+"MassbankEU:UA002801 2-Naphthalenamine, N-phenyl-|N-phenylnaphthalen-2-amine"	1	0.01	0	0.00	0	0.00
+Methionine	0	0.00	4	0.08	0	0.00
+MoNA:1022931 Deoxyepinephrine	1	0.01	0	0.00	0	0.00
+MoNA:1453 MLS000069640-01!SULFAMETER M+H	1	0.01	0	0.00	0	0.00
+MoNA:2476170 Rifathyroin	0	0.00	1	0.02	0	0.00
+MoNA:2740979 N-Phenyl-1-naphthylamine	1	0.01	0	0.00	0	0.00
+"MoNA:2907684 DL-beta-(3,4-Dihydroxyphenyl)alanine"	3	0.03	0	0.00	0	0.00
+MoNA:2919099 Cepteic acid	1	0.01	0	0.00	0	0.00
+MoNA:2920599 Liquiritin	2	0.02	0	0.00	0	0.00
+MoNA:645585 Elimite (TN)	0	0.00	0	0.00	1	0.14
+"MoNA:676719 4,6-dinitro-o-cresol"	1	0.01	0	0.00	0	0.00
+MoNA:727194 Nafcillin (INN)	0	0.00	5	0.10	0	0.00
+MoNA:729 Sulfamethazine (Trisulfapyrimidines)	10	0.11	0	0.00	0	0.00
+MoNA:928135 EQ	1	0.01	0	0.00	0	0.00
+MoNA:936698 DBP	0	0.00	0	0.00	1	0.14
+N-ACETYL-D-TRYPTOPHAN	0	0.00	8	0.16	0	0.00
+N-ACETYL-DL-METHIONINE	0	0.00	1	0.02	0	0.00
+N-AMIDINO-L-ASPARTATE	0	0.00	1	0.02	0	0.00
+N-L-Leucyl-L-leucine	0	0.00	13	0.26	0	0.00
+N-acetyltyramine	0	0.00	0	0.00	1	0.14
+NCGC00093889-13_C15H21N3O2_Antilirium	0	0.00	0	0.00	1	0.14
+"NCGC00160316-01!6,7-didehydro-26,28didemethyl-16,28-secosolanidan-3,16-diol"	1	0.01	0	0.00	0	0.00
+"NCGC00169187-02!5,7-dihydroxy-2-(4-hydroxyphenyl)-3-[(2S,3R,4S,5R,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxychromen-4-one"	1	0.01	0	0.00	0	0.00
+"NCGC00169428-02!3-(2-methylpropyl)-2,3,6,7,8,8a-hexahydropyrrolo[1,2-a]pyrazine-1,4-dione"	13	0.14	11	0.22	0	0.00
+"NCGC00169940-02!3-(1H-indol-3-ylmethyl)-2,3,6,7,8,8a-hexahydropyrrolo[1,2-a]pyrazine-1,4-dione"	20	0.22	0	0.00	2	0.28
+"NCGC00170012-03!5-hydroxy-3-[(2S,3R,4S,5S)-4-hydroxy-5-(hydroxymethyl)-3-[(2S,3R,4R,5R,6S)-3,4,5-trihydroxy-6-methyloxan-2-yl]oxyoxolan-2-yl]oxy-2-(4-hydroxyphenyl)-7-methoxychromen-4-one"	43	0.48	0	0.00	5	0.71
+"NCGC00179861-02_C15H26O2_1,8-Azulenediol, 1,2,3,3a,4,7,8,8a-octahydro-3a,6-dimethyl-1-(1-methylethyl)-, (1R,3aR,8S,8aS)-"	0	0.00	0	0.00	1	0.14
+NCGC00180099-02!methyl 2-[(3-formamido-2-hydroxybenzoyl)amino]-3-hydroxybutanoate	0	0.00	0	0.00	3	0.42
+"NCGC00180384-03_C22H32O6_(1S,2R,4aR,8aR)-1-Acetoxy-7-isopropylidene-1,4a-dimethyl-6-oxodecahydro-2-naphthalenyl 2,3-dimethyl-2-oxiranecarboxylate"	29	0.32	2	0.04	4	0.57
+"NCGC00180705-02!(E)-5-hydroxy-1,7-diphenylhept-1-en-3-one"	3	0.03	0	0.00	0	0.00
+"NCGC00180747-02!5-[(1S,2R,4aR)-1,2,4a,5-tetramethyl-7-oxo-3,4,8,8a-tetrahydro-2H-naphthalen-1-yl]-3-methylpentanoic acid"	1	0.01	0	0.00	0	0.00
+"NCGC00186665-03!2,3-dihydroxypropyl hexadecanoate"	79	0.88	0	0.00	1	0.14
+"NCGC00347704-02_C24H32O7_2H-Oxireno[1,10a]phenanthro[3,2-b]furan-10(11bH)-one, 5,7-bis(acetyloxy)-3,3a,4,5,6,7,7a,7b,8,8a-decahydro-4,4,7a,11-tetramethyl-, (1aS,3aR,5S,7S,7aR,7bS,8aR,11bR)-"	67	0.75	10	0.20	4	0.57
+"NCGC00347859-02!2,3-dihydroxypropyl 13-methyltetradecanoate"	3	0.03	0	0.00	0	0.00
+NCGC00380115-01_C15H14O5_2-Hydroxy-4-(3-hydroxy-5-methylphenoxy)-6-methylbenzoic acid	7	0.07	0	0.00	0	0.00
+"NCGC00380343-01!3-[4-[6-[[3,4-dihydroxy-4-(hydroxymethyl)oxolan-2-yl]oxymethyl]-3,4,5-trihydroxyoxan-2-yl]oxy-3-methoxyphenyl]-5-hydroxy-7-methoxychromen-4-one"	0	0.00	0	0.00	3	0.42
+"NCGC00380422-01!4-methoxy-6-[2-[4-(3-methylbut-2-enoxy)phenyl]ethyl]-1,3-benzodioxole"	0	0.00	0	0.00	2	0.28
+"NCGC00380633-02_C14H16N2O2_Pyrrolo[1,2-a]pyrazine-1,4-dione, hexahydro-3-(phenylmethyl)-"	2	0.02	0	0.00	0	0.00
+"NCGC00380778-01_C9H14N2O3_(3S,8aS)-3-[(1R)-1-Hydroxyethyl]hexahydropyrrolo[1,2-a]pyrazine-1,4-dione"	0	0.00	2	0.04	0	0.00
+"NCGC00381060-01_C24H32O7_Benzoic acid, 4-hydroxy-, (1aS,2aR,3S,5R,6S,7aR)-3-(acetyloxy)decahydro-5-hydroxy-2a,7a-dimethyl-5-(1-methylethyl)azuleno[5,6-b]oxiren-6-yl ester"	2	0.02	0	0.00	2	0.28
+"NCGC00381178-01!3,7,8-trihydroxy-3-methyl-10-oxo-1,4-dihydropyrano[4,3-b]chromene-9-carboxylic acid"	0	0.00	0	0.00	2	0.28
+"NCGC00381359-01_C14H18N2O3_Phenylalanine, prolyl-"	68	0.76	0	0.00	5	0.71
+"NCGC00381364-01!3-propan-2-yl-2,3,6,7,8,8a-hexahydropyrrolo[1,2-a]pyrazine-1,4-dione"	3	0.03	0	0.00	0	0.00
+"NCGC00384639-01_C14H16N2O3_Pyrrolo[1,2-a]pyrazine-1,4-dione, hexahydro-3-[(4-hydroxyphenyl)methyl]-"	0	0.00	6	0.12	3	0.42
+"NCGC00384854-01_C23H34O4_Card-20(22)-enolide, 3,14-dihydroxy-, (3beta,5alpha)-"	0	0.00	0	0.00	1	0.14
+"NCGC00385097-01_C20H22O9_beta-D-Glucopyranoside, 4-hydroxy-2-(hydroxymethyl)phenyl, 6-benzoate"	3	0.03	0	0.00	0	0.00
+"NCGC00385123-01_C22H30O6_7b,9-Dihydroxy-3-(hydroxymethyl)-1,1,6,8-tetramethyl-5-oxo-1,1a,1b,4,4a,5,7a,7b,8,9-decahydro-9aH-cyclopropa[3,4]benzo[1,2-e]azulen-9a-yl acetate"	42	0.47	11	0.22	5	0.71
+"NCGC00385199-01!2-[3,4-bis[[(2S,3R,4S,5S,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxy]phenyl]-5,7-dihydroxychromen-4-one"	45	0.50	0	0.00	1	0.14
+"NCGC00385660-01!(10R)-2,8-dihydroxy-1-methoxy-6-methyl-10-[(2S,3R,4R,5S,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]-10H-anthracen-9-one"	1	0.01	0	0.00	0	0.00
+"NCGC00385669-01!(E)-3-(acetyloxymethyl)-5-(2-formyl-4-hydroxy-5,5,8a-trimethyl-1,4,4a,6,7,8-hexahydronaphthalen-1-yl)pent-2-enoic acid"	2	0.02	1	0.02	3	0.42
+"NCGC00385811-01!6-[3-[(3,4-dimethoxyphenyl)methyl]-4-methoxy-2-(methoxymethyl)butyl]-4-methoxy-1,3-benzodioxole"	29	0.32	1	0.02	3	0.42
+NCGC00385962-01_C16H24O3_	89	1.00	46	0.93	0	0.00
+NIACIN	0	0.00	1	0.02	0	0.00
+Nalbuphine	3	0.03	0	0.00	0	0.00
+Nelarabine (Arranon)	0	0.00	0	0.00	1	0.14
+PC(0:0/16:0); [M+H]+ C24H51N1O7P1	0	0.00	0	0.00	1	0.14
+PC(20:3/0:0); [M+H]+ C28H53N1O7P1	0	0.00	0	0.00	1	0.14
+PE(15:0/15:0); [M+H]+ C35H71N1O8P1	39	0.43	0	0.00	0	0.00
+PE(16:0/0:0); [M+H]+ C21H45N1O7P1	9	0.10	0	0.00	2	0.28
+PE(16:0/0:0); [M-H]- C21H43N1O7P1	1	0.01	0	0.00	0	0.00
+PE(16:0/16:0); [M+H]+ C37H75N1O8P1	4	0.04	0	0.00	0	0.00
+PE(18:0/0:0); [M+H]+ C23H49N1O7P1	12	0.13	0	0.00	0	0.00
+PE(18:0/0:0); [M-H]- C23H47N1O7P1	4	0.04	0	0.00	0	0.00
+PE(18:1/0:0); [M+H]+ C23H47N1O7P1	0	0.00	0	0.00	1	0.14
+PE(18:1/0:0); [M-H]- C23H45N1O7P1	1	0.01	0	0.00	0	0.00
+PE(20:0/0:0); [M-H]- C25H51N1O7P1	6	0.06	0	0.00	0	0.00
+PE(20:1/0:0); [M-H]- C25H49N1O7P1	2	0.02	0	0.00	0	0.00
+PIPERINE	0	0.00	1	0.02	0	0.00
+PS(18:0/0:0); [M+H]+ C24H49N1O9P1	0	0.00	0	0.00	1	0.14
+PUTRESCINE DIHYDROCHLORIDE	0	0.00	2	0.04	0	0.00
+Parfumine	1	0.01	0	0.00	0	0.00
+Pelletierine Hydrochloride	0	0.00	1	0.02	0	0.00
+Pentadecanoyl Ethanolamide	0	0.00	0	0.00	1	0.14
+Pesticide3_Fenoxycarb_C17H19NO4_[2-(4-Phenoxyphenoxy)ethyl]carbamic acid ethyl ester	0	0.00	1	0.02	0	0.00
+Phenylalanine	0	0.00	7	0.14	0	0.00
+Physcion	1	0.01	0	0.00	0	0.00
+"Phytol; (E,7R,11R)-3,7,11,15-tetramethylhexadec-2-en-1-ol"	0	0.00	8	0.16	0	0.00
+Polysaccharide Hexose x1	0	0.00	17	0.34	0	0.00
+Prolylyphenylalanine	13	0.14	0	0.00	0	0.00
+Pumilacidin_F_31271_dereplictor_pv_1.40196e-35	5	0.05	0	0.00	0	0.00
+Purpurogallin	1	0.01	0	0.00	0	0.00
+RIBOFLAVIN	3	0.03	0	0.00	0	0.00
+ReSpect:PM014402 Cyclo(Ala-Ile)	0	0.00	6	0.12	0	0.00
+ReSpect:PM014403 Cyclo(Ala-Leu)	0	0.00	3	0.06	0	0.00
+ReSpect:PM014407 Cyclo(Phe-Leu)	2	0.02	0	0.00	0	0.00
+ReSpect:PM014410 Cyclo(Val-Tyr)	0	0.00	39	0.79	0	0.00
+ReSpect:PM014412 Cyclo(Pro-Leu)	0	0.00	3	0.06	0	0.00
+ReSpect:PM014413 Cyclo(Pro-Phe)	1	0.01	48	0.97	0	0.00
+ReSpect:PM017301 gamma-L-Glutamyl-L-leucine	0	0.00	40	0.81	0	0.00
+ReSpect:PM017302 gamma-L-Glutamyl-L-valine	0	0.00	8	0.16	0	0.00
+ReSpect:PM018186 p-Coumaroylagmatine	0	0.00	0	0.00	1	0.14
+ReSpect:PS005302 L-Methionine|L-Met|L-2-Amino-4-methylmercaptobutyric Acid|L-a-Amino-g-methylthiobutyric acid|L-Lobamine|(S)-2-Amino-4-(methylmercapto)butyric acid	0	0.00	3	0.06	0	0.00
+ReSpect:PS005504 L-Tryptophane|L-Trp|L-alpha-Amino-3-indolepropionic Acid|3-beta-Indolylalanine|(S)-2-Amino-3-(3-indolyl)propionic acid	1	0.01	0	0.00	0	0.00
+ReSpect:PS005602 L-Tyrosine|L-Tyr|(-)-alpha-Amino-p-hydroxyhydrocinnamic acid|4-Hydroxyphenylalanine|L-2-Amino-3-p-hydroxyphenylpropanoic acid|(S)-2-Amino-3-(4-hydroxyphenyl)propionic acid	0	0.00	1	0.02	0	0.00
+"ReSpect:PS012504 Harmaline hydrochloride dihydrate|Dihydroharmine|Harmidine|1-Methyl-7-methoxy-3,4-dihydro-beta-carboline hydrochloride|Harmalol methyl ether hydrochloride"	1	0.01	0	0.00	0	0.00
+ReSpect:PS065602 L(+)-Arginine|Arg|2-Amino-5-guanidinovaleric Acid|(S)-2-Amino-5-guanidinopentanoic Acid|Argamine|Argivene|Detoxargin|Levargin	0	0.00	4	0.08	0	0.00
+ReSpect:PS099702 N-Acetyl-DL-aspartic acid|Ac-Asp|NAA|N-Acetyl-aspartate|N-Acetylaspartate|2-acetamidobutanedioic acid	0	0.00	2	0.04	0	0.00
+ReSpect:PT109970 N-Acetyl-DL-aspartic acid|Ac-Asp|NAA|N-Acetyl-aspartate|N-Acetylaspartate|2-acetamidobutanedioic acid|(2S)-2-acetamidobutanedioic acid	0	0.00	2	0.04	0	0.00
+ReSpect:PT110460 N-Acetyl-DL-glutamic acid|Ac-Glu|N-Acetyl-DL-glutamate|N-Acetylglutamate|2-(Acetylamino)pentanedioic Acid|(2S)-2-acetamidopentanedioic acid	0	0.00	1	0.02	0	0.00
+Rhizonic acid	17	0.19	0	0.00	0	0.00
+Riboflavin	1	0.01	0	0.00	0	0.00
+SINAPIC ACID	0	0.00	1	0.02	0	0.00
+Sarmentoside B	89	1.00	0	0.00	2	0.28
+Sorbitane Monopalmitate - Polysorbate 40 in-source fragment	31	0.34	0	0.00	0	0.00
+Sorbitane Monostearate - Polysorbate 60 in-source fragment	35	0.39	0	0.00	0	0.00
+Sotalol	2	0.02	0	0.00	0	0.00
+Spectral Match to (-)-Riboflavin from NIST14	42	0.47	0	0.00	0	0.00
+Spectral Match to .alpha.-L-Asp-L-Phe from NIST14	0	0.00	29	0.59	0	0.00
+Spectral Match to .beta.-D-Allose from NIST14	0	0.00	1	0.02	0	0.00
+Spectral Match to .beta.-Estradiol 3-benzoate from NIST14	15	0.16	0	0.00	0	0.00
+"Spectral Match to 1,2-Dipalmitoyl-sn-glycero-3-phospho-(1'-rac-glycerol) from NIST14"	40	0.44	0	0.00	0	0.00
+Spectral Match to 1-Hexadecanoyl-sn-glycerol from NIST14	69	0.77	0	0.00	0	0.00
+Spectral Match to 1-Palmitoyl-2-hydroxy-sn-glycero-3-phosphoethanolamine from NIST14	25	0.28	0	0.00	0	0.00
+Spectral Match to 1-Stearoyl-2-hydroxy-sn-glycero-3-phosphocholine from NIST14	1	0.01	0	0.00	0	0.00
+Spectral Match to 1-Stearoyl-2-hydroxy-sn-glycero-3-phosphoethanolamine from NIST14	1	0.01	0	0.00	0	0.00
+Spectral Match to 12-Ketodeoxycholic acid from NIST14	0	0.00	0	0.00	1	0.14
+"Spectral Match to 13,14-Dihydro-15-ketoprostaglandin J2 from NIST14"	1	0.01	0	0.00	0	0.00
+"Spectral Match to 13-Docosenamide, (Z)- from NIST14"	84	0.94	0	0.00	3	0.42
+Spectral Match to 2-Hydroxychalcone from NIST14	2	0.02	0	0.00	0	0.00
+"Spectral Match to 3-Hexyne-2,5-diol, 2,5-dimethyl- from NIST14"	2	0.02	0	0.00	0	0.00
+"Spectral Match to 4'-Hydroxy-2,3',5,5'-tetramethoxychalcone from NIST14"	1	0.01	0	0.00	0	0.00
+Spectral Match to 7-Methylguanosine from NIST14	0	0.00	0	0.00	3	0.42
+Spectral Match to 9(S)-HpOTrE from NIST14	1	0.01	0	0.00	0	0.00
+"Spectral Match to 9-Octadecenamide, (Z)- from NIST14"	0	0.00	44	0.89	0	0.00
+Spectral Match to Abrine from NIST14	0	0.00	2	0.04	0	0.00
+"Spectral Match to Adenosine 2',3'-cyclic monophosphate from NIST14"	0	0.00	1	0.02	0	0.00
+Spectral Match to Adenylyl(3'-5')cytidine from NIST14	0	0.00	5	0.10	0	0.00
+Spectral Match to Ala-Pro-Lys from NIST14	0	0.00	1	0.02	0	0.00
+Spectral Match to Arg-Ile from NIST14	0	0.00	4	0.08	0	0.00
+Spectral Match to Asn-Ile from NIST14	0	0.00	10	0.20	0	0.00
+Spectral Match to Asn-Phe from NIST14	0	0.00	12	0.24	0	0.00
+Spectral Match to Asp-Leu from NIST14	0	0.00	46	0.93	0	0.00
+Spectral Match to Avobenzone from NIST14	1	0.01	0	0.00	0	0.00
+"Spectral Match to Benzoic acid, 3,5-bis(1,1-dimethylethyl)-4-hydroxy- from NIST14"	3	0.03	0	0.00	0	0.00
+Spectral Match to Biotin from NIST14	1	0.01	0	0.00	0	0.00
+"Spectral Match to Cholest-5-ene-3.beta.,4.beta.-diol from NIST14"	0	0.00	0	0.00	2	0.28
+"Spectral Match to Cholesta-5,8(9)-dien-3.beta.-ol from NIST14"	0	0.00	0	0.00	1	0.14
+Spectral Match to Cholic acid from NIST14	0	0.00	0	0.00	6	0.85
+Spectral Match to DL-Arginine from NIST14	0	0.00	21	0.42	0	0.00
+Spectral Match to DL-Indole-3-lactic acid from NIST14	1	0.01	4	0.08	0	0.00
+Spectral Match to DL-Phenylalanine from NIST14	0	0.00	46	0.93	0	0.00
+Spectral Match to Dibutyl phthalate from NIST14	2	0.02	0	0.00	2	0.28
+Spectral Match to Diisooctyl phthalate from NIST14	1	0.01	0	0.00	2	0.28
+Spectral Match to Dimethyldioctadecylammonium cation from NIST14	0	0.00	0	0.00	3	0.42
+Spectral Match to Dioctyl phthalate from NIST14	3	0.03	0	0.00	6	0.85
+Spectral Match to Doxazosin from NIST14	2	0.02	0	0.00	0	0.00
+Spectral Match to Enterolactone from NIST14	1	0.01	0	0.00	0	0.00
+Spectral Match to Gln-Leu-Lys from NIST14	0	0.00	1	0.02	0	0.00
+Spectral Match to Glu Phe from METLIN	0	0.00	11	0.22	0	0.00
+Spectral Match to Glu-Phe from NIST14	0	0.00	2	0.04	0	0.00
+Spectral Match to Glu-Pro from NIST14	0	0.00	1	0.02	0	0.00
+Spectral Match to Glu-Val from NIST14	0	0.00	45	0.91	0	0.00
+Spectral Match to Gly-Ile from NIST14	0	0.00	8	0.16	0	0.00
+Spectral Match to Gly-Leu from NIST14	0	0.00	38	0.77	0	0.00
+Spectral Match to Gly-Phe from NIST14	0	0.00	3	0.06	0	0.00
+Spectral Match to Gly-Tyr from NIST14	0	0.00	13	0.26	0	0.00
+Spectral Match to Gly-Val from NIST14	0	0.00	22	0.44	0	0.00
+Spectral Match to Glycan Le-X Trisaccharide from NIST14	0	0.00	1	0.02	0	0.00
+Spectral Match to Glycerol 1-myristate from NIST14	1	0.01	0	0.00	0	0.00
+Spectral Match to Glycerol 1-stearate from NIST14	27	0.30	0	0.00	0	0.00
+Spectral Match to Glycoursodeoxycholic acid from NIST14	1	0.01	0	0.00	1	0.14
+Spectral Match to His-Ile from NIST14	0	0.00	28	0.57	0	0.00
+Spectral Match to His-Pro from NIST14	0	0.00	48	0.97	0	0.00
+Spectral Match to Ile-Arg from NIST14	0	0.00	10	0.20	0	0.00
+Spectral Match to Ile-Asn from NIST14	0	0.00	23	0.46	0	0.00
+Spectral Match to Ile-Glu from NIST14	0	0.00	13	0.26	0	0.00
+Spectral Match to Ile-Glu-Lys from NIST14	0	0.00	4	0.08	0	0.00
+Spectral Match to Ile-Gly-Ile from NIST14	0	0.00	45	0.91	0	0.00
+Spectral Match to Ile-Ile from NIST14	0	0.00	1	0.02	0	0.00
+Spectral Match to Ile-Ile-Lys from NIST14	0	0.00	25	0.51	0	0.00
+Spectral Match to Ile-Leu from NIST14	0	0.00	38	0.77	0	0.00
+Spectral Match to Ile-Leu-Lys from NIST14	0	0.00	3	0.06	0	0.00
+Spectral Match to Ile-Lys from NIST14	0	0.00	37	0.75	0	0.00
+Spectral Match to Ile-Met from NIST14	0	0.00	42	0.85	0	0.00
+Spectral Match to Ile-Pro from NIST14	0	0.00	21	0.42	0	0.00
+Spectral Match to Ile-Pro-Ile from NIST14	0	0.00	31	0.63	0	0.00
+Spectral Match to Ile-Pro-Lys from NIST14	0	0.00	19	0.38	0	0.00
+Spectral Match to Ile-Ser from NIST14	0	0.00	2	0.04	0	0.00
+Spectral Match to Ile-Thr from NIST14	0	0.00	4	0.08	0	0.00
+Spectral Match to Ile-Trp from NIST14	0	0.00	5	0.10	0	0.00
+Spectral Match to Ile-Tyr from NIST14	0	0.00	13	0.26	0	0.00
+Spectral Match to Ile-Val-Lys from NIST14	0	0.00	7	0.14	0	0.00
+Spectral Match to Inosine from NIST14	0	0.00	26	0.53	4	0.57
+"Spectral Match to Inosine, 2'-deoxy- from NIST14"	1	0.01	0	0.00	0	0.00
+Spectral Match to Isoproterenol from NIST14	1	0.01	0	0.00	0	0.00
+Spectral Match to L-Alanyl-L-norleucine from NIST14	0	0.00	11	0.22	0	0.00
+Spectral Match to L-Arginine from NIST14	0	0.00	37	0.75	0	0.00
+Spectral Match to L-Glutamic acid from NIST14	0	0.00	25	0.51	0	0.00
+Spectral Match to L-Kynurenine from NIST14	0	0.00	19	0.38	0	0.00
+Spectral Match to L-Leucine from NIST14	0	0.00	1	0.02	0	0.00
+Spectral Match to L-Methionine from NIST14	0	0.00	40	0.81	0	0.00
+"Spectral Match to L-Methionine, N-acetyl- from NIST14"	0	0.00	4	0.08	0	0.00
+"Spectral Match to L-Phenylalanine, N-acetyl- from NIST14"	2	0.02	48	0.97	0	0.00
+Spectral Match to L-Saccharopine from NIST14	0	0.00	1	0.02	0	0.00
+Spectral Match to L-Tryptophan from NIST14	5	0.05	38	0.77	0	0.00
+Spectral Match to L-Tryptophanamide from NIST14	0	0.00	7	0.14	0	0.00
+Spectral Match to L-Tyrosine from NIST14	3	0.03	40	0.81	0	0.00
+Spectral Match to Leu-Gln-Lys from NIST14	0	0.00	1	0.02	0	0.00
+Spectral Match to Leu-Glu from NIST14	0	0.00	2	0.04	0	0.00
+Spectral Match to Leu-Glu-Lys from NIST14	0	0.00	8	0.16	0	0.00
+Spectral Match to Leu-Gly from NIST14	0	0.00	2	0.04	0	0.00
+Spectral Match to Leu-Gly-Leu from NIST14	0	0.00	20	0.40	0	0.00
+Spectral Match to Leu-His from NIST14	0	0.00	42	0.85	0	0.00
+Spectral Match to Leu-Ile from NIST14	0	0.00	17	0.34	0	0.00
+Spectral Match to Leu-Leu from NIST14	0	0.00	36	0.73	0	0.00
+Spectral Match to Leu-Met from NIST14	0	0.00	11	0.22	0	0.00
+Spectral Match to Leu-Phe from NIST14	0	0.00	38	0.77	0	0.00
+Spectral Match to Leu-Pro from NIST14	0	0.00	33	0.67	0	0.00
+Spectral Match to Leu-Pro-Lys from NIST14	0	0.00	12	0.24	0	0.00
+Spectral Match to Leu-Trp from NIST14	0	0.00	2	0.04	0	0.00
+Spectral Match to Leu-Val from NIST14	0	0.00	47	0.95	0	0.00
+Spectral Match to Leu-Val-Lys from NIST14	0	0.00	24	0.48	0	0.00
+Spectral Match to Lys-Ile from NIST14	0	0.00	1	0.02	0	0.00
+Spectral Match to Lys-Leu from NIST14	0	0.00	32	0.65	0	0.00
+Spectral Match to Lys-Pro from NIST14	0	0.00	36	0.73	0	0.00
+Spectral Match to Met-Val from NIST14	0	0.00	3	0.06	0	0.00
+Spectral Match to N-(4-Aminobenzoyl)-L-glutamic acid from NIST14	0	0.00	5	0.10	0	0.00
+Spectral Match to N-.alpha.-Acetyl-L-arginine from NIST14	0	0.00	3	0.06	0	0.00
+Spectral Match to N-Lauroyl-D-erythro-sphinganine from NIST14	1	0.01	0	0.00	0	0.00
+Spectral Match to N.alpha.-Acetyl-L-lysine from NIST14	0	0.00	2	0.04	0	0.00
+Spectral Match to Nalbuphine from NIST14	40	0.44	0	0.00	0	0.00
+Spectral Match to Pantothenic acid from NIST14	0	0.00	18	0.36	0	0.00
+Spectral Match to Phe-Ala from NIST14	48	0.53	0	0.00	0	0.00
+Spectral Match to Phe-Gln from NIST14	0	0.00	9	0.18	0	0.00
+Spectral Match to Phe-Glu from NIST14	0	0.00	28	0.57	0	0.00
+Spectral Match to Phe-Ile from NIST14	0	0.00	4	0.08	0	0.00
+Spectral Match to Phe-Leu from NIST14	1	0.01	12	0.24	0	0.00
+Spectral Match to Phe-Met from NIST14	0	0.00	4	0.08	0	0.00
+Spectral Match to Phe-Phe from NIST14	1	0.01	1	0.02	0	0.00
+Spectral Match to Phe-Pro from NIST14	0	0.00	29	0.59	0	0.00
+Spectral Match to Phe-Pro-Lys from NIST14	0	0.00	35	0.71	0	0.00
+Spectral Match to Phe-Val from NIST14	0	0.00	6	0.12	0	0.00
+"Spectral Match to Phenol, 4-(2-aminoethyl)- from NIST14"	0	0.00	2	0.04	0	0.00
+Spectral Match to Pro-Ala from NIST14	0	0.00	1	0.02	0	0.00
+Spectral Match to Pro-Ile from NIST14	0	0.00	45	0.91	0	0.00
+Spectral Match to Pro-Leu from NIST14	0	0.00	20	0.40	0	0.00
+Spectral Match to Pro-Phe from NIST14	0	0.00	12	0.24	0	0.00
+Spectral Match to Pro-Pro-Lys from NIST14	0	0.00	48	0.97	0	0.00
+Spectral Match to Pro-Val from NIST14	0	0.00	18	0.36	0	0.00
+Spectral Match to PyroGlu-Ile from NIST14	0	0.00	47	0.95	0	0.00
+Spectral Match to PyroGlu-Ile-Arg from NIST14	0	0.00	6	0.12	0	0.00
+Spectral Match to PyroGlu-Ile-Lys from NIST14	0	0.00	48	0.97	0	0.00
+Spectral Match to PyroGlu-Met from NIST14	0	0.00	39	0.79	0	0.00
+Spectral Match to PyroGlu-Phe from NIST14	6	0.06	29	0.59	0	0.00
+Spectral Match to PyroGlu-Pro from NIST14	0	0.00	37	0.75	0	0.00
+Spectral Match to PyroGlu-Pro-Lys from NIST14	0	0.00	47	0.95	0	0.00
+Spectral Match to PyroGlu-Tyr from NIST14	1	0.01	42	0.85	0	0.00
+Spectral Match to PyroGlu-Val from NIST14	0	0.00	48	0.97	0	0.00
+Spectral Match to Ser-Ile from NIST14	0	0.00	11	0.22	0	0.00
+Spectral Match to Ser-Leu from NIST14	0	0.00	46	0.93	0	0.00
+Spectral Match to Ser-Phe from NIST14	0	0.00	34	0.69	0	0.00
+Spectral Match to Ser-Val from NIST14	0	0.00	31	0.63	0	0.00
+Spectral Match to Sulfamethazine from NIST14	88	0.98	0	0.00	0	0.00
+Spectral Match to Sulfisomidin from NIST14	76	0.85	0	0.00	0	0.00
+Spectral Match to Thr-Ile from NIST14	0	0.00	10	0.20	0	0.00
+Spectral Match to Thr-Leu from NIST14	0	0.00	46	0.93	0	0.00
+Spectral Match to Thr-Phe from NIST14	0	0.00	4	0.08	0	0.00
+Spectral Match to Thr-Pro from NIST14	0	0.00	20	0.40	0	0.00
+Spectral Match to Triphenylphosphine oxide from NIST14	7	0.07	0	0.00	0	0.00
+Spectral Match to Tris(2-butoxyethyl) phosphate from NIST14	1	0.01	49	1.00	0	0.00
+Spectral Match to Tropic acid from NIST14	0	0.00	17	0.34	0	0.00
+Spectral Match to Trp-Glu from NIST14	0	0.00	8	0.16	0	0.00
+Spectral Match to Trp-Met from NIST14	0	0.00	4	0.08	0	0.00
+Spectral Match to Trp-Phe from NIST14	7	0.07	0	0.00	0	0.00
+Spectral Match to Tyr-Ile from NIST14	0	0.00	1	0.02	0	0.00
+Spectral Match to Tyr-Leu from NIST14	0	0.00	5	0.10	0	0.00
+Spectral Match to Tyr-Pro from NIST14	0	0.00	47	0.95	0	0.00
+Spectral Match to Tyr-Val from NIST14	0	0.00	14	0.28	0	0.00
+Spectral Match to Val-Arg from NIST14	0	0.00	4	0.08	0	0.00
+Spectral Match to Val-Gly-Val from NIST14	0	0.00	16	0.32	0	0.00
+Spectral Match to Val-Ile from NIST14	0	0.00	26	0.53	0	0.00
+Spectral Match to Val-Leu from NIST14	0	0.00	32	0.65	0	0.00
+Spectral Match to Val-Met from NIST14	0	0.00	27	0.55	0	0.00
+Spectral Match to Val-Phe from NIST14	0	0.00	29	0.59	0	0.00
+Spectral Match to Val-Pro from NIST14	0	0.00	19	0.38	0	0.00
+Spectral Match to Val-Trp from NIST14	0	0.00	8	0.16	0	0.00
+Spectral Match to Val-Val from NIST14	0	0.00	37	0.75	0	0.00
+Spectral Match to Xanthosine from NIST14	0	0.00	1	0.02	0	0.00
+"Spectral Match to cis-4,10,13,16-Docosatetraenoic acid from NIST14"	0	0.00	1	0.02	0	0.00
+Spectral Match to p-Hydroxyphenyllactic acid from NIST14	1	0.01	0	0.00	0	0.00
+Staurosporine	0	0.00	0	0.00	1	0.14
+Stearoyl Ethanolamide	0	0.00	0	0.00	2	0.28
+Surfactin	19	0.21	0	0.00	0	0.00
+Surfactin C	0	0.00	0	0.00	1	0.14
+Surfactin C13	2	0.02	0	0.00	0	0.00
+Surfactin C14	51	0.57	0	0.00	0	0.00
+Surfactin C15	62	0.69	0	0.00	0	0.00
+Surfactin-D_40519_dereplictor_pv_9.12507e-42	64	0.71	0	0.00	0	0.00
+Surfactin_C14	89	1.00	0	0.00	0	0.00
+TC2	1	0.01	0	0.00	0	0.00
+TG(8:0/10:0/10:0); [M+NH4]+ C31H62N1O6	3	0.03	0	0.00	0	0.00
+TRYPTOPHAN	0	0.00	48	0.97	0	0.00
+Taurocholic Acid Sulfate	0	0.00	1	0.02	0	0.00
+Theanine	1	0.01	0	0.00	0	0.00
+Threonine	0	0.00	5	0.10	0	0.00
+Tryptophan	0	0.00	5	0.10	0	0.00
+"[(2R,3R,4S,5R,6S)-6-[(3S,4S,5S,6R)-4,5-dihydroxy-6-(hydroxymethyl)oxan-3-yl]oxy-3,4,5-trihydroxyoxan-2-yl]methyl benzoate"	0	0.00	2	0.04	0	0.00
+"[(2S,3R,4S,5S,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl] (1S,4aR,6aS,6bR,9S,10R,11R,12aR)-1,10,11-trihydroxy-9-(hydroxymethyl)-2,2,6a,6b,9,12a-hexamethyl-1,3,4,5,6,6a,7,8,8a,10,11,12,13,14b-tetradecahydropicene-4a-carboxylate"	3	0.03	0	0.00	0	0.00
+"[2,3-dihydroxy-1-(7-methoxy-2-oxochromen-6-yl)-3-methylbutyl] (Z)-2-methylbut-2-enoate"	0	0.00	0	0.00	1	0.14
+[Ile2_4_7]Surfactin_43293_dereplictor_pv_2.3158e-16	38	0.42	0	0.00	0	0.00
+[Leu7]-Surfactin_C13ai_dimethyl_ester_45031_dereplictor_pv_1.52898e-24	4	0.04	0	0.00	0	0.00
+[Leu7]-Surfactin_C14i_monomethyl_ester_45019_dereplictor_pv_9.54813e-25	53	0.59	0	0.00	0	0.00
+[Val7]-Surfactin_C14i_dimethyl_ester_45034_dereplictor_pv_4.20666e-26	22	0.24	0	0.00	0	0.00
+arginine	0	0.00	25	0.51	0	0.00
+asperuloside	2	0.02	0	0.00	0	0.00
+cordycepin	0	0.00	2	0.04	0	0.00
+cyclo(D-Trp-L-Pro)	16	0.17	4	0.08	6	0.85
+cyclo(L-Leu-L-Pro)	0	0.00	48	0.97	0	0.00
+cyclo(L-Phe-D-Pro)	0	0.00	13	0.26	0	0.00
+cyclo(L-Phe-L-4-Hyp)	1	0.01	0	0.00	5	0.71
+cyclo(L-Trp-L-Pro)	29	0.32	8	0.16	2	0.28
+cyclo(L-Tyr-L-Pro)	0	0.00	0	0.00	1	0.14
+cyclo(L-Val-L-Pro)	0	0.00	48	0.97	0	0.00
+cyclo(Phe-Leu)	3	0.03	0	0.00	3	0.42
+cyclo-(Asn-Leu)	0	0.00	1	0.02	0	0.00
+cyclo-(L-Leu-L-Pro)	0	0.00	1	0.02	0	0.00
+cyclo-(Val-Phe)	1	0.01	1	0.02	0	0.00
+dehydrocostus lactone	2	0.02	0	0.00	0	0.00
+dihydroferulic acid	4	0.04	0	0.00	0	0.00
+eudesmin	8	0.08	0	0.00	0	0.00
+geniposidic acid	2	0.02	0	0.00	5	0.71
+glutamate	0	0.00	1	0.02	0	0.00
+halobacillin_08708_dereplictor_pv_2.36662e-33	50	0.56	0	0.00	0	0.00
+isoferulic acid	3	0.03	0	0.00	0	0.00
+lenticin	0	0.00	41	0.83	0	0.00
+maesopsin	1	0.01	0	0.00	0	0.00
+maltol	0	0.00	1	0.02	0	0.00
+"methyl 2-(2,6-dihydroxy-4-methylbenzoyl)-3,5-dimethoxybenzoate"	1	0.01	0	0.00	0	0.00
+"methyl 2-(2,6-dihydroxy-4-methylbenzoyl)-3-hydroxy-5-methoxybenzoate"	1	0.01	0	0.00	0	0.00
+phenylethylamide_239	15	0.16	0	0.00	0	0.00
+pumilacidin_B_14340_dereplictor_pv_4.27622e-20	2	0.02	0	0.00	0	0.00
+pumilacidin_E_14342_dereplictor_pv_1.13518e-25	14	0.15	0	0.00	0	0.00
+purine riboside 1	0	0.00	0	0.00	2	0.28
+salicin	0	0.00	1	0.02	0	0.00
+terpestacin	1	0.01	0	0.00	0	0.00
+val-leu-pro-val-pro	0	0.00	48	0.97	0	0.00
