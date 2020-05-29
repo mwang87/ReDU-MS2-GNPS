@@ -4,7 +4,7 @@ on:
   schedule:
    - cron:  '*/60 * * * *'
 jobs:
-  build:
+  production-selenium:
     runs-on: ubuntu-latest
       
     steps:
@@ -20,5 +20,23 @@ jobs:
         pip install chromedriver-binary==80.0.3987.16.0
     - name: Test with Selenium
       run: |
-        cd test-production-integration	&& export SERVER_URL="http://dorresteintesthub.ucsd.edu:5005" && nose2 -v test_selenium && cd ..
         cd test-production-integration	&& export SERVER_URL="https://redu.ucsd.edu" && nose2 -v test_selenium && cd ..
+
+  # beta-selenium:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #   - uses: actions/checkout@v1
+  #   - name: Set up Python 3.7
+  #     uses: actions/setup-python@v1
+  #     with:
+  #       python-version: 3.7
+  #   - name: Install dependencies
+  #     run: |
+  #       python -m pip install --upgrade pip
+  #       pip install requests nose2 selenium
+  #       pip install chromedriver-binary==80.0.3987.16.0
+  #   - name: Test with Selenium
+  #     run: |
+  #       cd test-production-integration	&& export SERVER_URL="http://dorresteintesthub.ucsd.edu:5005" && nose2 -v test_selenium && cd ..
+
