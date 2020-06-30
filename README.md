@@ -2,6 +2,8 @@
 
 ![](https://github.com/mwang87/ReDU-MS2-GNPS/workflows/production-integration/badge.svg)
 ![unit test](https://github.com/mwang87/ReDU-MS2-GNPS/workflows/unit%20test/badge.svg)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3924422.svg)](https://doi.org/10.5281/zenodo.3924422)
+
 
 ## Reanalysis of Data User Interface
 
