@@ -28,7 +28,7 @@ plot_number_files <- subset(number_files, number_files$Lat != "not specified" & 
 plot_number_files$Unique <- log(plot_number_files$Unique,10)
 #Using GGPLOT, plot the Base World Map
 mp <- NULL
-mapWorld <- borders("world", colour="gray50", fill="gray90") # create a layer of borders
+mapWorld <- borders("world", colour="gray90", fill="gray90") # create a layer of borders
 mp <- ggplot() +  mapWorld 
 print(mp)
 #Now Layer the cities on top
@@ -48,7 +48,7 @@ plot_sum <- subset(plot_sum, plot_sum$Lat != "not specified" & plot_sum$Lat != "
 plot_sum$proportion <- log(plot_sum$proportion,10)
 #Using GGPLOT, plot the Base World Map
 mp <- NULL
-mapWorld <- borders("world", colour="grey50", fill="gray90", size=0.25) # create a layer of borders
+mapWorld <- borders("world", colour="gray90", fill="gray90", size=0.25) # create a layer of borders
 mp <- ggplot() +  mapWorld 
 #Now Layer the cities on top
 mp <- mp + geom_point(data=plot_sum, aes(x=as.numeric(Long), y=as.numeric(Lat), colour=as.numeric(proportion)), 
