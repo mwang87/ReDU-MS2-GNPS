@@ -209,7 +209,7 @@ def main():
 
     # Import Library Identifications
     if args.importidentifications is not None:
-        import_identification(args.importidentifications, args.identifications_output)
+        import_identification(args.importidentifications, args.identifications_output, force=True)
 
 
 if __name__ == "__main__":
