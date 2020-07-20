@@ -21,6 +21,12 @@ massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
 def find_dataset_metadata(dataset_accession, useftp=False):
     print("Finding Files %s " % dataset_accession)
     if useftp:
+        try:
+            massive_host.keep_alive()
+        except:
+            print("MassIVE connection broken, reconnecting")
+            massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
+            
         all_other_files = []
         all_update_files = ming_proteosafe_library.get_all_files_in_dataset_folder_ftp(dataset_accession, "updates", includefilemetadata=True, massive_host=massive_host)
     else:
@@ -178,6 +184,7 @@ def main():
         for dataset in all_datasets:
             if not "GNPS" in dataset["title"].upper():
                 continue
+                
             
             try:
                 total_valid_metadata_entries, files_added = process_metadata_import(dataset["dataset"], dryrun=False)
