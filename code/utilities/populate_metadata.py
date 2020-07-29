@@ -16,9 +16,8 @@ try:
 except:
     print("no redis")
 
-massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
 
-def get_dataset_files(dataset_accession, collection_name):
+def get_dataset_files(dataset_accession, collection_name, massive_host=None):
     dataset_files = None
 
     try:
@@ -49,7 +48,7 @@ def resolve_metadata_filename_to_all_files(filename, all_files):
 
     return acceptable_filenames[0]
 
-def add_metadata_per_accession(dataset_accession, metadata_list):
+def add_metadata_per_accession(dataset_accession, metadata_list, massive_host=None):
     whitelist_columns = ["SampleType", 
     "SampleTypeSub1", 
     "NCBITaxonomy", 
@@ -82,7 +81,7 @@ def add_metadata_per_accession(dataset_accession, metadata_list):
 
     ###Make sure we line these datasets up
     print("Get All Files Per Dataset")
-    all_files = get_dataset_files(dataset_accession, "ccms_peak")
+    all_files = get_dataset_files(dataset_accession, "ccms_peak", massive_host=massive_host)
 
     for result in metadata_list:
         filename = result["filename"].rstrip()
@@ -118,7 +117,7 @@ def add_metadata_per_accession(dataset_accession, metadata_list):
 
     return added_files
 
-def populate_dataset_metadata(input_metadata_filename):
+def populate_dataset_metadata(input_metadata_filename, massive_host=None):
     Filename.create_table(True)
     Attribute.create_table(True)
     AttributeTerm.create_table(True)
@@ -153,7 +152,7 @@ def populate_dataset_metadata(input_metadata_filename):
         if dataset_accession in included_accessions:
             print("Skipping %s, already imported" % (dataset_accession))
             continue
-        added_files = add_metadata_per_accession(dataset_accession, metadata_by_accession[dataset_accession])
+        added_files = add_metadata_per_accession(dataset_accession, metadata_by_accession[dataset_accession], massive_host=massive_host)
         total_added_files += added_files
         print(dataset_accession, len(metadata_by_accession[dataset_accession]), added_files)
 

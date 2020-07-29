@@ -21,7 +21,6 @@ def find_dataset_metadata(dataset_accession, useftp=False, massive_host=None):
     if useftp:
         try:
             list_names = massive_host.listdir("/")
-            print("LISTING ROOT", len(list_names))
         except Exception as e:
             print("MassIVE connection broken, reconnecting", e)
             massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
@@ -93,7 +92,7 @@ def process_metadata_import(dataset_accession, dryrun=False, massive_host=None):
     if pass_validation:
         print("Importing Data")
         if not dryrun:
-            added_files_count = populate_metadata.populate_dataset_metadata(local_filtered_metadata_path)
+            added_files_count = populate_metadata.populate_dataset_metadata(local_filtered_metadata_path, massive_host=massive_host)
     else:
         print("Filtered File is not valid")
 
@@ -185,8 +184,14 @@ def main():
         for dataset in all_datasets:
             if not "GNPS" in dataset["title"].upper():
                 continue
+
+            # Checking the FTP host
+            try:
+                list_names = massive_host.listdir("/")
+            except Exception as e:
+                print("MassIVE connection broken, reconnecting", e)
+                massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
                 
-            
             try:
                 print("Importing, ", dataset["dataset"])
                 total_valid_metadata_entries, files_added = process_metadata_import(dataset["dataset"], dryrun=False, massive_host=massive_host)
@@ -213,7 +218,7 @@ def main():
         print(total_valid_metadata_entries, files_added)
 
     elif args.importmetadata == "file":
-        populate_metadata.populate_dataset_metadata(args.metadatafile)
+        populate_metadata.populate_dataset_metadata(args.metadatafile, massive_host=massive_host)
 
 
     # Import Library Identifications

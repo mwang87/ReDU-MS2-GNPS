@@ -15,10 +15,7 @@ import ftputil
 import ming_proteosafe_library
 import ming_fileio_library
 
-"""Validation with actual data"""
-massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
-
-def get_dataset_files(dataset_accession, collection_name):
+def get_dataset_files(dataset_accession, collection_name, massive_host=None):
     try:
         list_names = massive_host.listdir("/")
         print("LISTING ROOT", len(list_names))
@@ -30,7 +27,7 @@ def get_dataset_files(dataset_accession, collection_name):
 
     return dataset_files
 
-def perform_validation_against_massive(filename):
+def perform_validation_against_massive(filename, massive_host=None):
     metadata = pd.read_csv(filename, sep="\t")
 
     print(metadata.keys())
@@ -41,7 +38,7 @@ def perform_validation_against_massive(filename):
 
     accession = metadata["MassiveID"][0]
     print(accession)
-    dataset_files = get_dataset_files(accession, "ccms_peak")
+    dataset_files = get_dataset_files(accession, "ccms_peak", massive_host=massive_host)
 
     all_resolved_filenames = []
     for query_filename in metadata["filename"]:
