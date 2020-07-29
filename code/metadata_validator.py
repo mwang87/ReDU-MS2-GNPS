@@ -68,8 +68,6 @@ def resolve_metadata_filename_to_all_files(filename, dataset_files):
         return acceptable_filenames[0]
     return None
 
-    
-
 
 def rewrite_metadata(metadata_filename):
     """
@@ -80,7 +78,7 @@ def rewrite_metadata(metadata_filename):
     metadata_df = pd.read_csv(metadata_filename, sep="\t")
 
     #Limiting the number of rows
-    metadata_df = metadata_df.truncate(after=2000)
+    metadata_df = metadata_df.truncate(after=10000)
 
     #Rewriting Year of Analysis
     metadata_list = metadata_df.to_dict(orient="records")
@@ -178,16 +176,17 @@ def perform_validation(filename):
 
         errors_list.append(error_dict)
 
+    # Reading in the validation
+    metadata_df = pd.read_csv(filename, sep="\t")
+    row_count = len(metadata_df)
+
     valid_rows = []
-    row_count = 0
     #Read in the good rows
     try:
         no_validation_lines = [int(error["line_number"]) for error in errors_list]
-        row_count = 0
         with open(filename) as csvfile:
             reader = csv.DictReader(csvfile, delimiter="\t")
             for row in reader:
-                row_count += 1
                 if row_count in no_validation_lines:
                     continue
                 valid_rows.append(row)
