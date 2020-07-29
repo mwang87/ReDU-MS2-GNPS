@@ -16,15 +16,14 @@ import argparse
 from models import *
 import csv
 
-massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
-
-def find_dataset_metadata(dataset_accession, useftp=False):
+def find_dataset_metadata(dataset_accession, useftp=False, massive_host=None):
     print("Finding Files %s " % dataset_accession)
     if useftp:
         try:
-            massive_host.keep_alive()
-        except:
-            print("MassIVE connection broken, reconnecting")
+            list_names = massive_host.listdir("/")
+            print("LISTING ROOT", len(list_names))
+        except Exception as e:
+            print("MassIVE connection broken, reconnecting", e)
             massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
             
         all_other_files = []
@@ -47,8 +46,8 @@ def find_dataset_metadata(dataset_accession, useftp=False):
 
     return None
 
-def process_metadata_import(dataset_accession, dryrun=False):
-    dataset_metadatum = find_dataset_metadata(dataset_accession, useftp=True)
+def process_metadata_import(dataset_accession, dryrun=False, massive_host=None):
+    dataset_metadatum = find_dataset_metadata(dataset_accession, useftp=True, massive_host=massive_host)
 
     if dataset_metadatum == None:
         print("Not Importing %s, no metadata" % dataset_accession)
@@ -174,6 +173,8 @@ def main():
     parser.add_argument('--importidentifications', default=None, help='Imports identifications, from task file')
     parser.add_argument('--identifications_output', help='identifications_output')
 
+    massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
+
     args = parser.parse_args()
 
     # Importing Metadata First
@@ -187,7 +188,8 @@ def main():
                 
             
             try:
-                total_valid_metadata_entries, files_added = process_metadata_import(dataset["dataset"], dryrun=False)
+                print("Importing, ", dataset["dataset"])
+                total_valid_metadata_entries, files_added = process_metadata_import(dataset["dataset"], dryrun=False, massive_host=massive_host)
             except KeyboardInterrupt:
                 raise
             except:
@@ -207,7 +209,7 @@ def main():
                 continue
         
     elif args.importmetadata == "dataset":
-        total_valid_metadata_entries, files_added = process_metadata_import(args.metadataaccession)
+        total_valid_metadata_entries, files_added = process_metadata_import(args.metadataaccession, massive_host=massive_host)
         print(total_valid_metadata_entries, files_added)
 
     elif args.importmetadata == "file":

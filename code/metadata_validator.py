@@ -20,7 +20,8 @@ massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
 
 def get_dataset_files(dataset_accession, collection_name):
     try:
-        massive_host.keep_alive()
+        list_names = massive_host.listdir("/")
+        print("LISTING ROOT", len(list_names))
     except:
         print("MassIVE connection broken, reconnecting")
         massive_host = ftputil.FTPHost("massive.ucsd.edu", "anonymous", "")
