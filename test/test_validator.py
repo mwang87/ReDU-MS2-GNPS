@@ -11,6 +11,7 @@ def test_valid():
         print("VALIDATION", valid_filename, "VALID ROWS", len(valid_rows), "TOTAL ROWS", row_count, dataset_success, "TOTAL MASSIVE VALID ROWS", matched_dataset_items)
         assert(passes_validation is True)
         assert(matched_dataset_items == len(valid_rows))
+        assert(matched_dataset_items == row_count)
 
 def test_invalid():
     invalid_files = glob.glob("data/validator/invalid_*")
