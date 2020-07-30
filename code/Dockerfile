@@ -17,7 +17,7 @@ RUN pip3 install pandas
 
 RUN pip3 install matplotlib
 RUN pip3 install scikit-bio
-RUN pip3 install emperor==1.0.0b19 --pre
+RUN pip3 install emperor==1.0.1
 
 RUN apt-get install -y wget
 
