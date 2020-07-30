@@ -117,7 +117,7 @@ def perform_validation(filename):
             SetValidator(valid_set=['amitryptiline','amitryptiline;fluconazole','cholic_acid-d4;lithocholic_acid-d4','cocaine-d3','cocaine;cocaine-d3','fluconazole','none','not specified','sulfadimethoxine','sulfadimethoxine;sulfachloropyridazine','sulfamethazine','sulfamethazine;sulfadimethoxine','sulfamethizole','sulfamethizole;sulfachloropyridazine','sulfamethizole;sulfachloropyridazine;sulfadimethoxine;sulfamethazine;coumarin-314;amitryptiline','decahydroquinoline','sulfachloropyridazine','coumarin-314'])
         ],        
        'MassSpectrometer' : [
-            SetValidator(valid_set=['6540 Q-TOF LC/MS|MS:1002789','impact HD|MS:1002667','impact|MS:1002077','LTQ Orbitrap XL|MS:1000556','maXis II|MS:1003004','micrOTOF-Q II|MS:1000704','not specified','Q Exactive Plus|MS:1002634','Q Exactive|MS:1001911','Xevo G2 XS Tof|MS:1002729','Agilent GC 6890-MS 5973'])
+            SetValidator(valid_set=['6540 Q-TOF LC/MS|MS:1002789','impact HD|MS:1002667','impact|MS:1002077','LTQ Orbitrap XL|MS:1000556','maXis II|MS:1003004','micrOTOF-Q II|MS:1000704','not specified','Q Exactive Plus|MS:1002634','Q Exactive|MS:1001911','Xevo G2 XS Tof|MS:1002729','Agilent GC 6890-MS 5973','Xevo TQ-S|1001792'])
         ],        
         'IonizationSourceAndPolarity' : [
             SetValidator(valid_set=['atmospheric pressure chemical ionization (negative)','atmospheric pressure chemical ionization (positive)','atmospheric pressure photoionization (negative)','atmospheric pressure photoionization (positive)','electrospray ionization (alternating)','electrospray ionization (negative)','electrospray ionization (positive)','not specified','electron ionization'])
