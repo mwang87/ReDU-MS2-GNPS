@@ -39,8 +39,10 @@ To simulate selenium and production integration tests:
 
 ## Manual Validation
 
-1. Check that XXX works
-1. Lorem Ipsum
+1. Check number of files avaliable in the File Selector
+2. Check the humber of unique chemical annotated in Chemical Explorer.
+3. Check that graphs in Chemical Explorer are functional, available after clicking an example chemical's 'view assocations' button.
+4. Test all buttons to ensure links are correct.
 
 ## Updating ReDU Data Procedure
 
