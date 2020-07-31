@@ -37,6 +37,13 @@ To simulate selenium and production integration tests:
 
 ```make test-schedule```
 
+## Manual Validation
+
+1. Check number of files avaliable in the File Selector
+2. Check the humber of unique chemical annotated in Chemical Explorer.
+3. Check that graphs in Chemical Explorer are functional, available after clicking an example chemical's 'view assocations' button.
+4. Test all buttons to ensure links are correct.
+
 ## Updating ReDU Data Procedure
 
 One of the key steps in ReDU is the updating of the database to include the latest identifications for files within ReDU. These are the following steps:
@@ -47,5 +54,5 @@ One of the key steps in ReDU is the updating of the database to include the late
 1. Remove database [here](https://github.com/mwang87/ReDU-MS2-GNPS/tree/master/database)
 1. Remove all untracked files in temp, this will be for the global pca
 1. Start ReDU back up and it will autopopulate
-1. Wait til full autopopulate before going to global PCA views
+1. Wait Until full autopopulate before going to global PCA views
 
