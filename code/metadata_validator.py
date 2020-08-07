@@ -108,7 +108,7 @@ def perform_validation(filename):
         ],
         'YearOfAnalysis' : [
             IntValidator(),
-            RangeValidator(low=2000, high=2030)
+            RangeValidator(low=1999, high=2030)
         ],
         'SampleCollectionMethod' : [
             SetValidator(valid_set=['blood draw, capillary','blood draw, venous','blood NOS','extract, solid phase extraction (C18)','liquid','liquid, solid phase extraction (C18)','liquid, solid phase extraction (PPL)','not applicable','not specified','solid material, dried','solid material, fresh','solid material, frozen','solid material, NOS','solid, solid phase extraction (C18)','swabs, dry','swabs, moist (50% EtOH)','urine, 24-hour','urine, NOS','urine, spot','liquid, solid phase extraction (ABN)','swabs, solution (95% EtOH)','swabs, solution (100% EtOH)','in vivo, head space solid phase microextraction','solid material, head space solid phase microextraction','solid material, PDMS patch, head space solid phase microextraction','needle trap device','hollow fiber-liquid phase microextraction','lumbar puncture','ML import: not available'])
