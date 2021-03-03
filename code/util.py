@@ -332,7 +332,41 @@ def get_featurenetworking_highres_parameters():
 
     return invokeParameters
 
+#set for redu library search
+def get_librarysearch_parameters():
+    invokeParameters = {}
+    invokeParameters["ANALOG_SEARCH"] = "0"
+    invokeParameters["FILTER_LIBRARY"] = "1"
+    invokeParameters["FILTER_PRECURSOR_WINDOW"] = "1"
+    invokeParameters["FILTER_SNR_PEAK_INT"] = "0.0"
+    invokeParameters["FILTER_STDDEV_PEAK_INT"] = "0.0"
+    invokeParameters["MAX_SHIFT_MASS"] = "100.0"
+    invokeParameters["MIN_MATCHED_PEAKS"]= "6"
+    invokeParameters["MIN_PEAK_INT"] = "0.0"
+    invokeParameters["SCORE_THRESHOLD"] = "0.7"
+    invokeParameters["SEARCH_LIBQUALITY"]="3"
+    invokeParameters["TOP_K_RESULTS"]="1"
+    invokeParameters["WINDOW_FILTER"]="1"
+    invokeParameters["library_on_server"] = "d.speclibs;"
+    invokeParameters["reanalyzed_datasets"]=""
+    invokeParameters["tolerance.Ion_tolerance"] = "0.5"
+    invokeParameters["tolerance.PM_tolerance"]="2.0"
+    invokeParameters["workflow"] = "MOLECULAR-LIBRARYSEARCH-V2"
+    invokeParameters["workflow_version"] = "release_10.1"
 
+    return(invokeParameters)
+
+def launch_GNPS_librarysearchworkflow(filenames_list, description, username, password, email):
+    invokeParameters = {}
+    invokeParameters = get_librarysearch_parameters()
+    
+    invokeParameters["desc"] = description
+    invokeParameters["spec_on_server"] = filenames_list
+    invokeParameters["email"] = email
+
+    task_id = invoke_workflow("gnps.ucsd.edu", invokeParameters, username, password)
+
+    return task_id
 
 
 def invoke_workflow(base_url, parameters, login, password):
