@@ -4,7 +4,10 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
+
 from selenium.webdriver.support.ui import WebDriverWait
+
+
 from selenium.webdriver.common.keys import Keys
 import unittest, time, re
 import os
@@ -14,6 +17,7 @@ import chromedriver_binary
 SERVER_URL = os.environ.get("SERVER_URL", "https://redu.ucsd.edu")
 
 class TestInterfaceready(unittest.TestCase):
+  
     def setUp(self):    
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--no-sandbox')
@@ -21,6 +25,7 @@ class TestInterfaceready(unittest.TestCase):
         chrome_options.add_argument('--headless') 
         self.driver = webdriver.Chrome(options=chrome_options)
         self.driver.implicitly_wait(30)
+
         
     def tearDown(self):
         self.driver.quit()
@@ -28,6 +33,7 @@ class TestInterfaceready(unittest.TestCase):
     def test_compound_enrichment(self):
         #going to the page
         url = "{}/compoundenrichmentdashboard?compound=ESCITALOPRAM%20OXALATE".format(SERVER_URL)
+
         
         self.driver.get(url)
         time.sleep(1)
@@ -37,6 +43,7 @@ class TestInterfaceready(unittest.TestCase):
         wait.until(EC.visibility_of_element_located((By.ID,'querycompound')))
         #clicking the button
         python_button = self.driver.find_element_by_id('querycompound')
+
         python_button.click()
 
         try:
