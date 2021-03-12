@@ -20,7 +20,7 @@ def find_dataset_metadata(dataset_accession, useftp=False):
     print("Finding Files %s " % dataset_accession)
     if useftp:
         all_other_files = []
-        all_update_files = ming_proteosafe_library.get_all_files_in_dataset_folder_ftp(dataset_accession, "updates", includefilemetadata=True, massive_host=massive_host)
+        all_update_files = ming_proteosafe_library.get_all_files_in_dataset_folder_cache(dataset_accession, "updates", includefilemetadata=True, massive_host=massive_host)
     else:
         all_other_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, "other", credentials.USERNAME, credentials.PASSWORD, includefilemetadata=True)
         all_update_files = ming_proteosafe_library.get_all_files_in_dataset_folder(dataset_accession, "updates", credentials.USERNAME, credentials.PASSWORD, includefilemetadata=True)
