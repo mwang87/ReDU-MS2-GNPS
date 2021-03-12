@@ -8,7 +8,7 @@ import shutil
 import xmltodict
 import ming_fileio_library
 from collections import defaultdict
-import datetime from datetime
+from datetime import datetime
 
 try:
     from requests.packages.urllib3.response import InsecureRequestWarning
