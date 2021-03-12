@@ -44,6 +44,7 @@ To simulate selenium and production integration tests:
 1. Check that graphs in Chemical Explorer are functional, available after clicking an example chemical's 'view assocations' button. (e.g. ```/compoundenrichmentdashboard?compound=Spectral%20Match%20to%20Sulfachloropyridazine%20from%20NIST14```)
 1. Test all buttons to ensure links are correct.
 
+
 ## Updating ReDU Data Procedure
 
 One of the key steps in ReDU is the updating of the database to include the latest identifications for files within ReDU. These are the following steps:
