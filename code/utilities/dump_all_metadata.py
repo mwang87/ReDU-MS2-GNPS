@@ -33,6 +33,7 @@ def main():
 
     df = pd.DataFrame(all_file_metadata)
     df.to_csv("all_sampleinformation.tsv", index=False, sep="\t")
+    df.to_parquet("all_sampleinformation.parquet")
 
 if __name__ == '__main__':
     main()

@@ -26,7 +26,6 @@ def test_attribute_filtration():
     response = requests.get(query_url)
     response.raise_for_status()
 
-
 def test_attribute_terms_fields():
     query_url = f"{SERVER_URL}/attributes"
     response = requests.get(query_url)
@@ -46,7 +45,12 @@ def test_attribute_list():
         query_url = f"{SERVER_URL}/attribute/{attribute_name}/attributeterms?filters=[]"
         response = requests.get(query_url)
         response.raise_for_status()
-        
+
+def test_attribute_term_file_list():
+    query_url = f"{SERVER_URL}/attribute/HealthStatus/attributeterm/ML%20import:%20not%20available/files?filters=%5B%5D"
+    r = requests.get(query_url)
+    data = r.json()
+    assert(len(data) > 1000)
 
 def test_file_enrichment():
     query_url = f"{SERVER_URL}/compoundfilename"

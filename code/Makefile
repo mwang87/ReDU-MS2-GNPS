@@ -28,21 +28,14 @@ populate-test:
 bash:
 	docker run -it -v $(PWD)/../database/:/app/database -v $(PWD)/../temp/:/app/temp  -p 5006:5001 --rm --name gnpsmetadata gnpsmetadata bash
 
-
-
-
 #Docker Compose
 server-compose-interactive:
 	docker-compose build
-	docker-compose up 
+	docker-compose --compatibility up 
 
 server-compose-background:
 	docker-compose build
-	docker-compose up -d 
-
-server-compose-production:
-	docker-compose build
-	docker-compose -f docker-compose.yml -f docker-compose-production.yml up -d
+	docker-compose --compatibility up -d 
 
 attach:
 	docker exec -i -t code_redu-ms2-populate_1  /bin/bash

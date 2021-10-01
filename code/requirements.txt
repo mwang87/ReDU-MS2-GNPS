@@ -1,0 +1,15 @@
+urllib3==1.23
+peewee
+flask
+requests
+requests-cache
+gunicorn
+xmltodict
+ftputil
+vladiate
+pandas
+matplotlib
+numpy
+sklearn
+seaborn
+bokeh==1.4.0

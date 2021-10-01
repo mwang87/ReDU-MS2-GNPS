@@ -1,4 +1,7 @@
 #!/bin/bash
+
+source activate py3
+
 cd utilities
 while true; do
     python3 ./populate_database.py \
