@@ -10,6 +10,15 @@ services:
       - ../temp/:/app/temp
       - ../logs/:/app/logs
     command: /app/run_server.sh
+    environment:
+      VIRTUAL_HOST: redu.ucsd.edu
+      VIRTUAL_PORT: 5005
+      LETSENCRYPT_HOST: redu.ucsd.edu
+      LETSENCRYPT_EMAIL: miw023@ucsd.edu
+    deploy:
+      resources:
+        limits:
+          memory: 8000M  
 
   redu-ms2-populate:
     build: .
@@ -17,3 +26,7 @@ services:
       - ../database/:/app/database
       - ../temp/:/app/temp
     command: /app/utilities/continuous_metadata_update.sh
+    deploy:
+      resources:
+        limits:
+          memory: 8000M

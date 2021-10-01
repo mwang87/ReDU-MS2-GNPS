@@ -1,4 +1,5 @@
 #!/bin/bash
+source activate py38
 
 cd utilities
 python3 ./populate_database.py --importmetadata all \
