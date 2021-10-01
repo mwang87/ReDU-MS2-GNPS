@@ -18,45 +18,10 @@ import ast
 
 import config
 from ccmsproteosafepythonapi import proteosafe
+from ontology_utils import resolve_ontology
 
-requests_cache.install_cache('demo_cache', allowable_codes=(200, 404, 500))
+requests_cache.install_cache('./temp/requests_cache', allowable_codes=(200, 404, 500))
 
-black_list_attribute = ["SubjectIdentifierAsRecorded", "UniqueSubjectID", "UBERONOntologyIndex", "DOIDOntologyIndex", "ComorbidityListDOIDIndex"]
-
-"""Resolving ontologies only if they need to be"""
-def resolve_ontology(attribute, term):
-    if attribute == "ATTRIBUTE_BodyPart":
-        url = "https://www.ebi.ac.uk/ols/api/ontologies/uberon/terms?iri=http://purl.obolibrary.org/obo/%s" % (term.replace(":", "_"))
-        try:
-            requests.get(url)
-            ontology_json = json.loads(requests.get(url).text)
-            #print(json.dumps(ontology_json))
-            return ontology_json["_embedded"]["terms"][0]["label"]
-        except KeyboardInterrupt:
-            raise
-        except:
-            return term
-
-    if attribute == "ATTRIBUTE_Disease":
-        url = "https://www.ebi.ac.uk/ols/api/ontologies/doid/terms?iri=http://purl.obolibrary.org/obo/%s" % (term.replace(":", "_"))
-        try:
-            ontology_json = requests.get(url).json()
-            return ontology_json["_embedded"]["terms"][0]["label"]
-        except KeyboardInterrupt:
-            raise
-        except:
-            return term
-
-    if attribute == "ATTRIBUTE_DatasetAccession":
-        try:
-            url = f"https://massive.ucsd.edu/ProteoSAFe//proxi/v0.1/datasets?filter={term}&function=datasets"
-            dataset_information = requests.get(url).json()
-            return dataset_information["title"]
-        except:
-            raise
-            #raise Exception(url)
-
-    return term
 
 def count_compounds_in_files(filelist1, filelist2, filelist3, filelist4, filelist5, filelist6):
     output_list = []
@@ -248,95 +213,6 @@ def queryfilename():
 
     return json.dumps(resolved_terms)
 
-##############################
-# Metadata Selector API Calls
-##############################
-@app.route('/attributes', methods=['GET'])
-def viewattributes():
-    # Reading the dump instead of the database
-    metadata_df = pd.read_csv(config.PATH_TO_ORIGINAL_MAPPING_FILE, sep="\t")
-
-    all_attributes_list = list(metadata_df.columns)
-
-    output_list = []
-    for attribute in all_attributes_list:
-        output_dict = {}
-        output_dict["attributename"] = attribute
-        output_dict["attributedisplay"] = attribute.replace("ATTRIBUTE_", "").replace("Analysis_", "").replace("Subject_", "").replace("Curated_", "")
-
-        all_terms = set(metadata_df[attribute])
-        output_dict["countterms"] = len(all_terms)
-
-        if attribute == "filename":
-            continue
-
-        if attribute in black_list_attribute:
-            continue
-        else:
-            output_list.append(output_dict)
-
-    output_list = sorted(output_list, key=lambda x: x["attributedisplay"], reverse=False)
-
-    return json.dumps(output_list)
-
-
-#Returns all the terms given an attribute along with file counts for each term
-@app.route('/attribute/<attribute>/attributeterms', methods=['GET'])
-def viewattributeterms(attribute):
-    attribute_db = Attribute.select().where(Attribute.categoryname == attribute)
-    all_terms_db = AttributeTerm.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attribute == attribute_db).group_by(AttributeTerm.term)
-
-    filters_list = json.loads(request.values.get('filters', "[]"))
-
-    output_list = []
-
-    for attribute_term_db in all_terms_db:
-        all_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == attribute_term_db).where(FilenameAttributeConnection.attribute == attribute)
-        all_files = set([file_db.filepath for file_db in all_files_db])
-        #Adding the filter
-        all_filtered_files_list = [all_files]
-        for filterobject in filters_list:
-            new_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == filterobject["attributeterm"]).where(FilenameAttributeConnection.attribute == filterobject["attributename"])
-            all_filtered_files_list.append(set([file_db.filepath for file_db in new_db]))
-
-        intersection_set = set.intersection(*all_filtered_files_list)
-
-
-
-        if len(intersection_set) > 0:
-            output_dict = {}
-            output_dict["attributename"] = attribute
-            output_dict["attributeterm"] = attribute_term_db.term
-            output_dict["ontologyterm"] = resolve_ontology(attribute, attribute_term_db.term)
-            output_dict["countfiles"] = len(intersection_set)
-            output_list.append(output_dict)
-
-    return json.dumps(output_list)
-
-#Returns all the terms given an attribute along with file counts for each term
-@app.route('/attribute/<attribute>/attributeterm/<term>/files', methods=['GET'])
-def viewfilesattributeattributeterm(attribute, term): 
-    all_files_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == term).where(FilenameAttributeConnection.attribute == attribute)
-    all_files = set([file_db.filepath for file_db in all_files_db])
-
-    filters_list = json.loads(request.args['filters'])
-    all_filtered_files_list = [all_files]
-    for filterobject in filters_list:
-        new_db = Filename.select().join(FilenameAttributeConnection).where(FilenameAttributeConnection.attributeterm == filterobject["attributeterm"]).where(FilenameAttributeConnection.attribute == filterobject["attributename"])
-
-        all_filtered_files_list.append(set([file_db.filepath for file_db in new_db]))
-    intersection_set = set.intersection(*all_filtered_files_list)
-
-    output_list = []
-    
-    for filepath in intersection_set:
-        output_dict = {}
-        output_dict["attribute"] = attribute
-        output_dict["attributeterm"] = term
-        output_dict["filename"] = filepath
-        output_list.append(output_dict)
-
-    return json.dumps(output_list)
 
 #Summarize Files Per Comparison Group
 @app.route('/explorer', methods=['POST'])
