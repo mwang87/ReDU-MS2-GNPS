@@ -15,6 +15,8 @@ from app import app
 @app.route("/displayglobalmultivariate", methods = ["GET"])
 def displayglobalmultivariate():
     return send_file("./temp/global/index.html")
+
+    # This is a hack and the rest of this needs to be fixed. 
     
     # if not (os.path.isfile(config.PATH_TO_ORIGINAL_PCA) and os.path.isfile(config.PATH_TO_EIGS)):
     #     print("Missing Global PCA Calculation, Calculating")
@@ -84,8 +86,9 @@ def displayglobalmultivariate():
 #     return(pcaid) 
 
 
-# @app.route('/processcomparemultivariate', methods=['GET'])
-# def processcomparemultivariate():
+@app.route('/processcomparemultivariate', methods=['GET'])
+def processcomparemultivariate():
+    return "Apologies, but this site is under maintenance"
 
 #     knn = request.args.get("knn", "0")
 #     if knn == "0":
