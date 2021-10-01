@@ -1,4 +1,4 @@
-urllib3==1.23
+urllib3==1.26.5
 peewee
 flask
 requests
