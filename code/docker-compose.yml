@@ -5,6 +5,9 @@ services:
     build: .
     ports:
       - "5005:5001"
+    networks:
+      - default
+      - nginx-net
     volumes:
       - ../database/:/app/database
       - ../temp/:/app/temp
