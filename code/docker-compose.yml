@@ -30,3 +30,8 @@ services:
       resources:
         limits:
           memory: 8000M
+
+networks:
+  nginx-net:
+    external:
+      name: nginx-net
