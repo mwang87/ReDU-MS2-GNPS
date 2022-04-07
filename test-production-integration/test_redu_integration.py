@@ -92,14 +92,14 @@ def test_pca_feature_based():
     r = requests.get(query_url)
     r.raise_for_status()
 
-def test_your_pca():
-    params = {'task': SAMPLE_TASK_ID}
-    query_url = f"{SERVER_URL}/processcomparemultivariate"
-    response = requests.get(query_url, params = params)
-    data = response.content
-    file_size = sys.getsizeof(data)
+# def test_your_pca():
+#     params = {'task': SAMPLE_TASK_ID}
+#     query_url = f"{SERVER_URL}/processcomparemultivariate"
+#     response = requests.get(query_url, params = params)
+#     data = response.content
+#     file_size = sys.getsizeof(data)
     
-    assert(file_size > 22000000)
+#     assert(file_size > 22000000)
 
 
 def test_global_pca():
@@ -110,19 +110,19 @@ def test_global_pca():
 
     assert(file_size > 22760000)
 
-def test_selected_pca(): 
-    list_files = ["f.MSV000083388/ccms_peak/Negative Mode/1_n_blk_LCMSblk_50MeOH_01.mzML", "f.MSV000083388/ccms_peak/Negative Mode/1_n_blk_LCMSblk_50MeOH_02.mzML", "f.MSV000083388/ccms_peak/Negative Mode/1_n_blk_LCMSblk_50MeOH_03.mzML"] 
-    params = {'files' : json.dumps(list_files)}
-    query_url_pca = f"{SERVER_URL}/fileselectedpca"
-    response = requests.post(query_url_pca, data = params) 
+# def test_selected_pca(): 
+#     list_files = ["f.MSV000083388/ccms_peak/Negative Mode/1_n_blk_LCMSblk_50MeOH_01.mzML", "f.MSV000083388/ccms_peak/Negative Mode/1_n_blk_LCMSblk_50MeOH_02.mzML", "f.MSV000083388/ccms_peak/Negative Mode/1_n_blk_LCMSblk_50MeOH_03.mzML"] 
+#     params = {'files' : json.dumps(list_files)}
+#     query_url_pca = f"{SERVER_URL}/fileselectedpca"
+#     response = requests.post(query_url_pca, data = params) 
 
-    import time
-    time.sleep(1)
+#     import time
+#     time.sleep(1)
 
-    pcaid = response.text
-    query_url_view = f"{SERVER_URL}/fileselectedpcaviews?pcaid={pcaid}"
-    response = requests.get(query_url_view)
-    response.raise_for_status()
+#     pcaid = response.text
+#     query_url_view = f"{SERVER_URL}/fileselectedpcaviews?pcaid={pcaid}"
+#     response = requests.get(query_url_view)
+#     response.raise_for_status()
 
 
 def testing_massive_api():
