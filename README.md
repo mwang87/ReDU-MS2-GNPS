@@ -11,6 +11,18 @@
 
 **This is a community effort and everyone is encouraged to participate by submitting their own data and sample information [instructions](https://mwang87.github.io/ReDU-MS2-Documentation/HowtoContribute). The sharing of new applications (and code) which use ReDU is highly encouraged.**
 
+## Requirements
+
+Python `pip` can install most of the required packages:
+```
+pip install -r code/requiremens.txt
+```
+In addition you need to install `ccmsproteosafepythonapi` manually:
+```
+git clone https://github.com/mwang87/CCMS_ProteoSAFe_pythonAPI.git
+pip install -e CCMS_ProteoSAFe_pythonAPI/
+```
+
 ## Testing Procedure
 
 To get ReDU up and running on your local system, it should be as easy as
