@@ -19,7 +19,7 @@ _**gnps_validator.py**_<br>
 This script runs the downloaded GNPS metadata files against the metadata validator and stores the list of file names that have passed through the validator. The script also rejects files that haven't passed and appends the passed file names into a TSV file.
 
 To run the script, use the following command:<br>
-_python3 gnps_validator.py _
+_python3 gnps_validator.py_
 
 _**gnps_name_matcher.py**_<br>
 This script matches the GNPS metadata files to their respective CCMS peak dataset names and gives out a TSV file that contains all the names that match unambiguously.
