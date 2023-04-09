@@ -11,9 +11,9 @@ from subprocess import PIPE, run
 
 # Print message to indicate importing is done
 os.system("echo Importing Done ...")
-
+current_dir = os.getcwd()
 # Read the TSV file containing file paths into a pandas DataFrame
-df = pd.read_csv('file_paths.tsv', delimiter='\t')
+df = pd.read_csv(current_dir + '/file_paths.tsv', delimiter='\t')
 
 # Get a list of all the values in the first column (file names)
 file_names = df.iloc[:, 0].tolist()
@@ -25,7 +25,7 @@ passed_file_names = []
 os.system("echo Validating Files now ...")
 for file_name in file_names:
     # Call the metadata_validator.py script and pass the file name as an argument
-    output = os.popen("python3 metadata_validator.py " + file_name).read()
+    output = os.popen("python3 /Users/siddhantpoojary/Desktop/ReDU-MS2-GNPS/code/metadata_validator.py " + current_dir +'/' + file_name).read()
     # If the script output starts with "S", then the file has passed validation
     if output and output[0] == "S":
         passed_file_names.append(file_name)

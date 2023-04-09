@@ -13,12 +13,12 @@ ccms_peak_link_start = "https://gnps-datasetcache.ucsd.edu/datasette/database/fi
 ccms_peak_link_end = "&_size=max"    
 name = ""             
 os.system("echo CCMS Read Done!")
-
+current_dir = os.getcwd()
 ccms_filenames = collections.defaultdict(set)
-
+# print(current_dir)
 if True:
     # Read the TSV file and specify the delimiter as a tab
-    df = pd.read_csv('passed_file_names.tsv', delimiter='\t', header=None, names=['Name'])
+    df = pd.read_csv(current_dir + '/passed_file_names.tsv', delimiter='\t', header=None, names=['Name'])
     # Extract the names from a specific column (e.g., column 'Name')
     passed_file_names = df['Name'].tolist()
 
@@ -33,7 +33,8 @@ if True:
         # print("Length of visit is ",len(visit))
         print("Working on ", file)
         # os.system("echo Working on")
-        df = pd.read_csv(file, delimiter='\t')
+        # csv_path = os.path.join(current_dir, './data.csv' file)
+        df = pd.read_csv( current_dir + "/" +file, delimiter='\t')
         try:            
             # Get the value of the first row of the 'column_name' column
             dataset = df['MassiveID'].iloc[0]
