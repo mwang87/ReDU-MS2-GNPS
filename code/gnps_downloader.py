@@ -72,6 +72,6 @@ with open("file_paths.tsv", "w") as f:
   f.close()
   
 # Print message to indicate that the TSV file for file paths has been created
-os.system("echo Tsv file created for path names!")
+os.system("echo Tsv file created for path names!!")
 # Print message to indicate that the execution of the code is complete
 os.system("echo EXECUTION COMPLETE ! HAVE A GOOD DAY ")
