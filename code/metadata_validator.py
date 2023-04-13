@@ -151,6 +151,11 @@ def perform_validation(filename):
 
     my_validator = Vlad(source=LocalFile(filename),delimiter="\t",ignore_missing_validators=True,validators=validators)
     passes_validation = my_validator.validate()
+    
+    if passes_validation:
+        print ("Success")
+    else:
+        print("Fail")
 
     errors_list = []
     for column in my_validator.failures:
